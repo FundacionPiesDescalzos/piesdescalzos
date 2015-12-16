@@ -1,0 +1,1 @@
+json.extract! @guardian, :id, :id_type, :identification, :name, :last_name, :second_name, :gender, :born, :address, :villa, :zone, :department, :municipality, :phone, :cel, :email, :relationship, :created_at, :updated_at

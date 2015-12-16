@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Guardians</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id type</th>
+      <th>Identification</th>
+      <th>Name</th>
+      <th>Last name</th>
+      <th>Second name</th>
+      <th>Gender</th>
+      <th>Born</th>
+      <th>Address</th>
+      <th>Villa</th>
+      <th>Zone</th>
+      <th>Department</th>
+      <th>Municipality</th>
+      <th>Phone</th>
+      <th>Cel</th>
+      <th>Email</th>
+      <th>Relationship</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @guardians.each do |guardian| %>
+      <tr>
+        <td><%= guardian.id_type %></td>
+        <td><%= guardian.identification %></td>
+        <td><%= guardian.name %></td>
+        <td><%= guardian.last_name %></td>
+        <td><%= guardian.second_name %></td>
+        <td><%= guardian.gender %></td>
+        <td><%= guardian.born %></td>
+        <td><%= guardian.address %></td>
+        <td><%= guardian.villa %></td>
+        <td><%= guardian.zone %></td>
+        <td><%= guardian.department %></td>
+        <td><%= guardian.municipality %></td>
+        <td><%= guardian.phone %></td>
+        <td><%= guardian.cel %></td>
+        <td><%= guardian.email %></td>
+        <td><%= guardian.relationship %></td>
+        <td><%= link_to 'Show', guardian %></td>
+        <td><%= link_to 'Edit', edit_guardian_path(guardian) %></td>
+        <td><%= link_to 'Destroy', guardian, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Guardian', new_guardian_path %>

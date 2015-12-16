@@ -1,0 +1,26 @@
+<%= simple_form_for(@guardian) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :id_type %>
+    <%= f.input :identification %>
+    <%= f.input :name %>
+    <%= f.input :last_name %>
+    <%= f.input :second_name %>
+    <%= f.input :gender %>
+    <%= f.input :born %>
+    <%= f.input :address %>
+    <%= f.input :villa %>
+    <%= f.input :zone %>
+    <%= f.input :department %>
+    <%= f.input :municipality %>
+    <%= f.input :phone %>
+    <%= f.input :cel %>
+    <%= f.input :email %>
+    <%= f.input :relationship %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

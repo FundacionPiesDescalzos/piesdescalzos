@@ -11,10 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216071220) do
+ActiveRecord::Schema.define(version: 20151216075002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "guardians", force: :cascade do |t|
+    t.string   "id_type"
+    t.integer  "identification"
+    t.string   "name"
+    t.string   "last_name"
+    t.string   "second_name"
+    t.string   "gender"
+    t.date     "born"
+    t.string   "address"
+    t.string   "villa"
+    t.string   "zone"
+    t.string   "department"
+    t.string   "municipality"
+    t.string   "phone"
+    t.string   "cel"
+    t.string   "email"
+    t.string   "relationship"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string   "name"
+    t.string   "id_type"
+    t.string   "gender"
+    t.string   "address"
+    t.string   "last_course"
+    t.integer  "outschool_years"
+    t.integer  "identification"
+    t.date     "born"
+    t.string   "etnic"
+    t.string   "villa"
+    t.string   "born_state"
+    t.string   "displaced"
+    t.string   "residency_state"
+    t.string   "zone"
+    t.integer  "guardian_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "students", ["guardian_id"], name: "index_students_on_guardian_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -36,4 +79,5 @@ ActiveRecord::Schema.define(version: 20151216071220) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "students", "guardians"
 end
