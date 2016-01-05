@@ -1,0 +1,22 @@
+<%= simple_form_for(@school) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :code %>
+    <%= f.input :name %>
+    <%= f.input :address %>
+    <%= f.input :neighborhood %>
+    <%= f.input :zone %>
+    <%= f.input :contact_name %>
+    <%= f.input :contact_position %>
+    <%= f.input :phone %>
+    <%= f.input :email %>
+    <%= f.input :headquarter %>
+    <%= f.input :foundation_present %>
+    <%= f.association :establishment %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

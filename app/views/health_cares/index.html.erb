@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Health Cares</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Affiliate</th>
+      <th>Regime</th>
+      <th>Eps</th>
+      <th>Ips</th>
+      <th>Register</th>
+      <th>Card</th>
+      <th>Poll date</th>
+      <th>Score</th>
+      <th>Inhabilites</th>
+      <th>Inh description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @health_cares.each do |health_care| %>
+      <tr>
+        <td><%= health_care.affiliate %></td>
+        <td><%= health_care.regime %></td>
+        <td><%= health_care.eps %></td>
+        <td><%= health_care.ips %></td>
+        <td><%= health_care.register %></td>
+        <td><%= health_care.card %></td>
+        <td><%= health_care.poll_date %></td>
+        <td><%= health_care.score %></td>
+        <td><%= health_care.inhabilites %></td>
+        <td><%= health_care.inh_description %></td>
+        <td><%= link_to 'Show', health_care %></td>
+        <td><%= link_to 'Edit', edit_health_care_path(health_care) %></td>
+        <td><%= link_to 'Destroy', health_care, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Health care', new_health_care_path %>
