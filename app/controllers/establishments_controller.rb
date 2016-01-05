@@ -5,6 +5,10 @@ class EstablishmentsController < ApplicationController
   # GET /establishments.json
   def index
     @establishments = Establishment.all
+    respond_to do |format|
+        format.html
+        format.csv { send_data @establishments.to_csv }
+      end
   end
 
   # GET /establishments/1
@@ -59,6 +63,11 @@ class EstablishmentsController < ApplicationController
       format.html { redirect_to establishments_url, notice: 'Establishment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def import
+    Establishment.import(params[:file])
+    redirect_to establishments_url, notice: "Establecimientos importados."
   end
 
   private

@@ -35,3 +35,11 @@
 <br>
 
 <%= link_to 'New Establishment', new_establishment_path %>
+<%= link_to "descargar CSV", establishments_path(format: "csv") %>
+
+
+<h2>Importar establecimientos</h2>
+<%= form_tag import_establishments_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Importar", :class => "button" %>
+<% end %>
