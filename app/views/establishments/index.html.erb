@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Establishments</h1>
+<h1>Listado de establecimientos</h1>
+
+<div class="right">
+  <%= form_tag establishments_path, :method => 'get' do %>
+    <%= search_field_tag :search, params[:search] %>
+  <% end %>
+</div>
 
 <table>
   <thead>
@@ -11,7 +17,7 @@
       <th>State</th>
       <th>Phone</th>
       <th>Email</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -24,9 +30,35 @@
         <td><%= establishment.state %></td>
         <td><%= establishment.phone %></td>
         <td><%= establishment.email %></td>
-        <td><%= link_to 'Show', establishment %></td>
-        <td><%= link_to 'Edit', edit_establishment_path(establishment) %></td>
-        <td><%= link_to 'Destroy', establishment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%# link_to 'Edit', edit_establishment_path(establishment) %>
+          <%= link_to "#", "data-reveal-id" => "establishment-#{establishment.id}" do %>
+            <%= fa_icon "pencil" %>
+          <% end %>
+          <div class="reveal-modal small" id="establishment-<%= establishment.id %>" data-reveal>
+            <%= simple_form_for(establishment) do |f| %>
+              <%= f.error_notification %>
+
+              <div class="form-inputs">
+                <%= f.input :code %>
+                <%= f.input :name %>
+                <%= f.input :department %>
+                <%= f.input :state %>
+                <%= f.input :phone %>
+                <%= f.input :email %>
+              </div>
+
+              <div class="form-actions">
+                <%= f.button :submit, 'Actualizar' %>
+              </div>
+            <% end %>
+          </div>
+        </td>
+        <td>
+          <%= link_to establishment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'redtxt' do %>
+            <%= fa_icon "trash-o" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -34,12 +66,34 @@
 
 <br>
 
-<%= link_to 'New Establishment', new_establishment_path %>
-<%= link_to "descargar CSV", establishments_path(format: "csv") %>
+<%= link_to 'Nuevo establecimiento', new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success' %>
+
+<div class="reveal-modal small" id="establishment-new" data-reveal>
+  <%= simple_form_for(@establishment) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :code %>
+      <%= f.input :name %>
+      <%= f.input :department %>
+      <%= f.input :state %>
+      <%= f.input :phone %>
+      <%= f.input :email %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Crear' %>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to establishments_path(format: "csv") do %>
+<%= fa_icon "download" %> Descargar CSV
+<% end %>
 
 
 <h2>Importar establecimientos</h2>
 <%= form_tag import_establishments_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Importar", :class => "button" %>
+  <%= submit_tag "Importar", :class => "button small" %>
 <% end %>
