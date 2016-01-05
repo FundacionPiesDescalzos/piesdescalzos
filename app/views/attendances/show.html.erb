@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Identification:</strong>
+  <%= @attendance.identification %>
+</p>
+
+<p>
+  <strong>Period:</strong>
+  <%= @attendance.period %>
+</p>
+
+<p>
+  <strong>Went days:</strong>
+  <%= @attendance.went_days %>
+</p>
+
+<p>
+  <strong>Skip days:</strong>
+  <%= @attendance.skip_days %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @attendance.reason %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @attendance.student %>
+</p>
+
+<%= link_to 'Edit', edit_attendance_path(@attendance) %> |
+<%= link_to 'Back', attendances_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Identification:</strong>
+  <%= @score.identification %>
+</p>
+
+<p>
+  <strong>Period:</strong>
+  <%= @score.period %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @score.area %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @score.score %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @score.student %>
+</p>
+
+<%= link_to 'Edit', edit_score_path(@score) %> |
+<%= link_to 'Back', scores_path %>
