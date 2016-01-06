@@ -1,5 +1,7 @@
 class Establishment < ActiveRecord::Base
   
+  has_many :schools
+  
   def self.search(search)
     if search
        where('lower(name) LIKE ?', "%#{search.downcase}%")

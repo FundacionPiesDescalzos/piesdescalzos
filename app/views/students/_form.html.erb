@@ -1,10 +1,12 @@
+<% @gender = ["femenino", "masculino"] %>
+<% @ti = ["TI", "RC"] %>
 <%= simple_form_for(@student) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :id_type %>
-    <%= f.input :gender %>
+    <%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
+    <%= f.input :gender, collection: @gender, prompt: "Escoger un genero" %>
     <%= f.input :address %>
     <%= f.input :last_course %>
     <%= f.input :outschool_years %>
@@ -12,11 +14,12 @@
     <%= f.input :born %>
     <%= f.input :etnic %>
     <%= f.input :villa %>
-    <%= f.input :born_state %>
+    <%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
     <%= f.input :displaced %>
-    <%= f.input :residency_state %>
+    <%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
     <%= f.input :zone %>
     <%= f.association :guardian %>
+    <%= f.association :school %>
   </div>
 
   <div class="form-actions">

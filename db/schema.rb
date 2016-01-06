@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105020148) do
+ActiveRecord::Schema.define(version: 20160106052452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +74,10 @@ ActiveRecord::Schema.define(version: 20160105020148) do
     t.text     "inh_description"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "student_id"
   end
+
+  add_index "health_cares", ["student_id"], name: "index_health_cares_on_student_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.integer  "code"
@@ -125,9 +128,11 @@ ActiveRecord::Schema.define(version: 20160105020148) do
     t.integer  "guardian_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "school_id"
   end
 
   add_index "students", ["guardian_id"], name: "index_students_on_guardian_id", using: :btree
+  add_index "students", ["school_id"], name: "index_students_on_school_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -150,7 +155,9 @@ ActiveRecord::Schema.define(version: 20160105020148) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "attendances", "students"
+  add_foreign_key "health_cares", "students"
   add_foreign_key "schools", "establishments"
   add_foreign_key "scores", "students"
   add_foreign_key "students", "guardians"
+  add_foreign_key "students", "schools"
 end

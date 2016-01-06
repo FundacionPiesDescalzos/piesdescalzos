@@ -2,6 +2,8 @@
   <li><%= link_to 'Edit account', edit_user_registration_path %></li>
   <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
   <li><%= link_to 'establishments', establishments_path %></li>
+  <li><%= link_to 'schools', schools_path %></li>
+  <li><%= link_to 'students', students_path %></li>
 <% else %>
   <li><%= link_to 'Sign in', new_user_session_path %></li>
 <% end %>
