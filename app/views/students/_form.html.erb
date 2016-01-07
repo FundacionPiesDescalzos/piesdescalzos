@@ -16,6 +16,10 @@
     <%= f.input :villa %>
     <%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
     <%= f.input :displaced %>
+    <div class="switch small">
+      <input id="displaced" type="radio" checked name="displaced">
+      <label for="displaced"></label>
+    </div>
     <%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
     <%= f.input :zone %>
     <%= f.association :guardian %>
