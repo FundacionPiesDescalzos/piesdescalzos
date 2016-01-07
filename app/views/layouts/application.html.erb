@@ -5,9 +5,11 @@
     <title><%= content_for?(:title) ? yield(:title) : "Rails Devise Roles" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Rails Devise Roles" %>">
     <%= stylesheet_link_tag 'application', media: 'all' %>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/s/zf/dt-1.10.10,r-2.0.0/datatables.min.css"/>
     <%# Modernizr is required for Zurb Foundation %>
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= javascript_include_tag 'application' %>
+		<script type="text/javascript" src="https://cdn.datatables.net/s/zf/dt-1.10.10,r-2.0.0/datatables.min.js"></script>
     <%= csrf_meta_tags %>
   </head>
   <body>

@@ -1,78 +1,81 @@
+<br />
+<ul class="breadcrumbs">
+  <li><a href="#">Inicio</a></li>
+  <li class="current"><a href="#">Consulta de estudiante <%= @student.name %></a></li>
+</ul>
+<hr />
 
-<p>
-  <strong>Name:</strong>
-  <%= @student.name %>
-</p>
-
-<p>
-  <strong>Id type:</strong>
-  <%= @student.id_type %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @student.gender %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @student.address %>
-</p>
-
-<p>
-  <strong>Last course:</strong>
-  <%= @student.last_course %>
-</p>
-
-<p>
-  <strong>Outschool years:</strong>
-  <%= @student.outschool_years %>
-</p>
-
-<p>
-  <strong>Identification:</strong>
-  <%= @student.identification %>
-</p>
-
-<p>
-  <strong>Born:</strong>
-  <%= @student.born %>
-</p>
-
-<p>
-  <strong>Etnic:</strong>
-  <%= @student.etnic %>
-</p>
-
-<p>
-  <strong>Villa:</strong>
-  <%= @student.villa %>
-</p>
-
-<p>
-  <strong>Born state:</strong>
-  <%= @student.born_state %>
-</p>
-
-<p>
-  <strong>Displaced:</strong>
-  <%= @student.displaced %>
-</p>
-
-<p>
-  <strong>Residency state:</strong>
-  <%= @student.residency_state %>
-</p>
-
-<p>
-  <strong>Zone:</strong>
-  <%= @student.zone %>
-</p>
-
-<p>
-  <strong>Guardian:</strong>
-  <%= @student.guardian %>
-</p>
+<ul class="accordion" data-accordion>
+  <li class="accordion-navigation">
+    <a href="#panel1a">Datos basicos</a>
+    <div id="panel1a" class="content active">
+      <div class="row-x">
+        <div class="large-4 columns">
+          <ul class="no-bullet">
+            <li><b>Nombre:</b> <%= @student.name %></li>
+            <li><b>Tipo de indetificación:</b> <%= @student.id_type %></li>
+            <li><b>Genero:</b> <%= @student.gender %></li>
+            <li><b>Dirección:</b> <%= @student.address %></li>
+          </ul>
+        </div>
+        <div class="large-4 columns">
+          <ul class="no-bullet">
+            <li><b>Ultimo curso:</b> <%= @student.last_course %></li>
+            <li><b>Años desescolarizado:</b> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
+            <li><b>indetificación:</b> <%= @student.identification %></li>
+            <li><b>Fecha de nacimiento:</b> <%= @student.born %></li>
+            <li><b>Etnia:</b> <%= @student.etnic %></li>
+            <li><b>Lugar:</b> <%= @student.villa %></li>
+          </ul>
+        </div>
+        <div class="large-4 columns">
+          <ul class="no-bullet">
+            <li><b>Lugar de nacimiento:</b> <%= @student.born_state %></li>
+            <li><b>Desplazado:</b> <%= @student.displaced? ? "SI" : "NO" %></li>
+            <li><b>Lugar de residencia:</b> <%= @student.residency_state %></li>
+            <li><b>Area:</b> <%= @student.zone %></li>
+            <li><b>Tutor:</b> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% if @student.guardian.present? %>
+  <li class="accordion-navigation">
+    <a href="#panel2a">Acudiente</a>
+    <div id="panel2a" class="content">
+      <ul class="no-bullet">
+        <li><b>Nombre:</b> <%= @student.guardian.name %></li>
+        <li><b>Apellido:</b> <%= @student.guardian.last_name %></li>
+      </ul>
+    </div>
+  </li>
+  <% end %>
+  <li class="accordion-navigation">
+    <a href="#panel3a">Afiliación al sistema de salud</a>
+    <div id="panel3a" class="content">
+      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel4a">Datos escolares</a>
+    <div id="panel4a" class="content">
+      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel5a">Seguimiento nutricional</a>
+    <div id="panel5a" class="content">
+      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel6a">Actividad en la fundacion</a>
+    <div id="panel6a" class="content">
+      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </li>
+</ul>
 
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

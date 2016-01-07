@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :health_cares
   resources :students
   resources :guardians
+  resources :visitors
   root to: 'visitors#index'
   devise_for :users
   resources :users

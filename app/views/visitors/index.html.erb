@@ -1,2 +1,74 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<br />
+<ul class="breadcrumbs">
+  <li><a href="#">Inicio</a></li>
+  <li class="current"><a href="#">Consulta de estudiantes</a></li>
+</ul>
+<hr />
+
+<h5 class="subheader">Para buscar un estudiante ingrese una parte del nombre o su numero de identificación</h5>
+<br />
+<div class="row">
+  <div class="centerize">
+    <%= form_tag visitors_path, :method => 'get' do %>
+    <div class="row collapse">
+        <div class="small-10 columns">
+          <%= search_field_tag :search, params[:search], placeholder: "Ej: Juan o 1033201291" %>
+        </div>
+        <div class="small-2 columns">
+          <%= submit_tag "Search", :name => nil, class: "button success postfix" %>
+        </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<h4 class="text-center redtxt"><%= @message %></h4>
+<% if @students.count > 0 %>
+<div class="results">
+  <table id="global">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo de documento</th>
+        <th>Curso</th>
+        <th>Identificación</th>
+        <th>Nacimiento</th>
+        <th>Etnia</th>
+        <th>Lugar de nacimiento</th>
+        <th>Desplazado</th>
+        <th>Lugar de residencia</th>
+        <th>Zona</th>
+        <th>Acudiente</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= link_to student.name, student %></td>
+          <td><%= student.id_type %></td>
+          <td><%= student.last_course %></td>
+          <td><%= student.identification %></td>
+          <td><%= student.born %></td>
+          <td><%= student.etnic %></td>
+          <td><%= student.born_state %></td>
+          <td><%= student.displaced ? "SI" : "NO" %></td>
+          <td><%= student.residency_state %></td>
+          <td><%= student.zone %></td>
+          <td><%= student.guardian.present? ? student.guardian.name : "No tiene registrado" %></td>
+          <td><%= link_to edit_student_path(student) do %><%= fa_icon :pencil %><% end %></td>
+          <td><%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon :trash, class: 'redtxt' %><% end %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+  <% if  params[:search].present?  %>
+  <div data-alert class="alert-box warning round">
+    <%= "No se encontraron resultados para #{params[:search]}" %>
+    <a href="#" class="close">&times;</a>
+  </div>
+  <% end %>
+<% end %>

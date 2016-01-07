@@ -21,8 +21,20 @@
   @extend .columns;
   @extend .text-center;
   }
+@mixin six-centered {
+  @extend .large-6;
+  @extend .columns;
+  @extend .large-centered;
+  }
 // create your own classes
 // to make views framework-neutral
+.row-x{
+	@extend .row;
+	max-width: 80em;
+}
+.centerize{
+	@include six-centered;
+}
 .column {
   @include six-columns-centered;
   }
@@ -40,7 +52,8 @@
 // to make views framework-neutral
 main {
   @include twelve-columns;
-  background-color: #eee;
+  background-color: #f9f9f9;
+	min-height: 720px;
   }
 section {
   @extend .row;

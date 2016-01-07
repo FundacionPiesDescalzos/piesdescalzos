@@ -1,14 +1,17 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
-  <li><%= link_to 'establishments', establishments_path %></li>
-  <li><%= link_to 'schools', schools_path %></li>
-  <li><%= link_to 'students', students_path %></li>
-<% else %>
-  <li><%= link_to 'Sign in', new_user_session_path %></li>
-<% end %>
-<% if user_signed_in? %>
+  <li><%= link_to 'Editar cuenta', edit_user_registration_path %></li>
+  <li><%= link_to 'Establecimientos', establishments_path %></li>
+  <li><%= link_to 'Sedes', schools_path %></li>
+  <li><%= link_to 'Estudiantes', students_path %></li>
+  <li><%= link_to 'Acudientes', guardians_path %></li>
   <% if current_user.try(:admin?) %>
-    <li><%= link_to 'Users', users_path %></li>
+    <li><%= link_to 'Usuarios', users_path %></li>
   <% end %>
+  <li>
+    <%= link_to destroy_user_session_path, :method=>'delete' do %>
+    <%= fa_icon "sign-out" %>  Cerrar sesión
+    <% end %>
+  </li>
+<% else %>
+  <li><%= link_to 'Iniciar sesión', new_user_session_path %></li>
 <% end %>
