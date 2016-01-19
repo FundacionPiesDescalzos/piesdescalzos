@@ -8,7 +8,7 @@ namespace :db do
     
     Establishment.populate 20 do |establishment|
       establishment.name = Faker::Company.name
-      establishment.code = 100000..2000000
+      establishment.code = 10000..200000
       establishment.department = Faker::Address.city
       establishment.state = Faker::Address.state
       establishment.phone = Faker::PhoneNumber.phone_number
@@ -27,7 +27,7 @@ namespace :db do
         school.foundation_present = [true, false]
         school.establishment_id = establishment.id
         school.created_at = 2.years.ago..Time.now
-        Student.populate 10..34 do |person|
+        Student.populate 5..14 do |person|
           person.name    = Faker::Name.name
           person.gender = ['masculino', 'femenino']
           person.id_type = Faker::Number.number(9) 
