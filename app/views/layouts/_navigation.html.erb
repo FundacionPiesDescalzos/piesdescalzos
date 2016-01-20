@@ -1,13 +1,46 @@
-<%# navigation styled for Zurb Foundation 5 %>
-<nav class="top-bar" data-topbar>
+<div class="nav-logo">
+  <img src="http://placehold.it/150x110" alt="" />
+</div>
+<div class="user-info">
+  <div class="info">
+    <h6 class="whitetxt">Lilian nuñez</h6>
+    <h6 class="whitetxt">cargo - cargo</h6>
+  </div>
+  <%= link_to destroy_user_session_path, :method=>'delete', class: "sign-out" do %>
+    <%= fa_icon "sign-out 2x" %> 
+  <% end %>
+</div>
+<ul class="nav">
+  <li class="main">
+    <a href=""><%= fa_icon "home 2x" %> <span class="fix">Inicio</span></a>
+  </li>
+  <li class="main submenu">
+    <a href=""><%= fa_icon "bank 2x" %> <span class="fix">Instituciones</span></a>
+    <ul>
+      <li><a href="">Consultar estudiante</a></li>
+      <li><a href="">Datos escolares</a></li>
+    </ul>
+  </li>
+  <li class="main">
+    <a href=""><%= fa_icon "book 2x" %> <span class="fix">Programas</span></a>
+  </li>
+  <li class="main">
+    <a href=""><%= fa_icon "graphs 2x" %> <span class="fix">Reportes</span></a>
+  </li>
+  <li class="main">
+    <a href=""><%= fa_icon "cog 2x" %> <span class="fix">Configuracion</span></a>
+  </li>
+</ul>
+
+<!-- <nav class="top-bar" data-topbar>
   <ul class="title-area">
-    <li class="name"><%= link_to 'Home', root_path %></li>
+    <li class="name"><% link_to 'Home', root_path %></li>
     <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
   </ul>
   <div class="top-bar-section">
     <ul>
-      <%= render 'layouts/navigation_links' %>
-        <%= render 'layouts/nav_links_for_auth' %>
+      <% render 'layouts/navigation_links' %>
+        <% render 'layouts/nav_links_for_auth' %>
     </ul>
   </div>
-</nav>
+</nav> -->

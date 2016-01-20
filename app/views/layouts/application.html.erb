@@ -13,12 +13,16 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
+		<% if params[:controller] == 'public' %>
+		  <%= yield %>
+		<% else %>
+		<div class="nav-menu">
+			<%= render 'layouts/navigation' %>
+		</div>
     <main role="main">
        <%= render 'layouts/messages' %>
        <%= yield %>
     </main>
+		<% end %>
   </body>
 </html>

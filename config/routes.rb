@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :homes
   resources :attendances
   resources :scores
   resources :schools
@@ -9,7 +10,7 @@ Rails.application.routes.draw do
   resources :students
   resources :guardians
   resources :visitors
-  root to: 'visitors#index'
   devise_for :users
   resources :users
+  root :to => 'public#index'
 end

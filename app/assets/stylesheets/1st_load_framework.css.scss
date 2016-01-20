@@ -1,5 +1,6 @@
 // import the CSS framework
 @import "foundation";
+$primary:#e1c641;
 
 // override for the 'Home' navigation link
 .top-bar .name {
@@ -26,6 +27,19 @@
   @extend .columns;
   @extend .large-centered;
   }
+	
+.button{
+	@extend .button;
+	padding: 5px 40px;
+	&.success{
+		background: $primary;
+		color: #000;
+		&:hover{
+			background: darken($primary,10%);
+		}
+	}
+}
+
 // create your own classes
 // to make views framework-neutral
 .row-x{
@@ -51,7 +65,8 @@
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
-  @include twelve-columns;
+  width: 75%;
+	float: right;
   background-color: #f9f9f9;
 	min-height: 720px;
   }
