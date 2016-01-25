@@ -1,6 +1,6 @@
 // import the CSS framework
 @import "foundation";
-$primary:#e1c641;
+$primary:#FFD41F;
 
 // override for the 'Home' navigation link
 .top-bar .name {
@@ -33,7 +33,7 @@ $primary:#e1c641;
 	padding: 5px 40px;
 	&.success{
 		background: $primary;
-		color: #000;
+		color: #888;
 		&:hover{
 			background: darken($primary,10%);
 		}
@@ -65,7 +65,7 @@ $primary:#e1c641;
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
-  width: 75%;
+  width: 77%;
 	float: right;
   background-color: #f9f9f9;
 	min-height: 720px;

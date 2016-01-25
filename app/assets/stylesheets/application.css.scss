@@ -15,6 +15,8 @@
  *= require_self
  */
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic');
+
 @mixin border-radius($foo:5px){
 	-webkit-border-radius: $foo;
 	-moz-border-radius: $foo;
@@ -25,6 +27,47 @@
 	-webkit-box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
 	-moz-box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
 	box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  
+}
+
+h2 {
+  font-family: 'Open Sans', sans-serif;
+}
+h3 {
+  font-family: 'Open Sans', sans-serif;
+}
+h4 {
+  font-family: 'Open Sans', sans-serif;
+}
+h5 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+
+}
+
+h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  font-family: 'Open Sans', sans-serif;
 }
 
 .redtxt{
@@ -48,17 +91,58 @@
 }
 
 .main-logout{
-	background: url("http://placehold.it/1280x720") no-repeat center center;
+	background: url("") no-repeat center center;
+	background-image: image-url("login-bg.jpg");
 	-webkit-background-size: cover;
 	background-size: cover;
 	width: 100vw;
 	height: 100vh;
 }
 
+.titular {
+    width: 310px;
+    padding-top: 40px;
+    margin: 0 auto;
+}
+
+
+
+.logo {
+  background: url("") no-repeat center 20px;
+  background-image: image-url("pies-blanco.png");
+  height: 100px;
+}
+
+.app-name {
+  
+  text-align: center;
+  margin-top: 14px;
+  border-top: solid #FFD41F 2px;
+  padding-top: 5px;
+  
+  h3{
+    
+        font-size: 15px;
+    font-weight: bold;
+    color: #FFD41F;
+  }
+  
+  p{
+    font-size: 15px;
+    margin-top: -14px;
+    color: #fff;
+    padding: 7px;
+    font-style: italic;
+    font-weight: 400;
+  }
+}
+
+
 .pos-bottom{
 	width: 100%;
 	position: fixed;
 	bottom: 0;
+	padding-bottom: 20px;
 }
 
 .inner-padding{
@@ -88,31 +172,83 @@
 }
 
 .nav-menu{
-	width: 25%;
+	width: 23%;
 	float: left;
 	@include shadow;
 	height: 100vh;
 }
 
 .nav{
+
+    margin-left:0px;
+
 	li.main{
 		list-style-type: none;
-		margin: 5px 0;
-		a{
-			color: gray;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+    
 			span.fix{
 				position: relative;
 				top:-5px;
+				 padding-left: 8px;
+				 color: #888;
 			}
 			i{
-				width: 50px;
-				border-right: 1px solid gray;
+				width: 40px;
+				border-right: 1px solid #888888;
 				padding-right: 10px;
 			}
 		}
+		
+		li a{
+      padding-left: 15px;
+		}
+		a{
+    color: #888;
+    }
+		a :hover {
+		  color: #232321;
+		  
+		}
 	}
+
+
+.subitem{
+      list-style-position: inside;
+      padding-left: 0px;
+      margin-top: 10px;
+      a {
+      color: #fff;
+      font-size: smaller;
+      }
 }
 
+.subitem :hover {
+
+      a {
+      color: #FFD41F;
+     
+      }
+}
+
+.submenu{
+  ul{
+    background-color: #232321;
+    list-style-position: inside;
+    margin-left: 0px;
+    
+  }
+  li{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 43px;
+    border-bottom: solid #000 1px;
+  }
+  
+}
 .nav-logo{
 	padding: 20px;
 	img{
@@ -123,41 +259,65 @@
 }
 
 .user-info{
-	background: black;
+	background: #232321;
+	border-bottom: solid #000 1px;
+    border-top: solid #000 1px;
 	h6{
 		color: #fff;
 		margin: 0;
 		text-align: left;
 		padding-left: 10px;
 	}
-	height: 60px;
+	height: 61px;
 }
 
 .info{
 	width: 80%;
+	padding-top: 5px;
+  padding-left: 20px;
 	display: inline-block;
+	
+	h6 {
+	  margin-top: -11px;
+    margin-left: -10px;
+    font-size: 13px;
+	}
 }
 
 .sign-out{
-	display: block;
-	background: yellow;
-	color: #000;
-	height: 60px;
-	width: 20%;
-	float: right;
-	text-align: center;
+display: block;
+    background: #FFD41F;
+    color: #000;
+    margin-top: -1px;
+    height: 61px;
+    width: 20%;
+    float: right;
+    text-align: center;
+    border-bottom: solid #c6a911 1px;
+    border-top: solid #c6a911 1px;
+    border-left: solid #000 1px;
 	span{
 		font-size: 18px;
 		line-height: 18px;	
 	}
 }
 
+.fa-sign-out {
+      margin-top: 14px;
+  
+}
+
 .breadcrumb{
 	width: 30%;
-	background: black;
+	background: #232321;
 	text-align: center;
 	padding: 30px 0;
 	float: left;
+	h4 {
+	  font-style: italic;
+    font-size: 20px;
+    font-weight: 600;
+	}
 }
 .search-field{
 	width: 70%;

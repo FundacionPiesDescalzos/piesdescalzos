@@ -1,10 +1,10 @@
 <div class="nav-logo">
-  <img src="http://placehold.it/150x110" alt="" />
+  <img src="pies-negro.png" alt="" />
 </div>
 <div class="user-info">
   <div class="info">
-    <h6 class="whitetxt">Lilian nuñez</h6>
-    <h6 class="whitetxt">cargo - cargo</h6>
+    <h5 class="whitetxt">Lilian nuñez</h5>
+    <h6 class="whitetxt italic">cargo - cargo</h6>
   </div>
   <%= link_to destroy_user_session_path, :method=>'delete', class: "sign-out" do %>
     <%= fa_icon "sign-out 2x" %> 
@@ -16,7 +16,7 @@
   </li>
   <li class="main submenu">
     <a href=""><%= fa_icon "bank 2x" %> <span class="fix">Instituciones</span></a>
-    <ul>
+    <ul class="subitem">
       <li><a href="">Consultar estudiante</a></li>
       <li><a href="">Datos escolares</a></li>
     </ul>
