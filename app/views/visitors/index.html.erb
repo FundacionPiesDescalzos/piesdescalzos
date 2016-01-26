@@ -29,7 +29,6 @@
         <th>Curso</th>
         <th>Identificación</th>
         <th>Nacimiento</th>
-        <th>Lugar de residencia</th>
         <th></th>
         <th></th>
       </tr>
@@ -38,12 +37,12 @@
     <tbody>
       <% @students.each do |student| %>
         <tr>
-          <td><%= link_to student.name, student %></td>
+          <td><%= link_to student.name, student %><h6><%= fa_icon "map-marker" %><%= student.residency_state %></h6></td>
           <td><%= student.id_type %></td>
           <td><%= student.last_course %></td>
           <td><%= student.identification %></td>
           <td><%= student.born %> - <%= student.school.present? ? student.school.name : "no esta vinculado" %></td>
-          <td><%= student.residency_state %></td>
+  
           <td><%= link_to edit_student_path(student) do %><%= fa_icon :pencil %><% end %></td>
           <td><%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon :trash, class: 'redtxt' %><% end %></td>
         </tr>
