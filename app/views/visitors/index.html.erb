@@ -2,13 +2,17 @@
   <h4 class="whitetxt">Consultar estudiante</h4>
 </div>
 <div class="search-field">
-      <%= form_tag visitors_path, :method => 'get' do %>
+      <%= form_tag visitors_path, :method => 'get', class: "rounded" do %>
       <div class="row collapse">
           <div class="small-10 columns">
             <%= search_field_tag :search, params[:search], placeholder: "Buscar por identificación nombre o apellido" %>
+            <label for="instituciones" class="ib">Instituciones: </label>
+            <%= select_tag "instituciones", options_from_collection_for_select(@schools, "id", "name", params[:instituciones]), include_blank: "Todas" %>
           </div>
           <div class="small-2 columns">
-            <%= submit_tag "Search", :name => nil, class: "button success postfix" %>
+            <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+                <%= fa_icon "search" %> Search
+            <% end %>
           </div>
       </div>
       <% end %>
@@ -25,12 +29,7 @@
         <th>Curso</th>
         <th>Identificación</th>
         <th>Nacimiento</th>
-        <th>Etnia</th>
-        <th>Lugar de nacimiento</th>
-        <th>Desplazado</th>
         <th>Lugar de residencia</th>
-        <th>Zona</th>
-        <th>Acudiente</th>
         <th></th>
         <th></th>
       </tr>
@@ -43,13 +42,8 @@
           <td><%= student.id_type %></td>
           <td><%= student.last_course %></td>
           <td><%= student.identification %></td>
-          <td><%= student.born %></td>
-          <td><%= student.etnic %></td>
-          <td><%= student.born_state %></td>
-          <td><%= student.displaced ? "SI" : "NO" %></td>
+          <td><%= student.born %> - <%= student.school.present? ? student.school.name : "no esta vinculado" %></td>
           <td><%= student.residency_state %></td>
-          <td><%= student.zone %></td>
-          <td><%= student.guardian.present? ? student.guardian.name : "No tiene registrado" %></td>
           <td><%= link_to edit_student_path(student) do %><%= fa_icon :pencil %><% end %></td>
           <td><%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon :trash, class: 'redtxt' %><% end %></td>
         </tr>

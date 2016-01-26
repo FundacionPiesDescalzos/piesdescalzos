@@ -13,6 +13,15 @@ $primary:#FFD41F;
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create mixins using Foundation classes
+
+body{
+	font-family:'Open Sans', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6,p{
+	font-family:'Open Sans', sans-serif;
+}
+
 @mixin twelve-columns {
   @extend .small-12;
   @extend .columns;
