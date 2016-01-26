@@ -43,6 +43,10 @@ h1,h2,h3,h4,h5,h6,p{
 	&.success{
 		background: $primary;
 		color: #888;
+		font-weight: 600;
+    font-size: 13px;
+    color: #383636;
+    font-family: 'Open Sans', sans-serif;
 		&:hover{
 			background: darken($primary,10%);
 		}

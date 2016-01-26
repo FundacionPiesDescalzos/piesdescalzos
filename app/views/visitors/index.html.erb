@@ -11,7 +11,7 @@
           </div>
           <div class="small-2 columns">
             <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
-                <%= fa_icon "search" %> Search
+                <h6><%= fa_icon "search" %> Buscar</h6>
             <% end %>
           </div>
       </div>
@@ -24,11 +24,14 @@
   <table id="global">
     <thead>
       <tr>
+      	<th></th>
+        <th></th>
+        <th></th>
         <th>Nombre</th>
         <th>Tipo de documento</th>
-        <th>Curso</th>
         <th>Identificación</th>
-        <th>Nacimiento</th>
+        <th>Edad</th>
+        <th>Curso</th>
         <th></th>
         <th></th>
       </tr>
@@ -37,17 +40,20 @@
     <tbody>
       <% @students.each do |student| %>
         <tr>
+        	<td><%= fa_icon "graduation-cap green" %></td>
+        	<td><%= fa_icon "cutlery green" %></td>
+        	<td><%= image_tag "nino.jpg", class:"circulo" %></td>
           <td>
-            <%= link_to student.name, student %>
-            <h6 class="subtitle"><%= student.school.present? ? student.school.name : "Sin institución" %></h6>
-            <h6 class="subtitle"><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
+            <h5 class="italic nospace"><%= link_to student.name, student %></h5>
+            <h6 class="nospace"><%= student.school.present? ? student.school.name : "Sin institución" %></h6>
+            <p><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
           </td>
-          <td><%= student.id_type %></td>
-          <td><%= student.last_course %></td>
-          <td><%= student.identification %></td>
-          <td><%= student.born %></td>
-          <td><%= link_to edit_student_path(student) do %><%= fa_icon :pencil %><% end %></td>
-          <td><%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon :trash, class: 'redtxt' %><% end %></td>
+          <td><h6 class="nospace">Tipo de documento</h6><p><%= student.id_type %></p></td>
+          <td><h6 class="nospace">Identificación</h6><p><%= student.identification %></p></td>
+          <td><h6 class="nospace">Edad</h6><p><%= student.born %></p></td>
+          <td><h6 class="nospace">Curso</h6><p><%= student.last_course %></p></td>
+          <td><%= link_to edit_student_path(student) do %><%= fa_icon "pencil editar"%><% end %></td>
+          <td><%= link_to student, method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon "trash borrar", class: 'redtxt' %><% end %></td>
         </tr>
       <% end %>
     </tbody>
