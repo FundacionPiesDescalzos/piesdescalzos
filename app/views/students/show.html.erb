@@ -37,74 +37,91 @@
   </div>
 </div>
 
-<ul class="accordion" data-accordion>
-  <li class="accordion-navigation">
-    <a href="#panel1a">Datos basicos</a>
-    <div id="panel1a" class="content active">
-      <div class="row-x">
-        <div class="large-4 columns">
-          <ul class="no-bullet">
-            <li><b>Tipo de indetificación:</b> <%= @student.id_type %></li>
-            <li><b>Genero:</b> <%= @student.gender %></li>
-            <li><b>Dirección:</b> <%= @student.address %></li>
-          </ul>
-        </div>
-        <div class="large-4 columns">
-          <ul class="no-bullet">
-            <li><b>Años desescolarizado:</b> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
-            <li><b>indetificación:</b> <%= @student.identification %></li>
-            <li><b>Fecha de nacimiento:</b> <%= @student.born %></li>
-            <li><b>Etnia:</b> <%= @student.etnic %></li>
-            <li><b>Lugar:</b> <%= @student.villa %></li>
-          </ul>
-        </div>
-        <div class="large-4 columns">
-          <ul class="no-bullet">
-            <li><b>Lugar de nacimiento:</b> <%= @student.born_state %></li>
-            <li><b>Desplazado:</b> <%= @student.displaced? ? "SI" : "NO" %></li>
-            <li><b>Area:</b> <%= @student.zone %></li>
-            <li><b>Tutor:</b> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </li>
+
+<ul class="tabs vertical" data-tab>
+  <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
+   <% if @student.guardian.present? %>
+	  <li class="tab-title"><a href="#panel2">Acudiente</a></li>
+  <% end %>
+  <li class="tab-title"><a href="#panel3">Afiliación en salud</a></li>
+  <li class="tab-title"><a href="#panel4">Datos escolares</a></li>
+  <li class="tab-title"><a href="#panel5">Seguimiento nutricional</a></li>
+</ul>
+
+<div class="tabs-content extended-tabs">
+  <div class="content active" id="panel1">
+    <ul class="no-bullet equal">
+      <li><span class="labeling"><%= fa_icon "phone" %> Tipo de indetificación:</span> <%= @student.id_type %></li>
+	  <hr />
+      <li><span class="labeling"><%= fa_icon "phone" %> Genero </span> <%= @student.gender %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Dirección </span> <%= @student.address %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Años desescolarizado:</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> indetificación </span> <%= @student.identification %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Fecha de nacimiento:</span> <%= @student.born %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Etnia </span> <%= @student.etnic %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Lugar </span> <%= @student.villa %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Lugar de nacimiento:</span> <%= @student.born_state %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Desplazado </span> <%= @student.displaced? ? "SI" : "NO" %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Area </span> <%= @student.zone %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Tutor </span> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
+    </ul>
+  </div> <!-- /tab 1 -->
   <% if @student.guardian.present? %>
-  <li class="accordion-navigation">
-    <a href="#panel2a">Acudiente</a>
-    <div id="panel2a" class="content">
+  <div class="content" id="panel2">
       <ul class="no-bullet">
         <li><b>Nombre:</b> <%= @student.guardian.name %></li>
         <li><b>Apellido:</b> <%= @student.guardian.last_name %></li>
       </ul>
-    </div>
-  </li>
+   </div> <!-- /tabs 2 -->
   <% end %>
-  <li class="accordion-navigation">
-    <a href="#panel3a">Afiliación al sistema de salud</a>
-    <div id="panel3a" class="content">
-      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-  </li>
-  <li class="accordion-navigation">
-    <a href="#panel4a">Datos escolares</a>
-    <div id="panel4a" class="content">
-      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-  </li>
-  <li class="accordion-navigation">
-    <a href="#panel5a">Seguimiento nutricional</a>
-    <div id="panel5a" class="content">
-      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-  </li>
-  <li class="accordion-navigation">
-    <a href="#panel6a">Actividad en la fundacion</a>
-    <div id="panel6a" class="content">
-      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-  </li>
-</ul>
+  <div class="content" id="panel3">
+    <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
+  </div>
+  <div class="content" id="panel4">
+    <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
+  </div>
+  <div class="content" id="panel5">
+    <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+<div id="basicos" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
+  <div class="modal-header">
+  	<h5 class="whitetxt nospace">Datos básicos</h5>
+  </div>
+  
+  <div class="modal-content">
+	  <% @gender = ["femenino", "masculino"] %>
+  	<% @ti = ["TI", "RC"] %>
+  	<%= simple_form_for(@student) do |f| %>
+  	  <%= f.error_notification %>
+  	
+  	  <div class="form-inputs">
+  	    <%= f.input :name %>
+  	    <%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
+  	    <%= f.input :gender, collection: @gender, prompt: "Escoger un genero" %>
+  	    <%= f.input :address %>
+  	    <%= f.input :last_course %>
+  	    <%= f.input :outschool_years %>
+  	    <%= f.input :identification %>
+  	    <%= f.input :born %>
+  	    <%= f.input :etnic %>
+  	    <%= f.input :villa %>
+  	    <%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
+  	    <%= f.input :displaced %>
+  	    <%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
+  	    <%= f.input :zone %>
+  	    <%= f.association :guardian %>
+  	    <%= f.association :school %>
+  	  </div>
+  	
+  	  <div class="form-actions">
+  	    <%= f.button :submit %>
+  	  </div>
+  	<% end %>
+  	</div>
+  
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
+<%# link_to 'Edit', edit_student_path(@student) %>

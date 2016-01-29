@@ -30,7 +30,7 @@ namespace :db do
         Student.populate 5..14 do |person|
           person.name    = Faker::Name.name
           person.gender = ['masculino', 'femenino']
-          person.id_type = Faker::Number.number(9) 
+          person.id_type = ['rc', 'ti', 'otro']
           person.address = Faker::Address.street_address
           person.last_course = 1..11
           person.outschool_years = 0..4
@@ -42,7 +42,7 @@ namespace :db do
           person.displaced = [true, false]
           person.residency_state = Faker::Address.state
           person.zone = Faker::Address.zip_code
-          # person.school_id = school.id
+          person.school_id = school.id
           person.created_at = 2.years.ago..Time.now
         end
       end

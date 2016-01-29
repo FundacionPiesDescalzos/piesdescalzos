@@ -34,9 +34,9 @@ $primary_yellow:#FFD41F;
 
 h4 {
 	//TO-DO: esto es un error ivancho los h4 pueden existir sin italica si quiere que alguno tenga italica pongale la clase .italic o <i>
-  font-style: italic;
-  font-weight: 600;
-  font-size: 17px;
+//  font-style: italic;
+//  font-weight: 600;
+//  font-size: 17px;
 }
 
 h5 {
@@ -45,9 +45,10 @@ h5 {
 }
 
 h6 {
-  font-weight: bold;
-  font-size: 13px;
-  color: #2F2F2F;
+//	TO-DO: puede usar la clase .bold y ese font-size solo si estamos seguros que todos los h6 van a quedar bien de ese tamaño
+//  font-weight: bold;
+//  font-size: 13px;
+//  color: #2F2F2F;
 }
 
 p {
@@ -459,9 +460,10 @@ table tr td {
 	background: url("pies-textura.jpg") repeat-x top left;
 	height: 190px;
 	width: 100%;
+	border-bottom: 1px solid lightgray;
 	.pic{
 		display: inline-table;
-		width: 29%;
+		width: 19%;
 		img{
 			width: 100px;
 			height: 100px;
@@ -474,6 +476,80 @@ table tr td {
 	.student-info{
 		padding-top: 70px;
 		display: inline-table;
-		width: 70%;
+		width: 80%;
 	}
+}
+
+.extended-tabs{
+    width: 80%;
+    float: right;
+	min-height: 65vh;
+	padding: 20px;
+	background: rgb(247,247,249);
+}
+
+.tabs-content{
+	.content{
+		ul.equal{
+			li{
+				max-width: 24vw;
+				text-align: right;
+				left: 150px;
+			}	
+		}	
+	}
+}
+
+.edit_tabs{
+	display: none;
+}
+
+$size_tab:57px;
+.tabs.vertical{
+	.tab-title{
+		&.active{
+		    position: relative;
+			border-left: 6px solid $primary_yellow;
+			.edit_tabs{
+				display: inline-block;
+			    float: right;
+			    position: absolute;
+			    top: 0;
+			    right: 0;
+			    width:$size_tab;
+			    height:$size_tab;
+			    background: $primary_yellow;
+				a{
+					display: block;
+					width: 100%;
+					height: 100%;
+				}
+				i{
+				  text-align: center;
+				  display: block;
+				  line-height:$size_tab;
+				  color: #000;
+				}
+			}
+		}
+	}
+}
+
+.labeling{
+	color: rgb(173,172,177);
+	float: left;
+}
+
+.subitem{
+	display: none;
+}
+
+.modal-header{
+	background: black;
+	padding: 20px;
+	text-align: center;
+}
+
+.modal-content{
+	padding: 20px;
 }
