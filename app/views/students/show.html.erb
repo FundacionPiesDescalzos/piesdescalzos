@@ -1,9 +1,41 @@
-<br />
-<ul class="breadcrumbs">
-  <li><a href="#">Inicio</a></li>
-  <li class="current"><a href="#">Consulta de estudiante <%= @student.name %></a></li>
-</ul>
-<hr />
+<div class="breadcrumb">
+  <h4 class="whitetxt">Consultar estudiante</h4>
+</div>
+<div class="search-field">
+      <%= form_tag visitors_path, :method => 'get', class: "rounded" do %>
+      <div class="row collapse">
+          <div class="small-10 columns">
+            <%= search_field_tag :search, params[:search], placeholder: "Buscar por identificación nombre o apellido" %>
+            <label for="instituciones" class="ib">Instituciones: </label>
+            <%= select_tag "instituciones", options_from_collection_for_select(@schools, "id", "name", params[:instituciones]), include_blank: "Todas" %>
+          </div>
+          <div class="small-2 columns">
+            <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+                <h6><%= fa_icon "search" %> Buscar</h6>
+            <% end %>
+          </div>
+      </div>
+      <% end %>
+</div>
+
+<div class="back_link">
+  <%= link_to visitors_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
+
+<div class="student-banner">
+  <div class="pic">
+    <%= image_tag "nino.jpg" %>
+  </div>
+  <div class="student-info">
+    <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
+    <h4 class="whitetxt"><%= @student.name %></h4>
+    <h5 class="italic nospace"><%= @student.the_school %></h5>
+    <h5 class="subheader nospace">Curso  <%= @student.last_course %></h5>
+    <h5 class="subheader nospace"><%= fa_icon "map-marker" %> <%= @student.residency_state %></h5>
+  </div>
+</div>
 
 <ul class="accordion" data-accordion>
   <li class="accordion-navigation">
@@ -12,7 +44,6 @@
       <div class="row-x">
         <div class="large-4 columns">
           <ul class="no-bullet">
-            <li><b>Nombre:</b> <%= @student.name %></li>
             <li><b>Tipo de indetificación:</b> <%= @student.id_type %></li>
             <li><b>Genero:</b> <%= @student.gender %></li>
             <li><b>Dirección:</b> <%= @student.address %></li>
@@ -20,7 +51,6 @@
         </div>
         <div class="large-4 columns">
           <ul class="no-bullet">
-            <li><b>Ultimo curso:</b> <%= @student.last_course %></li>
             <li><b>Años desescolarizado:</b> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
             <li><b>indetificación:</b> <%= @student.identification %></li>
             <li><b>Fecha de nacimiento:</b> <%= @student.born %></li>
@@ -32,7 +62,6 @@
           <ul class="no-bullet">
             <li><b>Lugar de nacimiento:</b> <%= @student.born_state %></li>
             <li><b>Desplazado:</b> <%= @student.displaced? ? "SI" : "NO" %></li>
-            <li><b>Lugar de residencia:</b> <%= @student.residency_state %></li>
             <li><b>Area:</b> <%= @student.zone %></li>
             <li><b>Tutor:</b> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
           </ul>

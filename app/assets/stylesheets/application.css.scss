@@ -17,6 +17,9 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic');
 
+//esto es tan recurrente que tiene que tener su propia variable
+$primary_yellow:#FFD41F;
+
 @mixin border-radius($foo:5px){
 	-webkit-border-radius: $foo;
 	-moz-border-radius: $foo;
@@ -30,6 +33,7 @@
 }
 
 h4 {
+	//TO-DO: esto es un error ivancho los h4 pueden existir sin italica si quiere que alguno tenga italica pongale la clase .italic o <i>
   font-style: italic;
   font-weight: 600;
   font-size: 17px;
@@ -55,6 +59,7 @@ p {
 }
 
 .ib{
+//	TO-DO: .ib solo es para inline-block de resto personalice con otra clase
 	  display: inline-block;
     font-weight: 600;
     font-style: italic;
@@ -115,8 +120,7 @@ p {
   padding-top: 5px;
   
   h3{
-    
-        font-size: 15px;
+    font-size: 15px;
     font-weight: bold;
     color: #FFD41F;
   }
@@ -294,7 +298,7 @@ p {
 }
 
 .sign-out{
-display: block;
+    display: block;
     background: #FFD41F;
     color: #000;
     margin-top: -1px;
@@ -324,11 +328,12 @@ color: #B59307 !important;
 }
 
 .fa-2x {
+//	TO-DO: seguro todos los fa-2x van a tener 20px de font-size?
   font-size: 20px;
-  
 }
 
 .fa-circle-ls {
+	// TO-DO: y si necesitamos este icono con estilo?? personalizar con otro clase 
     font-size: 9px;
     padding-right: 8px;
     top: -2px;
@@ -399,10 +404,11 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
 .nospace {
     padding: 0px;
     margin: 0px;
-    color: #636363;
+//	quite el color pues si necesitamos un objeto sin padding y sin margin pero sin ese color? hay que poner el color en otra clase si es recurrente.. 
 }
 .bold{
   font-weight: bold;  
+//	TO-DO: lo mismo este color sobra aca
   color: #2F2F2F;
 }
 
@@ -429,5 +435,45 @@ table tr td {
 		&[type="search"]{
 			width: 98%;
 		}
+	}
+}
+
+.back_link{
+	padding: 10px 20px;
+	i{
+		width: 40px;
+		height: 40px;
+    font-size: 22px;
+    line-height: 40px;
+		@include border-radius(100%);
+		background: $primary_yellow;
+		color:#000;
+		text-align: center;
+	}
+	span{
+			color: gray;
+	}
+}
+
+.student-banner{
+	background: url("pies-textura.jpg") repeat-x top left;
+	height: 190px;
+	width: 100%;
+	.pic{
+		display: inline-table;
+		width: 29%;
+		img{
+			width: 100px;
+			height: 100px;
+			@include border-radius(100%);
+	    position: relative;
+	    top: 15px;
+	    left: 25px;
+		}
+	}
+	.student-info{
+		padding-top: 70px;
+		display: inline-table;
+		width: 70%;
 	}
 }

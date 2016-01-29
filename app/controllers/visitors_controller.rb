@@ -4,8 +4,6 @@ class VisitorsController < ApplicationController
     if params[:search]
       s = "%#{params[:search]}%"
       i = "#{params[:instituciones]}"
-      p "i: -----"
-      p i
       if params[:search].to_i.is_a?(Integer)  && params[:search].to_i > 0 && !i.present?
         @students = Student.where(identification: params[:search].to_i)
       elsif params[:search].to_i.is_a?(Integer)  && params[:search].to_i > 0 && i.present?
