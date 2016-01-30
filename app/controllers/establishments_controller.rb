@@ -7,6 +7,7 @@ class EstablishmentsController < ApplicationController
   def index
     @establishment = Establishment.new
     @establishments = Establishment.search(params[:search])
+		@school = School.new
     respond_to do |format|
         format.html
         format.csv { send_data @establishments.to_csv }

@@ -1,70 +1,120 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listado de establecimientos</h1>
-
-<div class="right">
-  <%= form_tag establishments_path, :method => 'get' do %>
-    <%= search_field_tag :search, params[:search] %>
-  <% end %>
+<div class="breadcrumb">
+  <h4 class="whitetxt">Instituciones educativas</h4>
 </div>
+<div class="search-field">
+	  <div class="no-so-big">
+		  <br />
+	  	  <%= form_tag establishments_path, :method => 'get', class: "rounded" do %>
+	  	  <div class="row collapse">
+	  	      <div class="small-10 columns">
+	  	        <%= search_field_tag :search, params[:search], placeholder: "Ingrese parte del nombre de la institución" %>
+	  	      </div>
+	  	      <div class="small-2 columns">
+	  	        <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+	  	            <h6><%= fa_icon "search" %> Buscar</h6>
+	  	        <% end %>
+	  	      </div>
+	  	  </div>
+	  	  <% end %>
+	  </div>
+</div>
+<br />
+&nbsp;<%= link_to new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success round nospace' do %>
+	<%= fa_icon "plus" %> Añadir institución
+<% end %>
+&nbsp;
+<%= link_to establishments_path(format: "csv") do %>
+	<%= fa_icon "download" %> Descargar CSV
+<% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Name</th>
-      <th>Department</th>
-      <th>State</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<ul class="accordion" data-accordion>
+ <% @i = 0 %>
+ <% @establishments.each do |establishment| %>
+   <li class="accordion-navigation">
+     <a href="#panel_<%= @i %>"><%= establishment.name %></a>
+     <div id="panel_<%= @i %>" class="content <%= @i == 0 ? 'active':'subactive' %>">
+		 <% @i = @i + 1 %>
+	     <%= link_to "#", "data-reveal-id" => "establishment-#{establishment.id}", class: "edit-establishment" do %>
+	       <%= fa_icon "pencil" %>
+	     <% end %>
+		 <% if establishment.schools.present? %>
+		  <table width="100%">
+		    <thead>
+		      <tr>
+		        <th>Nombre</th>
+		        <th>Codigo de sede</th>
+		        <th>Nombre de contacto</th>
+		        <th>Correo electronico</th>
+		        <th>Atendida por la fundación</th>
+		      </tr>
+		    </thead>
+			<tbody>
+		   <% establishment.schools.each do |school| %>
+			 	<tr>
+			 		<td><%= link_to school.name, school %></td>
+					<td><num><%= school.code %></num></td>
+					<td><p><%= school.contact_name %></p></td>
+					<td><%= mail_to school.email %></td>
+					<td><h5 class="subheader"><%= school.foundation_present? ? "Si" : "NO" %></h5></td>
+			 	</tr>
+		   <% end %>
+			 </tbody>
+		   </table>
+		 <% end %>
+		 <%= link_to new_school_path, "data-reveal-id" => "school-new-#{establishment.code}-#{establishment.id}", class: 'button small success round nospace' do %>
+		 	<%= fa_icon "plus" %> Añadir Sede
+		 <% end %>
+		 <div class="reveal-modal nospace small radius" id="school-new-<%= establishment.code %>-<%= establishment.id %>" data-reveal>
+		    <div class="modal-header">
+		    	<h5 class="whitetxt nospace">Añadir sede a <%= establishment.name %></h5>
+		    </div>
+			<div class="modal-content">
+				<%= simple_form_for(@school) do |f| %>
+				  <%= f.error_notification %>
+				  <div class="form-inputs">
+				    <%= f.input :code %>
+				    <%= f.input :name %>
+				    <%= f.input :address %>
+				    <%= f.input :neighborhood %>
+				    <%= f.input :zone %>
+				    <%= f.input :contact_name %>
+				    <%= f.input :contact_position %>
+				    <%= f.input :phone %>
+				    <%= f.input :email %>
+				    <%= f.input :headquarter %>
+					<%= f.input :foundation_present %>
+				    <%= f.input :establishment, :as => :hidden, input_html: {value: establishment.id} %>
+				  </div>
+				  <div class="form-actions">
+				    <%= f.button :submit %>
+				  </div>
+				<% end %>
+			</div>
+		 </div>
+		 
+	     <div class="reveal-modal small" id="establishment-<%= establishment.id %>" data-reveal>
+	       <%= simple_form_for(establishment) do |f| %>
+	         <%= f.error_notification %>
 
-  <tbody>
-    <% @establishments.each do |establishment| %>
-      <tr>
-        <td><%= establishment.code %></td>
-        <td><%= establishment.name %></td>
-        <td><%= establishment.department %></td>
-        <td><%= establishment.phone %></td>
-        <td><%= establishment.email %></td>
-        <td>
-          <%# link_to 'Edit', edit_establishment_path(establishment) %>
-          <%= link_to "#", "data-reveal-id" => "establishment-#{establishment.id}" do %>
-            <%= fa_icon "pencil" %>
-          <% end %>
-          <div class="reveal-modal small" id="establishment-<%= establishment.id %>" data-reveal>
-            <%= simple_form_for(establishment) do |f| %>
-              <%= f.error_notification %>
+	         <div class="form-inputs">
+	           <%= f.input :code %>
+	           <%= f.input :name %>
+	           <%= f.input :department, required: true,  label: "Ciudad", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
+	           <%= f.input :phone %>
+	           <%= f.input :email %>
+	         </div>
 
-              <div class="form-inputs">
-                <%= f.input :code %>
-                <%= f.input :name %>
-                <%= f.input :department, required: true,  label: "Ciudad", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
-                <%= f.input :phone %>
-                <%= f.input :email %>
-              </div>
-
-              <div class="form-actions">
-                <%= f.button :submit, 'Actualizar' %>
-              </div>
-            <% end %>
-          </div>
-        </td>
-        <td>
-          <%= link_to establishment, method: :delete, data: { confirm: 'Are you sure?' }, class: 'redtxt' do %>
-            <%= fa_icon "trash-o" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	         <div class="form-actions">
+	           <%= f.button :submit, 'Actualizar' %>
+	         </div>
+	       <% end %>
+	     </div>
+     </div><!-- / panel_content -->
+   </li>
+ <% end %>
+</ul>
 
 <br>
-
-<%= link_to 'Nuevo establecimiento', new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success' %>
 
 <div class="reveal-modal small" id="establishment-new" data-reveal>
   <%= simple_form_for(@establishment) do |f| %>
@@ -84,13 +134,7 @@
   <% end %>
 </div>
 
-<%= link_to establishments_path(format: "csv") do %>
-<%= fa_icon "download" %> Descargar CSV
-<% end %>
-
-
-<h2>Importar establecimientos</h2>
 <%= form_tag import_establishments_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Importar", :class => "button small" %>
+  <%= submit_tag "Importar instituciones", :class => "button small" %>
 <% end %>

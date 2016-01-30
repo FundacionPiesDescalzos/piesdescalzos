@@ -1,64 +1,70 @@
-<p id="notice"><%= notice %></p>
+<div class="breadcrumb">
+  <h4 class="whitetxt"><%= @school.name %></h4>
+</div>
+<div class="search-field">
+	  <div class="no-so-big">
+		  <br />
+	  	  <%= form_tag establishments_path, :method => 'get', class: "rounded" do %>
+	  	  <div class="row collapse">
+	  	      <div class="small-10 columns">
+	  	        <%= search_field_tag :search, params[:search], placeholder: "Ingrese parte del nombre de la institución" %>
+	  	      </div>
+	  	      <div class="small-2 columns">
+	  	        <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+	  	            <h6><%= fa_icon "search" %> Buscar</h6>
+	  	        <% end %>
+	  	      </div>
+	  	  </div>
+	  	  <% end %>
+	  </div>
+</div>
 
-<p>
-  <strong>Code:</strong>
-  <%= @school.code %>
-</p>
+<div class="back_link">
+  <%= link_to establishments_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @school.name %>
-</p>
+<div class="student-banner">
+  <div class="pic">
+    <%= image_tag "http://placehold.it/110x110" %>
+  </div>
+  <div class="student-info">
+    <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
+    <h4 class="whitetxt"><%= @school.name %></h4>
+    <h5 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h5>
+    <h5 class="subheader nospace">Calificación <b>Nivel medio</b></h5>
+  </div>
+</div>
 
-<p>
-  <strong>Address:</strong>
-  <%= @school.address %>
-</p>
+<ul class="tabs vertical" data-tab>
+  <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
+  <li class="tab-title"><a href="#panel2">Programas de la sede</a></li>
+</ul>
 
-<p>
-  <strong>Neighborhood:</strong>
-  <%= @school.neighborhood %>
-</p>
+<div class="tabs-content extended-tabs">
+  <div class="content active" id="panel1">
+    <ul class="no-bullet equal">
+	  <li><span class="labeling"><%= fa_icon "phone" %> Numero de estudiantes: <%= @school.students.count %></span> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Codigo:</span>  <%= @school.code %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Calificacion </span>  Nivel medio </li>
+	  <hr />
+      <li><span class="labeling"><%= fa_icon "phone" %> Direccion </span> <%= @school.address %> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Barrio </span> <%= @school.neighborhood %> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Lugar </span> <%= @school.zone %> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Desplazado </span> <%= @school.contact_name %> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Area </span>  <%= @school.contact_position %> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Tutor </span> <%= @school.phone %> </li>
+	  <hr />
+      <li><span class="labeling"><%= fa_icon "phone" %> Correo </span>  <%= @school.email %></li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Barrio </span>  <%= @school.headquarter? ? "Si" : "No" %> </li>
+      <li><span class="labeling"><%= fa_icon "phone" %> Lugar </span> <%= @school.foundation_present? ? "Si" : "No" %> </li>
+    </ul>
+  </div>
+  <div class="content" id="panel2">
+	  <p>a implementar</p>
+  </div>
+</div>
 
-<p>
-  <strong>Zone:</strong>
-  <%= @school.zone %>
-</p>
 
-<p>
-  <strong>Contact name:</strong>
-  <%= @school.contact_name %>
-</p>
 
-<p>
-  <strong>Contact position:</strong>
-  <%= @school.contact_position %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @school.phone %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @school.email %>
-</p>
-
-<p>
-  <strong>Headquarter:</strong>
-  <%= @school.headquarter %>
-</p>
-
-<p>
-  <strong>Foundation present:</strong>
-  <%= @school.foundation_present %>
-</p>
-
-<p>
-  <strong>Establishment:</strong>
-  <%= @school.establishment %>
-</p>
-
-<%= link_to 'Edit', edit_school_path(@school) %> |
-<%= link_to 'Back', schools_path %>

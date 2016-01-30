@@ -481,7 +481,7 @@ table tr td {
 }
 
 .extended-tabs{
-    width: 80%;
+    width: 70%;
     float: right;
 	min-height: 65vh;
 	padding: 20px;
@@ -500,12 +500,33 @@ table tr td {
 	}
 }
 
+.edit-establishment{
+    position: absolute;
+	right: 0;
+    top: -57px;
+    height: 57px;
+    background: $primary_yellow;
+    line-height: 57px;
+    color: black;
+    padding: 0 20px;
+}
+
+.accordion .accordion-navigation > .content, .accordion dd > .content{
+	position: relative;
+}
+
 .edit_tabs{
 	display: none;
 }
 
+.no-so-big{
+	max-width: 600px;
+}
+
 $size_tab:57px;
 .tabs.vertical{
+	max-width: 30%;
+	width: 30%;
 	.tab-title{
 		&.active{
 		    position: relative;
