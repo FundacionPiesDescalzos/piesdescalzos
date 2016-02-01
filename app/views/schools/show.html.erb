@@ -26,14 +26,15 @@
 </div>
 
 <div class="student-banner">
+	<div class="degradado"> </div>
   <div class="pic">
     <%= image_tag "http://placehold.it/110x110" %>
   </div>
   <div class="student-info">
-    <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
-    <h4 class="whitetxt"><%= @school.name %></h4>
-    <h5 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h5>
-    <h5 class="subheader nospace">Calificación <b>Nivel medio</b></h5>
+    <!-- DONE -->
+    <h3 class="whitetxt bold relative"><%= @school.name %></h3>
+    <h6 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h6>
+    <h6 class="subheader nospace">Calificación <b>Nivel medio</b></h6>
   </div>
 </div>
 
@@ -45,20 +46,20 @@
 <div class="tabs-content extended-tabs">
   <div class="content active" id="panel1">
     <ul class="no-bullet equal">
-	  <li><span class="labeling"><%= fa_icon "phone" %> Numero de estudiantes: <%= @school.students.count %></span> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Codigo:</span>  <%= @school.code %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Calificacion </span>  Nivel medio </li>
+	  <li><span class="labeling"><%= fa_icon "user-plus ls-icon" %> Numero de estudiantes: </span> <%= @school.students.count %></li>
+      <li><span class="labeling"><%= fa_icon "cube ls-icon" %> Codigo:</span>  <%= @school.code %></li>
+      <li><span class="labeling"><%= fa_icon "bar-chart ls-icon" %> Calificacion </span>  Nivel medio </li>
 	  <hr />
-      <li><span class="labeling"><%= fa_icon "phone" %> Direccion </span> <%= @school.address %> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Barrio </span> <%= @school.neighborhood %> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Lugar </span> <%= @school.zone %> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Desplazado </span> <%= @school.contact_name %> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Area </span>  <%= @school.contact_position %> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Tutor </span> <%= @school.phone %> </li>
+      <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Direccion </span> <%= @school.address %> </li>
+      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio </span> <%= @school.neighborhood %> </li>
+      <li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar </span> <%= @school.zone %> </li>
+      <li><span class="labeling"><%= fa_icon "user ls-icon" %> Nombre del contacto </span> <%= @school.contact_name %> </li>
+      <li><span class="labeling"><%= fa_icon "code-fork ls-icon" %> Cargo </span>  <%= @school.contact_position %> </li>
+      <li><span class="labeling"><%= fa_icon "phone ls-icon" %> Telefono </span> <%= @school.phone %> </li>
 	  <hr />
-      <li><span class="labeling"><%= fa_icon "phone" %> Correo </span>  <%= @school.email %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Barrio </span>  <%= @school.headquarter? ? "Si" : "No" %> </li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Lugar </span> <%= @school.foundation_present? ? "Si" : "No" %> </li>
+      <li><span class="labeling"><%= fa_icon "envelope-o ls-icon" %> Correo </span>  <%= @school.email %></li>
+      <li><span class="labeling"><%= fa_icon "dot-circle-o ls-icon" %> Sede Principal </span>  <%= @school.headquarter? ? "Si" : "No" %> </li>
+      <li><span class="labeling"><%= fa_icon "crosshairs ls-icon" %> Fundacion Presente </span> <%= @school.foundation_present? ? "Si" : "No" %> </li>
     </ul>
   </div>
   <div class="content" id="panel2">

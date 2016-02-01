@@ -33,10 +33,10 @@ $primary_yellow:#FFD41F;
 }
 
 h4 {
-	//TO-DO: esto es un error ivancho los h4 pueden existir sin italica si quiere que alguno tenga italica pongale la clase .italic o <i>
+	
 //  font-style: italic;
-//  font-weight: 600;
-//  font-size: 17px;
+ font-weight: 600;
+ font-size: 17px;
 }
 
 h5 {
@@ -45,9 +45,7 @@ h5 {
 }
 
 h6 {
-//	TO-DO: puede usar la clase .bold y ese font-size solo si estamos seguros que todos los h6 van a quedar bien de ese tamaño
-//  font-weight: bold;
-//  font-size: 13px;
+  font-size: 13px;
 //  color: #2F2F2F;
 }
 
@@ -60,12 +58,8 @@ p {
 }
 
 .ib{
-//	TO-DO: .ib solo es para inline-block de resto personalice con otra clase
 	  display: inline-block;
-    font-weight: 600;
-    font-style: italic;
-    font-size: 14px;
-    padding-right: 7px;
+
 	
 }
 
@@ -174,7 +168,7 @@ p {
 	width: 23%;
 	float: left;
 	@include shadow;
-	height: 100vh;
+	height: 180%;
 }
 
 .nav{
@@ -329,12 +323,11 @@ color: #B59307 !important;
 }
 
 .fa-2x {
-//	TO-DO: seguro todos los fa-2x van a tener 20px de font-size?
   font-size: 20px;
 }
 
 .fa-circle-ls {
-	// TO-DO: y si necesitamos este icono con estilo?? personalizar con otro clase 
+	// DONE: si la clase fa-circle-ls la cree yo, la que llama al favicon se llama otra cosa.
     font-size: 9px;
     padding-right: 8px;
     top: -2px;
@@ -377,6 +370,40 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
     background: #FFF;
 }
 
+table thead {
+        background: #FFFFFF;
+}
+
+table {
+    background: #FFFFFF;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-spacing: 0px;
+    margin-bottom: 1.25rem;
+    table-layout: auto;
+}
+
+table.dataTable thead .sorting {
+    background: none !important;
+}
+
+table.dataTable thead .sorting_asc {
+    background: none !important;
+}
+
+table tr th, table tr td {
+    color: #5A5A5A;
+    font-size: 0.875rem;
+    padding: 0.5625rem 0.625rem !important;
+    text-align: center;
+}
+
+div.dataTables_wrapper div.dataTables_filter input {
+
+    border-radius: 20px;
+}
+
 .fa-green {
     color: #6CD80F;
     font-size: 26px;
@@ -409,12 +436,19 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
 }
 .bold{
   font-weight: bold;  
-//	TO-DO: lo mismo este color sobra aca
-  color: #2F2F2F;
+
+}
+
+.relative {
+      position: relative;
+}
+
+.flex {
+  display: inline-flex ;
 }
 
 table tr td {
-    color: #232321;
+    color: #5A5A5A;
     font-size: none;
     padding: 0px;
     text-align: center;
@@ -441,6 +475,7 @@ table tr td {
 
 .back_link{
 	padding: 10px 20px;
+	margin-top: -6px;
 	i{
 		width: 40px;
 		height: 40px;
@@ -454,6 +489,16 @@ table tr td {
 	span{
 			color: gray;
 	}
+}
+
+.degradado {
+  width: 77%;
+    height: 112px;
+    position: absolute;
+  background: -moz-linear-gradient(left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#cc000000',GradientType=1 ); /* IE6-9 */
 }
 
 .student-banner{
@@ -474,41 +519,81 @@ table tr td {
 		}
 	}
 	.student-info{
-		padding-top: 70px;
+		padding-top: 66px;
 		display: inline-table;
 		width: 80%;
 	}
 }
 
+.est-data {
+  padding-top: 10px;
+    margin-top: -6px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.accordion-navigation {
+
+    color: #222222;
+    border-bottom: solid #CCC 1px;
+    border-top: solid #FFF 1px;
+  
+}
+
+.accordion .accordion-navigation > a, .accordion dd > a {
+
+    color: #222222;
+    display: block;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    
+}
+
+.accordion .accordion-navigation.active > a, .accordion dd.active > a {
+    background: #F5F5F5;
+    color: #232321;
+    border-bottom: solid #CCC 1px;
+    border-top: solid #CCC 1px;
+}
+
 .extended-tabs{
     width: 70%;
     float: right;
-	min-height: 65vh;
-	padding: 20px;
-	background: rgb(247,247,249);
+    min-height: 65vh;
+    padding-left: 20px;
+    background: #f7f7f9;
+    border: solid #D3D3D3 1px;
+    border-top: none;
 }
 
 .tabs-content{
 	.content{
 		ul.equal{
 			li{
-				max-width: 24vw;
-				text-align: right;
-				left: 150px;
+				text-transform: capitalize;
+        font-size: 13px;
+        padding-top: 10px;
+        padding-bottom: 10px;
 			}	
 		}	
 	}
 }
 
+.fa-ls-icon {
+    min-width: 25px;
+    font-size: 15px;
+}
+
 .edit-establishment{
     position: absolute;
-	right: 0;
-    top: -57px;
-    height: 57px;
-    background: $primary_yellow;
-    line-height: 57px;
+    right: 0;
+    top: -46px;
+    height: 45px;
+    background: #FFD41F;
+    line-height: 45px;
     color: black;
-    padding: 0 20px;
+    padding: 0 17px;
 }
 
 .accordion .accordion-navigation > .content, .accordion dd > .content{
@@ -528,9 +613,14 @@ $size_tab:57px;
 	max-width: 30%;
 	width: 30%;
 	.tab-title{
+	   
 		&.active{
 		    position: relative;
 			border-left: 6px solid $primary_yellow;
+			   a {
+			     color: #232321;
+			   }
+			
 			.edit_tabs{
 				display: inline-block;
 			    float: right;
@@ -541,6 +631,7 @@ $size_tab:57px;
 			    height:$size_tab;
 			    background: $primary_yellow;
 				a{
+				  color: #232321;
 					display: block;
 					width: 100%;
 					height: 100%;
@@ -553,12 +644,49 @@ $size_tab:57px;
 				}
 			}
 		}
+		a{
+		  font-family: 'Open Sans', sans-serif;
+      font-size: 15px;
+      line-height: 25px;
+      font-weight: 600;
+      color: #848484;
+
+		}
 	}
 }
 
+.tabs dd > a, .tabs .tab-title > a {
+    background-color: #fff;
+}
+
+a:hover, .tabs .tab-title > a:hover {
+    background-color: #F3F3F3;
+}
+
+.form-inputs {
+
+}
+
+.form-actions {
+    input {
+        font-size: 16px;
+        line-height: 30px;
+        border-radius: 10px;
+        background: #FFD41F;
+        font-weight: 600;
+        width: 100%;
+        color: #000;
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+    }
+}
+
 .labeling{
-	color: rgb(173,172,177);
-	float: left;
+    color: #848484;
+    float: left;
+    width: 40%;
+    text-align: left;
+    font-weight: 600;
 }
 
 .subitem{
@@ -573,4 +701,26 @@ $size_tab:57px;
 
 .modal-content{
 	padding: 20px;
+}
+
+.b-header {
+  background-color: #ffd41f;
+}
+
+.alert-box.warning, .authform .warning#error_explanation:not(:empty) {
+    background-color: #ffd41f;
+    border-color: #C7A309;
+    color: #333333;
+    border-radius: 0px;
+}
+
+.reveal-modal .close-reveal-modal {
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 1;
+    position: absolute;
+    top: 17px;
+    right: 1.375rem;
 }

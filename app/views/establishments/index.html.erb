@@ -19,6 +19,7 @@
 	  </div>
 </div>
 <br />
+<div class="est-data">
 &nbsp;<%= link_to new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success round nospace' do %>
 	<%= fa_icon "plus" %> Añadir institución
 <% end %>
@@ -26,12 +27,12 @@
 <%= link_to establishments_path(format: "csv") do %>
 	<%= fa_icon "download" %> Descargar CSV
 <% end %>
-
+</div>
 <ul class="accordion" data-accordion>
  <% @i = 0 %>
  <% @establishments.each do |establishment| %>
    <li class="accordion-navigation">
-     <a href="#panel_<%= @i %>"><%= establishment.name %></a>
+     <a href="#panel_<%= @i %>"><%= fa_icon "angle-up angle" %><%= establishment.name %></a>
      <div id="panel_<%= @i %>" class="content <%= @i == 0 ? 'active':'subactive' %>">
 		 <% @i = @i + 1 %>
 	     <%= link_to "#", "data-reveal-id" => "establishment-#{establishment.id}", class: "edit-establishment" do %>

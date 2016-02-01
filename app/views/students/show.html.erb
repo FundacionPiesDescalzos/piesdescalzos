@@ -25,15 +25,16 @@
 </div>
 
 <div class="student-banner">
+	<div class="degradado"> </div>
   <div class="pic">
     <%= image_tag "nino.jpg" %>
   </div>
   <div class="student-info">
-    <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
-    <h4 class="whitetxt"><%= @student.name %></h4>
+    <!-- DONE:  -->
+    <h3 class="whitetxt bold relative"><%= @student.name %></h3>
     <h5 class="italic nospace"><%= @student.the_school %></h5>
-    <h5 class="subheader nospace">Curso  <%= @student.last_course %></h5>
-    <h5 class="subheader nospace"><%= fa_icon "map-marker" %> <%= @student.residency_state %></h5>
+    <h6 class="subheader nospace">Curso  <%= @student.last_course %></h6>
+    <h6 class="subheader nospace"><%= fa_icon "map-marker" %> <%= @student.residency_state %></h6>
   </div>
 </div>
 
@@ -51,19 +52,22 @@
 <div class="tabs-content extended-tabs">
   <div class="content active" id="panel1">
     <ul class="no-bullet equal">
-      <li><span class="labeling"><%= fa_icon "phone" %> Tipo de indetificación:</span> <%= @student.id_type %></li>
+      <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= @student.id_type %></li>
+      <li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Indetificación </span> <%= @student.identification %></li>
 	  <hr />
-      <li><span class="labeling"><%= fa_icon "phone" %> Genero </span> <%= @student.gender %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Dirección </span> <%= @student.address %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Años desescolarizado:</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> indetificación </span> <%= @student.identification %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Fecha de nacimiento:</span> <%= @student.born %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Etnia </span> <%= @student.etnic %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Lugar </span> <%= @student.villa %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Lugar de nacimiento:</span> <%= @student.born_state %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Desplazado </span> <%= @student.displaced? ? "SI" : "NO" %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Area </span> <%= @student.zone %></li>
-      <li><span class="labeling"><%= fa_icon "phone" %> Tutor </span> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
+      <li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %></li>
+      <li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
+      <li><span class="labeling"><%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
+      <hr />
+      <li><span class="labeling"><%= fa_icon "globe ls-icon" %> Lugar de nacimiento</span> <%= @student.born_state %></li>
+      <li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar de residencia </span> <%= @student.villa %></li>
+      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Area </span> <%= @student.zone %></li>
+      <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
+      <hr />
+      <li><span class="labeling"><%= fa_icon "user ls-icon" %> Tutor </span> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
+      <li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
+      <li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "SI" : "NO" %></li>
+      
     </ul>
   </div> <!-- /tab 1 -->
   <% if @student.guardian.present? %>
@@ -97,22 +101,24 @@
   	  <%= f.error_notification %>
   	
   	  <div class="form-inputs">
-  	    <%= f.input :name %>
-  	    <%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
-  	    <%= f.input :gender, collection: @gender, prompt: "Escoger un genero" %>
-  	    <%= f.input :address %>
-  	    <%= f.input :last_course %>
-  	    <%= f.input :outschool_years %>
-  	    <%= f.input :identification %>
-  	    <%= f.input :born %>
-  	    <%= f.input :etnic %>
-  	    <%= f.input :villa %>
-  	    <%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
-  	    <%= f.input :displaced %>
-  	    <%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
-  	    <%= f.input :zone %>
-  	    <%= f.association :guardian %>
-  	    <%= f.association :school %>
+  	    <%= fa_icon "info ls-icon" %><%= f.input :name %>
+  	    
+  	    <%= fa_icon "credit-card ls-icon" %><%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
+  	    <%= fa_icon "hashtag ls-icon" %><%= f.input :identification %>
+  	    <%= fa_icon "venus-mars ls-icon" %><%= f.input :gender, collection: @gender, prompt: "Escoger un genero" %>
+  	    <%= fa_icon "graduation-cap ls-icon" %><%= f.input :last_course %>
+  	    <%= fa_icon "thumbs-o-down ls-icon" %><%= f.input :outschool_years %>
+  	    
+  	    <%= fa_icon "child ls-icon" %><%= f.input :born %>
+  	    <%= fa_icon "group ls-icon" %><%= f.input :etnic %>
+  	    <%= fa_icon "map-marker" %><%= f.input :villa %>
+  	    <%= fa_icon "globe" %><%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
+  	    <%= fa_icon "warning ls-icon" %><%= f.input :displaced %>
+  	    <%= fa_icon "map-signs ls-icon" %><%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
+  	    <%= fa_icon "map ls-icon" %><%= f.input :zone %>
+  	    <%= fa_icon "compass ls-icon" %><%= f.input :address %>
+  	    <%= fa_icon "user ls-icon" %><%= f.association :guardian %>
+  	    <%= fa_icon "building-o ls-icon" %><%= f.association :school %>
   	  </div>
   	
   	  <div class="form-actions">
