@@ -30,11 +30,13 @@
   <div class="pic">
     <%= image_tag "http://placehold.it/110x110" %>
   </div>
-  <div class="student-info">
-    <!-- DONE -->
-    <h3 class="whitetxt bold relative"><%= @school.name %></h3>
-    <h6 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h6>
-    <h6 class="subheader nospace">Calificación <b>Nivel medio</b></h6>
+  <div class="student-info general-banner">
+    <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
+	<a href="#" class="button round success several" data-reveal-id="estudiantes">Cargar Estudiantes</a> &nbsp;
+	<a href="#" class="button round success several" data-reveal-id="notas">Cargar Notas</a>
+    <h4 class="whitetxt"><%= @school.name %></h4>
+    <h5 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h5>
+    <h5 class="subheader nospace">Calificación <b>Nivel medio</b></h5>
   </div>
 </div>
 
@@ -66,6 +68,68 @@
 	  <p>a implementar</p>
   </div>
 </div>
+
+
+<div id="estudiantes" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
+  <div class="modal-header">
+  	<h5 class="whitetxt nospace">Cargar estudiantes</h5>
+  </div>
+   <div class="modal-content">
+	   <%= form_tag import_students_path, multipart: true do %>
+	     <%= file_field_tag :file %>
+	 	<%= hidden_field_tag 'school_id', @school.id %>
+	     <%= submit_tag "Importar estudiantes", :class => "button small round success" %>
+	   <% end %>
+   </div>
+</div>
+
+
+<div id="notas" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
+  <div class="modal-header">
+  	<h5 class="whitetxt nospace">Cargar Notas</h5>
+  </div>
+   <div class="modal-content">
+	   <%= form_tag import_scores_path, multipart: true do %>
+	     <%= file_field_tag :file %>
+	 	<%= hidden_field_tag 'school_id', @school.id %>
+	     <%= submit_tag "Importar notas", :class => "button small round success" %>
+	   <% end %>
+   </div>
+</div>
+
+<div id="basicos" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
+  <div class="modal-header">
+  	<h5 class="whitetxt nospace">Datos básicos</h5>
+  </div>
+  
+  <div class="modal-content">
+	<%= simple_form_for(@school) do |f| %>
+	  <%= f.error_notification %>
+	  <div class="form-inputs">
+	    <%= f.input :code %>
+	    <%= f.input :name %>
+	    <%= f.input :address %>
+	    <%= f.input :neighborhood %>
+	    <%= f.input :zone %>
+	    <%= f.input :contact_name %>
+	    <%= f.input :contact_position %>
+	    <%= f.input :phone %>
+	    <%= f.input :email %>
+	    <%= f.input :headquarter %>
+		<%= f.input :foundation_present %>
+		<div class="hide">
+		    <%= f.association :establishment, label: "Institucion a la que pertenece" %>
+		</div>
+	  </div>
+	  <div class="form-actions">
+	    <%= f.button :submit %>
+	  </div>
+	<% end %>
+  </div>
+  
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+
 
 
 

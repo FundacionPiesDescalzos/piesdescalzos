@@ -522,6 +522,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 		padding-top: 66px;
 		display: inline-table;
 		width: 80%;
+		&.general-banner{
+			padding-top: 45px;
+			a.button.several{
+				margin: 0;
+			}
+		}
 	}
 }
 

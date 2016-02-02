@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   resources :homes
   resources :attendances
-  resources :scores
+  resources :scores do 
+    collection { post :import }
+  end
   resources :schools
   resources :establishments do 
     collection { post :import }
   end
   resources :health_cares
-  resources :students
+  resources :students do 
+    collection { post :import }
+  end
   resources :guardians
   resources :visitors
   devise_for :users

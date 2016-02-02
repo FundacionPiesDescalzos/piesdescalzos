@@ -18,9 +18,9 @@ $(function() {
   $(document).foundation();
 	$('#global').DataTable();
 	
-	$(".nav li.submenu").click(function(e){
+	$(".nav li.submenu a.item").click(function(e){
 		e.preventDefault();
 		console.log($(this));
-		$(this).children(".subitem").slideToggle();
+		$(this).parent().children(".subitem").slideToggle();
 	});
 });

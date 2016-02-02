@@ -60,6 +60,11 @@ class ScoresController < ApplicationController
       format.json { head :no_content }
     end
   end
+	
+  def import
+    Score.import(params[:file],params[:school_id])
+    redirect_to school_url(params[:school_id]), notice: "Notas importadas."
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,6 +6,10 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @students = Student.all
+    respond_to do |format|
+        format.html
+        format.csv { send_data @students.to_csv }
+      end
   end
 
   # GET /students/1
@@ -62,6 +66,12 @@ class StudentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+	
+  def import
+    Student.import(params[:file],params[:school_id])
+    redirect_to school_url(params[:school_id]), notice: "Estudiantes importados."
+  end
+	
 
   private
     # Use callbacks to share common setup or constraints between actions.
