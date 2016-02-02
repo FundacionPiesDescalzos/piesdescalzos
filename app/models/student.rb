@@ -1,6 +1,7 @@
 class Student < ActiveRecord::Base
   belongs_to :guardian
   belongs_to :school
+	has_many :scores
   
   def the_school
     self.school.present? ? self.school.name : "Sin escuela"

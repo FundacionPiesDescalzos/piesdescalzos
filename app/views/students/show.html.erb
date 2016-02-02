@@ -82,7 +82,30 @@
     <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
   </div>
   <div class="content" id="panel4">
-    <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
+	<% if @student.scores.present? %>
+		<ul class="no-bullet equal">
+		  <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Rendimiento academico:</span></li>
+		</ul>
+		<table>
+			<thead>
+				<tr>
+					<th>Periodo</th>
+					<th>Area de conocimiento</th>
+					<th>Calificación</th>
+				</tr>
+			</thead>
+			<tbody>
+		<% @periods = ["", "Primer periodo", "Segundo periodo","Tercer periodo","Cuarto periodo"] %>
+		<% @student.scores.each do |score| %>
+		<tr>
+	     <td><%= @periods[score.period.to_i] %></td>
+	     <td><%= score.area %></td>
+	     <td><%= score.score %></td>
+		</tr>
+		<% end %>
+		</tbody>
+		</table>
+	<% end %>
   </div>
   <div class="content" id="panel5">
     <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
