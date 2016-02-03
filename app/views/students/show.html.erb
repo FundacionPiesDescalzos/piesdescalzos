@@ -69,25 +69,31 @@
     </ul>
   </div> <!-- /tab 1 -->
   <div class="content" id="panel2">
-	  <% if @student.guardian_id.present? %>
+	  <% if @student.guardian.present? %>
       <ul class="no-bullet">
         <li><b>Nombre:</b> <%= @student.guardian.name %></li>
         <li><b>Apellido:</b> <%= @student.guardian.last_name %></li>
       </ul>
 	  <% else %>
-	   
-	   <%= form_for @student do |f| %>
-	     <%= f.label :id_type %>
-	     <%= f.text_field :id_type %>
-	     <%= f.label :born_state %>
-	     <%= f.text_field :born_state %>
-
-	     <%= f.fields_for :guardian do |guardian| %>
-	       <%= fact.label :name %>
-	       <%= fact.text_field :name %>
-	     <% end %>
-
-	     <%= f.submit "Crear tutor", class: "example-class" %>
+	   <% @gender = ["femenino", "masculino"] %>
+	   <% @ti = {"Tarjeta de identidad" => "TI", "Cedula de Ciudadania" => "CC", "Cedula de extranjeria" => "CE" , "Otro" => "Otro"} %>
+	   <%= simple_form_for(@guardian) do |f| %>
+	     <%= f.error_notification %>
+		     <%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
+		     <%= f.input :identification %>
+		     <%= f.input :name, label: "Nombre" %>
+		     <%= f.input :gender, collection: @gender, prompt: "Escoger un genero" %>
+			 <%= f.label :born, "Fecha de nacimiento" %>
+		     <%= f.date_select :born %>
+		     <%= f.input :address %>
+		     <%= f.input :villa, label: "barrio o vereda" %>
+		     <%= f.input :department, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
+		     <%= f.input :phone %>
+		     <%= f.input :cel %>
+		     <%= f.input :email %>
+		     <%= f.input :relationship %>
+			 <%= f.input :student_id, :as => :hidden, input_html: {value: @student.id} %>
+  	         <%= f.submit "Guardar tutor", class: "button success" %>
 	   <% end %>
 	   
 	  <% end %>

@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+		@guardian = @student.guardian || Guardian.new
     @schools = School.all
   end
 
@@ -26,7 +27,6 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
-		@student.build_guardian if @student.guardian.nil?
   end
 
   # POST /students

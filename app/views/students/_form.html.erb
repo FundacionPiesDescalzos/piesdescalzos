@@ -18,7 +18,6 @@
     <%= f.input :displaced %>
     <%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
     <%= f.input :zone %>
-    <%= f.association :guardian %>
     <%= f.association :school %>
   </div>
 
