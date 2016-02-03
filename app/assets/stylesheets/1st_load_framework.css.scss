@@ -22,6 +22,12 @@ h1,h2,h3,h4,h5,h6,p{
 	font-family:'Open Sans', sans-serif;
 }
 
+@mixin border-radius($foo:5px){
+	-webkit-border-radius: $foo;
+	-moz-border-radius: $foo;
+	border-radius: $foo;
+}
+
 @mixin twelve-columns {
   @extend .small-12;
   @extend .columns;
@@ -55,6 +61,12 @@ h1,h2,h3,h4,h5,h6,p{
 		          color: #fff;
 		}
 	}
+}
+
+input:not([type]), input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], select{
+	@include border-radius(20px);
+	box-shadow:0 0 0 0 rgba(0, 0, 0, 0);
+	padding-left: 10px;
 }
 
 // create your own classes

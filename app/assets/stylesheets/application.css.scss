@@ -669,22 +669,34 @@ a:hover, .tabs .tab-title > a:hover {
     background-color: #F3F3F3;
 }
 
-.form-inputs {
+.inline-select{
+	text-align: right;
+	position: relative;
+	left: 18px;
+	select{
+		display: inline-block;
+		width: 31%;
+		margin: 0 2px;
+	}
+}
 
+label.inline{
+	color: gray;
 }
 
 .form-actions {
-    input {
-        font-size: 16px;
-        line-height: 30px;
-        border-radius: 10px;
-        background: #FFD41F;
-        font-weight: 600;
-        width: 100%;
-        color: #000;
-        text-align: center;
-        font-family: 'Open Sans', sans-serif;
-    }
+	//TO-DO: escribir algo tan especifico para solo inputs es muy abierto y afectaria a muchos tipos de botones que despues queramos poner ahi con la clase expand y success que son por defecto de foundation mas nospace se logra lo mismo
+//    input {
+//        font-size: 16px;
+//        line-height: 30px;
+//        border-radius: 10px;
+//        background: #FFD41F;
+//        font-weight: 600;
+//        width: 100%;
+//        color: #000;
+//        text-align: center;
+//        font-family: 'Open Sans', sans-serif;
+//    }
 }
 
 .labeling{

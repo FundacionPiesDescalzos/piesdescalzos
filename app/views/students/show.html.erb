@@ -41,9 +41,7 @@
 
 <ul class="tabs vertical" data-tab>
   <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
-   <% if @student.guardian.present? %>
-	  <li class="tab-title"><a href="#panel2">Acudiente</a></li>
-  <% end %>
+  <li class="tab-title"><a href="#panel2">Acudiente</a></li>
   <li class="tab-title"><a href="#panel3">Afiliación en salud</a></li>
   <li class="tab-title"><a href="#panel4">Datos escolares</a></li>
   <li class="tab-title"><a href="#panel5">Seguimiento nutricional</a></li>
@@ -70,14 +68,16 @@
       
     </ul>
   </div> <!-- /tab 1 -->
-  <% if @student.guardian.present? %>
   <div class="content" id="panel2">
+	  <% if @student.guardian.present? %>
       <ul class="no-bullet">
         <li><b>Nombre:</b> <%= @student.guardian.name %></li>
         <li><b>Apellido:</b> <%= @student.guardian.last_name %></li>
       </ul>
+	  <% else %>
+	   formulario para tutor legal
+	  <% end %>
    </div> <!-- /tabs 2 -->
-  <% end %>
   <div class="content" id="panel3">
     <p>This is the third panel of the basic tab example. This is the third panel of the basic tab example.</p>
   </div>
@@ -118,21 +118,58 @@
   </div>
   
   <div class="modal-content">
-	  <% @gender = ["femenino", "masculino"] %>
-  	<% @ti = ["TI", "RC"] %>
+	<% @gender = ["femenino", "masculino"] %>
+  	<% @ti = {"TI"=>"Tarjeta de identidad", "RC"=>"Registro civil"} %>
   	<%= simple_form_for(@student) do |f| %>
   	  <%= f.error_notification %>
   	
-  	  <div class="form-inputs">
-  	    <%= fa_icon "info ls-icon" %><%= f.input :name %>
+		<div class="row">
+		  <div class="small-4 columns">
+		    <%= f.label :name, class: 'inline-label inline left' do %>
+				<%= fa_icon "info ls-icon" %> Nombre
+			<% end %>
+		  </div>
+		  <div class="small-8 columns">
+		    <%= f.input_field :name %>
+		  </div>
+		</div>
+		
+		<div class="row">
+		  <div class="small-4 columns">
+		    <%= f.label :id_type, class: 'inline-label inline left' do %>
+				<%= fa_icon "credit-card ls-icon" %> Tipo de identificación
+			<% end %>
+		  </div>
+		  <div class="small-8 columns">
+		    <%= f.select :id_type, @ti, prompt: "Escoger uno" %>
+		  </div>
+		</div>
   	    
-  	    <%= fa_icon "credit-card ls-icon" %><%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
-  	    <%= fa_icon "hashtag ls-icon" %><%= f.input :identification %>
+		<div class="row">
+		  <div class="small-4 columns">
+		    <%= f.label :name, class: 'inline-label inline left' do %>
+				<%= fa_icon "hashtag ls-icon" %> Identificación
+			<% end %>
+		  </div>
+		  <div class="small-8 columns">
+		    <%= f.input_field :identification %>
+		  </div>
+		</div>
+		
   	    <%= fa_icon "venus-mars ls-icon" %><%= f.input :gender, collection: @gender, prompt: "Escoger un genero" %>
   	    <%= fa_icon "graduation-cap ls-icon" %><%= f.input :last_course %>
   	    <%= fa_icon "thumbs-o-down ls-icon" %><%= f.input :outschool_years %>
   	    
-  	    <%= fa_icon "child ls-icon" %><%= f.input :born %>
+		<div class="row">
+		  <div class="small-4 columns">
+		    <%= f.label :name, class: 'inline-label inline left' do %>
+				<%= fa_icon "child ls-icon" %> Fecha de nacimiento
+			<% end %>
+		  </div>
+		  <div class="small-8 columns">
+		    <div class="inline-select"><%= f.input_field :born, start_year: 1990 %></div>
+		  </div>
+		</div>
   	    <%= fa_icon "group ls-icon" %><%= f.input :etnic %>
   	    <%= fa_icon "map-marker" %><%= f.input :villa %>
   	    <%= fa_icon "globe" %><%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
@@ -140,17 +177,15 @@
   	    <%= fa_icon "map-signs ls-icon" %><%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
   	    <%= fa_icon "map ls-icon" %><%= f.input :zone %>
   	    <%= fa_icon "compass ls-icon" %><%= f.input :address %>
-  	    <%= fa_icon "user ls-icon" %><%= f.association :guardian %>
   	    <%= fa_icon "building-o ls-icon" %><%= f.association :school %>
-  	  </div>
+  	</div>
   	
   	  <div class="form-actions">
-  	    <%= f.button :submit %>
+  	    <%= f.button :submit, "Guardar estudiante", class: "expand nospace success" %>
   	  </div>
   	<% end %>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
   	</div>
-  
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
 <%# link_to 'Edit', edit_student_path(@student) %>

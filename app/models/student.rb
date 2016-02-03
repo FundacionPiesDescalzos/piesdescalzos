@@ -1,5 +1,6 @@
 class Student < ActiveRecord::Base
-  belongs_to :guardian
+  has_one :guardian
+	accepts_nested_attributes_for :guardian
   belongs_to :school
 	has_many :scores
   
