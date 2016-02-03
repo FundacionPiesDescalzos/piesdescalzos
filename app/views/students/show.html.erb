@@ -62,20 +62,34 @@
       <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Area </span> <%= @student.zone %></li>
       <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
       <hr />
-      <li><span class="labeling"><%= fa_icon "user ls-icon" %> Tutor </span> <%= @student.guardian.present? ? @student.name : "no tiene registrado" %></li>
+      <li><span class="labeling"><%= fa_icon "user ls-icon" %> Tutor </span> <%= @student.guardian_id.present? ? @student.name : "no tiene registrado" %></li>
       <li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
       <li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "SI" : "NO" %></li>
       
     </ul>
   </div> <!-- /tab 1 -->
   <div class="content" id="panel2">
-	  <% if @student.guardian.present? %>
+	  <% if @student.guardian_id.present? %>
       <ul class="no-bullet">
         <li><b>Nombre:</b> <%= @student.guardian.name %></li>
         <li><b>Apellido:</b> <%= @student.guardian.last_name %></li>
       </ul>
 	  <% else %>
-	   formulario para tutor legal
+	   
+	   <%= form_for @student do |f| %>
+	     <%= f.label :id_type %>
+	     <%= f.text_field :id_type %>
+	     <%= f.label :born_state %>
+	     <%= f.text_field :born_state %>
+
+	     <%= f.fields_for :guardian do |guardian| %>
+	       <%= fact.label :name %>
+	       <%= fact.text_field :name %>
+	     <% end %>
+
+	     <%= f.submit "Crear tutor", class: "example-class" %>
+	   <% end %>
+	   
 	  <% end %>
    </div> <!-- /tabs 2 -->
   <div class="content" id="panel3">

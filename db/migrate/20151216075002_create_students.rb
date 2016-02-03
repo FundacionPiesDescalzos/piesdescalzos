@@ -15,7 +15,6 @@ class CreateStudents < ActiveRecord::Migration
       t.string :displaced
       t.string :residency_state
       t.string :zone
-      t.belongs_to :guardian, index: true, foreign_key: true
 
       t.timestamps null: false
     end
