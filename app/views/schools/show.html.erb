@@ -42,6 +42,7 @@
 <ul class="tabs vertical" data-tab>
   <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
   <li class="tab-title"><a href="#panel1a">Educación en la sede</a></li>
+  <li class="tab-title"><a href="#panel2a">Nutrición en la sede</a></li>
   <li class="tab-title"><a href="#panel2">Programas de la sede</a></li>
 </ul>
 
@@ -82,58 +83,53 @@
 		  <% end %>
 	  <% end %>
 	<% end %>
-	<%= @mas/@i %>
+	<% @mas/@i %>
 	<div id="container"></div>
 	<script>
   // Create the chart
 	$(function () {
-    $('#container').highcharts({
-        chart: {
-            type: 'column',
-			backgroundColor:'transparent'
-        },
-        title: {
-            text: 'Promedio de educacion academica'
-        },
-        subtitle: {
-            text: 'Ultimos 3 años'
-        },
-        xAxis: {
-            type: 'category'
-        },
-        yAxis: {
-            title: {
-                text: 'Total promedio de estudiantes'
-            }
-
-        },
-        legend: {
-            enabled: false
-        },
-
-        series: [{
-            name: "Grados",
-            colorByPoint: true,
-            data: [{
-                name: "Cuarto",
-                y: 5
-            }, {
-                name: "Quinte",
-                y: 4.03
-            }, {
-                name: "Tercero",
-                y: 4.38
-            }, {
-                name: "Segundo",
-                y: 3.38
-            }]
-        }]
-    });
+		$('#container').highcharts({
+		        chart: {
+		            type: 'column',
+					backgroundColor:'transparent'
+		        },
+		        title: {
+		            text: 'Promedio de educacion academica'
+		        },
+		        subtitle: {
+		            text: 'Ultimos 3 años'
+		        },
+		        xAxis: {
+		           categories: ['2013', '2014', '2015']
+		        },
+		        credits: {
+		            enabled: false
+		        },
+	            series: [{
+	                name: "Primero",
+	                data: [5,3,4.5]
+	            }, {
+	                name: "Segundo",
+	                data: [4.5,3.4,4.3]
+	            }, {
+	                name: "Tercero",
+	                data: [4.38,3.42,4.6]
+	            }, {
+	                name: "Cuarto",
+	                data: [4.38,3.42,4.6]
+	            }, {
+	                name: "Quinto",
+	                data: [4.38,3.42,4.6]
+	            }]
+		    });
 	});
 	</script>
 	
   </div>
   <div class="content" id="panel2">
+	  <p>a implementar</p>
+  </div>
+  <div class="content" id="panel2a">
 	  <p>a implementar</p>
   </div>
 </div>
