@@ -508,14 +508,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 	border-bottom: 1px solid lightgray;
 	.pic{
 		display: inline-table;
-		width: 19%;
+		width: 18%;
 		img{
 			width: 100px;
 			height: 100px;
 			@include border-radius(100%);
 	    position: relative;
 	    top: 15px;
-	    left: 25px;
+	    left: 45px;
 		}
 	}
 	.student-info{
@@ -523,7 +523,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 		display: inline-table;
 		width: 80%;
 		&.general-banner{
-			padding-top: 35px;
+			padding-top: 25px;
+      position: relative;
+      top: -10px;
 			a.button.several{
 				margin: 0;
 			}
@@ -556,8 +558,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
     
 }
 
-.sede {
-  margin-top: 0px;
+.pic-sede {
+  display: inline-table;
+    width: 18%;
+    img{
+      width: 130px;
+      height: 130px;
+      position: relative;
+      top: 15px;
+      left: 25px;
+    }
 }
 
 .accordion .accordion-navigation.active > a, .accordion dd.active > a {
