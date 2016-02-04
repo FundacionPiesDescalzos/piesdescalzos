@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160120052436) do
+ActiveRecord::Schema.define(version: 20160204022501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,7 +59,10 @@ ActiveRecord::Schema.define(version: 20160120052436) do
     t.string   "relationship"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "student_id"
   end
+
+  add_index "guardians", ["student_id"], name: "index_guardians_on_student_id", using: :btree
 
   create_table "health_cares", force: :cascade do |t|
     t.boolean  "affiliate"
@@ -116,6 +119,8 @@ ActiveRecord::Schema.define(version: 20160120052436) do
     t.integer  "student_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.string   "year"
+    t.integer  "user_id"
   end
 
   add_index "scores", ["student_id"], name: "index_scores_on_student_id", using: :btree
@@ -165,6 +170,7 @@ ActiveRecord::Schema.define(version: 20160120052436) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "attendances", "students"
+  add_foreign_key "guardians", "students"
   add_foreign_key "health_cares", "students"
   add_foreign_key "schools", "establishments"
   add_foreign_key "scores", "students"

@@ -28,7 +28,10 @@ class HealthCaresController < ApplicationController
 
     respond_to do |format|
       if @health_care.save
-        format.html { redirect_to @health_care, notice: 'Health care was successfully created.' }
+        format.html { 
+					flash[:notice] = 'Fue creada la afiliacion a salud exitosamente.'
+					redirect_to student_path params[:health_care][:student_id]
+				 }
         format.json { render :show, status: :created, location: @health_care }
       else
         format.html { render :new }
@@ -69,6 +72,6 @@ class HealthCaresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def health_care_params
-      params.require(:health_care).permit(:affiliate, :regime, :eps, :ips, :register, :card, :poll_date, :score, :inhabilites, :inh_description)
+      params.require(:health_care).permit(:affiliate, :regime, :eps, :ips, :register, :card, :poll_date, :score, :inhabilites, :inh_description, :student_id)
     end
 end

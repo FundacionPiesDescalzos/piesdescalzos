@@ -1,5 +1,6 @@
 class Student < ActiveRecord::Base
   has_one :guardian
+	has_one :health_care
 	accepts_nested_attributes_for :guardian
   belongs_to :school
 	has_many :scores

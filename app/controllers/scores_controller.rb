@@ -62,7 +62,7 @@ class ScoresController < ApplicationController
   end
 	
   def import
-    Score.import(params[:file],params[:school_id])
+    Score.import(params[:file],params[:school_id],params[:date][:year], params[:period],params[:user_id])
     redirect_to school_url(params[:school_id]), notice: "Notas importadas."
   end
 
@@ -74,6 +74,6 @@ class ScoresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def score_params
-      params.require(:score).permit(:identification, :period, :area, :score, :student_id)
+      params.require(:score).permit(:identification, :period, :area, :score, :year, :student_id, :user_id)
     end
 end

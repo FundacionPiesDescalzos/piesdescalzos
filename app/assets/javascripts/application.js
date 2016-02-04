@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require highcharts
 //= require_tree .
 $(function() {
   $(document).foundation();
@@ -23,4 +24,11 @@ $(function() {
 		console.log($(this));
 		$(this).parent().children(".subitem").slideToggle();
 	});
+	
+	
+	// remove alerts
+	setTimeout(function(){
+	  $('.alert-box').remove();
+	}, 5000);
+	
 });

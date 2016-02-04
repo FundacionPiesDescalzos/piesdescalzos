@@ -33,7 +33,6 @@
   <div class="student-info general-banner">
     <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
 	<a href="#" class="button round success several" data-reveal-id="estudiantes">Cargar Estudiantes</a> &nbsp;
-	<a href="#" class="button round success several" data-reveal-id="notas">Cargar Notas</a>
     <h4 class="whitetxt"><%= @school.name %></h4>
     <h5 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h5>
     <h5 class="subheader nospace">Calificación <b>Nivel medio</b></h5>
@@ -42,6 +41,7 @@
 
 <ul class="tabs vertical" data-tab>
   <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
+  <li class="tab-title"><a href="#panel1a">Educación en la sede</a></li>
   <li class="tab-title"><a href="#panel2">Programas de la sede</a></li>
 </ul>
 
@@ -64,6 +64,75 @@
       <li><span class="labeling"><%= fa_icon "crosshairs ls-icon" %> Fundacion Presente </span> <%= @school.foundation_present? ? "Si" : "No" %> </li>
     </ul>
   </div>
+  <div class="content" id="panel1a">
+	<a href="#" class="button round success several" data-reveal-id="notas"><%= fa_icon "upload" %> Cargar notas</a>
+	<% if @school.students.count > 0 %>
+	<%
+	@mas = 0
+	@i = 0
+	%>
+	  <% @school.students.each do |student| %>
+	  <% if student.scores.present? %>
+		  <% student.scores.each do |score| %>
+		    <% @i = @i + 1 %>
+		    <% if score.year == "2015" %>
+		      <% @mas = @mas+score.score.to_i %>
+			<% end %>
+	       <% end %>
+		  <% end %>
+	  <% end %>
+	<% end %>
+	<%= @mas/@i %>
+	<div id="container"></div>
+	<script>
+  // Create the chart
+	$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'column',
+			backgroundColor:'transparent'
+        },
+        title: {
+            text: 'Promedio de educacion academica'
+        },
+        subtitle: {
+            text: 'Ultimos 3 años'
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Total promedio de estudiantes'
+            }
+
+        },
+        legend: {
+            enabled: false
+        },
+
+        series: [{
+            name: "Grados",
+            colorByPoint: true,
+            data: [{
+                name: "Cuarto",
+                y: 5
+            }, {
+                name: "Quinte",
+                y: 4.03
+            }, {
+                name: "Tercero",
+                y: 4.38
+            }, {
+                name: "Segundo",
+                y: 3.38
+            }]
+        }]
+    });
+	});
+	</script>
+	
+  </div>
   <div class="content" id="panel2">
 	  <p>a implementar</p>
   </div>
@@ -84,15 +153,30 @@
 </div>
 
 
-<div id="notas" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
+<div id="notas" class="reveal-modal nospace tiny radius" data-reveal aria-labelledby="notas" aria-hidden="true" role="dialog">
   <div class="modal-header">
   	<h5 class="whitetxt nospace">Cargar Notas</h5>
   </div>
    <div class="modal-content">
+	   <% @periodos = {"Primer periodo" => 1, "Segundo periodo" => 2, "Tercer periodo" => 3, "Cuarto periodo" => 4} %>
 	   <%= form_tag import_scores_path, multipart: true do %>
+ 	    <div class="row collapse">
+ 	    	<div class="large-6 columns">
+				<label for="year">Seleccione un año</label>
+				<%= select_year(Date.today, start_year: 1992, end_year: 2030) %>
+ 			</div>
+ 	    	<div class="large-6 columns">
+ 				<label for="period">Seleccione un periodo</label>
+ 	    		<%= select_tag "period", options_for_select(@periodos) %>
+ 			</div>
+ 	    </div>
+	    <div class="centerize">
 	     <%= file_field_tag :file %>
-	 	<%= hidden_field_tag 'school_id', @school.id %>
-	     <%= submit_tag "Importar notas", :class => "button small round success" %>
+	     <%= hidden_field_tag 'school_id', @school.id %>
+		 <%= hidden_field_tag 'user_id', current_user.try(:id) %>
+	    </div>
+		<br />
+	     <%= submit_tag "Importar notas", :class => "button small round success right" %>
 	   <% end %>
    </div>
 </div>

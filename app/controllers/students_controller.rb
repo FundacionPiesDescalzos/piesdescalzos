@@ -16,6 +16,7 @@ class StudentsController < ApplicationController
   # GET /students/1.json
   def show
 		@guardian = @student.guardian || Guardian.new
+		@health_care = @student.health_care || HealthCare.new
     @schools = School.all
   end
 
@@ -1227,6 +1228,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name, :id_type, :gender, :address, :last_course, :outschool_years, :identification, :born, :etnic, :villa, :born_state, :displaced, :residency_state, :zone, :guardian_id, :school_id, guardian_attributes: [:id_type, :identification, :name, :last_name, :second_name, :gender, :born, :address, :villa, :zone, :department, :municipality, :phone, :cel, :email, :relationship, :student_id])
+      params.require(:student).permit(:name, :id_type, :gender, :address, :last_course, :outschool_years, :identification, :born, :etnic, :villa, :born_state, :displaced, :residency_state, :zone, :guardian_id, :school_id, :health_care_id, guardian_attributes: [:id_type, :identification, :name, :last_name, :second_name, :gender, :born, :address, :villa, :zone, :department, :municipality, :phone, :cel, :email, :relationship, :student_id])
     end
 end

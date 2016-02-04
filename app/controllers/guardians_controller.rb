@@ -28,10 +28,21 @@ class GuardiansController < ApplicationController
 
     respond_to do |format|
       if @guardian.save
-        format.html { redirect_to @guardian, notice: 'Guardian was successfully created.' }
+        format.html { 
+					flash[:notice] = "Fue creado el tutor exitosamente."
+					redirect_to student_path params[:guardian][:student_id]
+				 }
         format.json { render :show, status: :created, location: @guardian }
       else
-        format.html { render :new }
+        format.html { 
+					@error = []
+					@guardian.errors.each do |error|
+						@error.push(error)
+					end
+					p @error
+					flash[:alert] = "No fue creado el tutor, ingresa todos los campos."
+					redirect_to student_path params[:guardian][:student_id] 
+				}
         format.json { render json: @guardian.errors, status: :unprocessable_entity }
       end
     end

@@ -43,13 +43,29 @@ h1,h2,h3,h4,h5,h6,p{
   @extend .large-centered;
   }
 	
+
+select{
+	max-width: 250px;
+	outline: 0;
+	&:focus{
+		outline: 0;
+	}
+}
+
+input, a{
+	&:focus{
+		outline: 0;
+	}
+}
+  
 .button{
 	@extend .button;
-	padding: 5px 40px;
+	padding: 8px 25px;
+	outline:0;
 	&.success{
-		background: $primary;
-		color: #888;
-		font-weight: 600;
+	background: $primary;
+	color: #888;
+	font-weight: 600;
     font-size: 13px;
     color: #383636;
     font-family: 'Open Sans', sans-serif;
@@ -57,9 +73,13 @@ h1,h2,h3,h4,h5,h6,p{
 			background: darken($primary,10%);
 		}
 		&:focus {
-		          background-color: #007095;
-		          color: #fff;
+			background-color: black;
+			color:white;
+			outline:0;
 		}
+	}
+	&:hover{
+		background: darken($primary,10%);
 	}
 }
 
@@ -75,6 +95,12 @@ input:not([type]), input[type="text"], input[type="password"], input[type="date"
 	@extend .row;
 	max-width: 80em;
 }
+
+.alert-box{
+    max-width: 50vw;
+    margin: 10px auto;
+}
+
 .centerize{
 	@include six-centered;
 }

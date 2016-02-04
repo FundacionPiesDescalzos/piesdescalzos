@@ -17,7 +17,6 @@ class CreateGuardians < ActiveRecord::Migration
       t.string :cel
       t.string :email
       t.string :relationship
-			t.belongs_to :student, index: true, foreign_key: true
 
       t.timestamps null: false
     end
