@@ -523,7 +523,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 		display: inline-table;
 		width: 80%;
 		&.general-banner{
-			padding-top: 45px;
+			padding-top: 35px;
 			a.button.several{
 				margin: 0;
 			}
@@ -554,6 +554,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
     font-size: 16px;
     padding: 10px;
     
+}
+
+.sede {
+  margin-top: 0px;
 }
 
 .accordion .accordion-navigation.active > a, .accordion dd.active > a {
@@ -671,8 +675,6 @@ a:hover, .tabs .tab-title > a:hover {
 
 .inline-select{
 	text-align: right;
-	position: relative;
-	left: 18px;
 	select{
 		display: inline-block;
 		width: 31%;
@@ -723,7 +725,18 @@ label.inline{
 }
 
 .modal-content{
-	padding: 20px;
+	padding: 15px;
+}
+
+.reveal-modal.small {
+    width: 42%;
+}
+
+.column, .columns, {
+    position: relative;
+    padding-left: 0px;
+    padding-right: 0px;
+    float: left;
 }
 
 .b-header {

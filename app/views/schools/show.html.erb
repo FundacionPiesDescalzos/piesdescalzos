@@ -27,15 +27,15 @@
 
 <div class="student-banner">
 	<div class="degradado"> </div>
-  <div class="pic">
+  <div class="pic sede">
     <%= image_tag "http://placehold.it/110x110" %>
   </div>
   <div class="student-info general-banner">
     <!-- TO-DO: esto no se ve bien porque personalizaste todos los h4 -->
 	<a href="#" class="button round success several" data-reveal-id="estudiantes">Cargar Estudiantes</a> &nbsp;
-    <h4 class="whitetxt"><%= @school.name %></h4>
-    <h5 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h5>
-    <h5 class="subheader nospace">Calificación <b>Nivel medio</b></h5>
+    <h3 class="whitetxt bold relative"><%= @school.name %></h3>
+    <h6 class="subheader nospace">Numero de estudiantes  <b><%= @school.students.count %></b></h6>
+    <h6 class="subheader nospace">Calificación <b>Nivel medio</b></h6>
   </div>
 </div>
 
@@ -49,16 +49,16 @@
 <div class="tabs-content extended-tabs">
   <div class="content active" id="panel1">
     <ul class="no-bullet equal">
-	  <li><span class="labeling"><%= fa_icon "user-plus ls-icon" %> Numero de estudiantes: </span> <%= @school.students.count %></li>
-      <li><span class="labeling"><%= fa_icon "cube ls-icon" %> Codigo:</span>  <%= @school.code %></li>
-      <li><span class="labeling"><%= fa_icon "bar-chart ls-icon" %> Calificacion </span>  Nivel medio </li>
+	  <li><span class="labeling"><%= fa_icon "user-plus ls-icon" %> Numero de estudiantes </span> <%= @school.students.count %></li>
+      <li><span class="labeling"><%= fa_icon "cube ls-icon" %> Codigo </span>  <%= @school.code %></li>
+      <li><span class="labeling"><%= fa_icon "bar-chart ls-icon" %> Calificaciones </span>  Nivel medio </li>
 	  <hr />
-      <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Direccion </span> <%= @school.address %> </li>
-      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio </span> <%= @school.neighborhood %> </li>
       <li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar </span> <%= @school.zone %> </li>
+      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o Vereda </span> <%= @school.neighborhood %> </li>
+      <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @school.address %> </li>
       <li><span class="labeling"><%= fa_icon "user ls-icon" %> Nombre del contacto </span> <%= @school.contact_name %> </li>
-      <li><span class="labeling"><%= fa_icon "code-fork ls-icon" %> Cargo </span>  <%= @school.contact_position %> </li>
-      <li><span class="labeling"><%= fa_icon "phone ls-icon" %> Telefono </span> <%= @school.phone %> </li>
+      <li><span class="labeling"><%= fa_icon "sitemap ls-icon" %> Cargo </span>  <%= @school.contact_position %> </li>
+      <li><span class="labeling"><%= fa_icon "phone ls-icon" %> Teléfono </span> <%= @school.phone %> </li>
 	  <hr />
       <li><span class="labeling"><%= fa_icon "envelope-o ls-icon" %> Correo </span>  <%= @school.email %></li>
       <li><span class="labeling"><%= fa_icon "dot-circle-o ls-icon" %> Sede Principal </span>  <%= @school.headquarter? ? "Si" : "No" %> </li>
@@ -81,9 +81,10 @@
 			<% end %>
 	       <% end %>
 		  <% end %>
+		  
 	  <% end %>
 	<% end %>
-	<% @mas/@i %>
+	
 	<div id="container"></div>
 	<script>
   // Create the chart
@@ -186,27 +187,139 @@
 	<%= simple_form_for(@school) do |f| %>
 	  <%= f.error_notification %>
 	  <div class="form-inputs">
-	    <%= f.input :code %>
-	    <%= f.input :name %>
-	    <%= f.input :address %>
-	    <%= f.input :neighborhood %>
-	    <%= f.input :zone %>
-	    <%= f.input :contact_name %>
-	    <%= f.input :contact_position %>
-	    <%= f.input :phone %>
-	    <%= f.input :email %>
-	    <%= f.input :headquarter %>
-		<%= f.input :foundation_present %>
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :code, class: 'inline-label inline left' do %>
+				<%= fa_icon "cube ls-icon" %> Código
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <%= f.input_field :code %>
+		  </div>
+		</div>
+	    
+	     <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :name, class: 'inline-label inline left' do %>
+				<%= fa_icon "info ls-icon" %> Nombre
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <%= f.input_field :name %>
+		  </div>
+		</div>
+	    
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :zone, required: true, class: 'inline-label inline left' do %>
+				<%= fa_icon "map-signs ls-icon" %> Municipio
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div><%= f.select :zone, @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+		  </div>
+		</div>
+	    
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :neighborhood, class: 'inline-label inline left' do %>
+				<%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div class="inline-select"><%= f.input_field :neighborhood  %></div>
+		  </div>
+		</div>
+		
+		<div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :address, class: 'inline-label inline left' do %>
+				<%= fa_icon "compass ls-icon" %> Dirección
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div ><%= f.input_field :address  %></div>
+		  </div>
+		</div>
+	    
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :contact_name, class: 'inline-label inline left' do %>
+				<%= fa_icon "user ls-icon" %> Nombre del Contacto
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div ><%= f.input_field :contact_name  %></div>
+		  </div>
+		</div>
+	    
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :contact_position, class: 'inline-label inline left' do %>
+				<%= fa_icon "sitemap ls-icon" %> Cargo
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div ><%= f.input_field :contact_position  %></div>
+		  </div>
+		</div>
+		
+	    
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :phone, class: 'inline-label inline left' do %>
+				<%= fa_icon "phone ls-icon" %> Teléfono
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div ><%= f.input_field :phone  %></div>
+		  </div>
+		</div>
+		
+		<div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :email, class: 'inline-label inline left' do %>
+				<%= fa_icon "envelope-o ls-icon" %> Correo electronico
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div ><%= f.input_field :email  %></div>
+		  </div>
+		</div>
+	    
+	    <div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :headquarter , class: 'inline-label inline left' do %>
+				<%= fa_icon "dot-circle-o ls-icon" %> Sede Principal
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div><%= f.input_field :headquarter , as: :boolean  %></div>
+		  </div>
+		</div>
+		
+		<div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :foundation_present, class: 'inline-label inline left' do %>
+				<%= fa_icon "crosshairs ls-icon" %> Fundación presente
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <div><%= f.input_field :foundation_present, as: :boolean  %></div>
+		  </div>
+		</div>
+		
 		<div class="hide">
 		    <%= f.association :establishment, label: "Institucion a la que pertenece" %>
 		</div>
 	  </div>
-	  <div class="form-actions">
-	    <%= f.button :submit %>
+	  
+	
+  	</div>
+  	<div class="form-actions">
+	    <%= f.button :submit, "Guardar Sede", class: "expand nospace success" %>
 	  </div>
-	<% end %>
-  </div>
-  
+	  <% end %>
   <a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
