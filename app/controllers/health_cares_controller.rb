@@ -1,6 +1,6 @@
 class HealthCaresController < ApplicationController
   before_action :set_health_care, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /health_cares
   # GET /health_cares.json
   def index

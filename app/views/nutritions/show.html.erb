@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @nutrition.weight %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @nutrition.height %>
+</p>
+
+<p>
+  <strong>Identification:</strong>
+  <%= @nutrition.identification %>
+</p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @nutrition.student %>
+</p>
+
+<%= link_to 'Edit', edit_nutrition_path(@nutrition) %> |
+<%= link_to 'Back', nutritions_path %>

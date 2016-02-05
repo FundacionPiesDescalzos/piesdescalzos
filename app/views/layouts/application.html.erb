@@ -12,8 +12,11 @@
 		<script type="text/javascript" src="https://cdn.datatables.net/s/zf/dt-1.10.10,r-2.0.0/datatables.min.js"></script>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-		<% if params[:controller] == 'public' %>
+  <body class="<%= params[:controller] == 'public' || params[:controller].include?('devise') ? 'main-logout' : 'logged' %>">
+		<% if params[:controller] == 'public' || params[:controller].include?("devise")  %>  
+		<messages role="messages">
+			<%= render 'layouts/messages' %>
+		</messages>
 		  <%= yield %>
 		<% else %>
 		<div class="nav-menu">

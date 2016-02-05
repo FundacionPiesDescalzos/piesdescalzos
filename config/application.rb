@@ -35,6 +35,7 @@ module RailsDeviseRoles
 
     # For Foundation 5
     config.assets.precompile += %w( vendor/modernizr )
+		config.i18n.default_locale = :es
 
 
     # Do not swallow errors in after_commit/after_rollback callbacks.

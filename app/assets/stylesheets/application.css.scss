@@ -404,16 +404,17 @@ div.dataTables_wrapper div.dataTables_filter input {
     border-radius: 20px;
 }
 
-.fa-green {
-    color: #6CD80F;
+.index-icon{
     font-size: 26px;
     padding: 10px;
 }
 
+.fa-green, .greentxt {
+    color: #6CD80F;
+}
+
 .fa-red {
     color: #CE0000;
-    font-size: 26px;
-    padding: 10px;
 }
 
 .fa-editar {

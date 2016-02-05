@@ -1,3 +1,4 @@
+<% @periodos = {"Primer periodo" => 1, "Segundo periodo" => 2, "Tercer periodo" => 3, "Cuarto periodo" => 4, "Final" => 5} %>
 <div class="breadcrumb">
   <h4 class="whitetxt"><%= @school.name %></h4>
 </div>
@@ -127,10 +128,10 @@
 	</script>
 	
   </div>
-  <div class="content" id="panel2">
-	  <p>a implementar</p>
-  </div>
   <div class="content" id="panel2a">
+	  <a href="#" class="button round success several" data-reveal-id="nutricion"><%= fa_icon "upload" %> Cargar nutrición</a>
+  </div>
+  <div class="content" id="panel2">
 	  <p>a implementar</p>
   </div>
 </div>
@@ -150,12 +151,39 @@
 </div>
 
 
+<div id="nutricion" class="reveal-modal nospace tiny radius" data-reveal aria-labelledby="notas" aria-hidden="true" role="dialog">
+  <div class="modal-header">
+  	<h5 class="whitetxt nospace">Cargar Nutrición</h5>
+  </div>
+   <div class="modal-content">
+	   <%= form_tag import_nutritions_path, multipart: true do %>
+ 	    <div class="row collapse">
+ 	    	<div class="large-6 columns">
+				<label for="year">Seleccione un año</label>
+				<%= select_year(Date.today, start_year: 1992, end_year: 2030) %>
+ 			</div>
+ 	    	<div class="large-6 columns">
+ 				<label for="period">Seleccione un periodo</label>
+ 	    		<%= select_tag "period", options_for_select(@periodos) %>
+ 			</div>
+ 	    </div>
+	    <div class="centerize">
+	     <%= file_field_tag :file %>
+	     <%= hidden_field_tag 'school_id', @school.id %>
+		 <%= hidden_field_tag 'user_id', current_user.try(:id) %>
+	    </div>
+		<br />
+	     <%= submit_tag "Importar datos de nutrición", :class => "button small round success right" %>
+	   <% end %>
+   </div>
+</div>
+
+
 <div id="notas" class="reveal-modal nospace tiny radius" data-reveal aria-labelledby="notas" aria-hidden="true" role="dialog">
   <div class="modal-header">
   	<h5 class="whitetxt nospace">Cargar Notas</h5>
   </div>
    <div class="modal-content">
-	   <% @periodos = {"Primer periodo" => 1, "Segundo periodo" => 2, "Tercer periodo" => 3, "Cuarto periodo" => 4} %>
 	   <%= form_tag import_scores_path, multipart: true do %>
  	    <div class="row collapse">
  	    	<div class="large-6 columns">

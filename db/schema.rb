@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160204022501) do
+ActiveRecord::Schema.define(version: 20160205023351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,21 @@ ActiveRecord::Schema.define(version: 20160204022501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "nutritions", force: :cascade do |t|
+    t.float    "weight"
+    t.float    "height"
+    t.string   "period"
+    t.string   "year"
+    t.integer  "identification", limit: 8
+    t.integer  "student_id"
+    t.integer  "user_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "nutritions", ["student_id"], name: "index_nutritions_on_student_id", using: :btree
+  add_index "nutritions", ["user_id"], name: "index_nutritions_on_user_id", using: :btree
 
   create_table "schools", force: :cascade do |t|
     t.integer  "code"
@@ -172,6 +187,8 @@ ActiveRecord::Schema.define(version: 20160204022501) do
   add_foreign_key "attendances", "students"
   add_foreign_key "guardians", "students"
   add_foreign_key "health_cares", "students"
+  add_foreign_key "nutritions", "students"
+  add_foreign_key "nutritions", "users"
   add_foreign_key "schools", "establishments"
   add_foreign_key "scores", "students"
   add_foreign_key "students", "guardians"

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :nutritions do 
+    collection { post :import }
+  end
   resources :homes
   resources :attendances
   resources :scores do 

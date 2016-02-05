@@ -1,6 +1,6 @@
 class GuardiansController < ApplicationController
   before_action :set_guardian, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /guardians
   # GET /guardians.json
   def index

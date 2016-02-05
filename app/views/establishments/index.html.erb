@@ -24,9 +24,9 @@
 	<%= fa_icon "plus" %> Añadir institución
 <% end %>
 &nbsp;
-<%= link_to establishments_path(format: "csv") do %>
-	<%= fa_icon "download" %> Descargar CSV
-<% end %>
+<!-- <%# link_to establishments_path(format: "csv") do %>
+	<%# fa_icon "download" %> Descargar CSV
+<%# end %> -->
 </div>
 <ul class="accordion" data-accordion>
  <% @i = 0 %>
@@ -135,7 +135,7 @@
   <% end %>
 </div>
 
-<%= form_tag import_establishments_path, multipart: true do %>
-  <%= file_field_tag :file %>
-  <%= submit_tag "Importar instituciones", :class => "button small" %>
-<% end %>
+<%# form_tag import_establishments_path, multipart: true do %>
+  <%# file_field_tag :file %>
+  <%# submit_tag "Importar instituciones", :class => "button small" %>
+<%# end %>

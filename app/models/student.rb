@@ -4,6 +4,7 @@ class Student < ActiveRecord::Base
 	accepts_nested_attributes_for :guardian
   belongs_to :school
 	has_many :scores
+	has_many :nutritions
   
   def the_school
     self.school.present? ? self.school.name : "Sin escuela"

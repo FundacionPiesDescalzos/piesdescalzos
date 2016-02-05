@@ -1,5 +1,6 @@
 class EstablishmentsController < ApplicationController
   before_action :set_establishment, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!
   before_action :set_city, only: [:index]
 
   # GET /establishments
