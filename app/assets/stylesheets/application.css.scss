@@ -735,7 +735,7 @@ label.inline{
 }
 
 .modal-content{
-	padding: 15px;
+	padding-top: 15px;
 }
 
 .reveal-modal.small {
@@ -769,4 +769,12 @@ label.inline{
     position: absolute;
     top: 17px;
     right: 1.375rem;
+}
+
+.row, .row-x, section {
+    margin: 0 auto;
+    max-width: 62.5rem;
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
 }
