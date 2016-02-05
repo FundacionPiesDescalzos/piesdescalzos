@@ -41,11 +41,15 @@
         <tr>
 		  <% if student.scores.present? %>
 		  <% @ultima = 0 %>
+		  <% @qty = 0 %>
 		  <% student.scores.each do |score| %>
-		    <% @ultima = @ultima + score.score.to_f %>
+		    <% if score.year == Time.now.year %>
+			    <% @qty = @qty + 1 %>
+			    <% @ultima = @ultima + score.score.to_f %>
+			<% end %>
 		  <% end %>
-		  <% @ultima = @ultima/student.scores.length-1  %>
-	         <td><%= fa_icon "graduation-cap", class: "index-icon #{(@ultima).round(2) < 3 ? 'redtxt' : 'graytxt'}" %></td>
+		  <% @ultima = @ultima/@qty unless @qty == 0 %>
+	         <td><%= fa_icon "graduation-cap", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
 		  <% else %>
 		      <td><%= fa_icon "graduation-cap", class: "index-icon" %></td>
 		  <% end %>
