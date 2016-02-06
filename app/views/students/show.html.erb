@@ -242,6 +242,29 @@
 	
 	<div id="nutrition"></div>
 	<script>
+	var nutrition = <%= raw @student.nutritions.to_json %>
+	var categories = [];
+	var graph = {
+		categories: [],
+		series: [{
+			name: "IMC",
+			data: []
+		}]
+	}
+	
+	function imc(h,w) {
+		console.log(h,w);
+		h = parseFloat(h);
+		w = parseFloat(w);
+		var imc = w/(h*h);
+		return imc.toFixed(2);
+	}
+	
+	$.each(nutrition, function( index, value ) {
+		graph.categories.push(value.year+" - "+value.period);
+		graph.series[0].data.push(parseFloat(imc(value.height,value.weight)));
+	});
+	console.log(graph.series[0].data);	
 	$('#nutrition').highcharts({
 	        chart: {
 	            type: 'column',
@@ -251,7 +274,7 @@
 	            text: 'Promedio de nutrición'
 	        },
 	        xAxis: {
-	           categories: ['2015 - I', '2015 - II', '2015 - III']
+	           categories: graph.categories
 	        },
 			yAxis:{
  			   allowDecimals: true,
@@ -268,7 +291,7 @@
 	        },
             series: [{
                 name: "IMC",
-                data: [16.024,13.4, 15.3]
+                data: graph.series[0].data
             }]
 	    });
 	</script>
