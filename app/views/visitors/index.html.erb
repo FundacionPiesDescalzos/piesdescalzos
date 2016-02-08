@@ -49,9 +49,9 @@
 			<% end %>
 		  <% end %>
 		  <% @ultima = @ultima/@qty unless @qty == 0 %>
-	         <td><%= fa_icon "graduation-cap #{(@ultima).round(2)}", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
+	         <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
 		  <% else %>
-		      <td><%= fa_icon "graduation-cap #{(@ultima).round(2)}", class: "index-icon" %></td>
+		      <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon" %></td>
 		  <% end %>
 		  <% if student.nutritions.present? %>
   		      <% @last = student.nutritions.length - 1  %>
