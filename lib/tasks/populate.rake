@@ -6,14 +6,14 @@ namespace :db do
     
     [Establishment, School, Student].each(&:delete_all)
     
-    Establishment.populate 20 do |establishment|
+    Establishment.populate 10 do |establishment|
       establishment.name = Faker::Company.name
       establishment.code = 10000..200000
       establishment.department = Faker::Address.city
       establishment.state = Faker::Address.state
       establishment.phone = Faker::PhoneNumber.phone_number
       establishment.email = Faker::Internet.email
-      School.populate 3..8 do |school| 
+      School.populate 1..5 do |school| 
         school.code = Faker::Number.number(9) 
         school.name = Faker::University.name
         school.address = Faker::Address.street_address
@@ -27,10 +27,10 @@ namespace :db do
         school.foundation_present = [true, false]
         school.establishment_id = establishment.id
         school.created_at = 2.years.ago..Time.now
-        Student.populate 5..14 do |person|
+        Student.populate 7..18 do |person|
           person.name    = Faker::Name.name
           person.gender = ['masculino', 'femenino']
-          person.id_type = ['rc', 'ti', 'otro']
+          person.id_type = ['TI', 'RC', 'Otro', 'NUIP']
           person.address = Faker::Address.street_address
           person.last_course = 1..11
           person.outschool_years = 0..4
