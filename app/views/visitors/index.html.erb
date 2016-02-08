@@ -43,15 +43,15 @@
 		  <% @ultima = 0 %>
 		  <% @qty = 0 %>
 		  <% student.scores.each do |score| %>
-		    <% if score.year == Time.now.year %>
+		    <% if score.year.to_i == Time.now.year || score.year.to_i == Time.now.year-1  %>
 			    <% @qty = @qty + 1 %>
 			    <% @ultima = @ultima + score.score.to_f %>
 			<% end %>
 		  <% end %>
 		  <% @ultima = @ultima/@qty unless @qty == 0 %>
-	         <td><%= fa_icon "graduation-cap", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
+	         <td><%= fa_icon "graduation-cap #{(@ultima).round(2)}", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
 		  <% else %>
-		      <td><%= fa_icon "graduation-cap", class: "index-icon" %></td>
+		      <td><%= fa_icon "graduation-cap #{(@ultima).round(2)}", class: "index-icon" %></td>
 		  <% end %>
 		  <% if student.nutritions.present? %>
   		      <% @last = student.nutritions.length - 1  %>
@@ -71,9 +71,186 @@
           <td><h6 class="nospace"><%= student.id_type.present? ? @type[student.id_type] : "Sin tipo" %></h6><p><%= student.identification %></p></td>
           <td><h6 class="nospace">Edad</h6><p><%= student.born %></p></td>
           <td><h6 class="nospace">Curso</h6><p><%= student.last_course %></p></td>
-          <td><%= link_to edit_student_path(student) do %><%= fa_icon "pencil editar"%><% end %></td>
+          <td><%= link_to edit_student_path(student), "data-reveal-id" => "edit_student_#{student.id}" do %><%= fa_icon "pencil editar"%><% end %></td>
           <td><%= link_to student, method: :delete, data: { confirm: 'Estas seguro que quieres borrar?' } do %><%= fa_icon "trash borrar", class: 'redtxt' %><% end %></td>
         </tr>
+		
+		<div id="edit_student_<%= student.id %>" class="reveal-modal nospace small radius" data-reveal aria-labelledby="edit_student_<%= student.id %>" aria-hidden="true" role="dialog">
+		  <div class="modal-header">
+		  	<h5 class="whitetxt nospace">Datos básicos <%= student.name %></h5>
+		  </div>
+  
+		  <div class="modal-content">
+		  	<%= simple_form_for(student) do |f| %>
+		  	  <%= f.error_notification %>
+  	
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :name, class: 'inline-label inline left' do %>
+						<%= fa_icon "info ls-icon" %> Nombre
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <%= f.input_field :name %>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :id_type, class: 'inline-label inline left' do %>
+						<%= fa_icon "credit-card ls-icon" %> Tipo de identificación
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <%= f.select :id_type, GeneralInfo.kids_id, prompt: "Escoger uno" %>
+				  </div>
+				</div>
+  	    
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :identification, class: 'inline-label inline left' do %>
+						<%= fa_icon "hashtag ls-icon" %> Identificación
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <%= f.input_field :identification %>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :gender, class: 'inline-label inline left' do %>
+						<%= fa_icon "venus-mars ls-icon" %> Genero
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <%= f.select :gender, GeneralInfo.gender, prompt: "Escoger un genero" %>
+				  </div>
+				</div>
+		
+		  	    <div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :last_course, class: 'inline-label inline left' do %>
+						<%= fa_icon "graduation-cap ls-icon" %> Ultimo año cursado
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <%= f.input_field :last_course %>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :outschool_years, class: 'inline-label inline left' do %>
+						<%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <%= f.input_field :outschool_years %>
+				  </div>
+				</div>
+  	    
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :born, class: 'inline-label inline left' do %>
+						<%= fa_icon "child ls-icon" %> Fecha de nacimiento
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div class="inline-select"><%= f.input_field :born, start_year: 1990 %></div>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :etnic, class: 'inline-label inline left' do %>
+						<%= fa_icon "group ls-icon" %> Grupo etnico
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div class="inline-select"><%= f.input_field :etnic %></div>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :born_state, required: true, class: 'inline-label inline left' do %>
+						<%= fa_icon "globe ls-icon" %> Ciudad de nacimiento
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div><%= f.select :born_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :residency_state, required: true, class: 'inline-label inline left' do %>
+						<%= fa_icon "map-signs ls-icon" %> Ciudad de Residencia
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div><%= f.select :residency_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+				  </div>
+				</div>
+		
+		  	    <div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :villa, class: 'inline-label inline left' do %>
+						<%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div class="inline-select"><%= f.input_field :villa  %></div>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :address, class: 'inline-label inline left' do %>
+						<%= fa_icon "compass ls-icon" %> Dirección
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div ><%= f.input_field :address  %></div>
+				  </div>
+				</div>
+		
+				<div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :zone, class: 'inline-label inline left' do %>
+						<%= fa_icon "map ls-icon" %> Estrato
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div><%= f.select :zone, GeneralInfo.estrato, prompt: "Escoger un estrato" %></div>
+				  </div>
+				</div>
+  	   
+		  	    <div class="row">
+				  <div class="small-5 columns">
+				    <%= f.label :displaced, class: 'inline-label inline left' do %>
+						<%= fa_icon "warning ls-icon" %> Desplazado
+					<% end %>
+				  </div>
+				  <div class="small-7 columns">
+				    <div><%= f.input_field :displaced, as: :boolean  %></div>
+				  </div>
+				</div>
+  	    
+  	    
+		  	</div>
+  	
+		  	  <div class="form-actions">
+		  	    <%= f.button :submit, "Guardar estudiante", class: "expand nospace success" %>
+		  	  </div>
+		  	<% end %>
+			<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+		  	</div>
+		</div>
+		<!-- /MODALS -->
+		
+		
       <% end %>
     </tbody>
   </table>
@@ -86,3 +263,4 @@
   </div>
   <% end %>
 <% end %>
+

@@ -21,7 +21,7 @@ class VisitorsController < ApplicationController
 				end
       end
     else
-      @students = Student.all.order(:name).limit 200
+      @students = Student.all.order(:name).limit 50
     end
   end
 end

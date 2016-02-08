@@ -102,7 +102,7 @@
 			<% end %>
 		  </div>
 		  <div class="small-7 columns">
-		    <div><%= f.select :zone, @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+		    <div><%= f.select :zone, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
 		  </div>
 		</div>
 	    
@@ -245,7 +245,7 @@
 			<% end %>
 		  </div>
 		  <div class="small-7 columns">
-		    <div><%= f.select :department, @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+		    <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
 		  </div>
 		</div>
 	           
@@ -325,7 +325,7 @@
 			<% end %>
 		  </div>
 		  <div class="small-7 columns">
-		    <div><%= f.select :department, @ciudades, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+		    <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
 		  </div>
 		</div>
 	           
