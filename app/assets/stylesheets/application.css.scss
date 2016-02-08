@@ -146,6 +146,45 @@ p {
 	padding:0 20px;
 }
 
+.authform {
+  
+  form {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border: solid #000 1px;
+    
+    h3 {
+      color: #FFD41F;
+      text-align: center;
+      font-weight: 600;
+      font-size: 23px;
+    }
+    p{
+      text-align: center;
+      color: #fff;
+      
+    }
+  }
+}
+
+.boton {
+    background-color: #FFD41F;
+    padding: 10px;
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: -0.01em;
+    font-weight: bold;
+    border: solid #E2B808 1px;
+    width: 100%;
+    
+      &:hover {
+        background-color: #F1C510;
+        color: #fff;
+      }
+}
+
 .downer{
 	background: rgba(255,255,255,.1);
 	padding:10px 20px;
@@ -156,6 +195,8 @@ p {
 		text-align: center;
 	}
 }
+
+
 
 .login{
 	width: 350px;
@@ -692,7 +733,7 @@ $size_tab:57px;
     background-color: #fff;
 }
 
-a:hover, .tabs .tab-title > a:hover {
+.tabs .tab-title > a:hover {
     background-color: #F3F3F3;
 }
 
@@ -706,7 +747,25 @@ a:hover, .tabs .tab-title > a:hover {
 }
 
 label.inline{
-	color: gray;
+	
+}
+
+
+
+.form-group {
+  padding-top: 10px;
+    label {
+      color: #fff;
+    }
+    a {
+      color:#FFD41F;
+    }
+}
+
+.checkbox {
+  label {
+    color: #fff;
+  }
 }
 
 .form-actions {
