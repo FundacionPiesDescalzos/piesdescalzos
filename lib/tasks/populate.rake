@@ -27,7 +27,7 @@ namespace :db do
         school.foundation_present = [true, false]
         school.establishment_id = establishment.id
         school.created_at = 2.years.ago..Time.now
-        Student.populate 7..18 do |person|
+        Student.populate 12 do |person|
           person.name    = Faker::Name.name
           person.gender = ['masculino', 'femenino']
           person.id_type = ['TI', 'RC', 'Otro', 'NUIP']
@@ -44,19 +44,18 @@ namespace :db do
           person.zone = Faker::Address.zip_code
           person.school_id = school.id
           person.created_at = 2.years.ago..Time.now
+					Nutrition.populate 3..10 do |nutrition|
+						nutrition.weight = Faker::Number.between(12, 18) 
+						nutrition.period = 1..5
+						nutrition.height = 88..120
+						nutrition.year = [2015,2016]
+						nutrition.user_id = 1
+					end
 					Score.populate 3..10 do |score|
 						score.period = 1..5
 						score.area = ["Matematicas","Ingles","Educación fisica","Sistemas", "Biología", "Disciplina", "Sociales"]
-						score.score = 1.0..5.0
+						score.score = [2.3,2.9,3.4,4.2,5,4.7,3.6,3,2.7,3.1,4.5,4.6,4.1,3.1]
 						score.year = [2015,2016]
-						score.student_id = person.id
-					end
-					Nutrition.populate 3..10 do |nutrition|
-						nutrition.weight = 13.1..18.1
-						nutrition.period = 1..5
-						nutrition.height = 88.8..120
-						nutrition.year = [2015,2016]
-						nutrition.student_id = person.id
 					end
         end
       end
