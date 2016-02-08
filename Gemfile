@@ -38,6 +38,8 @@ group :development, :test do
 end
 group :production do
   gem 'rails_12factor'
+  gem 'faker'
+	gem 'populator'
 end
 group :test do
   gem 'capybara'
