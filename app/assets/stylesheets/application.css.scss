@@ -88,8 +88,7 @@ p {
 }
 
 .main-logout{
-	background: url("") no-repeat center center;
-	background-image: image-url("login-bg.jpg");
+	background: url("../assets/login-bg.jpg") no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	width: 100vw;
@@ -147,11 +146,11 @@ p {
 }
 
 .authform {
-  
   form {
-    background: rgba(0, 0, 0, 0.2);
+	@include border-radius(8px);
+    background: rgba(255, 255, 255, 0.3);
     padding: 10px 20px;
-    border: solid #000 1px;
+    border: 0;
     
     h3 {
       color: #FFD41F;
@@ -556,7 +555,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 }
 
 .student-banner{
-	background: url("pies-textura.jpg") repeat-x top left;
+	background: url("../assets/pies-textura.jpg") repeat-x top left;
 	height: 190px;
 	width: 100%;
 	border-bottom: 1px solid lightgray;

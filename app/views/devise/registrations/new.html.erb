@@ -3,15 +3,15 @@
     <h3>Inicia Sesión</h3>
     <%= devise_error_messages! %>
     <div class="form-group">
-      <%= f.label :name %>
+      <%= f.label :name, "Nombre" %>
       <%= f.text_field :name, :autofocus => true, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :email %>
+      <%= f.label :email, "Correo" %>
       <%= f.email_field :email, class: 'form-control' %>
     </div>
     <div class="form-group">
-      <%= f.label :password %>
+      <%= f.label :password, "Contraseña" %>
       <%= f.password_field :password, class: 'form-control' %>
     </div>
     <div class="form-group">
