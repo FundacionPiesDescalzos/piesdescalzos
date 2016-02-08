@@ -54,7 +54,7 @@ namespace :db do
 					Score.populate 3..10 do |score|
 						score.period = 1..5
 						score.area = ["Matematicas","Ingles","Educación fisica","Sistemas", "Biología", "Disciplina", "Sociales"]
-						score.score = [2.3,2.9,3.4,4.2,5,4.7,3.6,3,2.7,3.1,4.5,4.6,4.1,3.1]
+						score.score = [2.3,2.9,3.4,4.2,5,4.7,3.6,3,2.7,3.1,4.5,4.6,4.1,3.1,4.9,4.8]
 						score.year = [2015,2016]
 					end
         end
