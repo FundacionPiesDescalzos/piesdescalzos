@@ -15,6 +15,10 @@ class GeneralInfo
 		@@estrato = {"Estrato 1" => "1", "Estrato 2" => "2", "Estrato 3" => "3" , "Estrato 4" => "4"}
 	end
 	
+	def self.period
+		@@period = ["", "I periodo", "II periodo","III periodo","IV periodo", "V periodo"]
+	end
+	
 	def self.cities
     @@cities = {
     	:"Amazonas" => [

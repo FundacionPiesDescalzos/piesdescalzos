@@ -4,16 +4,16 @@ namespace :db do
     require 'populator'
     require 'faker'
     
-    [Establishment, School, Student].each(&:delete_all)
+    [Establishment, School, Student, Nutrition, Score, Guardian].each(&:delete_all)
     
-    Establishment.populate 10 do |establishment|
+    Establishment.populate 8 do |establishment|
       establishment.name = Faker::Company.name
       establishment.code = 10000..200000
       establishment.department = Faker::Address.city
       establishment.state = Faker::Address.state
       establishment.phone = Faker::PhoneNumber.phone_number
       establishment.email = Faker::Internet.email
-      School.populate 1..5 do |school| 
+      School.populate 1..3 do |school| 
         school.code = Faker::Number.number(9) 
         school.name = Faker::University.name
         school.address = Faker::Address.street_address
@@ -27,7 +27,7 @@ namespace :db do
         school.foundation_present = [true, false]
         school.establishment_id = establishment.id
         school.created_at = 2.years.ago..Time.now
-        Student.populate 12 do |person|
+        Student.populate 5..10 do |person|
           person.name    = Faker::Name.name
           person.gender = ['masculino', 'femenino']
           person.id_type = ['TI', 'RC', 'Otro', 'NUIP']
@@ -44,18 +44,36 @@ namespace :db do
           person.zone = Faker::Address.zip_code
           person.school_id = school.id
           person.created_at = 2.years.ago..Time.now
+					Guardian.populate 1 do |guardian|
+						guardian.id_type = ["CC", "CE", "Otro"]
+						guardian.identification = Faker::Number.number(9) 
+						guardian.name = Faker::Name.name
+						guardian.gender = ['masculino', 'femenino']
+						guardian.born = Faker::Time.between(48.years.ago, 20.years.ago)
+						guardian.address = Faker::Address.street_address
+						guardian.villa = Faker::Address.street_name
+						guardian.department = Faker::Address.state
+						guardian.phone = Faker::PhoneNumber.phone_number
+						guardian.cel = Faker::PhoneNumber.cell_phone
+						guardian.email = Faker::Internet.email
+						guardian.zone = Faker::Number.between(1,4)
+						guardian.relationship = ['Padre', 'Madre', 'Hermano', 'Abuelo', 'Abuela', 'Tia', 'Tio', 'Madrastra', 'Padrastro']
+						guardian.student_id = person.id
+					end
 					Nutrition.populate 3..10 do |nutrition|
 						nutrition.weight = Faker::Number.between(12, 18) 
 						nutrition.period = 1..5
-						nutrition.height = 88..120
+						nutrition.height = Faker::Number.between(0.88, 1.2).round(2)
 						nutrition.year = [2015,2016]
 						nutrition.user_id = 1
+						nutrition.student_id = person.id
 					end
 					Score.populate 3..10 do |score|
 						score.period = 1..5
 						score.area = ["Matematicas","Ingles","Educación fisica","Sistemas", "Biología", "Disciplina", "Sociales"]
-						score.score = [2.3,2.9,3.4,4.2,5,4.7,3.6,3,2.7,3.1,4.5,4.6,4.1,3.1,4.9,4.8]
+						score.score = Faker::Number.between(2.5, 5).round(1)
 						score.year = [2015,2016]
+						score.student_id = person.id
 					end
         end
       end

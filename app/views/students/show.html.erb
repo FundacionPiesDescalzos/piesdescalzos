@@ -131,11 +131,10 @@
 				</tr>
 			</thead>
 			<tbody>
-		<% @periods = ["", "Primer periodo", "Segundo periodo","Tercer periodo","Cuarto periodo"] %>
 		<% @student.scores.each do |score| %>
 		<tr>
 		 <td><%= score.year %> </td>
-	     <td><%= @periods[score.period.to_i] %></td>
+	     <td><%= GeneralInfo.period[score.period.to_i] %></td>
 	     <td><%= score.area %></td>
 	     <td><span class="<%= score.score.to_i < 3 ? 'redtxt' : 'greentxt' %>"><%= score.score %></span></td>
 		</tr>
@@ -147,12 +146,18 @@
 	// highcharts
 	var notas = {};
 	notas = <%= raw @student.scores.to_json %>
+	console.log(notas);
 	var materias = {};
-	$sale = []
+	var periodos = ["", "I periodo", "II periodo","III periodo","IV periodo", "V periodo"];
+	var period = [];
+	$sale = [];
 	var lista = [];
 	$.each(notas, function( index, value ) {
 		if (lista.indexOf(value.area) == -1){
 			lista.push(value.area)
+		}
+		if (period.indexOf(value.period) == -1){
+			period.push(periodos[value.period]);
 		}
 	});
 	$.each(lista, function( index, value ) {
@@ -174,10 +179,10 @@
                text: 'Promedio de materias'
            },
            subtitle: {
-               text: 'Periodo I - II'
+               text: 'Periodos academicos'
            },
            xAxis: {
-               categories: ['Periodo I', 'Periodo II'],
+               categories: period,
 			   allowDecimals: true,
                title: {
                    enabled: false
@@ -230,14 +235,13 @@
 			</tr>
 		</thead>
 		<tbody>
-	<% @periods = ["", "Primer periodo", "Segundo periodo","Tercer periodo","Cuarto periodo"] %>
 	<% @student.nutritions.each do |nutrition| %>
 	<tr>
 	 <td><%= nutrition.year %></td>
-     <td><%= @periods[nutrition.period.to_i] %></td>
+     <td><%= GeneralInfo.period[nutrition.period.to_i] %></td>
      <td><%= nutrition.height %> Mts</td>
 	 <td><%= nutrition.weight %> Kg</td>
-	 <td><% @imc = nutrition.weight / (nutrition.height*nutrition.height) %> <%= (@imc).round(2) %></td>
+	 <td><%= @imc = nutrition.imc %></td>
 	 <td><%= fa_icon "cutlery ls-icon", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'}" %></td>
 	</tr>
 	<% end %>

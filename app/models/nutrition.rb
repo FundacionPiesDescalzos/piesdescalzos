@@ -23,7 +23,6 @@ class Nutrition < ActiveRecord::Base
 				nutrition.period = period
 				nutrition.year = year
 				nutrition.save!
-				p nutrition
 			end
 		end
   end
