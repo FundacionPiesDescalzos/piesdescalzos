@@ -44,6 +44,20 @@ namespace :db do
           person.zone = Faker::Address.zip_code
           person.school_id = school.id
           person.created_at = 2.years.ago..Time.now
+					Score.populate 3..10 do |score|
+						score.period = 1..5
+						score.area = ["Matematicas","Ingles","Educación fisica","Sistemas", "Biología", "Disciplina", "Sociales"]
+						score.score = 1.0..5.0
+						score.year = [2015,2016]
+						score.student_id = person.id
+					end
+					Nutrition.populate 3..10 do |nutrition|
+						nutrition.weight = 13.1..18.1
+						nutrition.period = 1..5
+						nutrition.height = 88.8..120
+						nutrition.year = [2015,2016]
+						nutrition.student_id = person.id
+					end
         end
       end
     end

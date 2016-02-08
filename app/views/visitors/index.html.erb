@@ -68,7 +68,7 @@
             	<p><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
             </div>
           </td>
-          <td><h6 class="nospace"><%= student.id_type.present? ? @type[student.id_type] : "Sin tipo" %></h6><p><%= student.identification %></p></td>
+          <td><h6 class="nospace"><%= student.id_type.present? ? GeneralInfo.kids_id.key[student.id_type] : "Sin tipo" %></h6><p><%= student.identification %></p></td>
           <td><h6 class="nospace">Edad</h6><p><%= student.born %></p></td>
           <td><h6 class="nospace">Curso</h6><p><%= student.last_course %></p></td>
           <td><%= link_to edit_student_path(student), "data-reveal-id" => "edit_student_#{student.id}" do %><%= fa_icon "pencil editar"%><% end %></td>

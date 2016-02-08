@@ -2,7 +2,6 @@ class VisitorsController < ApplicationController
 	before_action :authenticate_user!
   def index
     @schools = School.all
-		@type = {"Registro Civil" => 'rc',  "Tarjeta de identidad" => 'ti', "NUIP" => "NUIP", 'otro' => "Otro"}
     if params[:search]
       s = "%#{params[:search]}%"
       i = "#{params[:instituciones]}"
