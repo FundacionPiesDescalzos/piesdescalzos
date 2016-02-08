@@ -130,6 +130,89 @@
   </div>
   <div class="content" id="panel2a">
 	  <a href="#" class="button round success several" data-reveal-id="nutricion"><%= fa_icon "upload" %> Cargar nutrición</a>
+	  <% if @school.students.present? %>
+	  	  <% @i = 0 %>
+		  <% @results = {
+		  	"Delgadez cronica" => {data: 0},
+			"Delgadez" => {data: 0},
+			"Normal" => {data: 0},
+			"Sobrepeso" => {data: 0}
+		  }
+		   %>
+		  <% @school.students.each do |student|  %>
+			  <% if student.nutritions.present? %>
+ 			    <% @i = @i + 1 %>
+			    <% @cuantos = student.nutritions.count - 1  %>
+				<% @imc = student.nutritions[@cuantos].imc %>
+				<% if @imc < 13.25 %>
+					<% @results["Delgadez cronica"][:data] = @results["Delgadez cronica"][:data] + 1%>
+				<% elsif @imc > 13.25 && @imc < 13.83 %>
+				    <% @results["Delgadez"][:data] = @results["Delgadez"][:data] + 1%>
+				<% elsif @imc > 13.83 && @imc < 17.60 %>
+					<% @results["Normal"][:data] = @results["Normal"][:data] + 1 %>
+				<% elsif @imc > 17.60 && @imc < 19.01 %>
+					<% @results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 %>	
+				<% end %>
+			  <% end %>
+		 <% end %>
+		 
+   	  <div id="food" class="graph"></div>
+   	  <script>
+   	  $(function () {
+		  var food = <%= raw @results.to_json %> 
+		  console.log(food["Delgadez"].data);
+   	      $('#food').highcharts({
+   	          chart: {
+				  backgroundColor:'transparent',
+   	              plotBackgroundColor: null,
+   	              plotBorderWidth: null,
+   	              plotShadow: false,
+   	              type: 'pie'
+   	          },
+   	          title: {
+   	              text: 'Porcentajes de nutricion en la sede'
+   	          },
+   	          tooltip: {
+   	              pointFormat: '{series.name}({point.y}): <b>{point.percentage:.1f}%</b>'
+   	          },
+   	          plotOptions: {
+   	              pie: {
+   	                  allowPointSelect: true,
+   	                  cursor: 'pointer',
+   	                  dataLabels: {
+   	                      enabled: true,
+   	                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+   	                      style: {
+   	                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+   	                      }
+   	                  }
+   	              }
+   	          },
+   	          series: [{
+   	              name: 'Brands',
+   	              colorByPoint: true,
+   	              data: [{
+   	                  name: "Delgadez",
+   	                  y: food["Delgadez"].data
+   	              }, {
+   	                  name: "Delgadez crónica",
+   	                  y: food["Delgadez cronica"].data,
+   	              }, {
+   	                  name: 'Normal',
+   	                  y: food["Normal"].data
+   	              }, {
+   	                  name: 'Sobrepeso',
+   	                  y: food["Sobrepeso"].data
+   	              }]
+   	          }]
+   	      });
+   	  });
+   	  </script>
+		 
+	  <% end %>
+	  
+	  
+	  
   </div>
   <div class="content" id="panel2">
 	  <p>a implementar</p>

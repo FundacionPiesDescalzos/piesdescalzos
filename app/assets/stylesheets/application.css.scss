@@ -75,6 +75,10 @@ p {
 	font-style: italic;
 }
 
+.full-width{
+	width: 100%;
+}
+
 .transparent{
 	background: rgba(255,255,255,.3);
 }
@@ -382,6 +386,14 @@ table {
     border-spacing: 0px;
     margin-bottom: 1.25rem;
     table-layout: auto;
+	&.black{
+		thead{
+			background: black;
+			tr th{
+				color: white;
+			}
+		}
+	}
 }
 
 table.dataTable thead .sorting {
@@ -582,7 +594,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
     width: 70%;
     float: right;
     min-height: 65vh;
-    padding-left: 20px;
+    padding:0 20px;
     background: #f7f7f9;
     border: solid #D3D3D3 1px;
     border-top: none;
@@ -778,4 +790,10 @@ label.inline{
     width: 100%;
     padding-right: 20px;
     padding-left: 20px;
+}
+
+
+.graph{
+	width: 100%;
+	max-width: 700px;
 }

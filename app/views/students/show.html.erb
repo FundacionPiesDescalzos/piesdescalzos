@@ -1,5 +1,4 @@
 <% @gender = ["Femenino", "Masculino"] %>
-<% @ti = {"Tarjeta de identidad" => "TI", "Cedula de Ciudadania" => "CC", "Cedula de extranjeria" => "CE" , "Otro" => "Otro"} %>
 <% @estrato = {"Estrato 1" => "1", "Estrato 2" => "2", "Estrato 3" => "3" , "Estrato 4" => "4"} %>
 <div class="breadcrumb">
   <h4 class="whitetxt">Consultar estudiante</h4>
@@ -53,7 +52,7 @@
 <div class="tabs-content extended-tabs">
   <div class="content active" id="panel1">
     <ul class="no-bullet equal">
-      <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= @student.id_type %></li>
+      <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
       <li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Indetificación </span> <%= @student.identification %></li>
 	  <hr />
       <li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %></li>
@@ -79,7 +78,7 @@
   <div class="content" id="panel2">
 	  <% if @student.guardian.present? %>
       <ul class="no-bullet equal">
-      	<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= @ti.key(@student.guardian.id_type) %></li>
+      	<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= GeneralInfo.adult_id.key(@student.guardian.id_type) %></li>
       	<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Indetificación </span> <%= @student.guardian.identification %></li>
         <hr />
         <li><span class="labeling"><%= fa_icon "info ls-icon" %> Nombre:</span> <%= @student.guardian.name %></li>
@@ -124,9 +123,10 @@
 		<ul class="no-bullet equal">
 		  <li><span class="labeling"><%= fa_icon "line-chart ls-icon" %> Rendimiento academico:</span></li>
 		</ul>
-		<table>
+		<table class="black full-width">
 			<thead>
 				<tr>
+					<th>Año</th>
 					<th>Periodo</th>
 					<th>Area de conocimiento</th>
 					<th>Calificación</th>
@@ -136,6 +136,7 @@
 		<% @periods = ["", "Primer periodo", "Segundo periodo","Tercer periodo","Cuarto periodo"] %>
 		<% @student.scores.each do |score| %>
 		<tr>
+		 <td><%= score.year %> </td>
 	     <td><%= @periods[score.period.to_i] %></td>
 	     <td><%= score.area %></td>
 	     <td><span class="<%= score.score.to_i < 3 ? 'redtxt' : 'greentxt' %>"><%= score.score %></span></td>
@@ -143,34 +144,42 @@
 		<% end %>
 		</tbody>
 		</table>
-	<div id="container"></div>
+	<div id="container" class="graph"></div>
 	<script>
 	// highcharts
 	var notas = {};
 	notas = <%= raw @student.scores.to_json %>
-	console.log(notas);
-	var materias = {}
+	var materias = {};
 	$sale = []
+	var lista = [];
 	$.each(notas, function( index, value ) {
-		// console.log(index,value.area);
-		materias[value.area+"-"+value.period] = value.score
+		if (lista.indexOf(value.area) == -1){
+			lista.push(value.area)
+		}
 	});
-
-	console.log(materias);
+	$.each(lista, function( index, value ) {
+		var scores = []  
+		$.each(notas, function( i, v ) {
+			if (v.area == value){
+				scores.push(parseFloat(v.score));
+				materias[v.area] = scores
+			}
+		});
+	});
 	
     $('#container').highcharts({
            chart: {
-               type: 'areaspline',
+               type: 'spline',
 			   backgroundColor:'transparent'
            },
            title: {
                text: 'Promedio de materias'
            },
            subtitle: {
-               text: 'Primer periodo, Tercer periodo 2015'
+               text: 'Periodo I - II'
            },
            xAxis: {
-               categories: ['Primer periodo', 'Segundo periodo', 'Tercer periodo'],
+               categories: ['Periodo I', 'Periodo II'],
 			   allowDecimals: true,
                title: {
                    enabled: false
@@ -190,21 +199,19 @@
                shared: true,
                valueSuffix: '/5'
            },
-           series: [{
-               name: 'Matematicas',
-               data: [4, 3, 2]
-           }, {
-               name: 'Ingles',
-               data: [2, 3.4, 5]
-           }, {
-               name: 'Sistemas',
-               data: [4.1, 5, 1]
-           }, {
-               name: 'Educación fisica',
-               data: [4, 3, 1]
-           }]
+           series: []
        });
-	
+	   
+	   var chart = $('#container').highcharts();
+
+	   $.each(materias, function( index, value ) {
+		   chart.addSeries({
+		       name: index,
+		       data: value
+		   });
+	   });
+	   
+	   
 	</script>
 	<% end %> <!-- hay notas -->
   </div>
@@ -213,7 +220,7 @@
 	<ul class="no-bullet equal">
 	  <li><span class="labeling"><%= fa_icon "line-chart ls-icon" %> Informacion nutricional:</span></li>
 	</ul>
-	<table>
+	<table class="black full-width">
 		<thead>
 			<tr>
 				<th>Año</th>
@@ -240,7 +247,7 @@
 	</table>
 	<% end %>
 	
-	<div id="nutrition"></div>
+	<div id="nutrition" class="graph"></div>
 	<script>
 	var nutrition = <%= raw @student.nutritions.to_json %>
 	var categories = [];
@@ -253,7 +260,7 @@
 	}
 	
 	function imc(h,w) {
-		console.log(h,w);
+		//console.log(h,w);
 		h = parseFloat(h);
 		w = parseFloat(w);
 		var imc = w/(h*h);
@@ -264,7 +271,7 @@
 		graph.categories.push(value.year+" - "+value.period);
 		graph.series[0].data.push(parseFloat(imc(value.height,value.weight)));
 	});
-	console.log(graph.series[0].data);	
+	//console.log(graph.series[0].data);	
 	$('#nutrition').highcharts({
 	        chart: {
 	            type: 'column',
@@ -289,9 +296,15 @@
 	        credits: {
 	            enabled: false
 	        },
+			plotOptions:  {
+			    series: {
+			        borderWidth: 0
+			  }
+			},
             series: [{
                 name: "IMC",
-                data: graph.series[0].data
+                data: graph.series[0].data,
+				color: "#FFD41F"
             }]
 	    });
 	</script>
@@ -454,7 +467,7 @@
 			<% end %>
 		  </div>
 		  <div class="small-7 columns">
-		    <%= f.select :id_type, @ti, prompt: "Escoger uno" %>
+		    <%= f.select :id_type, GeneralInfo.adult_id, prompt: "Escoger uno" %>
 		  </div>
 		</div>
   	    
@@ -595,7 +608,6 @@
   
   <div class="modal-content">
 	<% @gender = ["femenino", "masculino"] %>
-  	<% @ti = {"TI"=>"Tarjeta de identidad", "RC"=>"Registro civil"} %>
   	<%= simple_form_for(@student) do |f| %>
   	  <%= f.error_notification %>
   	
@@ -617,7 +629,7 @@
 			<% end %>
 		  </div>
 		  <div class="small-7 columns">
-		    <%= f.select :id_type, @ti, prompt: "Escoger uno" %>
+		    <%= f.select :id_type, GeneralInfo.kids_id, prompt: "Escoger uno" %>
 		  </div>
 		</div>
   	    

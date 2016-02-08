@@ -2,6 +2,11 @@ class Nutrition < ActiveRecord::Base
   belongs_to :student
 	belongs_to :user
   # import CSV
+	
+	def imc
+		self.weight / (self.height*self.height)
+	end
+	
   def self.import(file, school, year, period, user)
 		allowed_attributes = ["weight", "height", "identification"]
 		   CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
