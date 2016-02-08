@@ -88,7 +88,7 @@ p {
 }
 
 .main-logout{
-	background: url("../assets/login-bg.jpg") no-repeat center center;
+	background: url("https://s3.amazonaws.com/piesdescalzos/login-bg.jpg") no-repeat center center;
 	-webkit-background-size: cover;
 	background-size: cover;
 	width: 100vw;
@@ -555,7 +555,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 }
 
 .student-banner{
-	background: url("../assets/pies-textura.jpg") repeat-x top left;
+	background: url("https://s3.amazonaws.com/piesdescalzos/pies-textura.jpg") repeat-x top left;
 	height: 190px;
 	width: 100%;
 	border-bottom: 1px solid lightgray;
