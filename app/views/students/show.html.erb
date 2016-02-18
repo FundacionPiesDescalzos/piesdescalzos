@@ -50,8 +50,8 @@
 <div class="tabs-content extended-tabs">
   <div class="content active" id="panel1">
     <ul class="no-bullet equal">
-      <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
-      <li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Indetificación </span> <%= @student.identification %></li>
+      <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
+      <li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.identification %></li>
 	  <hr />
       <li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %></li>
       <li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
@@ -59,12 +59,12 @@
       <hr />
       <li><span class="labeling"><%= fa_icon "globe ls-icon" %> Lugar de nacimiento</span> <%= @student.born_state %></li>
       <li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar de residencia </span> <%= @student.residency_state %></li>
-      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o Vereda </span> <%= @student.villa %></li>
-      <li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato Social </span> <%= @student.zone %></li>
+      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.villa %></li>
+      <li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.zone %></li>
       <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
       <hr />
       <% if @student.guardian.nil? %> 
-      	<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> no tiene registrado </li>
+      	<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> No tiene registrado </li>
       <%else%> 
       	<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> <%= @student.guardian.name %></li>
       <%end%>
@@ -76,8 +76,8 @@
   <div class="content" id="panel2">
 	  <% if @student.guardian.present? %>
       <ul class="no-bullet equal">
-      	<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de indetificación:</span> <%= GeneralInfo.adult_id.key(@student.guardian.id_type) %></li>
-      	<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Indetificación </span> <%= @student.guardian.identification %></li>
+      	<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación</span> <%= GeneralInfo.adult_id.key(@student.guardian.id_type) %></li>
+      	<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.guardian.identification %></li>
         <hr />
         <li><span class="labeling"><%= fa_icon "info ls-icon" %> Nombre:</span> <%= @student.guardian.name %></li>
         <li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero:</span> <%= @student.guardian.gender %></li>
@@ -85,9 +85,9 @@
 		<hr />
 		<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Fecha de nacimiento</span> <%= @student.guardian.born %></li>
 		<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Ciudad</span> <%= @student.guardian.department %></li>
-      	<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o Vereda </span> <%= @student.guardian.villa %></li>
+      	<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.guardian.villa %></li>
       	<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.guardian.address %></li>
-		<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato Social </span> <%= @student.guardian.zone %></li>
+		<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.guardian.zone %></li>
 		<hr />
 		<li><span class="labeling"><%= fa_icon "phone ls-icon" %> Teléfono</span> <%= @student.guardian.phone %></li>
       	<li><span class="labeling"><%= fa_icon "mobile ls-icon" %> Celular </span> <%= @student.guardian.cel %></li>
