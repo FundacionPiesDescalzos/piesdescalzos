@@ -51,3 +51,4 @@ end
 gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
+gem 'csv-importer'

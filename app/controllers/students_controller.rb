@@ -51,7 +51,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        format.html { redirect_to @student, notice: 'El estudiante fue actualizado.' }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit }
@@ -65,14 +65,18 @@ class StudentsController < ApplicationController
   def destroy
     @student.destroy
     respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
+      format.html { redirect_to visitors_url, notice: 'El estudiante fue borrado.' }
       format.json { head :no_content }
     end
   end
 	
   def import
-    Student.import(params[:file],params[:school_id])
-    redirect_to school_url(params[:school_id]), notice: "Estudiantes importados."
+    @importar = Student.import(params[:file],params[:school_id])
+		if @importar.status == :done
+	    redirect_to school_url(params[:school_id]), notice: @importar.message
+		else
+			redirect_to school_url(params[:school_id]), alert: @importar.message
+		end
   end
 	
 
