@@ -1,0 +1,11 @@
+<ul class="example-orbit" data-orbit>
+<% @homes.each do |home| %>
+<li>
+  <%= image_tag home.pic_url(:large), class: "full" %>
+  <div class="orbit-caption">
+	  <div class="lefty"><%= raw home.paragraph %></div>
+	  <div class="right-content"><%= raw home.texto %></div>		
+  </div>
+</li>
+<% end %>
+</ul>

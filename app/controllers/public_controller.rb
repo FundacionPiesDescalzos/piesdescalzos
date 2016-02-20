@@ -1,5 +1,5 @@
 class PublicController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:index]
   def index
     render :file => 'public/index.html'
   end

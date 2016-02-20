@@ -174,3 +174,10 @@ section {
   @extend .radius;
   @extend .tiny;
 }
+textarea{
+	min-height: 200px;
+}
+.orbit-container .orbit-slides-container > * .orbit-caption{
+	padding: 0;
+	background: transparent;
+}

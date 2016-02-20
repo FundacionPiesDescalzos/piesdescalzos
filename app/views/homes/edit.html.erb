@@ -1,6 +1,11 @@
-<h1>Editing Home</h1>
-
+<div class="breadcrumb">
+  <h4 class="whitetxt">Editando <%= @home.name %></h4>
+</div>
+<div class="search-field"></div>
+<div class="back_link">
+  <%= link_to homes_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
+<br />	
 <%= render 'form' %>
-
-<%= link_to 'Show', @home %> |
-<%= link_to 'Back', homes_path %>

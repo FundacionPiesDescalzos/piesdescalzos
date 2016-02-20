@@ -1,15 +1,20 @@
-<%= simple_form_for(@home, html: {multipart: true}) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :paragraph %>
-    <%= f.input :email %>
-    <%= f.input :pictures, as: :file, :input_html => { :multiple => true, accept: "image/jpeg, image/jpg, image/gif, image/png"  }%>
-    <%= f.input :texto %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<div class="row">
+<div class="large-12 columns">
+	<%= simple_form_for(@home, html: {multipart: true}) do |f| %>
+	  <%= f.error_notification %>
+	
+	  <div class="form-inputs">
+	    <%= f.input :name, label: "Nombre" %>
+	    <%= f.input :paragraph, :as => :ckeditor %>
+	    <%= f.input :pic %>
+		<% if @home.pic_url.present? %>
+			<%= image_tag @home.pic_url(:thumb) %>
+		<% end %>
+	    <%= f.input :texto, :as => :ckeditor %>
+	  </div>
+	  <br />
+	  <div class="form-actions">
+	    <%= f.button :submit, class: "button success right round" %>
+	  </div>
+	<% end %></div>
+</div>

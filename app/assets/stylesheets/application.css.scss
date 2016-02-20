@@ -87,6 +87,10 @@ p {
 	@include border-radius(10px);
 }
 
+.full{
+	width: 100%;
+}
+
 .main-logout{
 	background: url("https://s3.amazonaws.com/piesdescalzos/login-bg.jpg") no-repeat center center;
 	-webkit-background-size: cover;
@@ -854,4 +858,25 @@ label.inline{
 .graph{
 	width: 100%;
 	max-width: 700px;
+}
+.inside-content{
+	padding:0 20px;
+	max-width: 70%;
+}
+
+.lefty{
+	width: 39%;
+	background: black;
+	display: inline-block;
+}
+
+.right-content{
+  background: white;	
+  display: inline-block;
+  width: 60%;
+  a{
+	  background: yellow;
+	  color: #000;
+	  @include border-radius(20px);
+  }
 }

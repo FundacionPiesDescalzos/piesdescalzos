@@ -1,3 +1,3 @@
 class Home < ActiveRecord::Base
-  mount_uploader :pictuares, PictuareUploader
+  mount_uploader :pic, PictuareUploader
 end

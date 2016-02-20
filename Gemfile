@@ -22,6 +22,8 @@ gem 'pg'
 gem 'simple_form'
 gem 'unicorn'
 gem 'unicorn-rails'
+gem 'faker'
+gem 'populator'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
@@ -32,14 +34,10 @@ group :development do
 end
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'faker'
-	gem 'populator'
   gem 'rspec-rails'
 end
 group :production do
   gem 'rails_12factor'
-  gem 'faker'
-	gem 'populator'
 end
 group :test do
   gem 'capybara'
@@ -52,3 +50,4 @@ gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
 gem 'csv-importer'
+gem 'ckeditor'

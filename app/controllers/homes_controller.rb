@@ -6,7 +6,11 @@ class HomesController < ApplicationController
   def index
     @homes = Home.all
   end
-
+  
+  def banner
+		@homes = Home.all
+  end
+	
   # GET /homes/1
   # GET /homes/1.json
   def show
@@ -28,7 +32,7 @@ class HomesController < ApplicationController
 
     respond_to do |format|
       if @home.save
-        format.html { redirect_to @home, notice: 'Home was successfully created.' }
+        format.html { redirect_to homes_url, notice: 'El slide fue creado' }
         format.json { render :show, status: :created, location: @home }
       else
         format.html { render :new }
@@ -42,7 +46,7 @@ class HomesController < ApplicationController
   def update
     respond_to do |format|
       if @home.update(home_params)
-        format.html { redirect_to @home, notice: 'Home was successfully updated.' }
+        format.html { redirect_to homes_url, notice: 'El slide fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @home }
       else
         format.html { render :edit }
@@ -69,6 +73,6 @@ class HomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
-      params.require(:home).permit(:name, :paragraph, :email, :texto, pictures: [])
+      params.require(:home).permit(:name, :paragraph, :email, :texto, :pic, pictures: [])
     end
 end

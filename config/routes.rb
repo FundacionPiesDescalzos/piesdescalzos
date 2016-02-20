@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users
   root :to => 'public#index'
+	get '/home', :to => 'homes#banner'
+	
 end
