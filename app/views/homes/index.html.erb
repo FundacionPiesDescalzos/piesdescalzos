@@ -20,7 +20,7 @@
         <td><%= home.name %></td>
         <td><%= home.paragraph %></td>
         <td><%= home.email %></td>
-        <td><%= home.pictures %></td>
+        <td><%= image_tag home.pictuares_url(:thumb).to_s %></td>
         <td><%= home.texto %></td>
         <td><%= link_to 'Show', home %></td>
         <td><%= link_to 'Edit', edit_home_path(home) %></td>

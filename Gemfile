@@ -32,14 +32,11 @@ group :development do
 end
 group :development, :test do
   gem 'factory_girl_rails'
-  gem 'faker'
-	gem 'populator'
   gem 'rspec-rails'
 end
 group :production do
   gem 'rails_12factor'
-  gem 'faker'
-	gem 'populator'
+	
 end
 group :test do
   gem 'capybara'
@@ -48,7 +45,15 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'carrierwave'
-gem 'fog'
-gem 'mini_magick'
+gem 'faker'
+gem 'populator'
+
+#images
+gem 'aws-sdk', '~> 1.8.1'
+# gem "fog", "~> 1.27", require: "fog/aws/storage"
+gem 'carrierwave-aws'
+gem 'carrierwave_direct'
+gem 'carrierwave', '0.10.0'
+gem 'rmagick', :require => 'RMagick'
+
 gem 'csv-importer'

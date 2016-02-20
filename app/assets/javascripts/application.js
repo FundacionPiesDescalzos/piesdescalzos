@@ -15,6 +15,7 @@
 //= require foundation
 //= require highcharts
 //= require_tree .
+	
 $(function() {
   $(document).foundation();
 	$('#global').DataTable();
@@ -30,5 +31,6 @@ $(function() {
 	setTimeout(function(){
 	  $('.alert-box').remove();
 	}, 5000);
+	
 	
 });

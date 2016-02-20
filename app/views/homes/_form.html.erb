@@ -1,11 +1,11 @@
-<%= simple_form_for(@home, html: {multipart: true}) do |f| %>
+<%= simple_form_for(@home) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :paragraph %>
     <%= f.input :email %>
-    <%= f.input :pictures, as: :file, :input_html => { :multiple => true, accept: "image/jpeg, image/jpg, image/gif, image/png"  }%>
+	<%= f.file_field :pictures %>
     <%= f.input :texto %>
   </div>
 
