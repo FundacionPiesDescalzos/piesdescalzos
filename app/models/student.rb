@@ -10,6 +10,20 @@ class Student < ActiveRecord::Base
     self.school.present? ? self.school.name : "Sin escuela"
   end
 	
+	def average
+		@i = 0;
+		@mas = 0;
+    self.scores.each do |score| 
+	     if score.year.to_i == Time.now.year || score.year.to_i == Time.now.year-1 
+				 @i = @i + 1
+			   @mas = @mas+score.score.to_f 
+			  end 
+     end
+		@mas = @mas/@i unless @i == 0 
+		return @mas
+	end
+	
+	
   # export CSV
   def self.to_csv(options = {})
     (CSV.generate(options) do |csv|

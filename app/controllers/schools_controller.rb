@@ -10,7 +10,27 @@ class SchoolsController < ApplicationController
   # GET /schools/1
   # GET /schools/1.json
   def show
+		@students = Student.where(school_id: @school.id)
+		@group = {"1"=>[],"2"=>[],"3"=>[],"4"=>[],"5"=>[],"6"=>[],"7"=>[],"8"=>[],"9"=>[],"10"=>[],"11"=>[],"12"=>[]}
+		@st = []
+		@students.each do |student|
+			@group[student.last_course].push(student.average)
+			p student.average	
+		end
+		@group.reject!{ |k,v| !v.any? }
+		@courses = [];
+		@grades = [];
+		@group.each do |k,v|
+			@group[k] = added(v);
+			@courses.push(k);
+			@grades.push(v[0].round(2));
+		end
+		@title = "Informe del " + (Time.now.year-1).to_s + " al " + (Time.now.year).to_s
   end
+	
+	def added(arr)
+		arr.inject(0){|sum,x| sum + x }.to_f / arr.size
+	end
 
   # GET /schools/new
   def new

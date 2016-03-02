@@ -90,6 +90,7 @@
 	<script>
   // Create the chart
 	$(function () {
+		var title = "<%= raw @title %>", courses = <%= raw @courses.to_json  %>, grades = <%= raw @grades.to_json  %>;
 		$('#container').highcharts({
 		        chart: {
 		            type: 'column',
@@ -99,29 +100,30 @@
 		            text: 'Promedio de educacion academica'
 		        },
 		        subtitle: {
-		            text: 'Ultimos 3 años'
+		            text: title
 		        },
 		        xAxis: {
-		           categories: ['2013', '2014', '2015']
+		           categories: courses
 		        },
+				colors: [
+	                '#5C80BC', '#E9EDDE'
+	            ],
+	            yAxis: {
+	 			   allowDecimals: true,
+	                title: {
+	                    text: 'Notas'
+	                },plotBands: [{
+	                 from: 0,
+	                 to: 3,
+	                 color: 'rgba(255, 17, 21, .2)'
+	             }]
+	            },
 		        credits: {
 		            enabled: false
 		        },
 	            series: [{
-	                name: "Primero",
-	                data: [5,3,4.5]
-	            }, {
-	                name: "Segundo",
-	                data: [4.5,3.4,4.3]
-	            }, {
-	                name: "Tercero",
-	                data: [4.38,3.42,4.6]
-	            }, {
-	                name: "Cuarto",
-	                data: [4.38,3.42,4.6]
-	            }, {
-	                name: "Quinto",
-	                data: [4.38,3.42,4.6]
+	                name: "Promedio",
+	                data: grades
 	            }]
 		    });
 	});
@@ -172,6 +174,9 @@
    	          title: {
    	              text: 'Porcentajes de nutricion en la sede'
    	          },
+				colors: [
+	                '#FFD41F', '#3D3B30', '#4D5061', '#5C80BC', '#E9EDDE'
+	            ],
    	          tooltip: {
    	              pointFormat: '{series.name}({point.y}): <b>{point.percentage:.1f}%</b>'
    	          },
