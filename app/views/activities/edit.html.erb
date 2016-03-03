@@ -5,6 +5,11 @@
 	<br />
     <h5 class="subheader">En esta pantalla podras editar actividades y asociarlas con estudiantes</h5>
 </div>
+<div class="back_link">
+  <%= link_to programs_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
 
 
 <%= render 'form' %>

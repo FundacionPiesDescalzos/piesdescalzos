@@ -2,8 +2,50 @@
   <h4 class="whitetxt">Lista de programas</h4>
 </div>
 <div class="search-field">
-     
+   <br />
+   <h5 class="subheader">En esta pantalla podrás asignar programas a cualquier institución o sede inscrita</h5>
 </div>
+<div class="back_link">
+  <%= link_to programs_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
+
+<ul class="accordion" data-accordion>
+  <li class="accordion-navigation">
+    <a href="#panel1a">Educación de Calidad</a>
+	<p class="pre-info">La formación en estrategias pedagógicas es una herramienta creada para satisfacer las necesidades de padres o tutores inscritos en el prgrama, en el cual se
+enseñaran herramientas útiles del día a día para la generación de ingresos con base en el emprendimiento de bajo impacto.</p>
+    <div id="panel1a" class="content active">
+		<ul class="accordion" data-accordion>
+	      <% @programs.each do |program| %>
+		  <li class="accordion-navigation">
+			  <a href="#p1"><%= program.name %></a>
+			  <div id="p1" class="content">
+				  <% program.activities.each do |activity| %>
+					  <a href="@"><%= activity.name %></a>
+				  <% end %>
+			  </div>
+		  </li>
+		  <% end %>
+		 </ul>
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel2a">Herramientas para la vida</a>
+	<p class="pre-info">El tejido amazónico usado como un medio de generación de ingresos por medio de la manufactura y venta de telares con diseños únicos.</p>
+    <div id="panel2a" class="content">
+      Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </li>
+  <li class="accordion-navigation">
+    <a href="#panel3a">Nutrición</a>
+	<p class="pre-info">El tejido amazónico usado como un medio de generación de ingresos por medio de la manufactura y venta de telares con diseños únicos.</p>
+    <div id="panel3a" class="content">
+      Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </div>
+  </li>
+</ul>
 
 
 <table>

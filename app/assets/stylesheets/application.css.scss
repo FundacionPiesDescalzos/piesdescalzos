@@ -746,12 +746,38 @@ $size_tab:57px;
     background-color: #F3F3F3;
 }
 
+.students{
+	min-height: 90vh;
+	label{
+		input{
+			position: relative;
+			top: -25px;
+		}
+	}
+}
+
 .grados{
 	margin: 20px 0;
 	min-height: 50px;
 }
 
-#student_search{
+.student-info{
+	margin:0 10px;
+	width: 15%;
+	h6{
+		font-weight: bold;
+		&.subheader{
+			font-weight: normal;
+		}
+	}
+}
+
+.pre-info{
+	background: #EFEFEF;
+	padding: 10px;
+}
+
+input[type="search"].student_search{
 	width: 250px;
 	display: inline-block;
 	float: left;

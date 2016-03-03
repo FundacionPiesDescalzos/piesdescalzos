@@ -11,6 +11,11 @@ class Student < ActiveRecord::Base
     self.school.present? ? self.school.name : "Sin escuela"
   end
 	
+	def age
+		now = Time.now.utc.to_date
+		now.year - self.born.year - (self.born.to_date.change(:year => now.year) > now ? 1 : 0)
+	end
+	
 	def average
 		@i = 0;
 		@mas = 0;

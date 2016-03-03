@@ -63,4 +63,23 @@ $(function() {
 		
 	});
 	
+	// search student
+    $(".student_search").keyup(function(event) {
+      var str = $(this).val().toLowerCase();
+	  var labels = $(this).parent().parent().children("label");
+	  if (str.length > 0){
+        labels.hide();
+	  }else{
+	  	labels.show();
+	  }
+	  console.log(labels.find(".student_name"));
+      labels.find(".student_name").each(function( index ) {
+        var txt = $(this).text().toLowerCase();
+		console.log(txt, str, txt.indexOf(str));
+        if (txt.indexOf(str) >= 0){
+          $(this).parent().parent().show();
+        }
+      });
+    });
+	
 });

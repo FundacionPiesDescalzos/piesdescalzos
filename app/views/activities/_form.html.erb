@@ -16,15 +16,35 @@
 			 <a href="#student-<%= school.id %>"><%= school.name %></a>
 			 <div id="student-<%= school.id %>" class="students content">
 				<div class="grados">
-					<input type="search" name="student_search" id="student_search" placeholder="buscar estudiante" />
+					<input type="search" name="student_search" class="student_search" placeholder="buscar estudiante" />
 					<a href="#" class="label round" data-course="0">Todos</a> <a href="#" class="label round" data-course="1">1er</a> <a href="#" class="label round" data-course="2">2do</a> <a href="#" class="label round" data-course="3">3er</a><a href="#" class="label round" data-course="4">4to</a><a href="#" class="label round" data-course="5">5to</a><a href="#" class="label round" data-course="6">6to</a><a href="#" class="label round" data-course="7">7mo</a><a href="#" class="label round" data-course="8">8vo</a><a href="#" class="label round" data-course="9">9no</a><a href="#" class="label round" data-course="10">10</a><a href="#" class="label round" data-course="11">11</a>
 				</div>
 			  <% school.students.order(:last_course).each do |student| %>
 				  <label class="text-left course-<%= student.last_course %>">
 					  <%= check_box_tag "activity[student_ids][]", student.id, @activity.students.include?(student) %>
-					  <b><%= student.name %></b>
-					  <i><%= student.school.name %></i>
-					  <%= fa_icon "map-marker" %> <%= student.residency_state %>
+					  <div class="student-info ib">
+						<h6 class="student_name"><%= student.name %></h6>
+					  	<h6 class="subheader">
+					  		<i><%= student.school.name %></i>
+					  	</h6>
+					  	<h6 class="subheader"><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
+					  </div>
+					  <div class="student-info iden ib">
+					  	<h6 class="text-center">Tarjeta de identidad</h6>
+						<h6 class="subheader text-center"><%= student.identification %></h6>
+					  </div>
+					  <div class="student-info edad ib">
+					  	<h6 class="text-center">Edad</h6>
+						<h6 class="subheader text-center"><%= student.identification %></h6>
+					  </div>
+					  <div class="student-info edad ib">
+					  	<h6 class="text-center">Edad</h6>
+						<h6 class="subheader text-center"><%= student.age %></h6>
+					  </div>
+					  <div class="student-info grado ib">
+					  	<h6 class="text-center">grado</h6>
+						<h6 class="subheader text-center"><%= student.last_course %></h6>
+					  </div>
 				   </label>
 			  <% end %>
 			  </div>

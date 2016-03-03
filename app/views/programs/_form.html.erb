@@ -5,7 +5,7 @@
 			<%= simple_form_for(@program) do |f| %>
 			  <h5 class="text-center">Paso 1</h5>
 			  <%= f.error_notification %>
-				<% @posible = {"Educación publica de calidad" => "epc", "Herramientas para la vida" => "n", "Nutrición" => "n"} %>
+				<% @posible = {"Educación publica de calidad" => "epc", "Herramientas para la vida" => "h", "Nutrición" => "n"} %>
 			  <div class="form-inputs">
 				<%= f.input :line, label: "Escoge la linea del programa", collection: @posible, prompt: "Escoger uno" %>
 			    <%= f.input :name, label: "Nombre del programa" %>

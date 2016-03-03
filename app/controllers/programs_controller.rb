@@ -5,6 +5,9 @@ class ProgramsController < ApplicationController
   # GET /programs.json
   def index
     @programs = Program.all
+		@programs_edu = Program.where(line: "epc");
+		@programs_m = Program.where(line: "n");
+		@programs_h = Program.where(line: "h");
   end
 
   # GET /programs/1
