@@ -23,7 +23,20 @@ enseñaran herramientas útiles del día a día para la generación de ingresos 
 			  <a href="#p1"><%= program.name %></a>
 			  <div id="p1" class="content">
 				  <% program.activities.each do |activity| %>
-					  <a href="@"><%= activity.name %></a>
+					  <ul class="inline-list">
+					  	<li><%= link_to activity.name, activity %></li>
+						<li>
+							<% @cnt = [] %>
+							<% activity.students.each do |student| %> 
+								<% if student.school.present? %>
+									<% @cnt.push(student.school.name) unless @cnt.include?(student.school.name)  %>
+								<% end %>
+							<% end %>
+							<%= @cnt.size %> Sedes
+						</li>
+						<li><%= activity.boss %></li>
+						<li><%= activity.students.count %> Estudiantes</li>
+					  </ul>
 				  <% end %>
 			  </div>
 		  </li>
@@ -64,7 +77,7 @@ enseñaran herramientas útiles del día a día para la generación de ingresos 
     <% @programs.each do |program| %>
       <tr>
         <td><%= program.name %></td>
-        <td><%= program.line %></td>
+        <td><%= GeneralInfo.lines.key(program.line) %></td>
         <td><%= program.city %></td>
         <td><%= program.description %></td>
         <td><%= program.active %></td>

@@ -19,6 +19,10 @@ class GeneralInfo
 		@@period = ["", "I periodo", "II periodo","III periodo","IV periodo", "V periodo"]
 	end
 	
+	def self.lines
+		@@lines = {"Educación publica de calidad" => "epc", "Herramientas para la vida" => "h", "Nutrición" => "n"} 
+	end
+	
 	def self.cities
     @@cities = {
     	:"Amazonas" => [
