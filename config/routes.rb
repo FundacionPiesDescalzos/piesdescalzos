@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :activities
+  resources :programs
   resources :nutritions do 
     collection { post :import }
   end

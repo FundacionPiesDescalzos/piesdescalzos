@@ -32,4 +32,35 @@ $(function() {
 	  $('.alert-box').remove();
 	}, 5000);
 	
+	
+	// select students courses
+	$( ".grados" ).on( "click", "a", function(e) {
+		e.preventDefault();
+		var course = $(this).data("course"), link = $(this);;
+
+		if (course != 0){
+			var elem = $(this).parent().parent().children("label.course-"+course)
+			console.log(elem);
+			$.each(elem, function( index, value ) {
+				var incheck = $(this).children("input:checkbox");
+				if (incheck.is(':checked')) {
+					incheck.prop( "checked", false );
+					link.removeClass("success");
+				}else{
+					incheck.prop( "checked", true );
+					link.addClass("success");
+				}
+			});
+		}else{
+			var eleme = $(this).parent().parent().children("label")
+			console.log(eleme);
+			$.each(eleme, function( index, value ) {
+				var incheck = $(this).children("input:checkbox");
+				incheck.prop( "checked", true );
+				link.addClass("success");
+			});
+		}
+		
+	});
+	
 });

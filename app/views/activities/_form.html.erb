@@ -1,0 +1,51 @@
+<br /><br />
+<div class="text-center">
+	<%= simple_form_for(@activity) do |f| %>
+	 <h5 class="text-center">Paso 2</h5>
+	<%= f.error_notification %>
+	<div class="form-inputs">
+		<%= f.association :program, label: "Escoge el programa asociado" %>
+		<%# f.association :students, label: "Escoge estudiantes" %>
+		<br />
+		<% if @activity.students.count > 0 %>
+			<h6><%= @activity.students.count %> estudiantes seleccionados</h6>
+		<% end %>
+		<ul class="accordion" data-accordion>
+		<% School.order(:name).each do |school| %>
+			<li class="accordion-navigation">
+			 <a href="#student-<%= school.id %>"><%= school.name %></a>
+			 <div id="student-<%= school.id %>" class="students content">
+				<div class="grados">
+					<input type="search" name="student_search" id="student_search" placeholder="buscar estudiante" />
+					<a href="#" class="label round" data-course="0">Todos</a> <a href="#" class="label round" data-course="1">1er</a> <a href="#" class="label round" data-course="2">2do</a> <a href="#" class="label round" data-course="3">3er</a><a href="#" class="label round" data-course="4">4to</a><a href="#" class="label round" data-course="5">5to</a><a href="#" class="label round" data-course="6">6to</a><a href="#" class="label round" data-course="7">7mo</a><a href="#" class="label round" data-course="8">8vo</a><a href="#" class="label round" data-course="9">9no</a><a href="#" class="label round" data-course="10">10</a><a href="#" class="label round" data-course="11">11</a>
+				</div>
+			  <% school.students.order(:last_course).each do |student| %>
+				  <label class="text-left course-<%= student.last_course %>">
+					  <%= check_box_tag "activity[student_ids][]", student.id, @activity.students.include?(student) %>
+					  <b><%= student.name %></b>
+					  <i><%= student.school.name %></i>
+					  <%= fa_icon "map-marker" %> <%= student.residency_state %>
+				   </label>
+			  <% end %>
+			  </div>
+			</li>
+		<% end %>
+		</ul>
+		<br /><br />
+		<div class="row">
+			<div class="large-8 columns large-centered">
+				<%= f.input :name, label: "Nombre de la actividad" %>
+				<div class="inline-select center">
+					<%= f.input :the_date, label: "Fecha de la actividad" %>
+				</div>
+				<br />
+				<%= f.input :boss, label: "Persona a cargo" %>
+				<%= f.input :description, label: "Descripción de la actividad" %>
+			</div>
+		</div>
+	</div>
+	<div class="form-actions">
+		<%= f.button :submit, "Siguiente paso", class: "button success round"  %>
+	</div>
+	<% end %>
+</div>

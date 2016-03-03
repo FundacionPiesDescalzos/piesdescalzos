@@ -4,6 +4,7 @@ class Student < ActiveRecord::Base
 	accepts_nested_attributes_for :guardian
   belongs_to :school
 	has_many :scores
+	has_and_belongs_to_many :activities
 	has_many :nutritions
   
   def the_school

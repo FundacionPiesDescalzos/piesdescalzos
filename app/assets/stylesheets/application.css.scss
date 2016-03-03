@@ -216,7 +216,7 @@ p {
 	width: 23%;
 	float: left;
 	@include shadow;
-	height: 180%;
+	height: 100vh;
 }
 
 .nav{
@@ -746,8 +746,24 @@ $size_tab:57px;
     background-color: #F3F3F3;
 }
 
+.grados{
+	margin: 20px 0;
+	min-height: 50px;
+}
+
+#student_search{
+	width: 250px;
+	display: inline-block;
+	float: left;
+}
+
 .inline-select{
 	text-align: right;
+	&.center{
+		label{
+			text-align: center;
+		}
+	}
 	select{
 		display: inline-block;
 		width: 31%;
