@@ -18,7 +18,11 @@
 //= require_tree .
 $(function() {
   $(document).foundation();
-	$('#global').DataTable();
+    $('#global').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+    });
 	
 	$(".nav li.submenu a.item").click(function(e){
 		e.preventDefault();
