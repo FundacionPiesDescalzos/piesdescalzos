@@ -45,6 +45,7 @@
   <li class="tab-title"><a href="#panel3">Afiliación en salud</a><span class="edit_tabs"><a href="" data-reveal-id="health_care"> <%= fa_icon "pencil" %> </a></span></li>
   <li class="tab-title"><a href="#panel4">Datos escolares</a></li>
   <li class="tab-title"><a href="#panel5">Seguimiento nutricional</a></li>
+  <li class="tab-title"><a href="#panel6">Actividades en la fundación</a></li>
 </ul>
 
 <div class="tabs-content extended-tabs">
@@ -311,7 +312,76 @@
 	    });
 	</script>
   </div>
+  <div class="content" id="panel6">
+	<div class="row collapse">
+		<div class="small-8 columns">
+		  <div class="row">
+		    <div class="small-9 columns">
+		      <label for="right-label" class="right inline">Seleccione el año escolar</label>
+		    </div>
+		    <div class="small-3 columns">
+		      <select name="year" id="year">
+		      	<option value="2015">2015</option>
+				<option value="2016">2016</option>
+		      </select>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<ul class="accordion" data-accordion>
+	  <% if @programs_m.present? %>
+	  <li class="accordion-navigation">
+	    <a href="#panel1a"><%= fa_icon "cutlery" %>  Linea nutricional</a>
+	    <div id="panel1a" class="content">
+			<ul class="accordion" data-accordion>
+			<% @programs_m.each do |program| %>
+			  <li class="accordion-navigation sub">
+			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
+			    <div id="panel-<%= program.id %>" class="content">
+	                <% program.activities.each do |activity| %>
+						<%= activity.name %>
+					<% end %>
+			    </div>
+			  </li>
+			  <% end %>
+			</ul>
+	    </div>
+	  </li>
+	  <% end %>
+	  <% if @programs_h.present? %>
+	  <li class="accordion-navigation">
+	    <a href="#panel2a"><%= fa_icon "book" %> Herramientas para la vida</a>
+	    <div id="panel2a" class="content">
+			<% @programs_m.each do |program| %>
+				<%= program.name %>
+				<%= program.line %>
+			<% end %>
+	    </div>
+	  </li>
+	  <% end %>
+	  <% if @programs_edu.present? %>
+	  <li class="accordion-navigation">
+	    <a href="#panel3a"><%= fa_icon "book" %> Educación de calidad</a>
+	    <div id="panel3a" class="content active">
+			<ul class="accordion" data-accordion>
+			<% @programs_edu.each do |program| %>
+			  <li class="accordion-navigation sub">
+			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
+			    <div id="panel-<%= program.id %>" class="content">
+	                <% program.activities.each do |activity| %>
+						<%= activity.name %>
+					<% end %>
+			    </div>
+			  </li>
+			  <% end %>
+			</ul>
+	    </div>
+	  </li>
+	  <% end %>
+	</ul>
+  </div> <!-- /tab 6 actividades en la fundación -->
 </div>
+
 
 <!-- MODALS -->
 <div id="health_care" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">

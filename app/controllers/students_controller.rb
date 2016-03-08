@@ -18,6 +18,10 @@ class StudentsController < ApplicationController
 		@guardian = @student.guardian || Guardian.new
 		@health_care = @student.health_care || HealthCare.new
     @schools = School.all
+		@activities = Activity.joins(:students).where(students: {id: @student.id})
+		@programs_edu =	Program.where(line: "epc").joins(:activities).where(activities: {id: @activities})
+		@programs_m =	Program.where(line: "n").joins(:activities).where(activities: {id: @activities})
+		@programs_h =	Program.where(line: "h").joins(:activities).where(activities: {id: @activities})
   end
 
   # GET /students/new
