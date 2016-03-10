@@ -3,12 +3,13 @@
 	<div class="large-7 columns large-centered">
 		<div class="text-center">
 			<%= simple_form_for(@program) do |f| %>
-			  <h5 class="text-center">Paso 1</h5>
+			  <h5 class="text-center">Creación de programa</h5>
 			  <%= f.error_notification %>
 			  <div class="form-inputs">
 				<%= f.input :line, label: "Escoge la linea del programa", collection: GeneralInfo.lines, prompt: "Escoger uno" %>
 			    <%= f.input :name, label: "Nombre del programa" %>
 			    <%= f.input :description, label: "Descripción del programa" %>
+			    <%= f.input :name, label: "Escoge el código interno o parte del nombre del encagado" %>
 			  </div>
 	
 			  <div class="form-actions">

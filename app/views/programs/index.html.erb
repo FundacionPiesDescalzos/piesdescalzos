@@ -13,14 +13,14 @@
 
 <ul class="accordion" data-accordion>
   <li class="accordion-navigation">
-    <a href="#panel1a">Educación de Calidad</a>
+    <a class="negro italic bold" href="#panel1a"><%= fa_icon "bullseye angle" %> Educación de Calidad</a>
 	<p class="pre-info">La formación en estrategias pedagógicas es una herramienta creada para satisfacer las necesidades de padres o tutores inscritos en el prgrama, en el cual se
 enseñaran herramientas útiles del día a día para la generación de ingresos con base en el emprendimiento de bajo impacto.</p>
     <div id="panel1a" class="content active">
-		<ul class="accordion" data-accordion>
+		<ul class="accordion activities" data-accordion>
 	      <% @programs_edu.each do |program| %>
-		  <li class="accordion-navigation">
-			  <a href="#p1"><%= program.name %></a>
+		  <li class="accordion-navigation ">
+			  <a href="#p1"><%= fa_icon "angle-right angle" %><%= program.name %></a>
 			  <div id="p1" class="content">
 				  <% program.activities.each do |activity| %>
 					  <ul class="inline-list">
@@ -45,13 +45,13 @@ enseñaran herramientas útiles del día a día para la generación de ingresos 
     </div>
   </li>
   <li class="accordion-navigation">
-    <a href="#panel2a">Herramientas para la vida</a>
+    <a class="negro italic bold" href="#panel2a"><%= fa_icon "bullseye angle" %>Herramientas para la vida</a>
 	<p class="pre-info">El tejido amazónico usado como un medio de generación de ingresos por medio de la manufactura y venta de telares con diseños únicos.</p>
     <div id="panel2a" class="content">
-	<ul class="accordion" data-accordion>
+	<ul class="accordion activities" data-accordion>
       <% @programs_h.each do |program| %>
 	  <li class="accordion-navigation">
-		  <a href="#p1"><%= program.name %></a>
+		  <a href="#p1"><%= fa_icon "angle-right angle" %><%= program.name %></a>
 		  <div id="p1" class="content">
 			  <% program.activities.each do |activity| %>
 				  <ul class="inline-list">
@@ -76,13 +76,13 @@ enseñaran herramientas útiles del día a día para la generación de ingresos 
     </div>
   </li>
   <li class="accordion-navigation">
-    <a href="#panel3a">Nutrición</a>
+    <a class="negro italic bold" href="#panel3a"><%= fa_icon "bullseye angle" %>Nutrición</a>
 	<p class="pre-info">El tejido amazónico usado como un medio de generación de ingresos por medio de la manufactura y venta de telares con diseños únicos.</p>
     <div id="panel3a" class="content">
-	<ul class="accordion" data-accordion>
+	<ul class="accordion activities" data-accordion>
       <% @programs_m.each do |program| %>
 	  <li class="accordion-navigation">
-		  <a href="#p1"><%= program.name %></a>
+		  <a href="#p1"><%= fa_icon "angle-right angle" %><%= program.name %></a>
 		  <div id="p1" class="content">
 			  <% program.activities.each do |activity| %>
 				  <ul class="inline-list">

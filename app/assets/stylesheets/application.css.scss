@@ -32,6 +32,12 @@ $primary_yellow:#FFD41F;
 	box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
 }
 
+@mixin shadow2(){
+  -webkit-box-shadow: inset 0px 6px 10px -4px rgba(0,0,0,0.3);
+  -moz-box-shadow: inset 0px 6px 10px -4px rgba(0,0,0,0.3);
+  box-shadow: inset 0px 6px 10px -4px rgba(0,0,0,0.3);
+}
+
 h4 {
 	
 //  font-style: italic;
@@ -55,6 +61,10 @@ p {
   color: #636363;
   font-weight: 400;
   font-size: 13px;
+}
+
+select {
+      font-size: 13px !important;
 }
 
 .ib{
@@ -105,7 +115,11 @@ p {
     margin: 0 auto;
 }
 
-
+.negro {
+    background: #232321 !important;
+    color: #FBFBFB !important;
+    padding-left: 25px;
+} 
 
 .logo {
     padding-top: 20px;
@@ -571,6 +585,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 	.pic{
 		display: inline-table;
 		width: 18%;
+    top: 40px;
+    position: relative;
 		img{
 			width: 100px;
 			height: 100px;
@@ -583,11 +599,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 	.student-info{
 		padding-top: 66px;
 		display: inline-table;
+		position: absolute;
 		width: 80%;
 		&.general-banner{
-			padding-top: 25px;
-      position: relative;
-      top: -10px;
+      top: 148px;
 			a.button.several{
 				margin: 0;
 			}
@@ -680,6 +695,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', e
 }
 
 .accordion .accordion-navigation > .content, .accordion dd > .content{
+  border: solid #CCC 1px;
 	position: relative;
 }
 
@@ -747,7 +763,7 @@ $size_tab:57px;
 }
 
 .students{
-	min-height: 90vh;
+	    min-height: 30vh;
 	label{
 		input{
 			position: relative;
@@ -756,9 +772,26 @@ $size_tab:57px;
 	}
 }
 
+
+
 .grados{
-	margin: 20px 0;
+	margin: 5px 0;
 	min-height: 50px;
+	 a{
+	  margin-left: 3px;
+    margin-right: 3px;
+    width: 47px;
+    margin-top: 9px;
+    
+      &:hover {
+         background-color: #ebbe00;
+         color: #000;
+	   }
+	   &:focus {
+         background-color: #ebbe00;
+         color: #000;
+     }
+	 }
 }
 
 .student-info{
@@ -773,8 +806,42 @@ $size_tab:57px;
 }
 
 .pre-info{
-	background: #EFEFEF;
+	background: #FBFBFB;
 	padding: 10px;
+}
+
+.activities {
+    background-color: none;
+    border: none;
+    
+    .accordion-navigation {
+    color: #222222;
+    border-bottom: none;
+    border-top: none;
+    }
+    .accordion-navigation > a:hover, .accordion dd > a:hover {
+    background: #fff; 
+    color: #00A5E7;
+    }
+    
+    .accordion-navigation > a, .accordion dd > a {
+    color: #135486;
+    background-color: white;
+    border-bottom: none;
+    border-top: none;
+    font-weight: bold;
+}
+    .accordion-navigation.active > a, .accordion dd.active > a {
+    background: #fff;
+    color: #232321;
+    border-bottom: none;
+    border-top: none;
+}
+    .accordion-navigation > .content, .accordion dd > .content {
+    border: none;
+    @include shadow2;
+    position: relative;
+}
 }
 
 input[type="search"].student_search{
@@ -811,6 +878,13 @@ label.inline{
     a {
       color:#FFD41F;
     }
+}
+.form-inputs {
+  label {
+        margin-bottom: 5px;
+       
+  }
+  
 }
 
 .checkbox {
@@ -1012,3 +1086,4 @@ label.inline{
 .orbit-container .orbit-slides-container > * .orbit-caption {
     position: relative;
 }
+
