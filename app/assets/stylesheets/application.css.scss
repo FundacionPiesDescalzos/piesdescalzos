@@ -818,6 +818,7 @@ $size_tab:57px;
     color: #222222;
     border-bottom: none;
     border-top: none;
+		position: relative;
     }
     .accordion-navigation > a:hover, .accordion dd > a:hover {
     background: #fff; 
@@ -842,6 +843,15 @@ $size_tab:57px;
     @include shadow2;
     position: relative;
 }
+
+.edit-right{
+	float: right;
+  position: absolute;
+  right: 0;
+  top: 20px;
+	padding: 0 !important;
+}
+
 }
 
 input[type="search"].student_search{
@@ -1087,3 +1097,16 @@ label.inline{
     position: relative;
 }
 
+.assistance{
+	position: relative;
+	top: 25px;
+	h6{
+		display: block;
+    font-weight: bold;
+		color: #000;
+	}
+	input{
+		display: block;
+		top: 0 !important;
+	}
+}

@@ -1,6 +1,12 @@
-<h1>Editing Program</h1>
+<div class="breadcrumb">
+  <h4 class="whitetxt">Editando <%= @program.name %></h4>
+</div>
+<div class="search-field"></div>
+<div class="back_link">
+  <%= link_to programs_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
+<br />	
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @program %> |
-<%= link_to 'Back', programs_path %>

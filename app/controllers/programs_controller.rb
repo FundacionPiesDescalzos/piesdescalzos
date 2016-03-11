@@ -45,7 +45,7 @@ class ProgramsController < ApplicationController
   def update
     respond_to do |format|
       if @program.update(program_params)
-        format.html { redirect_to @program, notice: 'Program was successfully updated.' }
+        format.html { redirect_to programs_url, notice: 'Program was successfully updated.' }
         format.json { render :show, status: :ok, location: @program }
       else
         format.html { render :edit }
