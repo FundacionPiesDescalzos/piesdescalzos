@@ -44,7 +44,7 @@
   <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
   <li class="tab-title"><a href="#panel1a">Educación en la sede</a></li>
   <li class="tab-title"><a href="#panel2a">Nutrición en la sede</a></li>
-  <li class="tab-title"><a href="#panel2">Programas de la sede</a></li>
+  <li class="tab-title"><a href="#panel3">Programas de la sede</a></li>
 </ul>
 
 <div class="tabs-content extended-tabs">
@@ -219,9 +219,73 @@
 	  
 	  
   </div>
-  <div class="content" id="panel2">
-	  <p>a implementar</p>
-  </div>
+  <div class="content" id="panel3">
+	<div class="row collapse">
+		<div class="small-8 columns">
+		  <div class="row">
+		    <div class="small-9 columns">
+		      <label for="right-label" class="right inline">Seleccione el año escolar</label>
+		    </div>
+		    <div class="small-3 columns">
+		      <select name="year" id="year">
+						<option value="2016">2016</option>
+		      </select>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<ul class="accordion" data-accordion>
+	  <% if @programs_m.present? %>
+	  <li class="accordion-navigation">
+	    <a href="#panel1a"><%= fa_icon "cutlery" %>  Linea nutricional</a>
+	    <div id="panel1a" class="content">
+			<ul class="accordion" data-accordion>
+			<% @programs_m.each do |program| %>
+			  <li class="accordion-navigation sub">
+			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
+			    <div id="panel-<%= program.id %>" class="content">
+	                <% program.activities.each do |activity| %>
+						<%= activity.name %>
+					<% end %>
+			    </div>
+			  </li>
+			  <% end %>
+			</ul>
+	    </div>
+	  </li>
+	  <% end %>
+	  <% if @programs_h.present? %>
+	  <li class="accordion-navigation">
+	    <a href="#panel2a"><%= fa_icon "wrench" %> Herramientas para la vida</a>
+	    <div id="panel2a" class="content">
+			<% @programs_m.each do |program| %>
+				<%= program.name %>
+				<%= program.line %>
+			<% end %>
+	    </div>
+	  </li>
+	  <% end %>
+	  <% if @programs_edu.present? %>
+	  <li class="accordion-navigation">
+	    <a href="#panel3a"><%= fa_icon "book" %> Educación de calidad</a>
+	    <div id="panel3a" class="content active">
+			<ul class="accordion" data-accordion>
+			<% @programs_edu.each do |program| %>
+			  <li class="accordion-navigation sub">
+			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
+			    <div id="panel-<%= program.id %>" class="content">
+	                <% program.activities.each do |activity| %>
+						<%= activity.name %>
+					<% end %>
+			    </div>
+			  </li>
+			  <% end %>
+			</ul>
+	    </div>
+	  </li>
+	  <% end %>
+	</ul>
+  </div> <!-- /tab 6 actividades en la fundación -->
 </div>
 
 

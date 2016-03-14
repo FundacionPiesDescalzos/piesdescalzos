@@ -53,7 +53,8 @@ class GuardiansController < ApplicationController
   def update
     respond_to do |format|
       if @guardian.update(guardian_params)
-        format.html { redirect_to @guardian, notice: 'Guardian was successfully updated.' }
+				@student  = Student.find(guardian_params[:student_id])
+        format.html { redirect_to @student, notice: 'Guardian was successfully updated.' }
         format.json { render :show, status: :ok, location: @guardian }
       else
         format.html { render :edit }

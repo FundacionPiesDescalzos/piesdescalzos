@@ -45,7 +45,8 @@ class HealthCaresController < ApplicationController
   def update
     respond_to do |format|
       if @health_care.update(health_care_params)
-        format.html { redirect_to @health_care, notice: 'Health care was successfully updated.' }
+				@student  = Student.find(health_care_params[:student_id])
+        format.html { redirect_to @student, notice: 'Afiliacíon a salud fue actualizada' }
         format.json { render :show, status: :ok, location: @health_care }
       else
         format.html { render :edit }

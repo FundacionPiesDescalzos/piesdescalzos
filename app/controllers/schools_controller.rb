@@ -26,6 +26,17 @@ class SchoolsController < ApplicationController
 			@grades.push(v[0].round(2));
 		end
 		@title = "Informe del " + (Time.now.year-1).to_s + " al " + (Time.now.year).to_s
+		
+		@ids=[]
+		@students.each do |st|
+			@ids.push(st.id)
+		end
+		
+		@activities = Activity.joins(:students).where(students: {id: @ids})
+		@programs_edu =	Program.where(line: "epc").joins(:activities).where(activities: {id: @activities})
+		@programs_m =	Program.where(line: "n").joins(:activities).where(activities: {id: @activities})
+		@programs_h =	Program.where(line: "h").joins(:activities).where(activities: {id: @activities})
+		
   end
 	
 	def added(arr)

@@ -1,26 +1,166 @@
-<% @ti = ["TI", "RC"] %>
-<%= simple_form_for(@student) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :id_type, collection: @ti, prompt: "Escoger uno", label: "Tipo de identificación" %>
-    <%= f.input :gender, collection: GeneralInfo.gender, prompt: "Escoger un genero" %>
-    <%= f.input :address %>
-    <%= f.input :last_course %>
-    <%= f.input :outschool_years %>
-    <%= f.input :identification %>
-    <%= f.input :born %>
-    <%= f.input :etnic %>
-    <%= f.input :villa %>
-    <%= f.input :born_state, required: true, label: "Ciudad de nacimiento", collection: GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
-    <%= f.input :displaced %>
-    <%= f.input :residency_state, required: true,  label: "Ciudad de residencia", collection: GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %>
-    <%= f.input :zone %>
-    <%= f.association :school %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<div class="row">
+	<div class="large-12 columns"><%= simple_form_for(@student) do |f| %>
+		  <%= f.error_notification %>
+		  	
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :name, class: 'inline-label inline left' do %>
+								<%= fa_icon "info ls-icon" %> Nombre
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.input_field :name %>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :id_type, class: 'inline-label inline left' do %>
+								<%= fa_icon "credit-card ls-icon" %> Tipo de identificación
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.select :id_type, GeneralInfo.kids_id, prompt: "Escoger uno" %>
+						  </div>
+						</div>
+		  	    
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :identification, class: 'inline-label inline left' do %>
+								<%= fa_icon "hashtag ls-icon" %> Identificación
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.input_field :identification %>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :gender, class: 'inline-label inline left' do %>
+								<%= fa_icon "venus-mars ls-icon" %> Genero
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.select :gender, GeneralInfo.gender, prompt: "Escoger un genero" %>
+						  </div>
+						</div>
+				
+		    <div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :last_course, class: 'inline-label inline left' do %>
+								<%= fa_icon "graduation-cap ls-icon" %> Ultimo año cursado
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.input_field :last_course %>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :outschool_years, class: 'inline-label inline left' do %>
+								<%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.input_field :outschool_years %>
+						  </div>
+						</div>
+		  	    
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :born, class: 'inline-label inline left' do %>
+								<%= fa_icon "child ls-icon" %> Fecha de nacimiento
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div class="inline-select"><%= f.input_field :born, start_year: 1990 %></div>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :etnic, class: 'inline-label inline left' do %>
+								<%= fa_icon "group ls-icon" %> Grupo etnico
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div class="inline-select"><%= f.input_field :etnic %></div>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :born_state, required: true, class: 'inline-label inline left' do %>
+								<%= fa_icon "globe ls-icon" %> Ciudad de nacimiento
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div><%= f.select :born_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :residency_state, required: true, class: 'inline-label inline left' do %>
+								<%= fa_icon "map-signs ls-icon" %> Ciudad de Residencia
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div><%= f.select :residency_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+						  </div>
+						</div>
+				
+		    <div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :villa, class: 'inline-label inline left' do %>
+								<%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div class="inline-select"><%= f.input_field :villa  %></div>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :address, class: 'inline-label inline left' do %>
+								<%= fa_icon "compass ls-icon" %> Dirección
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div ><%= f.input_field :address  %></div>
+						  </div>
+						</div>
+				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :zone, class: 'inline-label inline left' do %>
+								<%= fa_icon "map ls-icon" %> Estrato
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div><%= f.select :zone, GeneralInfo.estrato, prompt: "Escoger un estrato" %></div>
+						  </div>
+						</div>
+		  	   
+		    <div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :displaced, class: 'inline-label inline left' do %>
+								<%= fa_icon "warning ls-icon" %> Desplazado
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <div><%= f.input_field :displaced, as: :boolean  %></div>
+						  </div>
+						</div>
+		  	    
+		  	    
+		</div>
+		  	
+		  <div class="form-actions text-right">
+		    <%= f.button :submit, "Guardar estudiante", class: "button large success" %>
+		  </div>
+		<% end %></div>
+</div>
