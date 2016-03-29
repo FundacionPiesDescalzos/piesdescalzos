@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   resources :users
   root :to => 'public#index'
 	get '/home', :to => 'homes#banner'
+	get '/reports', :to => 'reports#index'
 	
 end

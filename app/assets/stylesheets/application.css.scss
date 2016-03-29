@@ -1017,6 +1017,24 @@ label.inline{
     
 }
 
+
+form.inliner{
+	label{
+		display: inline-block;
+		margin:0 10px;
+		select{
+			display: block;
+			min-width: 100px;
+		}
+		span{
+			display:block;
+		}
+	}
+	input[type="submit"]{
+		margin-top: 20px;
+	}
+}
+
 .title-black{
     background-color: #232321;
     color: white;
@@ -1050,6 +1068,8 @@ label.inline{
   img {
     @include border-radius(100%);
     margin-left: 10%;
+		width: 180px;
+		height: 180px;
   }
 }
 .candidato-title {
@@ -1074,23 +1094,24 @@ label.inline{
 }
 
 .right-content{
-    padding-left: 15px;
-    padding-right: 10px;
+    padding: 15px;
     display: inline-block;
     width: 60%;
     position: relative;
+    vertical-align: top;
   a{
 	  background: #FFD41F;
+		display: inline-block;
     font-weight: bold;
     padding: 10px;
     color: #171717;
 	  @include border-radius(20px);
-	  
+		margin-top: 15px;
   }
 }
 
 .orbit-container {
-    height: 590px;
+//    height: 590px;
 }
 
 .orbit-container .orbit-slides-container > * .orbit-caption {
@@ -1110,3 +1131,4 @@ label.inline{
 		top: 0 !important;
 	}
 }
+

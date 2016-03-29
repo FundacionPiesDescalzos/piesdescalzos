@@ -1,0 +1,19 @@
+<div class="inner-padding">
+	<br /><br />
+	<form action="/reports" method="get" class="inliner">
+		<label> <span>Instituciones</span>
+			<%= select("establishments", "establishment_id", Establishment.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'Todas'}) %>
+		</label>
+		<label> <span>Departamentos</span>
+			<%= select("departments", "cities", GeneralInfo.cities, {include_blank: 'Todas'}) %>
+		</label>
+		<label> <span>Curso</span>
+		  <%= select("course", "course_number", 1..11, {include_blank: 'Todas'}) %>
+		</label>
+		<input type="submit" value="Consultar" class="button success right round" />
+	</form>
+	
+	<%= @boys.count %>
+	<%= @girls.count %>
+
+</div>

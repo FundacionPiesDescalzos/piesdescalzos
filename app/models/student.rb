@@ -6,6 +6,15 @@ class Student < ActiveRecord::Base
 	has_many :scores
 	has_and_belongs_to_many :activities
 	has_many :nutritions
+	
+	
+	def self.genderize(g)
+	   joins(:nutritions, :school).where("students.gender = :gen AND schools.created_at <= :end_date", {gen: g, end_date: Time.now.midnight}) if g.present?
+	end
+	
+	def self.created_before(time)
+	    joins(:nutritions, :school).where("schools.created_at < ?", time) if time.present?
+	 end
   
   def the_school
     self.school.present? ? self.school.name : "Sin escuela"

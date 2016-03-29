@@ -8,32 +8,55 @@
   <% end %>
 </div>
 <br />
-<div class="row">
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Texto izq</th>
-      <th>Texto der</th>
-	  <th>imagen</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @homes.each do |home| %>
-      <tr>
-        <td><%= home.name %></td>
-        <td><%= home.paragraph %></td>
-        <td><%= home.texto %></td>
-		<td><%= image_tag home.pic_url(:thumb) %></td>
-        <td><%= link_to 'Edit', edit_home_path(home) %></td>
-        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="inner-padding">
+	<table>
+	  <thead>
+	    <tr>
+	      <th>Nombre</th>
+	      <th>Texto izq</th>
+	      <th>Texto der</th>
+		  <th>imagen</th>
+	      <th colspan="3"></th>
+	    </tr>
+	  </thead>
 	
-<br>
-<%= link_to 'Nuevo slide', new_home_path, class: "button success round right" %>
-</div>
+	  <tbody>
+	    <% @homes.each do |home| %>
+	      <tr>
+	        <td><%= home.name %></td>
+	        <td><%= home.paragraph %></td>
+	        <td><%= home.texto %></td>
+			    <td><%= image_tag home.pic_url(:thumb) %></td>
+	        <td><%= link_to 'Edit', edit_home_path(home) %></td>
+	        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+		
+	<br>
+	<%= link_to 'Nuevo slide', new_home_path, class: "button success round right" %>
+	
+	<h2><%= fa_icon "calendar home" %> Candidato del mes</h2>
+	<hr />
+	
+	<%= simple_form_for(@home, html: {multipart: true}) do |f| %>
+	  <%= f.error_notification %>
+	
+	  <div class="form-inputs">
+	    <%= f.input :name, label: "Nombre" %>
+	    <%= f.input :pic, label: "Foto" %>
+			<%= f.input :slide, :as => :hidden, :input_html => { :value => true } %>
+			<% if @home.pic_url.present? %>
+				<%= image_tag @home.pic_url(:thumb) %>
+			<% end %>
+	    <%= f.input :texto, :as => :ckeditor %>
+	  </div>
+	  <br />
+	  <div class="form-actions">
+	    <%= f.button :submit, "Empleado del mes", class: "button success right round" %>
+	  </div>
+	<% end %>
+	
+	</div>
+

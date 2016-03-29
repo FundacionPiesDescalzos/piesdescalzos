@@ -4,11 +4,16 @@ class HomesController < ApplicationController
   # GET /homes
   # GET /homes.json
   def index
-    @homes = Home.all
+    @homes = Home.where(slide: [false, nil])
+		@home = Home.where(slide: true).first
+		if !@home
+			@home = Home.new
+		end
   end
   
   def banner
-		@homes = Home.all
+		@homes = Home.where(slide: [false, nil])
+		@monthly_favorite = Home.where(slide: true).first
   end
 	
   # GET /homes/1
@@ -73,6 +78,6 @@ class HomesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
-      params.require(:home).permit(:name, :paragraph, :email, :texto, :pic, pictures: [])
+      params.require(:home).permit(:name, :paragraph, :email, :texto, :pic, :slide,  pictures: [])
     end
 end

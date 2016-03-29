@@ -17,12 +17,11 @@
 	</div>
 <div class="row">
 	<div class="small-3 columns"> 
-		<%= image_tag "perfil.jpg" %>
+		<% if @monthly_favorite.pic_url.present? %>
+			<%= image_tag @monthly_favorite.pic_url(:thumb) %>
+		<% end %>
 		</div>
 	<div class="small-9 columns"> 
-		<h3>¡Gracias Trabajador Ejemplar!</h3>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in augue et ex vehicula gravida vitae ac quam. Morbi et tempor enim. Ut vestibulum fermentum lacus et vehicula.</p>
-	</br>
-		<a href="http://alla">Felicita a Ivonne</a>
-		</div>
+		<%= raw @monthly_favorite.texto %>
+	</div>
 </div>
