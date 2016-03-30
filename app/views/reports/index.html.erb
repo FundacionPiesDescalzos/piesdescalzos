@@ -2,13 +2,16 @@
 	<br /><br />
 	<form action="/reports" method="get" class="inliner">
 		<label> <span>Instituciones</span>
-			<%= select("establishments", "establishment_id", Establishment.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'Todas'}) %>
+			<% seleccionado = params[:establishments][:establishment_id] if params[:establishments].present? && params[:establishments][:establishment_id].present? %>
+			<%= select("establishments", "establishment_id", Establishment.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'Todas', selected: seleccionado || ""}) %>
 		</label>
 		<label> <span>Departamentos</span>
-			<%= select("departments", "cities", GeneralInfo.departments, {include_blank: 'Todas'}) %>
+			<% dep_seleccionado = params[:departments][:cities] if params[:departments].present? && params[:departments][:cities].present? %>
+			<%= select("departments", "cities", GeneralInfo.departments, {include_blank: 'Todos', selected: dep_seleccionado || ""}) %>
 		</label>
 		<label> <span>Curso</span>
-		  <%= select("course", "course_number", 1..11, {include_blank: 'Todas'}) %>
+			<% cur_seleccionado = params[:course][:course_number] if params[:course].present? && params[:course][:course_number].present? %> 
+		  <%= select("course", "course_number", 1..11, {include_blank: 'Todos', selected: cur_seleccionado || ""}) %>
 		</label>
 		<input type="submit" value="Consultar" class="button success right round" />
 	</form>
@@ -46,11 +49,10 @@
 		            }
 		        },
 		        series: [{
-		            name: '#',
 		            data: [
-		                ['menores de 8 años', 8],
-		                ['8 a 12 años', 3],
-		                ['mayores de 12 años', 1]
+		                ['menores de 8 años', <%= raw @under8 %>],
+		                ['8 a 12 años', <%= raw @middle %>],
+		                ['mayores de 12 años', <%= raw @pluls12 %>]
 		            ]
 		        }]
 		    });
@@ -75,7 +77,6 @@
 		            }
 		        },
 		        series: [{
-		            name: '#',
 		            data: [
 		                ['Niños', <%= raw @boys %>],
 		                ['Niñas', <%= raw @girls %>]
