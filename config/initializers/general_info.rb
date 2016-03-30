@@ -23,6 +23,10 @@ class GeneralInfo
 		@@lines = {"Educación publica de calidad" => "epc", "Herramientas para la vida" => "h", "Nutrición" => "n"} 
 	end
 	
+	def self.departments
+		@@departments = ["Amazonas", "Antioquia", "Arauca", "Atlantico", "Bogotá D.C", "Bolívar", "Boyaca", "Caldas", "Caqueta", "Casanare", "Cauca", "Cesar", "Cordoba", "Cundinamarca", "Choco", "Guainia", "Guaviare", "Huila", "La Guajira", "Magdalena", "Meta", "Narino", "Norte de Santander", "Putumayo", "Quindio", "Risaralda", "San Andres", "Santander", "Sucre", "Tolima", "Valle", "Vaupes", "Vichada"]
+	end
+	
 	def self.cities
     @@cities = {
     	:"Amazonas" => [

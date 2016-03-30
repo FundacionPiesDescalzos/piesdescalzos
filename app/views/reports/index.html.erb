@@ -5,7 +5,7 @@
 			<%= select("establishments", "establishment_id", Establishment.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'Todas'}) %>
 		</label>
 		<label> <span>Departamentos</span>
-			<%= select("departments", "cities", GeneralInfo.cities, {include_blank: 'Todas'}) %>
+			<%= select("departments", "cities", GeneralInfo.departments, {include_blank: 'Todas'}) %>
 		</label>
 		<label> <span>Curso</span>
 		  <%= select("course", "course_number", 1..11, {include_blank: 'Todas'}) %>
@@ -13,9 +13,75 @@
 		<input type="submit" value="Consultar" class="button success right round" />
 	</form>
 	
-	<%= @boys.count %>
-	<%= @girls.count %>
-  <% @students.each do |student| %>
+	
+	<br /><br />
+<div class="row">
+	<div class="large-6 medium-6 columns">
+		<div id="gender"></div>
+	</div>
+	<div class="large-6 medium-6 columns">
+		<div id="edad"></div>
+	</div>
+</div>
+  <!-- <% @students.each do |student| %>
     <b><%= student.name %></b> <%= student.school.name %>
-	<% end %>
+	<% end %> -->
+	<script>
+		$(function () {
+		    $('#edad').highcharts({
+		        chart: {
+		            type: 'pie',
+		            options3d: {
+		                enabled: true,
+		                alpha: 45
+		            }
+		        },
+		        title: {
+		            text: 'Clasificación por edad'
+		        },
+		        plotOptions: {
+		            pie: {
+		                innerSize: 100,
+		                depth: 45
+		            }
+		        },
+		        series: [{
+		            name: '#',
+		            data: [
+		                ['menores de 8 años', 8],
+		                ['8 a 12 años', 3],
+		                ['mayores de 12 años', 1]
+		            ]
+		        }]
+		    });
+		});
+		
+		$(function () {
+		    $('#gender').highcharts({
+		        chart: {
+		            type: 'pie',
+		            options3d: {
+		                enabled: true,
+		                alpha: 45
+		            }
+		        },
+		        title: {
+		            text: 'Clasificación por genero'
+		        },
+		        plotOptions: {
+		            pie: {
+		                innerSize: 100,
+		                depth: 45
+		            }
+		        },
+		        series: [{
+		            name: '#',
+		            data: [
+		                ['Niños', <%= raw @boys %>],
+		                ['Niñas', <%= raw @girls %>]
+		            ]
+		        }]
+		    });
+		});
+		</script>
 </div>
