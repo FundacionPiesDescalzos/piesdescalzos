@@ -12,6 +12,12 @@ class Student < ActiveRecord::Base
 	   joins(:nutritions, :school).where("students.gender = :gen AND schools.created_at <= :end_date", {gen: g, end_date: Time.now.midnight}) if g.present?
 	end
 	
+	def self.dynamic(r,d,c)
+		if r.present? && d.present? && c.present?
+	    joins(:nutritions, :school).where("students.residency_state = :res AND students.school_id = :school_id AND students.last_course = :course", {res: r, school_id: d, course: c})
+		end
+	end
+	
 	def self.created_before(time)
 	    joins(:nutritions, :school).where("schools.created_at < ?", time) if time.present?
 	 end

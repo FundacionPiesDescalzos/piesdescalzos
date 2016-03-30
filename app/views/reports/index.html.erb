@@ -15,5 +15,7 @@
 	
 	<%= @boys.count %>
 	<%= @girls.count %>
-
+  <% @students.each do |student| %>
+    <b><%= student.name %></b> <%= student.school.name %>
+	<% end %>
 </div>
