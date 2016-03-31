@@ -47,6 +47,12 @@
 		        title: {
 		            text: 'Clasificación por edad'
 		        },
+		        plotOptions: {
+		            pie: {
+		                innerSize: 100,
+		                depth: 45
+		            }
+		        },
 		        series: [{
 		            data: [
 		                ['menores de 8 años', <%= raw @under8 %>],
@@ -63,12 +69,6 @@
 		        title: {
 		            text: 'Clasificación por genero'
 		        },
-		        plotOptions: {
-		            pie: {
-		                innerSize: 150,
-		                depth: 45
-		            }
-		        },
 		        series: [{
 		            data: [
 		                ['Niños', <%= raw @boys %>],
@@ -81,18 +81,21 @@
 		    $('#container-speed').highcharts({
 		        chart: {
 		            type: 'pie',
-		            options3d: {
-		                enabled: true,
-		                alpha: 45
-		            }
 		        },
 		        title: {
 		            text: 'Cantidad de Desplazados'
 		        },
+		        plotOptions: {
+		            pie: {
+		                innerSize: 100,
+		                depth: 45
+		            }
+		        },
 		        series: [{
 		            data: [
 		                ['Desplazados', <%= raw @displaced %>],
-									  ['Discapacidad',<%= raw @less %>]
+									  ['Discapacidad',<%= raw @less %>],
+									  ['Demas estudiantes',12]
 		            ]
 		        }]
 		    });
