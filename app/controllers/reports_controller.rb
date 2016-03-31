@@ -59,26 +59,49 @@ class ReportsController < ApplicationController
 	@under8 = 0
 	@pluls12 = 0
 	@middle = 0
+	@displaced = 0
+	@all = @students.count
+	@hash_etnic = {}
 	
 	@students.each do |student|
 		# gender
 		if student.gender == "masculino"
-			@boys = @boys + 1 
+			@boys += 1 
 		else student.gender == "femenino"
-			@girls = @girls + 1 
+			@girls += 1 
 		end
-		
 		
 		if student.age < 8
-			@under8 = @under8 + 1
+			@under8 += 1
 		elsif student.age >= 8 && student.age <= 12
-			@middle = @middle + 1  
+			@middle += 1  
 		elsif student.age > 12
-			@pluls12 = @pluls12 + 1
+			@pluls12 += 1
 		end
 	
+	  if student.displaced == true || student.displaced == "t"
+			@displaced += 1 
+		end
+		
+		if @hash_etnic.key?(student.etnic)
+			@hash_etnic[student.etnic]+= 1
+		else
+			@hash_etnic[student.etnic] = 0 
+		end
+		
 	end
 
+	@finish_etnias = {
+    name: 'Etnias',
+    colorByPoint: true,
+		data: []
+	}
+	
+	@hash_etnic.each do |key, etnics|
+		@finish_etnias[:data].push({name: key, y: etnics});
+	end
+	
+	p @finish_etnias
 	
 	end
 	

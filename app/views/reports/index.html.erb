@@ -26,6 +26,15 @@
 		<div id="edad"></div>
 	</div>
 </div>
+<br /><br />
+<div class="row">
+	<div class="large-6 medium-6 columns">
+		<div id="container-speed"></div>
+	</div>
+	<div class="large-6 medium-6 columns">
+		<div id="etnic"></div>
+	</div>
+</div>
   <!-- <% @students.each do |student| %>
     <b><%= student.name %></b> <%= student.school.name %>
 	<% end %> -->
@@ -34,19 +43,9 @@
 		    $('#edad').highcharts({
 		        chart: {
 		            type: 'pie',
-		            options3d: {
-		                enabled: true,
-		                alpha: 45
-		            }
 		        },
 		        title: {
 		            text: 'Clasificación por edad'
-		        },
-		        plotOptions: {
-		            pie: {
-		                innerSize: 100,
-		                depth: 45
-		            }
 		        },
 		        series: [{
 		            data: [
@@ -56,23 +55,17 @@
 		            ]
 		        }]
 		    });
-		});
-		
-		$(function () {
+	
 		    $('#gender').highcharts({
 		        chart: {
 		            type: 'pie',
-		            options3d: {
-		                enabled: true,
-		                alpha: 45
-		            }
 		        },
 		        title: {
 		            text: 'Clasificación por genero'
 		        },
 		        plotOptions: {
 		            pie: {
-		                innerSize: 100,
+		                innerSize: 150,
 		                depth: 45
 		            }
 		        },
@@ -83,6 +76,62 @@
 		            ]
 		        }]
 		    });
+				
+	
+		    $('#container-speed').highcharts({
+		        chart: {
+		            type: 'pie',
+		            options3d: {
+		                enabled: true,
+		                alpha: 45
+		            }
+		        },
+		        title: {
+		            text: 'Cantidad de Desplazados'
+		        },
+		        series: [{
+		            data: [
+		                ['Desplazados', <%= raw @displaced %>],
+		            ]
+		        }]
+		    });
+				
+				
+		 // Create the chart
+				var etnias = <%= raw @finish_etnias.to_json %>;
+			  console.log(etnias);
+		    $('#etnic').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: 'Etnias'
+		        },
+		        xAxis: {
+		            type: 'category'
+		        },
+		        legend: {
+		            enabled: false
+		        },
+		        plotOptions: {
+		            series: {
+		                borderWidth: 0,
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '{point.y:.1f}%'
+		                }
+		            }
+		        },
+
+		        tooltip: {
+		            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+		            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+		        },
+
+		        series: etnias
+		    });
+       
+
 		});
 		</script>
 </div>
