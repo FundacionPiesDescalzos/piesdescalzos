@@ -92,6 +92,7 @@
 		        series: [{
 		            data: [
 		                ['Desplazados', <%= raw @displaced %>],
+									  ['Discapacidad',<%= raw @less %>]
 		            ]
 		        }]
 		    });
@@ -122,16 +123,18 @@
 		                }
 		            }
 		        },
-
 		        tooltip: {
 		            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
 		            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
 		        },
 
-		        series: etnias
+		        series: [etnias]
 		    });
        
 
 		});
 		</script>
+		<br />
+		<br />
+		<br />
 </div>

@@ -82,6 +82,7 @@ class ReportsController < ApplicationController
 	  if student.displaced == true || student.displaced == "t"
 			@displaced += 1 
 		end
+		@less = @all - @displaced
 		
 		if @hash_etnic.key?(student.etnic)
 			@hash_etnic[student.etnic]+= 1
@@ -101,7 +102,6 @@ class ReportsController < ApplicationController
 		@finish_etnias[:data].push({name: key, y: etnics});
 	end
 	
-	p @finish_etnias
 	
 	end
 	
