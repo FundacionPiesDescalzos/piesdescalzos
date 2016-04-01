@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329160127) do
+ActiveRecord::Schema.define(version: 20160401211342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20160329160127) do
     t.integer  "establishment_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "pic"
   end
 
   add_index "schools", ["establishment_id"], name: "index_schools_on_establishment_id", using: :btree
@@ -189,9 +190,12 @@ ActiveRecord::Schema.define(version: 20160329160127) do
     t.string   "residency_state"
     t.string   "zone"
     t.integer  "guardian_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "school_id"
+    t.boolean  "disability",      default: false
+    t.boolean  "drop",            default: false
+    t.string   "pic"
   end
 
   add_index "students", ["guardian_id"], name: "index_students_on_guardian_id", using: :btree

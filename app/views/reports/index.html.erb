@@ -66,8 +66,21 @@
 		        chart: {
 		            type: 'pie',
 		        },
+						// colors: [
+						// 			                '#7CB5EC','#FF9EBB'
+						// 			            ],
 		        title: {
 		            text: 'Clasificación por genero'
+		        },
+		        plotOptions: {
+		            pie: {
+										allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+		                }
+		            }
 		        },
 		        series: [{
 		            data: [
@@ -83,19 +96,25 @@
 		            type: 'pie',
 		        },
 		        title: {
-		            text: 'Cantidad de Desplazados'
+		            text: 'Porcentajes de desplazados, discapacitados, y retiros'
 		        },
 		        plotOptions: {
 		            pie: {
 		                innerSize: 100,
-		                depth: 45
+		                depth: 45,
+										allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+		                }
 		            }
 		        },
 		        series: [{
 		            data: [
 		                ['Desplazados', <%= raw @displaced %>],
-									  ['Discapacidad',<%= raw @less %>],
-									  ['Demas estudiantes',12]
+									  ['Discapacidad',<%= raw @disability %>],
+									  ['Deserción',<%= raw @drop %>]
 		            ]
 		        }]
 		    });

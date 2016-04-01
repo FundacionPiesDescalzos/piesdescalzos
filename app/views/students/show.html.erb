@@ -27,7 +27,11 @@
 <div class="student-banner">
 	<div class="degradado"> </div>
   <div class="pic">
-    <%= image_tag "unnamed.jpg" %>
+		<% if @student.pic_url.present? %>
+			<%= image_tag @student.pic_url(:thumb) %>
+		<% else %>
+		  <%= image_tag "unnamed.jpg" %>
+		<% end %>
   </div>
   <div class="student-info">
     <!-- DONE:  -->
@@ -689,6 +693,17 @@
 		  </div>
 		  <div class="small-7 columns">
 		    <%= f.input_field :name %>
+		  </div>
+		</div>
+		
+		<div class="row">
+		  <div class="small-5 columns">
+		    <%= f.label :pic, class: 'inline-label inline left' do %>
+				<%= fa_icon "image ls-icon" %> Imagen
+			<% end %>
+		  </div>
+		  <div class="small-7 columns">
+		    <%= f.input_field :pic %>
 		  </div>
 		</div>
 		

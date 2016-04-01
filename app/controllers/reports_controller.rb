@@ -60,6 +60,8 @@ class ReportsController < ApplicationController
 	@pluls12 = 0
 	@middle = 0
 	@displaced = 0
+	@disability = 0
+	@drop = 0
 	@all = @students.count
 	@hash_etnic = {}
 	
@@ -81,7 +83,12 @@ class ReportsController < ApplicationController
 	
 	  if student.displaced == true || student.displaced == "t"
 			@displaced += 1 
+		elsif student.disability == true || student.disability == "t"
+			@disability += 1
+		elsif student.drop == true || student.drop == "t"
+			@drop += 1
 		end
+		
 		@less = @all - @displaced
 		
 		if @hash_etnic.key?(student.etnic)

@@ -7,6 +7,7 @@ class Student < ActiveRecord::Base
 	has_and_belongs_to_many :activities
 	has_many :nutritions
 	
+	mount_uploader :pic, PicUploader
 	
 	def self.genderize(g)
 	   joins(:nutritions, :school).where("students.gender = :gen AND schools.created_at <= :end_date", {gen: g, end_date: Time.now.midnight}) if g.present?

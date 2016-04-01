@@ -12,7 +12,19 @@
 						    <%= f.input_field :name %>
 						  </div>
 						</div>
-				
+						<div class="row">
+						  <div class="small-5 columns">
+						    <%= f.label :pic, class: 'inline-label inline left' do %>
+								<%= fa_icon "image ls-icon" %> Imagen
+							<% end %>
+						  </div>
+						  <div class="small-7 columns">
+						    <%= f.input_field :pic %>
+								<% if @student.pic_url.present? %>
+									<%= image_tag @student.pic_url(:thumb) %>
+								<% end %>
+						  </div>
+						</div>
 						<div class="row">
 						  <div class="small-5 columns">
 						    <%= f.label :id_type, class: 'inline-label inline left' do %>

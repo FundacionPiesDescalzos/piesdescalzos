@@ -60,7 +60,13 @@
 		  <% else %>
 			  <td><%= fa_icon "cutlery", class: "index-icon" %></td>
 		  <% end %>
-          <td><%= image_tag "unnamed.jpg", class:"circulo" %></td>
+          <td>
+						<% if student.pic_url.present? %>
+							<%= image_tag student.pic_url(:thumb), class:"circulo" %>
+						<% else %>
+						  <%= image_tag "unnamed.jpg", class:"circulo" %>
+						<% end %>
+					</td>
           <td>
             <div class="text-left">
             	<h5 class="italic nospace"><%= link_to student.name, student %></h5>

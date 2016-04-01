@@ -95,6 +95,17 @@
 		  </div>
 		</div>
 	    
+			<div class="row">
+			  <div class="small-5 columns">
+			    <%= f.label :pic, class: 'inline-label inline left' do %>
+					<%= fa_icon "image ls-icon" %> Imagen
+				<% end %>
+			  </div>
+			  <div class="small-7 columns">
+			    <%= f.input_field :pic %>
+			  </div>
+			</div>
+			
 	    <div class="row">
 		  <div class="small-5 columns">
 		    <%= f.label :zone, required: true, class: 'inline-label inline left' do %>
