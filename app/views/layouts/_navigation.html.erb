@@ -4,7 +4,7 @@
 <div class="user-info">
   <div class="info">
     <h5 class="whitetxt"><%= current_user.try(:email) %></h5>
-    <h6 class="whitetxt italic">cargo - cargo</h6>
+    <h6 class="whitetxt italic"><%= current_user.try(:name) %></h6>
   </div>
   <%= link_to destroy_user_session_path, :method=>'delete', class: "sign-out" do %>
     <%= fa_icon "sign-out 2x" %> 

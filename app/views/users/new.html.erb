@@ -1,0 +1,57 @@
+<div class="breadcrumb">
+  <h4 class="whitetxt">Crear usuarios</h4>
+</div>
+<div class="search-field">
+</div>
+
+<div class="back_link">
+  <%= link_to users_path do %>
+    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+  <% end %>
+</div>
+<div class="row">
+<div class="large-6 columns large-centered">
+	<br />
+	<br />
+	<%= form_for @user do |f| %>
+	  <% if @user.errors.any? %>
+	    <div class="error_explanation">
+	      <h2><%= pluralize(@user.errors.count, "error") %> No dejo crear este usuario:</h2>
+	
+	      <ul>
+	      <% @user.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	
+	  <div class="field">
+	    <%= f.label :email, "Correo:" %>
+	    <%= f.email_field :email, autofocus: true %>
+	  </div>
+		
+	  <div class="field">
+	    <%= f.label :name, "Nombre:" %>
+	    <%= f.text_field :name, autofocus: true %>
+	  </div>
+	
+	  <div class="field">
+	    <%= f.label :password, "Contraseña:" %>
+	    <% if @validatable %>
+	    <em>(<%= @minimum_password_length %> Caracteres minimos)</em>
+	    <% end %><br />
+	    <%= f.password_field :password, autocomplete: "off" %>
+	  </div>
+	
+	  <div class="field">
+	    <%= f.label :password_confirmation, "Confirmacion de contraseña" %><br />
+	    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+	  </div>
+	
+	  <div class="actions">
+	    <%= f.submit "Crear usuario", class: "button success round right" %>
+	  </div>
+	
+	<% end %></div>
+</div>

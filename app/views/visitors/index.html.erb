@@ -38,7 +38,7 @@
 
     <tbody>
       <% @students.each do |student| %>
-        <tr>
+        <tr class="<%= 'retired' if student.drop %> <%= 'graduated' if student.graduated %>">
 		  <% if student.scores.present? %>
 		  <% @ultima = 0 %>
 		  <% @qty = 0 %>
@@ -46,8 +46,8 @@
 		    <% if score.year.to_i == Time.now.year || score.year.to_i == Time.now.year-1  %>
 			    <% @qty = @qty + 1 %>
 			    <% @ultima = @ultima + score.score.to_f %>
-			<% end %>
-		  <% end %>
+			  <% end %>
+ 		  <% end %>
 		  <% @ultima = @ultima/@qty unless @qty == 0 %>
 	         <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
 		  <% else %>

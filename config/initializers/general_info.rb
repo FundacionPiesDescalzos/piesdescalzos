@@ -27,6 +27,13 @@ class GeneralInfo
 		@@departments = ["Amazonas", "Antioquia", "Arauca", "Atlantico", "Bogotá D.C", "Bolívar", "Boyaca", "Caldas", "Caqueta", "Casanare", "Cauca", "Cesar", "Cordoba", "Cundinamarca", "Choco", "Guainia", "Guaviare", "Huila", "La Guajira", "Magdalena", "Meta", "Narino", "Norte de Santander", "Putumayo", "Quindio", "Risaralda", "San Andres", "Santander", "Sucre", "Tolima", "Valle", "Vaupes", "Vichada"]
 	end
 	
+	def self.nutrition_points
+		@@nutrition_points = {
+			"femenino" => {"lower" => 11.8, "minimum" => 13.25, "medium_min" => 13.83, "medium_max" => 16.9, "maximum" => 18.9},
+			"masculino" => {"lower" => 12.1, "minimum" => 13, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.9}
+		}
+	end
+	
 	def self.cities
     @@cities = {
     	:"Amazonas" => [

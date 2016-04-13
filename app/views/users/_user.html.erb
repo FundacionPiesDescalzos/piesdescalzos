@@ -1,12 +1,30 @@
 <td>
-  <%= link_to user.email, user %>
+	<% if user.name.present? %>
+	  <h5><%= link_to user.name, user %></h5>
+	<% else %>
+		<h5><%= link_to user.email, user %></h5>
+	<% end %>
 </td>
-<td>
+<td class="inliner">
   <%= form_for(user) do |f| %>
-    <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
-    <%= f.submit 'Change Role', :class => 'button-xs' %>
+<div class="row">
+	<div class="large-4 columns">
+		<%= f.label :name, "Nombre:" %>
+		<%= f.text_field :name, autofocus: true, placeholder: "Nombre" %>
+	</div>
+	<div class="large-4 columns">
+		<%= f.label :name, "Correo:" %>
+		<%= f.text_field :email, placeholder: "Email" %>
+	</div>
+	<div class="large-4 columns">
+		<div class="hide"><%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %></div>
+		<br />
+		<%= f.submit 'Actualizar', :class => 'button success round' %>
+	</div>
+	</div>
   <% end %>
 </td>
 <td>
-  <%= link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
+	<br />
+  <%= link_to("Borrar", user_path(user), :data => { :confirm => "¿Seguro quieres borrar este usuario?" }, :method => :delete, :class => 'small button alert round') unless user == current_user %>
 </td>

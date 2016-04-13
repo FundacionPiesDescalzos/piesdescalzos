@@ -60,7 +60,7 @@ input, a{
   
 .button{
 	@extend .button;
-	padding: 8px 25px;
+	padding: 10px 25px;
 	outline:0;
 	&.success{
 	background: $primary;
@@ -93,7 +93,7 @@ input:not([type]), input[type="text"], input[type="password"], input[type="date"
 // to make views framework-neutral
 .row-x{
 	@extend .row;
-	max-width: 80em;
+	max-width: 80em !important;
 }
 
 .alert-box{

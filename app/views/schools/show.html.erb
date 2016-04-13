@@ -139,26 +139,29 @@
 	  <% if @school.students.present? %>
 	  	  <% @i = 0 %>
 		  <% @results = {
-		  	"Delgadez cronica" => {data: 0},
-			"Delgadez" => {data: 0},
-			"Normal" => {data: 0},
-			"Sobrepeso" => {data: 0}
+		  "Delgadez" => {data: 0},
+			"Riesgo de delgadez" => {data: 0},
+			"Adecuado para la edad" => {data: 0},
+			"Sobrepeso" => {data: 0},
+			"Obesidad" => {data: 0}
 		  }
 		   %>
 		  <% @school.students.each do |student|  %>
 			  <% if student.nutritions.present? %>
  			    <% @i = @i + 1 %>
 			    <% @cuantos = student.nutritions.count - 1  %>
-				<% @imc = student.nutritions[@cuantos].imc %>
-				<% if @imc < 13.25 %>
-					<% @results["Delgadez cronica"][:data] = @results["Delgadez cronica"][:data] + 1%>
-				<% elsif @imc > 13.25 && @imc < 13.83 %>
-				    <% @results["Delgadez"][:data] = @results["Delgadez"][:data] + 1%>
-				<% elsif @imc > 13.83 && @imc < 17.60 %>
-					<% @results["Normal"][:data] = @results["Normal"][:data] + 1 %>
-				<% elsif @imc > 17.60 && @imc < 19.01 %>
-					<% @results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 %>	
-				<% end %>
+					<% @imc = student.nutritions[@cuantos].imc %>
+					<% if @imc < GeneralInfo.nutrition_points[student.gender]["lower"] %>
+						<% @results["Delgadez"][:data] = @results["Delgadez"][:data] + 1%>
+					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["lower"] && @imc < GeneralInfo.nutrition_points[student.gender]["minimum"] %>
+					    <% @results["Riesgo de delgadez"][:data] = @results["Riesgo de delgadez"][:data] + 1%>
+					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points[student.gender]["medium_min"] %>
+						<% @results["Adecuado para la edad"][:data] = @results["Adecuado para la edad"][:data] + 1 %>
+					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points[student.gender]["medium_max"] %>
+						<% @results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 %>	
+					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["maximum"] %>
+						<% @results["Obesidad"][:data] = @results["Obesidad"][:data] + 1 %>
+					<% end %>
 			  <% end %>
 		 <% end %>
 		 
@@ -169,7 +172,7 @@
 		  console.log(food["Delgadez"].data);
    	      $('#food').highcharts({
    	          chart: {
-				  backgroundColor:'transparent',
+				          backgroundColor:'transparent',
    	              plotBackgroundColor: null,
    	              plotBorderWidth: null,
    	              plotShadow: false,
@@ -201,17 +204,20 @@
    	              name: 'Estudiantes # ',
    	              colorByPoint: true,
    	              data: [{
+   	                  name: "Riesgo de delgadez",
+   	                  y: food["Riesgo de delgadez"].data
+   	              }, {
    	                  name: "Delgadez",
-   	                  y: food["Delgadez"].data
+   	                  y: food["Delgadez"].data,
    	              }, {
-   	                  name: "Delgadez crónica",
-   	                  y: food["Delgadez cronica"].data,
-   	              }, {
-   	                  name: 'Normal',
-   	                  y: food["Normal"].data
+   	                  name: 'Adecuado para la edad',
+   	                  y: food["Adecuado para la edad"].data
    	              }, {
    	                  name: 'Sobrepeso',
    	                  y: food["Sobrepeso"].data
+   	              }, {
+   	                  name: 'Obesidad',
+   	                  y: food["Obesidad"].data
    	              }]
    	          }]
    	      });

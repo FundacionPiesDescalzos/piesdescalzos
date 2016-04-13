@@ -29,7 +29,8 @@
 <br /><br />
 <div class="row">
 	<div class="large-6 medium-6 columns">
-		<div id="container-speed"></div>
+		<div id="container-speed"></div><br /><br />
+		<div id="food" class="graph"></div>
 	</div>
 	<div class="large-6 medium-6 columns">
 		<div id="etnic"></div>
@@ -114,7 +115,8 @@
 		            data: [
 		                ['Desplazados', <%= raw @displaced %>],
 									  ['Discapacidad',<%= raw @disability %>],
-									  ['Deserción',<%= raw @drop %>]
+									  ['Deserción',<%= raw @drop %>],
+  									['Graduados',<%= raw @graduated %>]
 		            ]
 		        }]
 		    });
@@ -122,7 +124,7 @@
 				
 		 // Create the chart
 				var etnias = <%= raw @finish_etnias.to_json %>;
-			  console.log(etnias);
+			  //console.log(etnias);
 		    $('#etnic').highcharts({
 		        chart: {
 		            type: 'column'
@@ -153,7 +155,111 @@
 		        series: [etnias]
 		    });
        
+        
+				// NUTRITIONS
+				
+			  var food = <%= raw @results.to_json %> 
+			  console.log(food, food["Delgadez"].girls)
+	   	      $('#food').highcharts({
+							chart: {
+								          backgroundColor:'transparent',
+				   	              plotBackgroundColor: null,
+				   	              plotBorderWidth: null,
+				   	              plotShadow: false,
+							            type: 'pie'
+							        },
+							        title: {
+							            text: 'Tablas de nutricion divididas por genero'
+							        },
+							        subtitle: {
+							            text: 'Clic en la tabla para ver la diferenciación por genero'
+							        },
+							        xAxis: {
+							            type: 'category'
+							        },
+							        yAxis: {
+							            title: {
+							                text: 'Cantidad total de nutrición'
+							            }
 
+							        },
+							        legend: {
+							            enabled: false
+							        },
+							        plotOptions: {
+							            series: {
+							                borderWidth: 0,
+							                dataLabels: {
+							                    enabled: true,
+							                    format: '{point.y:.1f}%'
+							                }
+							            }
+							        },
+											colors: [
+								                '#FFD41F', '#3D3B30', '#4D5061', '#5C80BC', '#E9EDDE'
+								            ],
+							        tooltip: {
+							            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+							            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+							        },
+	   	          series: [{
+	   	              name: 'Estudiantes en ',
+	   	              colorByPoint: true,
+	   	              data: [{
+	   	                  name: "Riesgo de delgadez",
+	   	                  y: food["Riesgo de delgadez"].data,
+											  drilldown: 'Riesgo de delgadez'
+	   	              }, {
+	   	                  name: "Delgadez",
+	   	                  y: food["Delgadez"].data,
+												drilldown: "Delgadez"
+	   	              }, {
+	   	                  name: 'Adecuado para la edad',
+	   	                  y: food["Adecuado para la edad"].data,
+												drilldown: "Adecuado para la edad"
+	   	              }, {
+	   	                  name: 'Sobrepeso',
+	   	                  y: food["Sobrepeso"].data,
+												drilldown: "Sobrepeso"
+	   	              }, {
+	   	                  name: 'Obesidad',
+	   	                  y: food["Obesidad"].data,
+											  drilldown: "Obesidad"
+	   	              }]
+	   	          }],
+								drilldown: {
+									series: [{
+										name: 'Riesgo de delgadez',
+		                id: 'Riesgo de delgadez',
+		                data: [["Niñas:", food["Riesgo de delgadez"].girls], ["Niños:", food["Riesgo de delgadez"].boys]]
+									},
+								  {
+										name: 'Delgadez',
+		                id: 'Delgadez',
+		                data: [["Niñas:", food["Delgadez"].girls], ["Niños:", food["Delgadez"].boys]]
+								  },
+								  {
+										name: 'Adecuado para la edad',
+		                id: 'Adecuado para la edad',
+		                data: [["Niñas:", food["Adecuado para la edad"].girls], ["Niños:", food["Adecuado para la edad"].boys]]
+								  },
+								  {
+										name: 'Sobrepeso',
+		                id: 'Sobrepeso',
+		                data: [["Niñas:", food["Sobrepeso"].girls], ["Niños:", food["Sobrepeso"].boys]]
+								  },
+								  {
+										name: 'Obesidad',
+		                id: 'Obesidad',
+		                data: [["Niñas:", food["Obesidad"].girls], ["Niños:", food["Obesidad"].boys]]
+								  }]
+								}
+	   	      });
+
+				
+				// / NUTRITIONS
+				
+				
 		});
 		</script>
 		<br />

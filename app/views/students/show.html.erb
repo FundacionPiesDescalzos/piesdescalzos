@@ -1,130 +1,133 @@
 <div class="breadcrumb">
-  <h4 class="whitetxt">Consultar estudiante</h4>
+	<h4 class="whitetxt">Consultar estudiante</h4>
 </div>
 <div class="search-field">
-      <%= form_tag visitors_path, :method => 'get', class: "rounded" do %>
-      <div class="row collapse">
-          <div class="small-10 columns">
-            <%= search_field_tag :search, params[:search], placeholder: "Buscar por identificación nombre o apellido" %>
-            <label for="instituciones" class="ib">Instituciones: </label>
-            <%= select_tag "instituciones", options_from_collection_for_select(@schools, "id", "name", params[:instituciones]), include_blank: "Todas" %>
-          </div>
-          <div class="small-2 columns">
-            <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
-                <h6><%= fa_icon "search" %> Buscar</h6>
-            <% end %>
-          </div>
-      </div>
-      <% end %>
+	<%= form_tag visitors_path, :method => 'get', class: "rounded" do %>
+	<div class="row collapse">
+		<div class="small-10 columns">
+			<%= search_field_tag :search, params[:search], placeholder: "Buscar por identificación nombre o apellido" %>
+			<label for="instituciones" class="ib">Instituciones: </label>
+			<%= select_tag "instituciones", options_from_collection_for_select(@schools, "id", "name", params[:instituciones]), include_blank: "Todas" %>
+		</div>
+		<div class="small-2 columns">
+			<%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+			<h6><%= fa_icon "search" %> Buscar</h6>
+			<% end %>
+		</div>
+	</div>
+	<% end %>
 </div>
 
 <div class="back_link">
-  <%= link_to visitors_path do %>
-    <%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
-  <% end %>
+	<%= link_to visitors_path do %>
+	<%= fa_icon "arrow-left" %> <span class="italic">Regresar</span>
+	<% end %>
 </div>
 
 <div class="student-banner">
 	<div class="degradado"> </div>
-  <div class="pic">
+	<div class="pic">
 		<% if @student.pic_url.present? %>
-			<%= image_tag @student.pic_url(:thumb) %>
+		<%= image_tag @student.pic_url(:thumb) %>
 		<% else %>
-		  <%= image_tag "unnamed.jpg" %>
+		<%= image_tag "unnamed.jpg" %>
 		<% end %>
-  </div>
-  <div class="student-info">
-    <!-- DONE:  -->
-    <h3 class="whitetxt bold relative"><%= @student.name %></h3>
-    <h5 class="italic nospace"><%= @student.the_school %></h5>
-    <h6 class="subheader nospace">Curso  <%= @student.last_course %></h6>
-    <h6 class="subheader nospace"><%= fa_icon "map-marker" %> <%= @student.residency_state %></h6>
-  </div>
+	</div>
+	<div class="student-info">
+		<!-- DONE:  -->
+		<h3 class="whitetxt bold relative"><%= @student.name %></h3>
+		<h5 class="italic nospace"><%= @student.the_school %></h5>
+		<h6 class="subheader nospace">Curso  <%= @student.last_course %></h6>
+		<h6 class="subheader nospace"><%= fa_icon "map-marker" %> <%= @student.residency_state %></h6>
+	</div>
 </div>
 
 
 <ul class="tabs vertical" data-tab>
-  <li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
-  <li class="tab-title"><a href="#panel2">Acudiente</a><span class="edit_tabs"><a href="" data-reveal-id="acudiente"> <%= fa_icon "pencil" %> </a></span></li>
-  <li class="tab-title"><a href="#panel3">Afiliación en salud</a><span class="edit_tabs"><a href="" data-reveal-id="health_care"> <%= fa_icon "pencil" %> </a></span></li>
-  <li class="tab-title"><a href="#panel4">Datos escolares</a></li>
-  <li class="tab-title"><a href="#panel5">Seguimiento nutricional</a></li>
-  <li class="tab-title"><a href="#panel6">Actividades en la fundación</a></li>
+	<li class="tab-title active"><a href="#panel1">Datos basicos</a><span class="edit_tabs"><a href="" data-reveal-id="basicos"> <%= fa_icon "pencil" %> </a></span></li>
+	<li class="tab-title"><a href="#panel2">Acudiente</a><span class="edit_tabs"><a href="" data-reveal-id="acudiente"> <%= fa_icon "pencil" %> </a></span></li>
+	<li class="tab-title"><a href="#panel3">Afiliación en salud</a><span class="edit_tabs"><a href="" data-reveal-id="health_care"> <%= fa_icon "pencil" %> </a></span></li>
+	<li class="tab-title"><a href="#panel4">Datos escolares</a></li>
+	<li class="tab-title"><a href="#panel5">Seguimiento nutricional</a></li>
+	<li class="tab-title"><a href="#panel6">Actividades en la fundación</a></li>
 </ul>
 
 <div class="tabs-content extended-tabs">
-  <div class="content active" id="panel1">
-    <ul class="no-bullet equal">
-      <li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
-      <li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.identification %></li>
-	  <hr />
-      <li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %></li>
-      <li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
-      <li><span class="labeling"><%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
-      <hr />
-      <li><span class="labeling"><%= fa_icon "globe ls-icon" %> Lugar de nacimiento</span> <%= @student.born_state %></li>
-      <li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar de residencia </span> <%= @student.residency_state %></li>
-      <li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.villa %></li>
-      <li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.zone %></li>
-      <li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
-      <hr />
-      <% if @student.guardian.nil? %> 
-      	<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> No tiene registrado </li>
-      <%else%> 
-      	<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> <%= @student.guardian.name %></li>
-      <%end%>
-      <li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
-      <li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "Si" : "No" %></li>
-      
-    </ul>
-  </div> <!-- /tab 1 -->
-  <div class="content" id="panel2">
-	  <% if @student.guardian.present? %>
-      <ul class="no-bullet equal">
-      	<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación</span> <%= GeneralInfo.adult_id.key(@student.guardian.id_type) %></li>
-      	<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.guardian.identification %></li>
-        <hr />
-        <li><span class="labeling"><%= fa_icon "info ls-icon" %> Nombre:</span> <%= @student.guardian.name %></li>
-        <li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero:</span> <%= @student.guardian.gender %></li>
-		<li><span class="labeling"><%= fa_icon "heart ls-icon" %> Relación con el estudiante </span> <%= @student.guardian.relationship %></li>
-		<hr />
-		<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Fecha de nacimiento</span> <%= @student.guardian.born %></li>
-		<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Ciudad</span> <%= @student.guardian.department %></li>
-      	<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.guardian.villa %></li>
-      	<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.guardian.address %></li>
-		<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.guardian.zone %></li>
-		<hr />
-		<li><span class="labeling"><%= fa_icon "phone ls-icon" %> Teléfono</span> <%= @student.guardian.phone %></li>
-      	<li><span class="labeling"><%= fa_icon "mobile ls-icon" %> Celular </span> <%= @student.guardian.cel %></li>
-		<li><span class="labeling"><%= fa_icon "envelope-o ls-icon" %> Email </span> <%= @student.guardian.email %></li>
-		
-      </ul>
-	  <% else %>
-	   <p class="redtxt">No tiene un tutor legal asociado</p>
-	  <% end %>
-   </div> <!-- /tabs 2 -->
-  <div class="content" id="panel3">
-    <% if @student.health_care.present? %>
-	  <ul class="no-bullet equal">
-	  	<li><span class="labeling"><%= fa_icon "hospital-o ls-icon" %> Afiliado al SGSSS</span> <%= @student.health_care.affiliate? ? "Si" : "No" %></li>
-		<li><span class="labeling"><%= fa_icon "plus-square ls-icon" %> Regimen</span> <%= @student.health_care.regime %></li>
-		<li><span class="labeling"><%= fa_icon "medkit ls-icon" %> EPS/ARP</span> <%= @student.health_care.eps %></li>
-		<li><span class="labeling"><%= fa_icon "user-md ls-icon" %> IPS</span> <%= @student.health_care.ips %></li>
-		<li><span class="labeling"><%= fa_icon "hand-paper-o ls-icon" %> SISBEN</span> <%= @student.health_care.register? ? "Si" : "No"  %></li>
-		<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Ficha Nº</span> <%= @student.health_care.card %></li>
-		<li><span class="labeling"><%= fa_icon "calendar ls-icon" %> Fecha de Encuesta</span> <%= @student.health_care.poll_date %></li>
-		<li><span class="labeling"><%= fa_icon "star-half-o ls-icon" %> Calificación</span> <%= @student.health_care.score %></li>
-		<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.inhabilites? ? "Si" : "No" %></li>
-	  	<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.inh_description %></li>
-	  </ul>
-	<% else %>
-		<p class="redtxt">No tiene un afiliación de salud asociada</p>
-	<% end %>
-  </div>
-  <div class="content" id="panel4">
-	<% if @student.scores.present? %>
+	<div class="content active" id="panel1">
 		<ul class="no-bullet equal">
-		  <li><span class="labeling"><%= fa_icon "line-chart ls-icon" %> Rendimiento academico:</span></li>
+			<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
+			<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.identification %></li>
+			<hr />
+			<li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %></li>
+			<li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
+			<li><span class="labeling"><%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
+			<hr />
+			<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Lugar de nacimiento</span> <%= @student.born_state %></li>
+			<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar de residencia </span> <%= @student.residency_state %></li>
+			<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.villa %></li>
+			<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.zone %></li>
+			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
+			<hr />
+			<% if @student.guardian.nil? %> 
+			<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> No tiene registrado </li>
+			<%else%> 
+			<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> <%= @student.guardian.name %></li>
+			<%end%>
+			<li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
+			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Discapacidad </span> <%= @student.disability? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Retirado </span> <%= @student.drop? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Explicaciones adicionales </span> <%= @student.why %></li>
+		</ul>
+	</div> <!-- /tab 1 -->
+	<div class="content" id="panel2">
+		<% if @student.guardian.present? %>
+		<ul class="no-bullet equal">
+			<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación</span> <%= GeneralInfo.adult_id.key(@student.guardian.id_type) %></li>
+			<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.guardian.identification %></li>
+			<hr />
+			<li><span class="labeling"><%= fa_icon "info ls-icon" %> Nombre:</span> <%= @student.guardian.name %></li>
+			<li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero:</span> <%= @student.guardian.gender %></li>
+			<li><span class="labeling"><%= fa_icon "heart ls-icon" %> Relación con el estudiante </span> <%= @student.guardian.relationship %></li>
+			<hr />
+			<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Fecha de nacimiento</span> <%= @student.guardian.born %></li>
+			<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Ciudad</span> <%= @student.guardian.department %></li>
+			<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.guardian.villa %></li>
+			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.guardian.address %></li>
+			<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.guardian.zone %></li>
+			<hr />
+			<li><span class="labeling"><%= fa_icon "phone ls-icon" %> Teléfono</span> <%= @student.guardian.phone %></li>
+			<li><span class="labeling"><%= fa_icon "mobile ls-icon" %> Celular </span> <%= @student.guardian.cel %></li>
+			<li><span class="labeling"><%= fa_icon "envelope-o ls-icon" %> Email </span> <%= @student.guardian.email %></li>
+		
+		</ul>
+		<% else %>
+		<p class="redtxt">No tiene un tutor legal asociado</p>
+		<% end %>
+	</div> <!-- /tabs 2 -->
+	<div class="content" id="panel3">
+		<% if @student.health_care.present? %>
+		<ul class="no-bullet equal">
+			<li><span class="labeling"><%= fa_icon "hospital-o ls-icon" %> Afiliado al SGSSS</span> <%= @student.health_care.affiliate? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "plus-square ls-icon" %> Regimen</span> <%= @student.health_care.regime %></li>
+			<li><span class="labeling"><%= fa_icon "medkit ls-icon" %> EPS/ARP</span> <%= @student.health_care.eps %></li>
+			<li><span class="labeling"><%= fa_icon "user-md ls-icon" %> IPS</span> <%= @student.health_care.ips %></li>
+			<li><span class="labeling"><%= fa_icon "hand-paper-o ls-icon" %> SISBEN</span> <%= @student.health_care.register? ? "Si" : "No"  %></li>
+			<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Ficha Nº</span> <%= @student.health_care.card %></li>
+			<li><span class="labeling"><%= fa_icon "calendar ls-icon" %> Fecha de Encuesta</span> <%= @student.health_care.poll_date %></li>
+			<li><span class="labeling"><%= fa_icon "star-half-o ls-icon" %> Calificación</span> <%= @student.health_care.score %></li>
+			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.inhabilites? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.inh_description %></li>
+		</ul>
+		<% else %>
+		<p class="redtxt">No tiene un afiliación de salud asociada</p>
+		<% end %>
+	</div>
+	<div class="content" id="panel4">
+		<% if @student.scores.present? %>
+		<ul class="no-bullet equal">
+			<li><span class="labeling"><%= fa_icon "line-chart ls-icon" %> Rendimiento academico:</span></li>
 		</ul>
 		<table class="black full-width">
 			<thead>
@@ -136,729 +139,775 @@
 				</tr>
 			</thead>
 			<tbody>
-		<% @student.scores.each do |score| %>
-		<tr>
-		 <td><%= score.year %> </td>
-	     <td><%= GeneralInfo.period[score.period.to_i] %></td>
-	     <td><%= score.area %></td>
-	     <td><span class="<%= score.score.to_i < 3 ? 'redtxt' : 'greentxt' %>"><%= score.score %></span></td>
-		</tr>
-		<% end %>
-		</tbody>
+				<% @student.scores.each do |score| %>
+				<tr>
+					<td><%= score.year %> </td>
+					<td><%= GeneralInfo.period[score.period.to_i] %></td>
+					<td><%= score.area %></td>
+					<td><span class="<%= score.score.to_i < 3 ? 'redtxt' : 'greentxt' %>"><%= score.score %></span></td>
+				</tr>
+				<% end %>
+			</tbody>
 		</table>
-	<div id="container" class="graph"></div>
-	<script>
-	// highcharts
-	var notas = {};
-	notas = <%= raw @student.scores.to_json %>
-	console.log(notas);
-	var materias = {};
-	var periodos = ["", "I periodo", "II periodo","III periodo","IV periodo", "Final"];
-	var period = [];
-	$sale = [];
-	var lista = [];
-	$.each(notas, function( index, value ) {
-		if (lista.indexOf(value.area) == -1){
-			lista.push(value.area)
-		}
-		if (period.indexOf(value.period) == -1){
-			period.push(periodos[value.period]);
-		}
-	});
-	$.each(lista, function( index, value ) {
-		var scores = []  
-		$.each(notas, function( i, v ) {
-			if (v.area == value){
-				scores.push(parseFloat(v.score));
-				materias[v.area] = scores
+		<div id="container" class="graph"></div>
+		<script>
+		// highcharts
+		var notas = {};
+		notas = <%= raw @student.scores.to_json %>
+		console.log(notas);
+		var materias = {};
+		var periodos = ["", "I periodo", "II periodo","III periodo","IV periodo", "Final"];
+		var period = [];
+		$sale = [];
+		var lista = [];
+		$.each(notas, function( index, value ) {
+			if (lista.indexOf(value.area) == -1){
+				lista.push(value.area)
+			}
+			if (period.indexOf(value.period) == -1){
+				period.push(periodos[value.period]);
 			}
 		});
-	});
+		$.each(lista, function( index, value ) {
+			var scores = []  
+			$.each(notas, function( i, v ) {
+				if (v.area == value){
+					scores.push(parseFloat(v.score));
+					materias[v.area] = scores
+				}
+			});
+		});
 	
-    $('#container').highcharts({
-           chart: {
-               type: 'spline',
-			   backgroundColor:'transparent'
-           },
-           title: {
-               text: 'Promedio de materias'
-           },
-           subtitle: {
-               text: 'Periodos academicos'
-           },
-           xAxis: {
-               categories: period,
-			   allowDecimals: true,
-               title: {
-                   enabled: false
-               }
-           },
-           yAxis: {
-			   allowDecimals: true,
-               title: {
-                   text: 'Notas'
-               },plotBands: [{ // visualize the weekend
-                from: 0,
-                to: 3,
-                color: 'rgba(255, 17, 21, .2)'
-            }]
-           },
-           tooltip: {
-               shared: true,
-               valueSuffix: '/5'
-           },
-           series: []
-       });
-	   
-	   var chart = $('#container').highcharts();
-
-	   $.each(materias, function( index, value ) {
-		   chart.addSeries({
-		       name: index,
-		       data: value
-		   });
-	   });
-	   
-	   
-	</script>
-	<% end %> <!-- hay notas -->
-  </div>
-  <div class="content" id="panel5">
-    <% if @student.nutritions.present? %>
-	<ul class="no-bullet equal">
-	  <li><span class="labeling"><%= fa_icon "line-chart ls-icon" %> Informacion nutricional:</span></li>
-	</ul>
-	<table class="black full-width">
-		<thead>
-			<tr>
-				<th>Año</th>
-				<th>Periodo</th>
-				<th>Altura</th>
-				<th>Peso</th>
-				<th>IMC</th>
-				<th>Estado</th>
-			</tr>
-		</thead>
-		<tbody>
-	<% @student.nutritions.each do |nutrition| %>
-	<tr>
-	 <td><%= nutrition.year %></td>
-     <td><%= GeneralInfo.period[nutrition.period.to_i] %></td>
-     <td><%= nutrition.height %> Mts</td>
-	 <td><%= nutrition.weight %> Kg</td>
-	 <td><%= @imc = nutrition.imc %></td>
-	 <td><%= fa_icon "cutlery ls-icon", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'}" %></td>
-	</tr>
-	<% end %>
-	</tbody>
-	</table>
-	<% end %>
-	
-	<div id="nutrition" class="graph"></div>
-	<script>
-	var nutrition = <%= raw @student.nutritions.to_json %>
-	var categories = [];
-	var graph = {
-		categories: [],
-		series: [{
-			name: "IMC",
-			data: []
-		}]
-	}
-	
-	function imc(h,w) {
-		//console.log(h,w);
-		h = parseFloat(h);
-		w = parseFloat(w);
-		var imc = w/(h*h);
-		return imc.toFixed(2);
-	}
-	
-	$.each(nutrition, function( index, value ) {
-		graph.categories.push(value.year+" - "+value.period);
-		graph.series[0].data.push(parseFloat(imc(value.height,value.weight)));
-	});
-	//console.log(graph.series[0].data);	
-	$('#nutrition').highcharts({
-	        chart: {
-	            type: 'column',
+		$('#container').highcharts({
+			chart: {
+				type: 'spline',
 				backgroundColor:'transparent'
-	        },
-	        title: {
-	            text: 'Promedio de nutrición'
-	        },
-	        xAxis: {
-	           categories: graph.categories
-	        },
-			yAxis:{
- 			   allowDecimals: true,
-                title: {
-                    text: 'IMC'
-                },plotBands: [{
-                 from: 13.84,
-                 to: 17.60,
-                 color: 'rgba(17, 255, 21, .1)'
-             }]	
 			},
-	        credits: {
-	            enabled: false
-	        },
-			plotOptions:  {
-			    series: {
-			        borderWidth: 0
-			  }
+			title: {
+				text: 'Promedio de materias'
 			},
-            series: [{
-                name: "IMC",
-                data: graph.series[0].data,
-				color: "#FFD41F"
-            }]
-	    });
-	</script>
-  </div>
-  <div class="content" id="panel6">
-	<div class="row collapse">
-		<div class="small-8 columns">
-		  <div class="row">
-		    <div class="small-9 columns">
-		      <label for="right-label" class="right inline">Seleccione el año escolar</label>
-		    </div>
-		    <div class="small-3 columns">
-		      <select name="year" id="year">
-						<option value="2016">2016</option>
-		      </select>
-		    </div>
-		  </div>
-		</div>
+			subtitle: {
+				text: 'Periodos academicos'
+			},
+			xAxis: {
+				categories: period,
+				allowDecimals: true,
+				title: {
+					enabled: false
+				}
+			},
+			yAxis: {
+				allowDecimals: true,
+				title: {
+					text: 'Notas'
+				},plotBands: [{ // visualize the weekend
+					from: 0,
+					to: 3,
+					color: 'rgba(255, 17, 21, .2)'
+				}]
+			},
+			tooltip: {
+				shared: true,
+				valueSuffix: '/5'
+			},
+			series: []
+		});
+	   
+		var chart = $('#container').highcharts();
+
+		$.each(materias, function( index, value ) {
+			chart.addSeries({
+				name: index,
+				data: value
+			});
+		});
+	   
+	   
+		</script>
+		<% end %> <!-- hay notas -->
 	</div>
-	<ul class="accordion" data-accordion>
-	  <% if @programs_m.present? %>
-	  <li class="accordion-navigation">
-	    <a href="#panel1a"><%= fa_icon "cutlery" %>  Linea nutricional</a>
-	    <div id="panel1a" class="content">
-			<ul class="accordion" data-accordion>
-			<% @programs_m.each do |program| %>
-			  <li class="accordion-navigation sub">
-			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
-			    <div id="panel-<%= program.id %>" class="content">
-	                <% program.activities.each do |activity| %>
-						<%= activity.name %>
-					<% end %>
-			    </div>
-			  </li>
-			  <% end %>
-			</ul>
-	    </div>
-	  </li>
-	  <% end %>
-	  <% if @programs_h.present? %>
-	  <li class="accordion-navigation">
-	    <a href="#panel2a"><%= fa_icon "wrench" %> Herramientas para la vida</a>
-	    <div id="panel2a" class="content">
-			<% @programs_m.each do |program| %>
-				<%= program.name %>
-				<%= program.line %>
+	<div class="content" id="panel5">
+		<% if @student.nutritions.present? %>
+		<ul class="no-bullet equal">
+			<li><span class="labeling"><%= fa_icon "line-chart ls-icon" %> Informacion nutricional:</span></li>
+		</ul>
+		<table class="black full-width">
+			<thead>
+				<tr>
+					<th>Año</th>
+					<th>Periodo</th>
+					<th>Altura</th>
+					<th>Peso</th>
+					<th>IMC</th>
+					<th>Estado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @student.nutritions.each do |nutrition| %>
+				<tr>
+					<td><%= nutrition.year %></td>
+					<td><%= GeneralInfo.period[nutrition.period.to_i] %></td>
+					<td><%= nutrition.height %> Mts</td>
+					<td><%= nutrition.weight %> Kg</td>
+					<td><%= @imc = nutrition.imc %></td>
+					<td><%= fa_icon "cutlery ls-icon", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'}" %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% end %>
+	
+		<div id="nutrition" class="graph"></div>
+		<script>
+		var nutrition = <%= raw @student.nutritions.to_json %>
+		var categories = [];
+		var graph = {
+			categories: [],
+			series: [{
+				name: "IMC",
+				data: []
+			}]
+		}
+	
+		function imc(h,w) {
+			//console.log(h,w);
+			h = parseFloat(h);
+			w = parseFloat(w);
+			var imc = w/(h*h);
+			return imc.toFixed(2);
+		}
+	
+		$.each(nutrition, function( index, value ) {
+			graph.categories.push(value.year+" - "+value.period);
+			graph.series[0].data.push(parseFloat(imc(value.height,value.weight)));
+		});
+		//console.log(graph.series[0].data);	
+		$('#nutrition').highcharts({
+			chart: {
+				type: 'column',
+				backgroundColor:'transparent'
+			},
+			title: {
+				text: 'Promedio de nutrición'
+			},
+			xAxis: {
+				categories: graph.categories
+			},
+			yAxis:{
+				allowDecimals: true,
+				title: {
+					text: 'IMC'
+				},plotBands: [{
+					from: 13.84,
+					to: 17.60,
+					color: 'rgba(17, 255, 21, .1)'
+				}]	
+			},
+			credits: {
+				enabled: false
+			},
+			plotOptions:  {
+				series: {
+					borderWidth: 0
+				}
+			},
+			series: [{
+				name: "IMC",
+				data: graph.series[0].data,
+				color: "#FFD41F"
+			}]
+		});
+		</script>
+	</div>
+	<div class="content" id="panel6">
+		<div class="row collapse">
+			<div class="small-8 columns">
+				<div class="row">
+					<div class="small-9 columns">
+						<label for="right-label" class="right inline">Seleccione el año escolar</label>
+					</div>
+					<div class="small-3 columns">
+						<select name="year" id="year">
+							<option value="2016">2016</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="accordion" data-accordion>
+			<% if @programs_m.present? %>
+			<li class="accordion-navigation">
+				<a href="#panel1a"><%= fa_icon "cutlery" %>  Linea nutricional</a>
+				<div id="panel1a" class="content">
+					<ul class="accordion" data-accordion>
+						<% @programs_m.each do |program| %>
+						<li class="accordion-navigation sub">
+							<a href="#panel-<%= program.id %>" ><%= program.name %></a>
+							<div id="panel-<%= program.id %>" class="content">
+								<% program.activities.each do |activity| %>
+								<%= activity.name %>
+								<% end %>
+							</div>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+			</li>
 			<% end %>
-	    </div>
-	  </li>
-	  <% end %>
-	  <% if @programs_edu.present? %>
-	  <li class="accordion-navigation">
-	    <a href="#panel3a"><%= fa_icon "book" %> Educación de calidad</a>
-	    <div id="panel3a" class="content active">
-			<ul class="accordion" data-accordion>
-			<% @programs_edu.each do |program| %>
-			  <li class="accordion-navigation sub">
-			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
-			    <div id="panel-<%= program.id %>" class="content">
-	                <% program.activities.each do |activity| %>
-						<%= activity.name %>
+			<% if @programs_h.present? %>
+			<li class="accordion-navigation">
+				<a href="#panel2a"><%= fa_icon "wrench" %> Herramientas para la vida</a>
+				<div id="panel2a" class="content">
+					<% @programs_m.each do |program| %>
+					<%= program.name %>
+					<%= program.line %>
 					<% end %>
-			    </div>
-			  </li>
-			  <% end %>
-			</ul>
-	    </div>
-	  </li>
-	  <% end %>
-	</ul>
-  </div> <!-- /tab 6 actividades en la fundación -->
+				</div>
+			</li>
+			<% end %>
+			<% if @programs_edu.present? %>
+			<li class="accordion-navigation">
+				<a href="#panel3a"><%= fa_icon "book" %> Educación de calidad</a>
+				<div id="panel3a" class="content active">
+					<ul class="accordion" data-accordion>
+						<% @programs_edu.each do |program| %>
+						<li class="accordion-navigation sub">
+							<a href="#panel-<%= program.id %>" ><%= program.name %></a>
+							<div id="panel-<%= program.id %>" class="content">
+								<% program.activities.each do |activity| %>
+								<%= activity.name %>
+								<% end %>
+							</div>
+						</li>
+						<% end %>
+					</ul>
+				</div>
+			</li>
+			<% end %>
+		</ul>
+	</div> <!-- /tab 6 actividades en la fundación -->
 </div>
 
 
 <!-- MODALS -->
 <div id="health_care" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
-  <div class="modal-header">
-  	<h5 class="whitetxt nospace">Afiliacion en salud</h5>
-  </div>
-  <div class="modal-content">
-	<%= simple_form_for(@health_care) do |f| %>
-	  <%= f.error_notification %>
+	<div class="modal-header">
+		<h5 class="whitetxt nospace">Afiliacion en salud</h5>
+	</div>
+	<div class="modal-content">
+		<%= simple_form_for(@health_care) do |f| %>
+		<%= f.error_notification %>
 	  
-	  <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :affiliate, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :affiliate, class: 'inline-label inline left' do %>
 				<%= fa_icon "hospital-o ls-icon" %> Afiliación a salud
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.input_field :affiliate, as: :boolean  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div><%= f.input_field :affiliate, as: :boolean  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :regime, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :regime, class: 'inline-label inline left' do %>
 				<%= fa_icon "plus-square ls-icon" %> Regimen
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :regime %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :regime %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :eps, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :eps, class: 'inline-label inline left' do %>
 				<%= fa_icon "medkit ls-icon" %> EPS
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :eps %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :eps %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :ips, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :ips, class: 'inline-label inline left' do %>
 				<%= fa_icon "user-md ls-icon" %> IPS
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :ips %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :ips %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :register, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :register, class: 'inline-label inline left' do %>
 				<%= fa_icon "hand-paper-o ls-icon" %> Registro
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :register %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :register %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :card, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :card, class: 'inline-label inline left' do %>
 				<%= fa_icon "hashtag ls-icon" %> Ficha Nº
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :card %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :card %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :poll_date, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :poll_date, class: 'inline-label inline left' do %>
 				<%= fa_icon "calendar ls-icon" %> Fecha de encuesta
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :poll_date, start_year: 2015 %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.input_field :poll_date, start_year: 2015 %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :score, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :score, class: 'inline-label inline left' do %>
 				<%= fa_icon "star-half-o ls-icon" %> Puntaje
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :score %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :score %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :inhabilites, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :inhabilites, class: 'inline-label inline left' do %>
 				<%= fa_icon "wheelchair ls-icon" %> Discapacidad
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :inhabilites %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :inhabilites %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :inh_description, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :inh_description, class: 'inline-label inline left' do %>
 				<%= fa_icon "heartbeat ls-icon" %> Descripción
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :inh_description %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :inh_description %>
+			</div>
 		</div>
 	
 	  
-	  <%= f.input :student_id, :as => :hidden, input_html: {value: @student.id} %>
+		<%= f.input :student_id, :as => :hidden, input_html: {value: @student.id} %>
 	</div>
 	<div class="form-actions">
-	  <%= f.submit "Guardar afiliación", class: "button expand nospace success" %>
+		<%= f.submit "Guardar afiliación", class: "button expand nospace success" %>
 	</div>
-   <% end %>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	<% end %>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
 
 <div id="acudiente" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
-  <div class="modal-header">
-  	<h5 class="whitetxt nospace">Acudiente</h5>
-  </div>
-  <div class="modal-content">
-   <%= simple_form_for(@guardian) do |f| %>
-       <%= f.error_notification %>
+	<div class="modal-header">
+		<h5 class="whitetxt nospace">Acudiente</h5>
+	</div>
+	<div class="modal-content">
+		<%= simple_form_for(@guardian) do |f| %>
+		<%= f.error_notification %>
        
-      <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :name, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :name, class: 'inline-label inline left' do %>
 				<%= fa_icon "info ls-icon" %> Nombre
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :name %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :name %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :id_type, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :id_type, class: 'inline-label inline left' do %>
 				<%= fa_icon "credit-card ls-icon" %> Tipo de identificación
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.select :id_type, GeneralInfo.adult_id, prompt: "Escoger uno" %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.select :id_type, GeneralInfo.adult_id, prompt: "Escoger uno" %>
+			</div>
 		</div>
   	    
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :identification, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :identification, class: 'inline-label inline left' do %>
 				<%= fa_icon "hashtag ls-icon" %> Identificación
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :identification %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :identification %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :gender, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :gender, class: 'inline-label inline left' do %>
 				<%= fa_icon "venus-mars ls-icon" %> Genero
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.select :gender, GeneralInfo.gender, prompt: "Escoger un genero" %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.select :gender, GeneralInfo.gender, prompt: "Escoger un genero" %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :relationship, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :relationship, class: 'inline-label inline left' do %>
 				<%= fa_icon "compass ls-icon" %> Relación
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :relationship %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div ><%= f.input_field :relationship %></div>
+			</div>
 		</div>
        
-	   <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :born, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :born, class: 'inline-label inline left' do %>
 				<%= fa_icon "child ls-icon" %> Fecha de nacimiento
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :born, start_year: 1940 %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.input_field :born, start_year: 1940 %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :department, required: true, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :department, required: true, class: 'inline-label inline left' do %>
 				<%= fa_icon "map-signs ls-icon" %> Ciudad de Residencia
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+			</div>
 		</div>
 		
-  	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :villa, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :villa, class: 'inline-label inline left' do %>
 				<%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :villa  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.input_field :villa  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :address, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :address, class: 'inline-label inline left' do %>
 				<%= fa_icon "compass ls-icon" %> Dirección
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :address  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div ><%= f.input_field :address  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :zone, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :zone, class: 'inline-label inline left' do %>
 				<%= fa_icon "list-ol ls-icon" %> Estrato
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :zone, GeneralInfo.estrato, prompt: "Escoger un estrato" %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div><%= f.select :zone, GeneralInfo.estrato, prompt: "Escoger un estrato" %></div>
+			</div>
 		</div>
   	   
-  	   <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :phone, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :phone, class: 'inline-label inline left' do %>
 				<%= fa_icon "phone ls-icon" %> Teléfono
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :phone  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div ><%= f.input_field :phone  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :cel, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :cel, class: 'inline-label inline left' do %>
 				<%= fa_icon "mobile ls-icon" %> Celular
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :cel  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div ><%= f.input_field :cel  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :email, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :email, class: 'inline-label inline left' do %>
 				<%= fa_icon "envelope-o ls-icon" %> Correo electronico
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :email  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div ><%= f.input_field :email  %></div>
+			</div>
 		</div>
 		
-	   <%= f.input :student_id, :as => :hidden, input_html: {value: @student.id} %>
+		<%= f.input :student_id, :as => :hidden, input_html: {value: @student.id} %>
 	</div>
 	<div class="form-actions">
-	  <%= f.submit "Guardar acudiente", class: "button expand nospace success" %>
+		<%= f.submit "Guardar acudiente", class: "button expand nospace success" %>
 	</div>
-   <% end %>
-  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+	<% end %>
+	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
 </div>
 
 <div id="basicos" class="reveal-modal nospace small radius" data-reveal aria-labelledby="Datos_basicos" aria-hidden="true" role="dialog">
-  <div class="modal-header">
-  	<h5 class="whitetxt nospace">Datos básicos</h5>
-  </div>
+	<div class="modal-header">
+		<h5 class="whitetxt nospace">Datos básicos</h5>
+	</div>
   
-  <div class="modal-content">
-  	<%= simple_form_for(@student) do |f| %>
-  	  <%= f.error_notification %>
+	<div class="modal-content">
+		<%= simple_form_for(@student) do |f| %>
+		<%= f.error_notification %>
   	
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :name, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :name, class: 'inline-label inline left' do %>
 				<%= fa_icon "info ls-icon" %> Nombre
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :name %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :name %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :pic, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :pic, class: 'inline-label inline left' do %>
 				<%= fa_icon "image ls-icon" %> Imagen
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :pic %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :pic %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :id_type, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :id_type, class: 'inline-label inline left' do %>
 				<%= fa_icon "credit-card ls-icon" %> Tipo de identificación
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.select :id_type, GeneralInfo.kids_id, prompt: "Escoger uno" %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.select :id_type, GeneralInfo.kids_id, prompt: "Escoger uno" %>
+			</div>
 		</div>
   	    
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :identification, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :identification, class: 'inline-label inline left' do %>
 				<%= fa_icon "hashtag ls-icon" %> Identificación
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :identification %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :identification %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :gender, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :gender, class: 'inline-label inline left' do %>
 				<%= fa_icon "venus-mars ls-icon" %> Genero
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.select :gender, GeneralInfo.gender, prompt: "Escoger un genero" %>
-		  </div>
-		</div>
-		
-  	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :last_course, class: 'inline-label inline left' do %>
-				<%= fa_icon "graduation-cap ls-icon" %> Ultimo año cursado
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :last_course %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.select :gender, GeneralInfo.gender, prompt: "Escoger un genero" %>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :outschool_years, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :last_course, class: 'inline-label inline left' do %>
+				<%= fa_icon "graduation-cap ls-icon" %> Ultimo año cursado
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :last_course %>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :outschool_years, class: 'inline-label inline left' do %>
 				<%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :outschool_years %>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :outschool_years %>
+			</div>
 		</div>
   	    
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :born, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :born, class: 'inline-label inline left' do %>
 				<%= fa_icon "child ls-icon" %> Fecha de nacimiento
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :born, start_year: 1990 %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.input_field :born, start_year: 1990 %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :etnic, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :etnic, class: 'inline-label inline left' do %>
 				<%= fa_icon "group ls-icon" %> Grupo etnico
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :etnic %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.input_field :etnic %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :born_state, required: true, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :born_state, required: true, class: 'inline-label inline left' do %>
 				<%= fa_icon "globe ls-icon" %> Ciudad de nacimiento
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :born_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div><%= f.select :born_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :residency_state, required: true, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :residency_state, required: true, class: 'inline-label inline left' do %>
 				<%= fa_icon "map-signs ls-icon" %> Ciudad de Residencia
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :residency_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div><%= f.select :residency_state, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
+			</div>
 		</div>
 		
-  	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :villa, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :villa, class: 'inline-label inline left' do %>
 				<%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :villa  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.input_field :villa  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :address, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :address, class: 'inline-label inline left' do %>
 				<%= fa_icon "compass ls-icon" %> Dirección
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :address  %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div ><%= f.input_field :address  %></div>
+			</div>
 		</div>
 		
 		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :zone, class: 'inline-label inline left' do %>
+			<div class="small-5 columns">
+				<%= f.label :zone, class: 'inline-label inline left' do %>
 				<%= fa_icon "map ls-icon" %> Estrato
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :zone, GeneralInfo.estrato, prompt: "Escoger un estrato" %></div>
-		  </div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div><%= f.select :zone, GeneralInfo.estrato, prompt: "Escoger un estrato" %></div>
+			</div>
 		</div>
   	   
-  	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :displaced, class: 'inline-label inline left' do %>
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :displaced, class: 'inline-label inline left' do %>
 				<%= fa_icon "warning ls-icon" %> Desplazado
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.input_field :displaced, as: :boolean  %></div>
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :displaced, as: :boolean  %>
 		  </div>
 		</div>
+		
+  	   
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :disability, class: 'inline-label inline left' do %>
+				<%= fa_icon "warning ls-icon" %> Discapacidad
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :disability, as: :boolean  %>
+		  </div>
+		</div>
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :drop, class: 'inline-label inline left' do %>
+				<%= fa_icon "warning ls-icon" %> Retirado
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :drop, as: :boolean  %>
+		  </div>
+		</div>
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :graduated, class: 'inline-label inline left' do %>
+				<%= fa_icon "warning ls-icon" %> Graduado
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :graduated, as: :boolean  %>
+		  </div>
+		</div>
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :why, class: 'inline-label inline left' do %>
+				<%= fa_icon "map-marker ls-icon" %> Explicaciones adicionales
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.text_area :why  %></div>
+			</div>
+		</div>
+			
   	    
   	    
-  	</div>
+	</div>
   	
-  	  <div class="form-actions">
-  	    <%= f.button :submit, "Guardar estudiante", class: "expand nospace success" %>
-  	  </div>
-  	<% end %>
+	<div class="form-actions">
+		<%= f.button :submit, "Guardar estudiante", class: "expand nospace success" %>
+	</div>
+	<% end %>
 	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
-  	</div>
+</div>
 </div>
 <!-- /MODALS -->
 

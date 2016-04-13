@@ -448,6 +448,19 @@ table {
     border-spacing: 0px;
     margin-bottom: 1.25rem;
     table-layout: auto;
+		width: 100%;
+		tbody{
+			tr{
+				&.retired{
+					opacity:0.8;
+					background: #f2f2f2;
+				}
+				&.graduated{
+					opacity:0.8;
+					background: #E9FFD6;
+				}
+			}
+		}
 	&.black{
 		thead{
 			background: black;
@@ -1132,3 +1145,12 @@ form.inliner{
 	}
 }
 
+.inliner{
+	label{
+		text-align: left;
+	}
+	input{
+		margin-right:5px;
+		max-width: 220px;
+	}
+}
