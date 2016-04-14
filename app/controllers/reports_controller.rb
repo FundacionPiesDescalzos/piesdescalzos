@@ -68,11 +68,12 @@ class ReportsController < ApplicationController
 	@overallscore = {} 
 	
   @results = {
-  "Delgadez" => {data: 0, girls: 0, boys: 0},
-	"Riesgo de delgadez" => {data: 0, girls: 0, boys: 0},
-	"Adecuado para la edad" => {data: 0, girls: 0, boys: 0},
-	"Sobrepeso" => {data: 0, girls: 0, boys: 0},
-	"Obesidad" => {data: 0, girls: 0, boys: 0}
+		"Delgadez severa" => {data: 0, girls: 0, boys: 0},
+	  "Delgadez" => {data: 0, girls: 0, boys: 0},
+		"Riesgo de delgadez" => {data: 0, girls: 0, boys: 0},
+		"Adecuado para la edad" => {data: 0, girls: 0, boys: 0},
+		"Sobrepeso" => {data: 0, girls: 0, boys: 0},
+		"Obesidad" => {data: 0, girls: 0, boys: 0}
  }
 	
 	@students.each do |student|
@@ -104,37 +105,72 @@ class ReportsController < ApplicationController
 		
 		#nutrition 
 	  if student.nutritions.present? 
-	    @cuantos = student.nutritions.count - 1 
-			@imc = student.nutritions[@cuantos].imc
-			if @imc < GeneralInfo.nutrition_points[student.gender]["lower"]
-				 @results["Delgadez"][:data] = @results["Delgadez"][:data] + 1
+	    @cuantos = student.nutritions.count - 1
+			
+			if params[:year].present? && params[:year][:year_number].present?
+				@year = params[:year][:year_number]
+				@much = 0
+				@all_nutritions = 0
+				student.nutritions.each do |nutrition|
+					if params[:period].present? && params[:period][:period_number].present?
+						if @year.to_s == nutrition.year.to_s && params[:period][:period_number].to_s == nutrition.period.to_s
+							@much += 1
+							@all_nutritions += nutrition.imc
+						end
+					else
+						if @year.to_s == nutrition.year.to_s
+							@much += 1
+							@all_nutritions += nutrition.imc
+						end
+					end
+				end
+				@imc = @all_nutritions/(@much > 0 ? @much : 1)
+			else
+				@much = 0
+				@all_nutritions = 0
+				student.nutritions.each do |nutrition|
+					@much += 1
+					@all_nutritions += nutrition.imc
+				end
+				@imc = @all_nutritions/(@much > 0 ? @much : 1)
+			end
+			
+			if @imc <= GeneralInfo.nutrition_points[student.gender]["lower"]
+				 @results["Delgadez severa"][:data] = @results["Delgadez severa"][:data] + 1
+				 if student.gender == "femenino"
+					 @results["Delgadez severa"][:girls] = @results["Delgadez severa"][:girls] + 1
+				 else
+					 @results["Delgadez severa"][:boys] = @results["Delgadez severa"][:boys] + 1
+				 end
+			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["lower"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"]
+				@results["Delgadez"][:data] = @results["Delgadez"][:data] + 1
 				 if student.gender == "femenino"
 					 @results["Delgadez"][:girls] = @results["Delgadez"][:girls] + 1
 				 else
 					 @results["Delgadez"][:boys] = @results["Delgadez"][:boys] + 1
 				 end
-			elsif @imc > GeneralInfo.nutrition_points[student.gender]["lower"] && @imc < GeneralInfo.nutrition_points[student.gender]["minimum"]
-				@results["Riesgo de delgadez"][:data] = @results["Riesgo de delgadez"][:data] + 1
-				 if student.gender == "femenino"
-					 @results["Riesgo de delgadez"][:girls] = @results["Riesgo de delgadez"][:girls] + 1
-				 else
-					 @results["Riesgo de delgadez"][:boys] = @results["Riesgo de delgadez"][:boys] + 1
-				 end
-			elsif @imc > GeneralInfo.nutrition_points[student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points[student.gender]["medium_min"] 
-				@results["Adecuado para la edad"][:data] = @results["Adecuado para la edad"][:data] + 1 
+			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] 
+				@results["Riesgo de delgadez"][:data] = @results["Riesgo de delgadez"][:data] + 1 
 			 if student.gender == "femenino"
-				 @results["Adecuado para la edad"][:girls] = @results["Adecuado para la edad"][:girls] + 1
+				 @results["Riesgo de delgadez"][:girls] = @results["Riesgo de delgadez"][:girls] + 1
 			 else
-				 @results["Adecuado para la edad"][:boys] = @results["Adecuado para la edad"][:boys] + 1
+				 @results["Riesgo de delgadez"][:boys] = @results["Riesgo de delgadez"][:boys] + 1
 			 end
-			elsif @imc > GeneralInfo.nutrition_points[student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points[student.gender]["medium_max"] 
-				@results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 
+			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] 
+				@results["Adecuado para la edad"][:data] = @results["Adecuado para la edad"][:data] + 1 
  			 if student.gender == "femenino"
- 				 @results["Sobrepeso"][:girls] = @results["Sobrepeso"][:girls] + 1
+ 				 @results["Adecuado para la edad"][:girls] = @results["Adecuado para la edad"][:girls] + 1
  			 else
- 				 @results["Sobrepeso"][:boys] = @results["Sobrepeso"][:boys] + 1
+ 				 @results["Adecuado para la edad"][:boys] = @results["Adecuado para la edad"][:boys] + 1
  			 end
-			elsif @imc > GeneralInfo.nutrition_points[student.gender]["maximum"]
+			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"] 
+				@results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 
+				 if student.gender == "femenino"
+					 @results["Sobrepeso"][:girls] = @results["Sobrepeso"][:girls] + 1
+				 else
+					 @results["Sobrepeso"][:boys] = @results["Sobrepeso"][:boys] + 1
+				 end
+			elsif @imc >= GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"]
 				@results["Obesidad"][:data] = @results["Obesidad"][:data] + 1 
   			 if student.gender == "femenino"
   				 @results["Obesidad"][:girls] = @results["Obesidad"][:girls] + 1
@@ -146,40 +182,132 @@ class ReportsController < ApplicationController
 		
 		#/ Nutrition
 		
-		
-		@less = @all - @displaced
-		
+		# Etnias
 		if @hash_etnic.key?(student.etnic)
-			@hash_etnic[student.etnic]+= 1
-		else
-			@hash_etnic[student.etnic] = 0 
-		end
-  		@sc = 0.0 
-			@ps = []
-			student.scores.each do |score|
-				if @overallscore.key?(score.period)
-					@sc+=score.score.to_f
-					@ps.push(score.area)
-					@overallscore[score.period] = {area: score.area, score: @sc, all: @ps}
+			@hash_etnic[student.etnic][:number]+= 1
+			  # nutrition
+		    @cuantos = student.nutritions.count - 1
+				if params[:year].present? && params[:year][:year_number].present?
+					@year = params[:year][:year_number]
+					@much = 0
+					@all_nutritions = 0
+					student.nutritions.each do |nutrition|
+						if params[:period].present? && params[:period][:period_number].present?
+							if @year.to_s == nutrition.year.to_s && params[:period][:period_number].to_s == nutrition.period.to_s
+								@much += 1
+								@all_nutritions += nutrition.imc
+							end
+						else
+							if @year.to_s == nutrition.year.to_s
+								@much += 1
+								@all_nutritions += nutrition.imc
+							end
+						end
+					end
+					@imc = @all_nutritions/(@much > 0 ? @much : 1)
 				else
-					@overallscore[score.period] = {area: score.area, score: 0.0, all: []}
+					@much = 0
+					@all_nutritions = 0
+					student.nutritions.each do |nutrition|
+						@much += 1
+						@all_nutritions += nutrition.imc
+					end
+					@imc = @all_nutritions/(@much > 0 ? @much : 1)
 				end
-			end   
+				
+				if @imc <= GeneralInfo.nutrition_points[student.gender]["lower"]
+					@hash_etnic[student.etnic]["Delgadez severa"]+= 1
+				elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["lower"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"]
+					@hash_etnic[student.etnic]["Delgadez"]+= 1
+				elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] 
+					@hash_etnic[student.etnic]["Riesgo de delgadez"]+= 1
+				elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"]
+					@hash_etnic[student.etnic]["Adecuado para la edad"]+= 1
+				elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"] 
+					@hash_etnic[student.etnic]["Sobrepeso"]+= 1
+				elsif @imc >= GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"] 
+					@hash_etnic[student.etnic]["Obesidad"]+= 1
+				end
+				# /nutrition
+		else
+			@hash_etnic[student.etnic] = {
+				number: 0,
+				"Delgadez severa" => 0,
+				"Delgadez" => 0,
+				"Riesgo de delgadez" => 0,
+				"Adecuado para la edad" => 0,
+				"Sobrepeso" => 0,
+				"Obesidad" => 0
+			}
+		end
+		# /Etnias
 		
+		# Grades 
+		if student.scores.present? 
+			@many = 0
+			@all_scores = 0
+			student.scores.each do |score|
+				if params[:year].present? && params[:year][:year_number].present? && !params[:period][:period_number].present? # if year
+					if params[:year][:year_number].to_s == score.year.to_s
+						if @overallscore.key?(score.area)
+							@overallscore[score.area][:many] += 1
+							@overallscore[score.area][:all] += score.score.to_f
+						else
+							@overallscore[score.area] = {many: 0, all:0.to_f, name: score.area}
+						end
+					end
+				elsif params[:year].present? && params[:year][:year_number].present? && params[:period].present? && params[:period][:period_number].present?
+					if params[:period][:period_number].to_s == score.period.to_s && params[:year][:year_number].to_s == score.year.to_s
+						if @overallscore.key?(score.area)
+							@overallscore[score.area][:many] += 1
+							@overallscore[score.area][:all] += score.score.to_f
+						else
+							@overallscore[score.area] = {many: 0, all:0.to_f, name: score.area}
+						end
+					end
+				else # else if not year
+					p "here"
+					if @overallscore.key?(score.area)
+						@overallscore[score.area][:many] += 1
+						@overallscore[score.area][:all] += score.score.to_f
+					else
+						@overallscore[score.area] = {many: 0, all:0.to_f, name: score.area}
+					end
+				end # /else if not year
+			end
+		end
+		# /grades
 	end
-
+	
+	p @overallscore
+  # grades
+	@finish_grades = {
+    name: 'Calificaciones academicas',
+    colorByPoint: true,
+		data: []
+	}
+	
+	@overallscore.each do |key, score|
+		@finish_grades[:data].push({name: key, y: (score[:all]/(score[:many] > 0 ? score[:many] : 1)).round(1)})
+	end
+	# /grades
+  
+  # Etnias
+	
 	@finish_etnias = {
     name: 'Etnias',
     colorByPoint: true,
 		data: []
 	}
+	@drilldown = {
+		series: []
+	}
 	
 	@hash_etnic.each do |key, etnics|
-		@finish_etnias[:data].push({name: key, y: etnics});
+		@finish_etnias[:data].push({name: key, y: etnics[:number], drilldown: key});
+		@drilldown[:series].push({name:key, id: key, data:[["Delgadez severa",etnics["Delgadez severa"]],["Delgadez",etnics["Delgadez"]],["Riesgo de delgadez",etnics["Riesgo de delgadez"]],["Adecuado para la edad",etnics["Adecuado para la edad"]],["Sobrepeso",etnics["Sobrepeso"]],["Obesidad",etnics["Obesidad"]]]})
 	end
-	
-	p "overall"
-	p @overallscore	 
+	# / Etnias
 	
 	end
 	

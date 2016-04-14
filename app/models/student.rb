@@ -32,6 +32,30 @@ class Student < ActiveRecord::Base
 		now.year - self.born.year - (self.born.to_date.change(:year => now.year) > now ? 1 : 0)
 	end
 	
+	def age_month
+		now = Time.now.utc.to_date
+		math = (self.born.to_date.change(:year => now.year) < now ? 0 : 12) - (now.month - self.born.month) * ((now.month - self.born.month) < 0 ? -1 : 1)
+		if math == -1
+			math = 1
+		elsif math == 12
+			math = 0
+		else
+			math = math
+		end
+	end
+	
+	def age_medium
+		now = Time.now.utc.to_date
+		age = now.year - self.born.year - (self.born.to_date.change(:year => now.year) > now ? 1 : 0)
+		math = (self.born.to_date.change(:year => now.year) < now ? 0 : 12) - (now.month - self.born.month) * ((now.month - self.born.month) < 0 ? -1 : 1)
+		if math >= 6
+			math = 5
+		else
+			math = 0
+		end
+		response = ("#{age}.#{math}").to_f
+	end
+	
 	def average
 		@i = 0;
 		@mas = 0;

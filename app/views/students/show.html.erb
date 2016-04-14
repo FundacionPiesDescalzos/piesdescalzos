@@ -58,7 +58,7 @@
 			<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
 			<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.identification %></li>
 			<hr />
-			<li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %></li>
+			<li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %>  <i><%= @student.age %> Años <%= @student.age_month %> <%= @student.age_month == 1 ? "mes" : "meses" %></i></li>
 			<li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
 			<li><span class="labeling"><%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
 			<hr />
@@ -91,7 +91,7 @@
 			<li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero:</span> <%= @student.guardian.gender %></li>
 			<li><span class="labeling"><%= fa_icon "heart ls-icon" %> Relación con el estudiante </span> <%= @student.guardian.relationship %></li>
 			<hr />
-			<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Fecha de nacimiento</span> <%= @student.guardian.born %></li>
+			<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Fecha de nacimiento</span> <%= @student.guardian.born %> </li>
 			<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Ciudad</span> <%= @student.guardian.department %></li>
 			<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.guardian.villa %></li>
 			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.guardian.address %></li>

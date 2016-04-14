@@ -139,6 +139,7 @@
 	  <% if @school.students.present? %>
 	  	  <% @i = 0 %>
 		  <% @results = {
+			"Delgadez severa" => {data: 0},
 		  "Delgadez" => {data: 0},
 			"Riesgo de delgadez" => {data: 0},
 			"Adecuado para la edad" => {data: 0},
@@ -151,15 +152,17 @@
  			    <% @i = @i + 1 %>
 			    <% @cuantos = student.nutritions.count - 1  %>
 					<% @imc = student.nutritions[@cuantos].imc %>
-					<% if @imc < GeneralInfo.nutrition_points[student.gender]["lower"] %>
-						<% @results["Delgadez"][:data] = @results["Delgadez"][:data] + 1%>
-					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["lower"] && @imc < GeneralInfo.nutrition_points[student.gender]["minimum"] %>
-					    <% @results["Riesgo de delgadez"][:data] = @results["Riesgo de delgadez"][:data] + 1%>
-					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points[student.gender]["medium_min"] %>
-						<% @results["Adecuado para la edad"][:data] = @results["Adecuado para la edad"][:data] + 1 %>
-					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points[student.gender]["medium_max"] %>
-						<% @results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 %>	
-					<% elsif @imc > GeneralInfo.nutrition_points[student.gender]["maximum"] %>
+					<% if @imc <= GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["lower"] %>
+						<% @results["Delgadez severa"][:data] = @results["Delgadez severa"][:data] + 1%>
+					<% elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["lower"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"] %>
+					    <% @results["Delgadez"][:data] = @results["Delgadez"][:data] + 1 %>
+					<% elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] %>
+						<% @results["Riesgo de delgadez"][:data] = @results["Riesgo de delgadez"][:data] + 1 %>
+					<% elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] %>
+						<% @results["Adecuado para la edad"][:data] = @results["Adecuado para la edad"][:data] + 1 %>	
+						<% elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"] %>
+							<% @results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 %>
+					<% elsif @imc >= GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"] %>
 						<% @results["Obesidad"][:data] = @results["Obesidad"][:data] + 1 %>
 					<% end %>
 			  <% end %>

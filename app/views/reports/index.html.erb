@@ -1,5 +1,4 @@
 <div class="inner-padding">
-	<br /><br />
 	<form action="/reports" method="get" class="inliner">
 		<label> <span>Instituciones</span>
 			<% seleccionado = params[:establishments][:establishment_id] if params[:establishments].present? && params[:establishments][:establishment_id].present? %>
@@ -13,6 +12,17 @@
 			<% cur_seleccionado = params[:course][:course_number] if params[:course].present? && params[:course][:course_number].present? %> 
 		  <%= select("course", "course_number", 1..11, {include_blank: 'Todos', selected: cur_seleccionado || ""}) %>
 		</label>
+		<fieldset class="fieldset ib">
+			<legend>Nutrición y educación</legend>
+			<label> <span>Año</span>
+				<% year_seleccionado = params[:year][:year_number] if params[:year].present? && params[:year][:year_number].present? %> 
+				<%= select("year", "year_number", (Time.now.year-10)..Time.now.year, {include_blank: 'Todos', selected: year_seleccionado || ""}) %>
+			</label>
+			<label> <span>Periodo</span>
+				<% periodo_seleccionado = params[:period][:period_number] if params[:period].present? && params[:period][:period_number].present? %> 
+				<%= select("period", "period_number", 1..5, {include_blank: 'Todos', selected: periodo_seleccionado || ""}) %>
+			</label>
+		</fieldset>
 		<input type="submit" value="Consultar" class="button success right round" />
 	</form>
 	
@@ -33,7 +43,8 @@
 		<div id="food" class="graph"></div>
 	</div>
 	<div class="large-6 medium-6 columns">
-		<div id="etnic"></div>
+		<div id="etnic"></div><br /><br />
+		<div id="education"></div>
 	</div>
 </div>
   <!-- <% @students.each do |student| %>
@@ -122,44 +133,124 @@
 		    });
 				
 				
-		 // Create the chart
+		 // Etnias
 				var etnias = <%= raw @finish_etnias.to_json %>;
-			  //console.log(etnias);
+				var drilldown = <%= raw @drilldown.to_json %>;
+				var mytotal = <%= raw @all %>;
+				console.log(etnias);
 		    $('#etnic').highcharts({
 		        chart: {
 		            type: 'column'
 		        },
 		        title: {
-		            text: 'Etnias'
+		            text: 'Representación Etnica y tabla de nutricion por etnias'
 		        },
-		        xAxis: {
-		            type: 'category'
+		        subtitle: {
+		            text: 'Clic en la barra para ver la nutrición por étnia'
+		        },
+						xAxis: {
+		            type: 'category',
+		            labels: {
+									formatter: function(){
+									                    if (this.value.length > 10){
+									                        return this.value.substr(0,10) + "..";
+									                    }else{
+									                         return this.value;   
+									                    }                        
+									                },
+		                style: {
+		                    fontSize: '11px'
+		                }
+		            }
+		        },
+		        legend: {
+		            enabled: false
+		        },
+						yAxis:{
+							gridLineDashStyle: "Dash"
+						},
+		        plotOptions: {
+		            series: {
+		                borderWidth: 0,
+										dataLabels: {
+	                    enabled: true,
+	                    formatter: function () {
+	                        var mychart = $('#etnic').highcharts();
+	                        var pcnt = (this.y / mytotal) * 100;
+	                        return Highcharts.numberFormat(pcnt) + '%';
+	                    }
+	                }
+		            }
+		        },
+		        tooltip: {
+		            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+		            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+		        },
+
+		        series: [etnias],
+						drilldown: drilldown
+		    });
+       // Education
+				var education = <%= raw @finish_grades.to_json %>;
+				console.log(education);
+		    $('#education').highcharts({
+		        chart: {
+		            type: 'column'
+		        },
+		        title: {
+		            text: 'Niveles de educación'
+		        },
+						yAxis:{
+							plotBands: [{
+								from: 0,
+								to: 3,
+								color: 'rgba(255, 17, 21, .2)'
+							}],
+							title: {
+								text: 'Puntaje'
+							},
+							gridLineDashStyle: "Dash",
+							max: 5
+						},
+						xAxis: {
+								allowDecimals: true,
+								title: {
+									text: 'Areas'
+								},
+		            type: 'category',
+		            labels: {
+									formatter: function(){
+									                    if (this.value.length > 10){
+									                        return this.value.substr(0,10) + "..";
+									                    }else{
+									                         return this.value;   
+									                    }                        
+									                },
+		                style: {
+		                    fontSize: '11px'
+		                }
+		            }
 		        },
 		        legend: {
 		            enabled: false
 		        },
 		        plotOptions: {
 		            series: {
-		                borderWidth: 0,
-		                dataLabels: {
-		                    enabled: true,
-		                    format: '{point.y:.1f}%'
-		                }
+		                borderWidth: 0
 		            }
 		        },
 		        tooltip: {
 		            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-		            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+		            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
 		        },
 
-		        series: [etnias]
+		        series: [education]
 		    });
-       
-        
+				// / Education
+				
 				// NUTRITIONS
 				
 			  var food = <%= raw @results.to_json %> 
-			  console.log(food, food["Delgadez"].girls)
 	   	      $('#food').highcharts({
 							chart: {
 								          backgroundColor:'transparent',
@@ -172,32 +263,31 @@
 							            text: 'Tablas de nutricion divididas por genero'
 							        },
 							        subtitle: {
-							            text: 'Clic en la tabla para ver la diferenciación por genero'
+							            text: 'Clic en la barra para ver la diferenciación por genero'
 							        },
 							        xAxis: {
 							            type: 'category'
 							        },
 							        yAxis: {
-							            title: {
-							                text: 'Cantidad total de nutrición'
-							            }
-
+						            title: {
+						                text: 'Cantidad total de nutrición'
+						            }
 							        },
 							        legend: {
 							            enabled: false
 							        },
 							        plotOptions: {
-							            series: {
-							                borderWidth: 0,
-							                dataLabels: {
-							                    enabled: true,
-							                    format: '{point.y:.1f}%'
-							                }
-							            }
+						            pie: {
+						                innerSize: 100,
+						                depth: 45,
+														allowPointSelect: true,
+						                cursor: 'pointer',
+						                dataLabels: {
+						                    enabled: true,
+						                    format: '{point.percentage:.1f} %'
+						                }
+						            }
 							        },
-											colors: [
-								                '#FFD41F', '#3D3B30', '#4D5061', '#5C80BC', '#E9EDDE'
-								            ],
 							        tooltip: {
 							            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
 							            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
