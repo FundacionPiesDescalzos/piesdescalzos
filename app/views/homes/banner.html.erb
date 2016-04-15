@@ -15,13 +15,14 @@
 		<%= fa_icon "calendar home" %>
 		<h2><%= @monthly_favorite.name %></h2>
 	</div>
-<div class="row">
-	<div class="small-3 columns"> 
-		<% if @monthly_favorite.pic_url.present? %>
-			<%= image_tag @monthly_favorite.pic_url(:thumb) %>
-		<% end %>
+	<div class="row">
+		<div class="small-3 columns"> 
+			<% if @monthly_favorite.pic_url.present? %>
+				<%= image_tag @monthly_favorite.pic_url(:thumb) %>
+			<% end %>
+			</div>
+		<div class="small-9 columns"> 
+			<%= raw @monthly_favorite.texto %>
 		</div>
-	<div class="small-9 columns"> 
-		<%= raw @monthly_favorite.texto %>
 	</div>
 </div>

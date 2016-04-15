@@ -75,10 +75,11 @@
 			<%end%>
 			<li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
 			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Discapacidad </span> <%= @student.disability? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Retirado </span> <%= @student.drop? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Explicaciones adicionales </span> <%= @student.why %></li>
+			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.inhabilites? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.inh_description %></li>
 		</ul>
 	</div> <!-- /tab 1 -->
 	<div class="content" id="panel2">
@@ -117,8 +118,6 @@
 			<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Ficha Nº</span> <%= @student.health_care.card %></li>
 			<li><span class="labeling"><%= fa_icon "calendar ls-icon" %> Fecha de Encuesta</span> <%= @student.health_care.poll_date %></li>
 			<li><span class="labeling"><%= fa_icon "star-half-o ls-icon" %> Calificación</span> <%= @student.health_care.score %></li>
-			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.inhabilites? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.inh_description %></li>
 		</ul>
 		<% else %>
 		<p class="redtxt">No tiene un afiliación de salud asociada</p>
@@ -853,18 +852,6 @@
 		  </div>
 		</div>
 		
-  	   
-		<div class="row">
-			<div class="small-5 columns">
-				<%= f.label :disability, class: 'inline-label inline left' do %>
-				<%= fa_icon "warning ls-icon" %> Discapacidad
-				<% end %>
-			</div>
-			<div class="small-7 columns">
-				<%= f.input_field :disability, as: :boolean  %>
-		  </div>
-		</div>
-		
 		<div class="row">
 			<div class="small-5 columns">
 				<%= f.label :drop, class: 'inline-label inline left' do %>
@@ -878,17 +865,6 @@
 		
 		<div class="row">
 			<div class="small-5 columns">
-				<%= f.label :graduated, class: 'inline-label inline left' do %>
-				<%= fa_icon "warning ls-icon" %> Graduado
-				<% end %>
-			</div>
-			<div class="small-7 columns">
-				<%= f.input_field :graduated, as: :boolean  %>
-		  </div>
-		</div>
-		
-		<div class="row">
-			<div class="small-5 columns">
 				<%= f.label :why, class: 'inline-label inline left' do %>
 				<%= fa_icon "map-marker ls-icon" %> Explicaciones adicionales
 				<% end %>
@@ -897,7 +873,17 @@
 				<div class="inline-select"><%= f.text_area :why  %></div>
 			</div>
 		</div>
-			
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :graduated, class: 'inline-label inline left' do %>
+				<%= fa_icon "warning ls-icon" %> Graduado
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :graduated, as: :boolean  %>
+		  </div>
+		</div>
   	    
   	    
 	</div>
