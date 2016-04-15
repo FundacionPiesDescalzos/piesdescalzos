@@ -30,7 +30,6 @@ class ReportsController < ApplicationController
 	end
 	
 	
-	
 	if params[:departments].present? && params[:departments][:cities].present?
 		@residency = GeneralInfo.cities[:"#{params[:departments][:cities]}"]
 	else

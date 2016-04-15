@@ -76,14 +76,20 @@ $(function() {
 	  }else{
 	  	labels.show();
 	  }
-	  console.log(labels.find(".student_name"));
       labels.find(".student_name").each(function( index ) {
         var txt = $(this).text().toLowerCase();
-		console.log(txt, str, txt.indexOf(str));
         if (txt.indexOf(str) >= 0){
           $(this).parent().parent().show();
         }
       });
     });
-	
+		$("#alt").click(function(){
+			if($(".alerts").css("position") === "absolute"){
+				$(".alerts").css({"position":"relative"});
+				$(".alerts-info").show();
+			}else{
+				$(".alerts").css({"position":"absolute"});	
+				$(".alerts-info").hide();
+			}
+		});	
 });

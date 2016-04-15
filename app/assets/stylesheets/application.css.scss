@@ -227,6 +227,7 @@ select {
 }
 
 .nav-menu{
+	position: relative;
 	width: 23%;
 	float: left;
 	@include shadow;
@@ -1161,5 +1162,81 @@ fieldset{
 	legend{
 		font-size: 11px;
 		font-weight: normal;
+	}
+}
+
+.alerts{
+	position: absolute;
+	bottom: 0;
+	background: rgb(35,35,35);
+	color: #fff;
+	height: 40px;
+	width: 100%;
+	.symbols{
+		a{
+			color: #fff;
+		}
+		i{
+			margin:0 5px;
+		}
+		display: inline-block;
+		height: 40px;
+    line-height: 40px;
+    padding-right: 10px;
+		margin-right: 10px;
+		border-right: 1px solid white;
+	}
+	.number-alert{
+		float:right;
+		background: rgb(197,95,31);
+		height: 40px;
+		width: 40px;
+		text-align: center;
+		line-height: 40px;
+	}
+}
+
+.alerts-info{
+	display: none;
+	height: 55vh;
+	overflow: auto;
+	background: rgb(35,35,35);
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	-webkit-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
+	-moz-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
+	box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
+	li{
+		padding: 0;
+		border-bottom: 1px solid rgba(255,255,255,.4);
+		&:first-child{
+			a{
+				&:hover{
+					background: rgb(76,76,76);
+					-webkit-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
+					-moz-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
+					box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
+				}
+			}
+		}
+		a{
+			padding: 10px;
+			display: block;
+			width: 100%;
+			height: 100%;
+			&:hover{
+				background: rgb(76,76,76);
+			}
+		}
+		h4{
+			margin: 0;
+		}
+		h6{
+			margin: 0;
+		}
+		.cole{
+			color: rgb(197,95,31);
+		}
 	}
 }

@@ -37,6 +37,24 @@
   </li>
 </ul>
 
+
+<div class="alerts">
+	<div class="symbols"><a href="#" id="alt"><%= fa_icon "angle-down" %><%= fa_icon "bullhorn 2x" %></a></div>
+	Alertas
+	<div class="number-alert"><%= alertas.count %></div>
+</div>
+<ul class="alerts-info">
+	<% alertas.each do |student| %>
+	<li>
+	  <%= link_to student do %>
+			<h4 class="whitetxt"><%= student.name %></h4>
+			<i class="whitetxt">Alerta en nutrición</i>
+			<h6 class="cole"><%= student.school.present? ? student.school.name : "sin sede" %></h6>
+	  <% end %>
+	</li>
+	<% end %>
+</ul>
+
 <!-- <nav class="top-bar" data-topbar>
   <ul class="title-area">
     <li class="name"><% link_to 'Home', root_path %></li>
