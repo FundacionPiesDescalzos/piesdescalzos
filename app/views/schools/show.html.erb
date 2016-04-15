@@ -233,7 +233,7 @@
 	  
   </div>
   <div class="content" id="panel3">
-	<div class="row collapse">
+	<!-- <div class="row collapse">
 		<div class="small-8 columns">
 		  <div class="row">
 		    <div class="small-9 columns">
@@ -246,17 +246,20 @@
 		    </div>
 		  </div>
 		</div>
-	</div>
+	</div> -->
 	<ul class="accordion" data-accordion>
 	  <% if @programs_m.present? %>
 	  <li class="accordion-navigation">
-	    <a href="#panel1a"><%= fa_icon "cutlery" %>  Linea nutricional</a>
-	    <div id="panel1a" class="content">
-			<ul class="accordion" data-accordion>
+	    <a href="#panel1j" class="negro italic bold"><%= fa_icon "cutlery" %>  Linea nutricional</a>
+	    <div id="panel1j" class="content">
+			<ul class="accordion activities" data-accordion>
 			<% @programs_m.each do |program| %>
 			  <li class="accordion-navigation sub">
-			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
-			    <div id="panel-<%= program.id %>" class="content">
+			    <a href="#cont-<%= program.id %>">
+						<span class="fa fa-angle-right fa-angle"></span>
+						<%= program.name %>
+					</a>
+			    <div id="cont-<%= program.id %>" class="content">
 	                <% program.activities.each do |activity| %>
 						<%= activity.name %>
 					<% end %>
@@ -269,8 +272,8 @@
 	  <% end %>
 	  <% if @programs_h.present? %>
 	  <li class="accordion-navigation">
-	    <a href="#panel2a"><%= fa_icon "wrench" %> Herramientas para la vida</a>
-	    <div id="panel2a" class="content">
+	    <a href="#panel2j" class="negro italic bold"><%= fa_icon "wrench" %> Herramientas para la vida</a>
+	    <div id="panel2j" class="content">
 			<% @programs_m.each do |program| %>
 				<%= program.name %>
 				<%= program.line %>
@@ -280,13 +283,16 @@
 	  <% end %>
 	  <% if @programs_edu.present? %>
 	  <li class="accordion-navigation">
-	    <a href="#panel3a"><%= fa_icon "book" %> Educación de calidad</a>
-	    <div id="panel3a" class="content active">
-			<ul class="accordion" data-accordion>
+	    <a href="#panel3j" class="negro italic bold"><%= fa_icon "book" %> Educación de calidad</a>
+	    <div id="panel3j" class="content active">
+			<ul class="accordion activities" data-accordion>
 			<% @programs_edu.each do |program| %>
 			  <li class="accordion-navigation sub">
-			    <a href="#panel-<%= program.id %>" ><%= program.name %></a>
-			    <div id="panel-<%= program.id %>" class="content">
+			    <a href="#cont-<%= program.id %>">
+						<span class="fa fa-angle-right fa-angle"></span>
+						<%= program.name %>
+					</a>
+			    <div id="cont-<%= program.id %>" class="content">
 	                <% program.activities.each do |activity| %>
 						<%= activity.name %>
 					<% end %>

@@ -6,6 +6,7 @@ class Student < ActiveRecord::Base
 	has_many :scores
 	has_and_belongs_to_many :activities
 	has_many :nutritions
+	has_many :assistances
 	
 	mount_uploader :pic, PicUploader
 	
@@ -26,6 +27,19 @@ class Student < ActiveRecord::Base
   def the_school
     self.school.present? ? self.school.name : "Sin escuela"
   end
+	
+	def average
+		adding = 0
+		self.scores.each do |score| 
+			adding += 1
+			total += score.to_f
+		end
+		total = total/(adding > 0 ? adding : 1)
+	end
+	
+	def touchdown
+		self.average > 3.0 ? true : false
+	end
 	
 	def age
 		now = Time.now.utc.to_date
@@ -69,6 +83,19 @@ class Student < ActiveRecord::Base
 		return @mas
 	end
 	
+	def lost_year
+		@response = true
+		 self.scores.each do |score|
+			 if score.period.to_i == 5 && score.pass == true 
+				 p score.period.to_i
+				 p score.pass
+				 @response = true
+			 else
+				 @response = false
+			 end
+		 end
+		 @response
+	end
 	
   # export CSV
   def self.to_csv(options = {})
@@ -119,6 +146,8 @@ class ImportUserCSV
 	column :villa, as: ["Barrio"]
 	column :born_state, as: ["Nacido en", "Ciudad de nacimiento"]
 	column :displaced, as: ["Desplazado"]
+	column :disability, as: ["Incapacidad"]
+	column :drop, as: ["Retiro", "Abandono"]
 	column :residency_state, as: ["Lugar de residencia"]
 	column :zone, as: ["Estrato"]
 	identifier :identification

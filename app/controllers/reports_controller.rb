@@ -63,17 +63,18 @@ class ReportsController < ApplicationController
 	@disability = 0
 	@drop = 0
 	@graduated = 0
+	@lost_year = 0
 	@all = @students.count
 	@hash_etnic = {}
 	@overallscore = {} 
 	
   @results = {
-		"Delgadez severa" => {data: 0, girls: 0, boys: 0},
-	  "Delgadez" => {data: 0, girls: 0, boys: 0},
-		"Riesgo de delgadez" => {data: 0, girls: 0, boys: 0},
-		"Adecuado para la edad" => {data: 0, girls: 0, boys: 0},
-		"Sobrepeso" => {data: 0, girls: 0, boys: 0},
-		"Obesidad" => {data: 0, girls: 0, boys: 0}
+		"Delgadez severa" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0},
+	  "Delgadez" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0},
+		"Riesgo de delgadez" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0},
+		"Adecuado para la edad" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0},
+		"Sobrepeso" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0},
+		"Obesidad" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0}
  }
 	
 	@students.each do |student|
@@ -102,6 +103,9 @@ class ReportsController < ApplicationController
 			@graduated += 1
 		end
 		
+		if student.lost_year == true
+			@lost_year += 1
+		end
 		
 		#nutrition 
 	  if student.nutritions.present? 
@@ -136,47 +140,80 @@ class ReportsController < ApplicationController
 			end
 			
 			if @imc <= GeneralInfo.nutrition_points[student.gender]["lower"]
-				 @results["Delgadez severa"][:data] = @results["Delgadez severa"][:data] + 1
+				 @results["Delgadez severa"][:data] += 1
+				 # gender
 				 if student.gender == "femenino"
-					 @results["Delgadez severa"][:girls] = @results["Delgadez severa"][:girls] + 1
+					 @results["Delgadez severa"][:girls] += 1
 				 else
-					 @results["Delgadez severa"][:boys] = @results["Delgadez severa"][:boys] + 1
+					 @results["Delgadez severa"][:boys] += 1
 				 end
-			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["lower"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"]
-				@results["Delgadez"][:data] = @results["Delgadez"][:data] + 1
-				 if student.gender == "femenino"
-					 @results["Delgadez"][:girls] = @results["Delgadez"][:girls] + 1
+				 # /gender
+				 if student.touchdown
+					 @results["Delgadez severa"][:good] += 1
 				 else
-					 @results["Delgadez"][:boys] = @results["Delgadez"][:boys] + 1
+					 @results["Delgadez severa"][:bad] += 1
+				 end
+				 
+			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["lower"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"]
+				@results["Delgadez"][:data] += 1
+				 if student.gender == "femenino"
+					 @results["Delgadez"][:girls] += 1
+				 else
+					 @results["Delgadez"][:boys] += 1
+				 end
+				 if student.touchdown
+					 @results["Delgadez"][:good] += 1
+				 else
+					 @results["Delgadez"][:bad] += 1
 				 end
 			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["minimum"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] 
-				@results["Riesgo de delgadez"][:data] = @results["Riesgo de delgadez"][:data] + 1 
+				@results["Riesgo de delgadez"][:data] += 1
 			 if student.gender == "femenino"
-				 @results["Riesgo de delgadez"][:girls] = @results["Riesgo de delgadez"][:girls] + 1
+				 @results["Riesgo de delgadez"][:girls] += 1
 			 else
-				 @results["Riesgo de delgadez"][:boys] = @results["Riesgo de delgadez"][:boys] + 1
+				 @results["Riesgo de delgadez"][:boys] += 1
+			 end
+			 if student.touchdown
+				 @results["Riesgo de delgadez"][:good] += 1
+			 else
+				 @results["Riesgo de delgadez"][:bad] += 1
 			 end
 			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] 
-				@results["Adecuado para la edad"][:data] = @results["Adecuado para la edad"][:data] + 1 
+				@results["Adecuado para la edad"][:data] += 1
  			 if student.gender == "femenino"
- 				 @results["Adecuado para la edad"][:girls] = @results["Adecuado para la edad"][:girls] + 1
+ 				 @results["Adecuado para la edad"][:girls] += 1
  			 else
- 				 @results["Adecuado para la edad"][:boys] = @results["Adecuado para la edad"][:boys] + 1
+ 				 @results["Adecuado para la edad"][:boys] += 1
  			 end
+			 if student.touchdown
+				 @results["Adecuado para la edad"][:good] += 1
+			 else
+				 @results["Adecuado para la edad"][:bad] += 1
+			 end
 			elsif @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"] 
-				@results["Sobrepeso"][:data] = @results["Sobrepeso"][:data] + 1 
+				@results["Sobrepeso"][:data] += 1
 				 if student.gender == "femenino"
-					 @results["Sobrepeso"][:girls] = @results["Sobrepeso"][:girls] + 1
+					 @results["Sobrepeso"][:girls] += 1
 				 else
-					 @results["Sobrepeso"][:boys] = @results["Sobrepeso"][:boys] + 1
+					 @results["Sobrepeso"][:boys] += 1
+				 end
+				 if student.touchdown
+					 @results["Sobrepeso"][:good] += 1
+				 else
+					 @results["Sobrepeso"][:bad] += 1
 				 end
 			elsif @imc >= GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["maximum"]
-				@results["Obesidad"][:data] = @results["Obesidad"][:data] + 1 
+				@results["Obesidad"][:data] += 1
   			 if student.gender == "femenino"
-  				 @results["Obesidad"][:girls] = @results["Obesidad"][:girls] + 1
+  				 @results["Obesidad"][:girls] += 1
   			 else
-  				 @results["Obesidad"][:boys] = @results["Obesidad"][:boys] + 1
+  				 @results["Obesidad"][:boys] += 1
   			 end
+				 if student.touchdown
+					 @results["Obesidad"][:good] += 1
+				 else
+					 @results["Obesidad"][:bad] += 1
+				 end
 			end 
 		end
 		
@@ -266,7 +303,6 @@ class ReportsController < ApplicationController
 						end
 					end
 				else # else if not year
-					p "here"
 					if @overallscore.key?(score.area)
 						@overallscore[score.area][:many] += 1
 						@overallscore[score.area][:all] += score.score.to_f
@@ -279,7 +315,6 @@ class ReportsController < ApplicationController
 		# /grades
 	end
 	
-	p @overallscore
   # grades
 	@finish_grades = {
     name: 'Calificaciones academicas',

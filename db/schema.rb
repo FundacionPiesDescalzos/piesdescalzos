@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160412191204) do
+ActiveRecord::Schema.define(version: 20160415122043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20160412191204) do
 
   add_index "activities_students", ["activity_id"], name: "index_activities_students_on_activity_id", using: :btree
   add_index "activities_students", ["student_id"], name: "index_activities_students_on_student_id", using: :btree
+
+  create_table "assistances", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "student_id"
+    t.boolean  "assistance_mark"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "assistances", ["activity_id"], name: "index_assistances_on_activity_id", using: :btree
+  add_index "assistances", ["student_id"], name: "index_assistances_on_student_id", using: :btree
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "identification"
@@ -166,10 +177,11 @@ ActiveRecord::Schema.define(version: 20160412191204) do
     t.string   "area"
     t.string   "score"
     t.integer  "student_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "year"
     t.integer  "user_id"
+    t.boolean  "pass",           default: false
   end
 
   add_index "scores", ["student_id"], name: "index_scores_on_student_id", using: :btree

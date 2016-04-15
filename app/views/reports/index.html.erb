@@ -30,9 +30,12 @@
 	<br /><br />
 <div class="row">
 	<div class="large-6 medium-6 columns">
+		<div class="text-center"><h1><%= @lost_year %></h1> de <%= @all %> perdieron el año</div>
+		<br />
 		<div id="gender"></div>
 	</div>
 	<div class="large-6 medium-6 columns">
+		<br />
 		<div id="edad"></div>
 	</div>
 </div>
@@ -40,7 +43,8 @@
 <div class="row">
 	<div class="large-6 medium-6 columns">
 		<div id="container-speed"></div><br /><br />
-		<div id="food" class="graph"></div>
+		<div id="food" class="graph"></div><br /><br />
+		<div id="foodandeducation" class="graph"></div>
 	</div>
 	<div class="large-6 medium-6 columns">
 		<div id="etnic"></div><br /><br />
@@ -137,7 +141,6 @@
 				var etnias = <%= raw @finish_etnias.to_json %>;
 				var drilldown = <%= raw @drilldown.to_json %>;
 				var mytotal = <%= raw @all %>;
-				console.log(etnias);
 		    $('#etnic').highcharts({
 		        chart: {
 		            type: 'column'
@@ -260,7 +263,7 @@
 							            type: 'pie'
 							        },
 							        title: {
-							            text: 'Tablas de nutricion divididas por genero'
+							            text: 'Tablas de nutrición zoom a genero'
 							        },
 							        subtitle: {
 							            text: 'Clic en la barra para ver la diferenciación por genero'
@@ -348,6 +351,107 @@
 
 				
 				// / NUTRITIONS
+						
+				// NUTRITIONS & Education
+				
+			  var foodandeducation = <%= raw @results.to_json %> 
+	   	      $('#foodandeducation').highcharts({
+							chart: {
+								          backgroundColor:'transparent',
+				   	              plotBackgroundColor: null,
+				   	              plotBorderWidth: null,
+				   	              plotShadow: false,
+							            type: 'pie'
+							        },
+							        title: {
+							            text: 'Tablas de nutrición zoom a rendimiento academico'
+							        },
+							        subtitle: {
+							            text: 'Clic en la barra para ver el rendimiento academico'
+							        },
+							        xAxis: {
+							            type: 'category'
+							        },
+							        yAxis: {
+						            title: {
+						                text: 'Cantidad total de nutrición'
+						            }
+							        },
+							        legend: {
+							            enabled: false
+							        },
+							        plotOptions: {
+						            pie: {
+						                innerSize: 70,
+						                depth: 45,
+														allowPointSelect: true,
+						                cursor: 'pointer',
+						                dataLabels: {
+						                    enabled: true,
+						                    format: '{point.percentage:.1f} %'
+						                }
+						            }
+							        },
+							        tooltip: {
+							            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+							            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b><br/>'
+							        },
+	   	          series: [{
+	   	              name: 'Estudiantes en ',
+	   	              colorByPoint: true,
+	   	              data: [{
+	   	                  name: "Riesgo de delgadez",
+	   	                  y: foodandeducation["Riesgo de delgadez"].data,
+											  drilldown: 'Riesgo de delgadez'
+	   	              }, {
+	   	                  name: "Delgadez",
+	   	                  y: foodandeducation["Delgadez"].data,
+												drilldown: "Delgadez"
+	   	              }, {
+	   	                  name: 'Adecuado para la edad',
+	   	                  y: foodandeducation["Adecuado para la edad"].data,
+												drilldown: "Adecuado para la edad"
+	   	              }, {
+	   	                  name: 'Sobrepeso',
+	   	                  y: foodandeducation["Sobrepeso"].data,
+												drilldown: "Sobrepeso"
+	   	              }, {
+	   	                  name: 'Obesidad',
+	   	                  y: foodandeducation["Obesidad"].data,
+											  drilldown: "Obesidad"
+	   	              }]
+	   	          }],
+								drilldown: {
+									series: [{
+										name: 'Riesgo de delgadez',
+		                id: 'Riesgo de delgadez',
+		                data: [["Notas satisfactorias:", foodandeducation["Riesgo de delgadez"].good], ["Notas deficientes:", foodandeducation["Riesgo de delgadez"].bad]]
+									},
+								  {
+										name: 'Delgadez',
+		                id: 'Delgadez',
+		                data: [["Notas satisfactorias:", foodandeducation["Delgadez"].good], ["Notas deficientes:", foodandeducation["Delgadez"].bad]]
+								  },
+								  {
+										name: 'Adecuado para la edad',
+		                id: 'Adecuado para la edad',
+		                data: [["Notas satisfactorias:", foodandeducation["Adecuado para la edad"].good], ["Notas deficientes:", foodandeducation["Adecuado para la edad"].bad]]
+								  },
+								  {
+										name: 'Sobrepeso',
+		                id: 'Sobrepeso',
+		                data: [["Notas satisfactorias:", foodandeducation["Sobrepeso"].good], ["Notas deficientes:", foodandeducation["Sobrepeso"].bad]]
+								  },
+								  {
+										name: 'Obesidad',
+		                id: 'Obesidad',
+		                data: [["Notas satisfactorias:", foodandeducation["Obesidad"].good], ["Notas deficientes:", foodandeducation["Obesidad"].bad]]
+								  }]
+								}
+	   	      });
+
+				
+				// / NUTRITIONS & Education
 				
 				
 		});
