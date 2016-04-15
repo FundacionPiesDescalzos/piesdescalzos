@@ -32,8 +32,12 @@
   <li class="main">
     <a class="item" href="/reports"><%= fa_icon "angle-right angle none" %><%= fa_icon "bar-chart 2x icon" %> <span class="fix">Reportes</span></a>
   </li>
-  <li class="main">
-    <a class="item" href="/homes"><%= fa_icon "angle-right angle none" %><%= fa_icon "cog 2x icon" %> <span class="fix">Configuracion</span></a>
+  <li class="main submenu">
+    <a class="item" href="/homes"><%= fa_icon "angle-right angle" %><%= fa_icon "cog 2x icon" %> <span class="fix">Configuracion</span></a>
+    <ul class="subitem">
+			<li><a href="/homes"><%= fa_icon "circle-o circle-ls" %>  Contenido</a></li>
+			<li><a href="/users"><%= fa_icon "circle-o circle-ls" %>  Usuarios</a></li>
+    </ul>
   </li>
 </ul>
 
