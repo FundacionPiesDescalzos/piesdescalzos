@@ -28,6 +28,10 @@ enseñaran herramientas útiles del día a día para la generación de ingresos 
 					  	<li><%= link_to activity.name, edit_activity_path(activity) %></li>
 						<li>
 							<% @cnt = [] %>
+							<%# activity.assistances.each do |assistance| %>
+								<%# assistance.student.try(:name) %>
+								<%# assistance.try(:assistance_mark) %>
+							<%# end %>
 							<% activity.students.each do |student| %> 
 								<% if student.school.present? %>
 									<% @cnt.push(student.school.name) unless @cnt.include?(student.school.name)  %>

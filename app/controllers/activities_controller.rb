@@ -15,6 +15,7 @@ class ActivitiesController < ApplicationController
   # GET /activities/new
   def new
     @activity = Activity.new
+		@activity.assistances.build
   end
 
   # GET /activities/1/edit
@@ -25,7 +26,9 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @activity = Activity.new(activity_params)
-
+		p params
+		p "activity_params"
+    p activity_params
     respond_to do |format|
       if @activity.save
         format.html { redirect_to programs_url, notice: 'Activity was successfully created.' }
@@ -69,6 +72,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:name, :the_date, :boss, :active, :description, :program_id, {student_ids: []})
+      params.require(:activity).permit(:name, :the_date, :boss, :active, :description, :program_id, {student_ids: []}, {assistances: []})
     end
 end
