@@ -75,8 +75,33 @@ class ReportsController < ApplicationController
 		"Sobrepeso" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0},
 		"Obesidad" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0}
  }
-	
+  
+ @actividad = {}
 	@students.each do |student|
+		
+		#programs activities
+			if student.activities.present? 
+				student.activities.each do |activity|
+					if @actividad.key?(activity.name)
+						@actividad[activity.name][:students]+=1
+						student.assistances.each do |assistance|
+							if assistance.activity_id == activity.id && assistance.assistance_mark == true
+								@actividad[activity.name][:assistance]+=1
+							end
+						end
+					else
+						@actividad[activity.name] = {students: 0, assistance: 0, program: activity.program.name}
+						
+					end
+					#  activity.assistances.each do |assistance|
+					# 	 assistance.student.try(:name)
+					# 	 assistance.try(:assistance_mark)
+					# end
+				end
+			end
+		#/programs activities
+		
+		
 		# gender
 		if student.gender == "masculino"
 			@boys += 1 
@@ -342,6 +367,18 @@ class ReportsController < ApplicationController
 		@drilldown[:series].push({name:key, id: key, data:[["Delgadez severa",etnics["Delgadez severa"]],["Delgadez",etnics["Delgadez"]],["Riesgo de delgadez",etnics["Riesgo de delgadez"]],["Adecuado para la edad",etnics["Adecuado para la edad"]],["Sobrepeso",etnics["Sobrepeso"]],["Obesidad",etnics["Obesidad"]]]})
 	end
 	# / Etnias
+	@cuales_actividades = []
+	@asistio = []
+	@noasistio = []
+	
+	@actividad.each do |key, actividad|
+		@cuales_actividades.push(key)
+		@asistio.push(actividad[:students]-actividad[:assistance])
+		@noasistio.push(actividad[:assistance])
+	end
+	
+	p "@actividad"
+	p @actividad
 	
 	end
 	

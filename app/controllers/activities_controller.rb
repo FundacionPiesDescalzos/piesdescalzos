@@ -26,12 +26,9 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @activity = Activity.new(activity_params)
-		p params
-		p "activity_params"
-    p activity_params
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to programs_url, notice: 'Activity was successfully created.' }
+        format.html { redirect_to programs_url, notice: 'La actividad ha sido creada.' }
         format.json { render :show, status: :created, location: @activity }
       else
         format.html { render :new }
@@ -43,9 +40,12 @@ class ActivitiesController < ApplicationController
   # PATCH/PUT /activities/1
   # PATCH/PUT /activities/1.json
   def update
+		am = params[:activity][:assistances_attributes]
     respond_to do |format|
       if @activity.update(activity_params)
-        format.html { redirect_to programs_url, notice: 'Activity was successfully updated.' }
+				@old_ones = Assistance.where(id: @activity.assistance_ids).update_all(assistance_mark: false)
+				@assistances = Assistance.where(id: am).update_all(assistance_mark: true)
+        format.html { redirect_to programs_url, notice: 'La actividad ha sido actualizada.' }
         format.json { render :show, status: :ok, location: @activity }
       else
         format.html { render :edit }
@@ -72,6 +72,6 @@ class ActivitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def activity_params
-      params.require(:activity).permit(:name, :the_date, :boss, :active, :description, :program_id, {student_ids: []}, {assistances: []})
+      params.require(:activity).permit(:name, :the_date, :boss, :active, :description, :program_id, {student_ids: []}, assistances_attributes: [:assistance_mark, :id])
     end
 end

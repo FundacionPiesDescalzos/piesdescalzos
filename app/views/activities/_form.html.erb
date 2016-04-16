@@ -60,7 +60,7 @@
 					  <div class="right assistance">
 						  <h6 class="text-center">Asistio?</h6>
 							<% @court = Assistance.where(activity_id:@activity.id).where(student_id:student.id).first %>
-							<%= check_box_tag "activity[assistances][assistance_mark][]", true, @court.try(:assistance_mark) %>
+							<%= check_box_tag "activity[assistances_attributes][]", @court.try(:id), @court.try(:assistance_mark) %>
 					  </div>
 				   </label>
 			  <% end %>
