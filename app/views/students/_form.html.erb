@@ -166,8 +166,40 @@
 						  <div class="small-7 columns">
 						    <div><%= f.input_field :displaced, as: :boolean  %></div>
 						  </div>
-						</div>
-		  	    
+			</div>
+		  	
+		  	<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :drop, class: 'inline-label inline left' do %>
+				<%= fa_icon "user-times ls-icon" %> Retirado
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :drop, as: :boolean  %>
+		  </div>
+		</div>
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :why, class: 'inline-label inline left' do %>
+				<%= fa_icon "history ls-icon" %> Explicaciones adicionales
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<div class="inline-select"><%= f.text_area :why  %></div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="small-5 columns">
+				<%= f.label :graduated, class: 'inline-label inline left' do %>
+				<%= fa_icon "graduation-cap ls-icon" %> Graduado
+				<% end %>
+			</div>
+			<div class="small-7 columns">
+				<%= f.input_field :graduated, as: :boolean  %>
+		  </div>
+		</div>
 		  	    
 		</div>
 		  	

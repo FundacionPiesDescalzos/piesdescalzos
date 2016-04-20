@@ -75,9 +75,9 @@
 			<%end%>
 			<li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
 			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Retirado </span> <%= @student.drop? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Explicaciones adicionales </span> <%= @student.why %></li>
-			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "user-times ls-icon" %> Retirado </span> <%= @student.drop? ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "history ls-icon" %> Explicaciones adicionales </span> <%= @student.why %></li>
+			<li><span class="labeling"><%= fa_icon "graduation-cap ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.inhabilites? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.inh_description %></li>
 		</ul>
@@ -855,7 +855,7 @@
 		<div class="row">
 			<div class="small-5 columns">
 				<%= f.label :drop, class: 'inline-label inline left' do %>
-				<%= fa_icon "warning ls-icon" %> Retirado
+				<%= fa_icon "user-times ls-icon" %> Retirado
 				<% end %>
 			</div>
 			<div class="small-7 columns">
@@ -866,7 +866,7 @@
 		<div class="row">
 			<div class="small-5 columns">
 				<%= f.label :why, class: 'inline-label inline left' do %>
-				<%= fa_icon "map-marker ls-icon" %> Explicaciones adicionales
+				<%= fa_icon "history ls-icon" %> Explicaciones adicionales
 				<% end %>
 			</div>
 			<div class="small-7 columns">
@@ -877,7 +877,7 @@
 		<div class="row">
 			<div class="small-5 columns">
 				<%= f.label :graduated, class: 'inline-label inline left' do %>
-				<%= fa_icon "warning ls-icon" %> Graduado
+				<%= fa_icon "graduation-cap ls-icon" %> Graduado
 				<% end %>
 			</div>
 			<div class="small-7 columns">
