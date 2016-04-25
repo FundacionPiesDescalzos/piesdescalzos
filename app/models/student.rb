@@ -4,7 +4,7 @@ class Student < ActiveRecord::Base
 	accepts_nested_attributes_for :guardian
   belongs_to :school
 	has_many :scores
-	has_and_belongs_to_many :activities
+	has_many :activities, through: :assistances
 	has_many :nutritions
 	has_many :assistances
 	

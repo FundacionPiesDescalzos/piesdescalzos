@@ -59,7 +59,8 @@
 					  </div>
 					  <div class="right assistance">
 						  <h6 class="text-center">Asistio?</h6>
-							<input type="checkbox" name="asistencia" id="asistencia" />
+							<% @court = Assistance.where(activity_id:@activity.id).where(student_id:student.id).first %>
+							<%= check_box_tag "activity[assistances_attributes][]", @court.try(:id), @court.try(:assistance_mark) %>
 					  </div>
 				   </label>
 			  <% end %>
