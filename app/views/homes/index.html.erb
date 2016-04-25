@@ -27,8 +27,10 @@
 	        <td><%= home.paragraph %></td>
 	        <td><%= home.texto %></td>
 			    <td><%= image_tag home.pic_url(:thumb) %></td>
-	        <td><%= link_to 'Edit', edit_home_path(home) %></td>
-	        <td><%= link_to 'Destroy', home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	        <td><%= link_to edit_home_path(home) do %><%= fa_icon "pencil editar"%><% end %></td>
+	        <td>
+			<%= link_to home, method: :delete, data: { confirm: 'Estas seguro que quieres borrar?' } do %><%= fa_icon "trash borrar", class: 'redtxt' %><% end %>
+			</td>
 	      </tr>
 	    <% end %>
 	  </tbody>
