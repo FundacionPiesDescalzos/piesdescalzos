@@ -92,4 +92,9 @@ $(function() {
 				$(".alerts-info").hide();
 			}
 		});	
+    
+    $(".edit-right").click(function(e){
+      window.location = $(this).attr("href");
+    });
+    
 });

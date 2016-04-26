@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   def admin_only
     unless current_user.admin?
-      redirect_to :back, :alert => "Accesso denegado."
+      redirect_to "/", :alert => "Accesso denegado."
     end
   end
 

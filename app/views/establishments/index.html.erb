@@ -20,7 +20,7 @@
 </div>
 <br />
 <div class="est-data">
-&nbsp;<%= link_to new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success round nospace' do %>
+&nbsp;<%= link_to new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success round nospace for-admin' do %>
 	<%= fa_icon "plus" %> Añadir institución
 <% end %>
 &nbsp;
@@ -62,7 +62,7 @@
 			 </tbody>
 		   </table>
 		 <% end %>
-		 <%= link_to new_school_path, "data-reveal-id" => "school-new-#{establishment.code}-#{establishment.id}", class: 'button small success round nospace' do %>
+		 <%= link_to new_school_path, "data-reveal-id" => "school-new-#{establishment.code}-#{establishment.id}", class: 'button small success round nospace for-admin' do %>
 		 	<%= fa_icon "plus" %> Añadir Sede
 		 <% end %>
 		 <div class="reveal-modal nospace small radius" id="school-new-<%= establishment.code %>-<%= establishment.id %>" data-reveal>

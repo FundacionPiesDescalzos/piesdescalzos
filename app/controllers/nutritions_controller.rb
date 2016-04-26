@@ -11,6 +11,20 @@ class NutritionsController < ApplicationController
   # GET /nutritions/1.json
   def show
   end
+  
+  def export
+    @school_id = params[:nutrition_id]
+    @students = Student.where(school_id: @school_id)
+    @ids = []
+    @students.each do |student|
+      @ids.push(student.id)
+    end
+    @nutritions = Nutrition.where(student_id: @ids)
+    respond_to do |format|
+        format.html
+        format.csv { send_data @nutritions.to_csv }
+    end
+  end
 
   # GET /nutritions/new
   def new

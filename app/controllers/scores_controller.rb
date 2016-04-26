@@ -7,6 +7,20 @@ class ScoresController < ApplicationController
   def index
     @scores = Score.all
   end
+  
+  def export
+    @school_id = params[:score_id]
+    @students = Student.where(school_id: @school_id)
+    @ids = []
+    @students.each do |student|
+      @ids.push(student.id)
+    end
+    @scores = Score.where(student_id: @ids)
+    respond_to do |format|
+        format.html
+        format.csv { send_data @scores.to_csv }
+    end
+  end
 
   # GET /scores/1
   # GET /scores/1.json

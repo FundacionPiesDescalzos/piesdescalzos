@@ -1,6 +1,20 @@
 class Score < ActiveRecord::Base
   belongs_to :student
 	belongs_to :user
+  
+  
+  # export CSV
+  def self.to_csv
+    attributes = %w{identification period area score year}
+    (CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |score|
+        # csv << attributes.map{ |attr| user.send(attr) }
+        csv << [score.student.identification, score.period, score.area, score.score, score.year]
+      end
+    end).encode('WINDOWS-1252', :undef => :replace, :replace => '')
+  end
+  
   # import CSV
   def self.import(file, school, year, period, user)
 		allowed_attributes = ["identification", "area", "score", "pass"]

@@ -6,6 +6,18 @@ class Nutrition < ActiveRecord::Base
 	def imc
 		self.weight / (self.height*self.height)
 	end
+  
+  # export CSV
+  def self.to_csv
+    attributes = %w{identification weight height period year}
+    (CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |nutrition|
+        # csv << attributes.map{ |attr| user.send(attr) }
+        csv << [nutrition.student.identification, nutrition.weight, nutrition.height, nutrition.period, nutrition.year]
+      end
+    end).encode('WINDOWS-1252', :undef => :replace, :replace => '')
+  end
 	
   def self.import(file, school, year, period, user)
 		allowed_attributes = ["weight", "height", "identification"]

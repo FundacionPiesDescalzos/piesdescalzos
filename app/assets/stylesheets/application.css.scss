@@ -1,19 +1,19 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
- *= require_tree .
- *= require font-awesome
- *= require_self
- */
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
+*= require_tree .
+*= require font-awesome
+*= require_self
+*/
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,300,400italic,600,600italic,700,700italic');
 
@@ -21,15 +21,15 @@
 $primary_yellow:#FFD41F;
 
 @mixin border-radius($foo:5px){
-	-webkit-border-radius: $foo;
-	-moz-border-radius: $foo;
-	border-radius: $foo;
+  -webkit-border-radius: $foo;
+  -moz-border-radius: $foo;
+  border-radius: $foo;
 }
 
 @mixin shadow($anchura:-11px, $radius: 20px){
-	-webkit-box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
-	-moz-box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
-	box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
+  -webkit-box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
+  box-shadow: inset $anchura 0px $radius -9px rgba(0,0,0,0.5);
 }
 
 @mixin shadow2(){
@@ -40,9 +40,9 @@ $primary_yellow:#FFD41F;
 
 h4 {
 	
-//  font-style: italic;
- font-weight: 600;
- font-size: 17px;
+  //  font-style: italic;
+  font-weight: 600;
+  font-size: 17px;
 }
 
 h5 {
@@ -52,7 +52,7 @@ h5 {
 
 h6 {
   font-size: 13px;
-//  color: #2F2F2F;
+  //  color: #2F2F2F;
 }
 
 p {
@@ -64,67 +64,71 @@ p {
 }
 
 select {
-      font-size: 13px !important;
+  font-size: 13px !important;
 }
 
 .ib{
-	  display: inline-block;
+  display: inline-block;
 
 	
 }
 
+.nm{
+  margin: 0;
+}
+
 .redtxt{
-	color: red;
+  color: red;
 }
 
 .whitetxt{
-	color: #fff;
+  color: #fff;
 }
 
 .italic{
-	font-style: italic;
+  font-style: italic;
 }
 
 .full-width{
-	width: 100%;
+  width: 100%;
 }
 
 .transparent{
-	background: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.3);
 }
 
 .radius{
-	@include border-radius(10px);
+  @include border-radius(10px);
 }
 
 .full{
-	width: 100%;
+  width: 100%;
 }
 
 .main-logout{
-	background: url("https://s3.amazonaws.com/piesdescalzos/login-bg.jpg") no-repeat center center;
-	-webkit-background-size: cover;
-	background-size: cover;
-	width: 100vw;
-	height: 100vh;
+  background: url("https://s3.amazonaws.com/piesdescalzos/login-bg.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
 }
 
 .titular {
-    width: 310px;
-    padding-top: 40px;
-    margin: 0 auto;
+  width: 310px;
+  padding-top: 40px;
+  margin: 0 auto;
 }
 
 .negro {
-    background: #232321 !important;
-    color: #FBFBFB !important;
-    padding-left: 25px;
+  background: #232321 !important;
+  color: #FBFBFB !important;
+  padding-left: 25px;
 } 
 
 .logo {
-    padding-top: 20px;
-    text-align: center;
-    height: 100px;
+  padding-top: 20px;
+  text-align: center;
+  height: 100px;
 }
 
 
@@ -152,25 +156,25 @@ select {
 }
 
 .waku {
-      position: fixed;
-    right: 0px;
-    top: 70%;
+  position: fixed;
+  right: 0px;
+  top: 70%;
 }
 
 .pos-bottom{
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	padding-bottom: 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  padding-bottom: 20px;
 }
 
 .inner-padding{
-	padding:0 20px;
+  padding:0 20px;
 }
 
 .authform {
   form {
-	@include border-radius(8px);
+    @include border-radius(8px);
     background: rgba(255, 255, 255, 0.3);
     padding: 10px 20px;
     border: 0;
@@ -190,91 +194,91 @@ select {
 }
 
 .boton {
-    background-color: #FFD41F;
-    padding: 10px;
-    color: #000;
-    text-align: center;
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
-    letter-spacing: -0.01em;
-    font-weight: bold;
-    border: solid #E2B808 1px;
-    width: 100%;
+  background-color: #FFD41F;
+  padding: 10px;
+  color: #000;
+  text-align: center;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: -0.01em;
+  font-weight: bold;
+  border: solid #E2B808 1px;
+  width: 100%;
     
-      &:hover {
-        background-color: #F1C510;
-        color: #fff;
-      }
+  &:hover {
+    background-color: #F1C510;
+    color: #fff;
+  }
 }
 
 .downer{
-	background: rgba(255,255,255,.1);
-	padding:10px 20px;
-	a{
-		display: block;
-		color: #fff;
-		text-decoration: underline;
-		text-align: center;
-	}
+  background: rgba(255,255,255,.1);
+  padding:10px 20px;
+  a{
+    display: block;
+    color: #fff;
+    text-decoration: underline;
+    text-align: center;
+  }
 }
 
 
 
 .login{
-	width: 350px;
+  width: 350px;
   margin: 0 auto;
-	input:not([type]), input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea{
-		background: white;
-		@include border-radius(50px);
-		border: 0;
-		text-align: center;
-	}
+  input:not([type]), input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea{
+    background: white;
+    @include border-radius(50px);
+    border: 0;
+    text-align: center;
+  }
 }
 
 .nav-menu{
-	position: relative;
-	width: 23%;
-	float: left;
-	@include shadow;
-	height: 100vh;
+  position: relative;
+  width: 23%;
+  float: left;
+  @include shadow;
+  height: 100vh;
 }
 
 .nav{
 
-    margin-left:0px;
+  margin-left:0px;
 
-	li.main{
-		list-style-type: none;
+  li.main{
+    list-style-type: none;
     font-size: 14px;
     font-weight: 600;
     color: white;
     padding-top: 15px;
     padding-bottom: 5px;
-			span.fix{
-				position: relative;
-				top:-3px;
-				 padding-left: 8px;
+    span.fix{
+      position: relative;
+      top:-3px;
+      padding-left: 8px;
 				 
-			}
+    }
 
-		}
+  }
 		
-		li a{
-      padding-left: 15px;
-      color: #666;
-		}
-		li a:hover {
-		  color: #232321 !important;
+  li a{
+    padding-left: 15px;
+    color: #666;
+  }
+  li a:hover {
+    color: #232321 !important;
 		  
-		}
-	}
+  }
+}
 
 .fa-angle {
   padding-right: 10px;
 }
 
 .fa-home {
-      font-size: 36px;
+  font-size: 36px;
 }
 
 .fa-icon {
@@ -292,17 +296,17 @@ select {
 
 .subitem{
       
-      padding-left: 0px;
-      margin-top: 10px;
+  padding-left: 0px;
+  margin-top: 10px;
       
-      a {
-          width: 100%;
-          font-size: smaller;
-          color: white !important;
-          padding-top: 10px;
-          padding-bottom: 10px;
+  a {
+    width: 100%;
+    font-size: smaller;
+    color: white !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
           
-      }
+  }
    
 }
 
@@ -317,7 +321,7 @@ select {
   li{
      
     border-bottom: solid #000 1px;
-        display: flex;
+    display: flex;
         
   }
   li:hover{
@@ -329,68 +333,68 @@ select {
   
 }
 .nav-logo{
-	 padding-top: 40px;
-   padding-bottom: 40px;
-	img{
-		text-align: center;
-		display: block;
-		margin: 0 auto;
-	}
+  padding-top: 40px;
+  padding-bottom: 40px;
+  img{
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
 }
 
 .user-info{
-	background: #232321;
-	border-bottom: solid #000 1px;
-    border-top: solid #000 1px;
-	h6{
-		color: #fff;
-		margin: 0;
-		text-align: left;
-		padding-left: 10px;
-	}
-	height: 61px;
+  background: #232321;
+  border-bottom: solid #000 1px;
+  border-top: solid #000 1px;
+  h6{
+    color: #fff;
+    margin: 0;
+    text-align: left;
+    padding-left: 10px;
+  }
+  height: 61px;
 }
 
 .info{
-	width: 80%;
-	padding-top: 5px;
+  width: 80%;
+  padding-top: 5px;
   padding-left: 20px;
-	display: inline-block;
+  display: inline-block;
 	
-	h6 {
-	  margin-top: -11px;
+  h6 {
+    margin-top: -11px;
     margin-left: -10px;
     font-size: 13px;
-	}
+  }
 }
 
 .sign-out{
-    display: block;
-    background: #FFD41F;
-    color: #000;
-    margin-top: -1px;
-    height: 61px;
-    width: 20%;
-    float: right;
-    text-align: center;
-    border-bottom: solid #c6a911 1px;
-    border-top: solid #c6a911 1px;
-    border-left: solid #000 1px;
-	span{
-		font-size: 18px;
-		line-height: 18px;	
-	}
+  display: block;
+  background: #FFD41F;
+  color: #000;
+  margin-top: -1px;
+  height: 61px;
+  width: 20%;
+  float: right;
+  text-align: center;
+  border-bottom: solid #c6a911 1px;
+  border-top: solid #c6a911 1px;
+  border-left: solid #000 1px;
+  span{
+    font-size: 18px;
+    line-height: 18px;	
+  }
 }
 
 .fa-sign-out {
-      margin-top: 20px;
+  margin-top: 20px;
   
 }
 
 a.sign-out  {
-color: #232321;
+  color: #232321;
   :hover {
-color: #B59307 !important;
+    color: #B59307 !important;
   }
 }
 
@@ -399,134 +403,134 @@ color: #B59307 !important;
 }
 
 .fa-circle-ls {
-	// DONE: si la clase fa-circle-ls la cree yo, la que llama al favicon se llama otra cosa.
-    font-size: 9px;
-    padding-right: 8px;
-    top: -2px;
-    position: relative;
+  // DONE: si la clase fa-circle-ls la cree yo, la que llama al favicon se llama otra cosa.
+  font-size: 9px;
+  padding-right: 8px;
+  top: -2px;
+  position: relative;
 }
 
 .breadcrumb{
-	width: 30%;
-	background: #232321;
-	text-align: center;
-	padding: 40px 0;
-	float: left;
-	height: 120px;
-	h4 {
-	  font-style: italic;
+  width: 30%;
+  background: #232321;
+  text-align: center;
+  padding: 40px 0;
+  float: left;
+  height: 120px;
+  h4 {
+    font-style: italic;
     font-size: 20px;
     font-weight: 600;
-	}
+  }
 }
 .search-field{
   width: 70%;
-	padding:  15px 20px;
-	background: #EDEEF0;
-	display: inline-block;
-	height: 120px;
-	overflow: hidden;
+  padding:  15px 20px;
+  background: #EDEEF0;
+  display: inline-block;
+  height: 120px;
+  overflow: hidden;
 }
 
 .circulo {
-    border: 2px solid #F7F7F7;
-    border-radius: 50%;
-    width: 60%;
-    height: auto;
-    margin-bottom: 5px;
-    margin-top: 5px;
+  border: 2px solid #F7F7F7;
+  border-radius: 50%;
+  width: 60%;
+  height: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
   
 }
 
 table tr.even, table tr.alt, table tr:nth-of-type(even) {
-    background: #FFF;
+  background: #FFF;
 }
 
 table thead {
-        background: #FFFFFF;
+  background: #FFFFFF;
 }
 
 table {
-    background: #FFFFFF;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-spacing: 0px;
-    margin-bottom: 1.25rem;
-    table-layout: auto;
-		width: 100%;
-		tbody{
-			tr{
-				&.retired{
-					opacity:0.8;
-					background: #f2f2f2;
-				}
-				&.graduated{
-					opacity:0.8;
-					background: #E9FFD6;
-				}
-			}
-		}
-	&.black{
-		thead{
-			background: black;
-			tr th{
-				color: white;
-			}
-		}
-	}
+  background: #FFFFFF;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-spacing: 0px;
+  margin-bottom: 1.25rem;
+  table-layout: auto;
+  width: 100%;
+  tbody{
+    tr{
+      &.retired{
+        opacity:0.8;
+        background: #b1b1b1;
+      }
+      &.graduated{
+        opacity:0.8;
+        background: #E9FFD6;
+      }
+    }
+  }
+  &.black{
+    thead{
+      background: black;
+      tr th{
+        color: white;
+      }
+    }
+  }
 }
 
 table.dataTable thead .sorting {
-    background: none !important;
+  background: none !important;
 }
 
 table.dataTable thead .sorting_asc {
-    background: none !important;
+  background: none !important;
 }
 
 table tr th, table tr td {
-    color: #5A5A5A;
-    font-size: 0.875rem;
-    padding: 0.5625rem 0.625rem !important;
-    text-align: center;
+  color: #5A5A5A;
+  font-size: 0.875rem;
+  padding: 0.5625rem 0.625rem !important;
+  text-align: center;
 }
 
 div.dataTables_wrapper div.dataTables_filter input {
 
-    border-radius: 20px;
+  border-radius: 20px;
 }
 
 .index-icon{
-    font-size: 26px;
-    padding: 10px;
+  font-size: 26px;
+  padding: 10px;
 }
 
 .fa-green, .greentxt {
-    color: #6CD80F;
+  color: #6CD80F;
 }
 
 .fa-red {
-    color: #CE0000;
+  color: #CE0000;
 }
 
 .fa-editar {
-    border-radius: 20px;
-    background-color: #FFD41F;
-    padding: 10px;
-    color: #232321;
+  border-radius: 20px;
+  background-color: #FFD41F;
+  padding: 10px;
+  color: #232321;
 }
 
 .fa-borrar {
-    border-radius: 20px;
-    background-color: #FF4C4C;
-    padding: 10px;
-    color: #fff;
+  border-radius: 20px;
+  background-color: #FF4C4C;
+  padding: 10px;
+  color: #fff;
 }
 .nospace {
-    padding: 0px;
-    margin: 0px;
-//	quite el color pues si necesitamos un objeto sin padding y sin margin pero sin ese color? hay que poner el color en otra clase si es recurrente.. 
+  padding: 0px;
+  margin: 0px;
+  //	quite el color pues si necesitamos un objeto sin padding y sin margin pero sin ese color? hay que poner el color en otra clase si es recurrente.. 
 }
 .bold{
   font-weight: bold;  
@@ -534,7 +538,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .relative {
-      position: relative;
+  position: relative;
 }
 
 .flex {
@@ -542,355 +546,370 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 table tr td {
-    color: #5A5A5A;
-    font-size: none;
-    padding: 0px;
-    text-align: center;
+  color: #5A5A5A;
+  font-size: none;
+  padding: 0px;
+  text-align: center;
 }
 
 .rounded{
-	button{
-		@include border-radius(20px);
-		color:#000;
-		margin:0;
-	}
-	select{
-		margin: 0;
-		@include border-radius(20px);
-		max-width: 180px;
-	}
-	input{
-		@include border-radius(20px);
-		&[type="search"]{
-			width: 98%;
-		}
-	}
+  button{
+    @include border-radius(20px);
+    color:#000;
+    margin:0;
+  }
+  select{
+    margin: 0;
+    @include border-radius(20px);
+    max-width: 180px;
+  }
+  input{
+    @include border-radius(20px);
+    &[type="search"]{
+      width: 98%;
+    }
+  }
 }
 
 .back_link{
-	padding: 10px 20px;
-	margin-top: -6px;
-	background-color: #FBFBFB;
-	i{
-		width: 40px;
-		height: 40px;
+  padding: 10px 20px;
+  margin-top: -6px;
+  background-color: #FBFBFB;
+  i{
+    width: 40px;
+    height: 40px;
     font-size: 22px;
     line-height: 40px;
-		@include border-radius(100%);
-		background: $primary_yellow;
-		color:#000;
-		text-align: center;
-	}
-	span{
-			color: gray;
-	}
+    @include border-radius(100%);
+    background: $primary_yellow;
+    color:#000;
+    text-align: center;
+  }
+  span{
+    color: gray;
+  }
 }
 
 .degradado {
   width: 77%;
-    height: 112px;
-    position: absolute;
+  height: 112px;
+  position: absolute;
   background: -moz-linear-gradient(left, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(left, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to right, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#cc000000',GradientType=1 ); /* IE6-9 */
+  background: -webkit-linear-gradient(left, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, rgba(0,0,0,0.8) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#cc000000',GradientType=1 ); /* IE6-9 */
 }
 
 .student-banner{
-	background: url("https://s3.amazonaws.com/piesdescalzos/pies-textura.jpg") repeat-x top left;
-	height: 190px;
-	width: 100%;
-	border-bottom: 1px solid lightgray;
-	.pic{
-		display: inline-table;
-		width: 18%;
+  background: url("https://s3.amazonaws.com/piesdescalzos/pies-textura.jpg") repeat-x top left;
+  height: 190px;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  .pic{
+    display: inline-table;
+    width: 18%;
     top: 40px;
     position: relative;
-		img{
-			width: 100px;
-			height: 100px;
-			@include border-radius(100%);
-	    position: relative;
-	    top: 15px;
-	    left: 45px;
-		}
-	}
-	.student-info{
-		padding-top: 66px;
-		display: inline-table;
-		position: absolute;
-		width: 80%;
-		&.general-banner{
+    img{
+      width: 100px;
+      height: 100px;
+      @include border-radius(100%);
+      position: relative;
+      top: 15px;
+      left: 45px;
+    }
+  }
+  .student-info{
+    padding-top: 66px;
+    display: inline-table;
+    position: absolute;
+    width: 80%;
+    &.general-banner{
       top: 148px;
-			a.button.several{
-				margin: 0;
-			}
-		}
-	}
+      a.button.several{
+        margin: 0;
+      }
+    }
+  }
 }
 
 .est-data {
   padding-top: 10px;
-    margin-top: -6px;
-    padding-bottom: 10px;
-    padding-left: 10px;
+  margin-top: -6px;
+  padding-bottom: 10px;
+  padding-left: 10px;
 }
 
 .accordion-navigation {
 
-    color: #222222;
-    border-bottom: solid #CCC 1px;
-    border-top: solid #FFF 1px;
+  color: #222222;
+  border-bottom: solid #CCC 1px;
+  border-top: solid #FFF 1px;
   
 }
 
 .accordion .accordion-navigation > a, .accordion dd > a {
 
-    color: #222222;
-    display: block;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    padding: 10px;
+  color: #222222;
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  padding: 10px;
     
 }
 
 .pic-sede {
   display: inline-table;
-    width: 18%;
-    img{
-      width: 130px;
-      height: 130px;
-      position: relative;
-      top: 15px;
-      left: 25px;
-    }
+  width: 18%;
+  img{
+    width: 130px;
+    height: 130px;
+    position: relative;
+    top: 15px;
+    left: 25px;
+  }
 }
 
 .accordion .accordion-navigation.active > a, .accordion dd.active > a {
-    background: #F5F5F5;
-    color: #232321;
-    border-bottom: solid #CCC 1px;
-    border-top: solid #CCC 1px;
+  background: #F5F5F5;
+  color: #232321;
+  border-bottom: solid #CCC 1px;
+  border-top: solid #CCC 1px;
 }
 
 .extended-tabs{
-    width: 70%;
-    float: right;
-    min-height: 65vh;
-    padding:0 20px;
-    background: #f7f7f9;
-    border: solid #D3D3D3 1px;
-    border-top: none;
+  width: 70%;
+  float: right;
+  min-height: 65vh;
+  padding:0 20px;
+  background: #f7f7f9;
+  border: solid #D3D3D3 1px;
+  border-top: none;
 }
 
 
 
 .tabs-content{
-	.content{
-		ul.equal{
-			li{
+  .content{
+    ul.equal{
+      li{
         font-size: 13px;
         padding-top: 10px;
         padding-bottom: 10px;
-			}	
-		}	
-	}
+      }	
+    }	
+  }
 }
 
 .fa-ls-icon {
-    min-width: 25px;
-    font-size: 15px;
+  min-width: 25px;
+  font-size: 15px;
 }
 
 .edit-establishment{
-    position: absolute;
-    right: 0;
-    top: -46px;
-    height: 45px;
-    background: #FFD41F;
-    line-height: 45px;
-    color: black;
-    padding: 0 17px;
+  position: absolute;
+  right: 0;
+  top: -46px;
+  height: 45px;
+  background: #FFD41F;
+  line-height: 45px;
+  color: black;
+  padding: 0 17px;
 }
 
 .accordion .accordion-navigation > .content, .accordion dd > .content{
   border: solid #CCC 1px;
-	position: relative;
+  position: relative;
 }
 
 .edit_tabs{
-	display: none;
+  display: none;
 }
 
 .no-so-big{
-	max-width: 600px;
+  max-width: 600px;
 }
 
 $size_tab:57px;
 .tabs.vertical{
-	max-width: 30%;
-	width: 30%;
-	.tab-title{
+  max-width: 30%;
+  width: 30%;
+  .tab-title{
 	   
-		&.active{
-		    position: relative;
-			border-left: 6px solid $primary_yellow;
-			   a {
-			     color: #232321;
-			   }
+    &.active{
+      position: relative;
+      border-left: 6px solid $primary_yellow;
+      a {
+        color: #232321;
+      }
 			
-			.edit_tabs{
-				display: inline-block;
-			    float: right;
-			    position: absolute;
-			    top: 0;
-			    right: 0;
-			    width:$size_tab;
-			    height:$size_tab;
-			    background: $primary_yellow;
-				a{
-				  color: #232321;
-					display: block;
-					width: 100%;
-					height: 100%;
-				}
-				i{
-				  text-align: center;
-				  display: block;
-				  line-height:$size_tab;
-				  color: #000;
-				}
-			}
-		}
-		a{
-		  font-family: 'Open Sans', sans-serif;
+      .edit_tabs{
+        display: inline-block;
+        float: right;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width:$size_tab;
+        height:$size_tab;
+        background: $primary_yellow;
+        a{
+          color: #232321;
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        i{
+          text-align: center;
+          display: block;
+          line-height:$size_tab;
+          color: #000;
+        }
+      }
+    }
+    a{
+      font-family: 'Open Sans', sans-serif;
       font-size: 15px;
       line-height: 25px;
       font-weight: 600;
       color: #848484;
 
-		}
-	}
+    }
+  }
 }
 
 .tabs dd > a, .tabs .tab-title > a {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .tabs .tab-title > a:hover {
-    background-color: #F3F3F3;
+  background-color: #F3F3F3;
 }
 
 .students{
-	    min-height: 30vh;
-	label{
-		input{
-			position: relative;
-			top: -25px;
-		}
-	}
+  min-height: 30vh;
+  label{
+    input{
+      position: relative;
+      top: -25px;
+    }
+  }
 }
 
 
 
 .grados{
-	margin: 5px 0;
-	min-height: 50px;
-	 a{
-	  margin-left: 3px;
+  margin: 5px 0;
+  min-height: 50px;
+  a{
+    margin-left: 3px;
     margin-right: 3px;
     width: 47px;
     margin-top: 9px;
     
-      &:hover {
-         background-color: #ebbe00;
-         color: #000;
-	   }
-	   &:focus {
-         background-color: #ebbe00;
-         color: #000;
-     }
-	 }
+    &:hover {
+      background-color: #ebbe00;
+      color: #000;
+    }
+    &:focus {
+      background-color: #ebbe00;
+      color: #000;
+    }
+  }
 }
 
 .student-info{
-	margin:0 10px;
-	width: 15%;
-	h6{
-		font-weight: bold;
-		&.subheader{
-			font-weight: normal;
-		}
-	}
+  margin:0 10px;
+  width: 15%;
+  h6{
+    font-weight: bold;
+    &.subheader{
+      font-weight: normal;
+    }
+  }
 }
 
 .pre-info{
-	background: #FBFBFB;
-	padding: 10px;
+  background: #FBFBFB;
+  padding: 10px;
 }
 
 .activities {
-    background-color: none;
-    border: none;
+  background-color: none;
+  border: none;
     
-    .accordion-navigation {
+  .accordion-navigation {
     color: #222222;
     border-bottom: none;
     border-top: none;
-		position: relative;
-    }
-    .accordion-navigation > a:hover, .accordion dd > a:hover {
+    position: relative;
+  }
+  .accordion-navigation > a:hover, .accordion dd > a:hover {
     background: #fff; 
     color: #00A5E7;
-    }
+  }
     
-    .accordion-navigation > a, .accordion dd > a {
+  .accordion-navigation > a, .accordion dd > a {
     color: #135486;
     background-color: white;
     border-bottom: none;
     border-top: none;
     font-weight: bold;
-}
-    .accordion-navigation.active > a, .accordion dd.active > a {
+  }
+  .accordion-navigation.active > a, .accordion dd.active > a {
     background: #fff;
     color: #232321;
     border-bottom: none;
     border-top: none;
-}
-    .accordion-navigation > .content, .accordion dd > .content {
+  }
+  .accordion-navigation > .content, .accordion dd > .content {
     border: none;
     @include shadow2;
     position: relative;
+  }
+
+  .edit-right{
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    padding: 0 !important;
+  }
+
 }
 
-.edit-right{
-	float: right;
-  position: absolute;
-  right: 0;
-  top: 20px;
-	padding: 0 !important;
-}
-
+.accordion.activities{
+  .edit-right{
+    background: #FFD41F;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 !important;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #000;
+  }
 }
 
 input[type="search"].student_search{
-	width: 250px;
-	display: inline-block;
-	float: left;
+  width: 250px;
+  display: inline-block;
+  float: left;
 }
 
 .inline-select{
-	text-align: right;
-	&.center{
-		label{
-			text-align: center;
-		}
-	}
-	select{
-		display: inline-block;
-		width: 31%;
-		margin: 0 2px;
-	}
+  text-align: right;
+  &.center{
+    label{
+      text-align: center;
+    }
+  }
+  select{
+    display: inline-block;
+    width: 31%;
+    margin: 0 2px;
+  }
 }
 
 label.inline{
@@ -901,16 +920,16 @@ label.inline{
 
 .form-group {
   padding-top: 10px;
-    label {
-      color: #fff;
-    }
-    a {
-      color:#FFD41F;
-    }
+  label {
+    color: #fff;
+  }
+  a {
+    color:#FFD41F;
+  }
 }
 .form-inputs {
   label {
-        margin-bottom: 5px;
+    margin-bottom: 5px;
        
   }
   
@@ -923,70 +942,70 @@ label.inline{
 }
 
 .form-actions {
-	//TO-DO: escribir algo tan especifico para solo inputs es muy abierto y afectaria a muchos tipos de botones que despues queramos poner ahi con la clase expand y success que son por defecto de foundation mas nospace se logra lo mismo
-//    input {
-//        font-size: 16px;
-//        line-height: 30px;
-//        border-radius: 10px;
-//        background: #FFD41F;
-//        font-weight: 600;
-//        width: 100%;
-//        color: #000;
-//        text-align: center;
-//        font-family: 'Open Sans', sans-serif;
-//    }
-}
+  //TO-DO: escribir algo tan especifico para solo inputs es muy abierto y afectaria a muchos tipos de botones que despues queramos poner ahi con la clase expand y success que son por defecto de foundation mas nospace se logra lo mismo
+  //    input {
+    //        font-size: 16px;
+    //        line-height: 30px;
+    //        border-radius: 10px;
+    //        background: #FFD41F;
+    //        font-weight: 600;
+    //        width: 100%;
+    //        color: #000;
+    //        text-align: center;
+    //        font-family: 'Open Sans', sans-serif;
+    //    }
+  }
 
-.labeling{
+  .labeling{
     color: #848484;
     float: left;
     width: 40%;
     text-align: left;
     font-weight: 600;
-}
+  }
 
-#container{
-	width: 100%;
-	max-width: 700px;
-}
+  #container{
+    width: 100%;
+    max-width: 700px;
+  }
 
-.subitem{
-	display: none;
-}
+  .subitem{
+    display: none;
+  }
 
-.modal-header{
-	background: black;
-	padding: 20px;
-	text-align: center;
-}
+  .modal-header{
+    background: black;
+    padding: 20px;
+    text-align: center;
+  }
 
-.modal-content{
-	padding-top: 15px;
-}
+  .modal-content{
+    padding-top: 15px;
+  }
 
-.reveal-modal.small {
+  .reveal-modal.small {
     width: 42%;
-}
+  }
 
-.column, .columns, {
+  .column, .columns, {
     position: relative;
     padding-left: 0px;
     padding-right: 0px;
     float: left;
-}
+  }
 
-.b-header {
-  background-color: #ffd41f;
-}
+  .b-header {
+    background-color: #ffd41f;
+  }
 
-.alert-box.warning, .authform .warning#error_explanation:not(:empty) {
+  .alert-box.warning, .authform .warning#error_explanation:not(:empty) {
     background-color: #ffd41f;
     border-color: #C7A309;
     color: #333333;
     border-radius: 0px;
-}
+  }
 
-.reveal-modal .close-reveal-modal {
+  .reveal-modal .close-reveal-modal {
     color: #fff;
     cursor: pointer;
     font-size: 1.5rem;
@@ -995,27 +1014,27 @@ label.inline{
     position: absolute;
     top: 17px;
     right: 1.375rem;
-}
+  }
 
-.row, .row-x, section {
+  .row, .row-x, section {
     margin: 0 auto;
     max-width: 62.5rem;
     width: 100%;
     padding-right: 20px;
     padding-left: 20px;
-}
+  }
 
 
-.graph{
-	width: 100%;
-	max-width: 700px;
-}
-.inside-content{
-	padding:0 20px;
-	max-width: 70%;
-}
+  .graph{
+    width: 100%;
+    max-width: 700px;
+  }
+  .inside-content{
+    padding:0 20px;
+    max-width: 70%;
+  }
 
-.lefty {
+  .lefty {
     width: 39%;
     background: #171717;
     display: inline-block;
@@ -1024,238 +1043,254 @@ label.inline{
     padding-bottom: 20px;
     padding-right: 20px;
       
-      h2{
-        font-size: 24px;
-      }
-      h3{
-       font-size: 20px;
-      }
-      h4{
-        font-size: 18px;
-      }
+    h2{
+      font-size: 24px;
+    }
+    h3{
+      font-size: 20px;
+    }
+    h4{
+      font-size: 18px;
+    }
     
-}
+  }
 
 
-form.inliner{
-	label{
-		display: inline-block;
-		margin:0 10px;
-		select{
-			display: block;
-			min-width: 100px;
-		}
-		span{
-			display:block;
-		}
-	}
-	input[type="submit"]{
-		margin-top: 20px;
-	}
-}
+  form.inliner{
+    label{
+      display: inline-block;
+      margin:0 10px;
+      select{
+        display: block;
+        min-width: 100px;
+      }
+      span{
+        display:block;
+      }
+    }
+    input[type="submit"]{
+      margin-top: 20px;
+    }
+  }
 
-.title-black{
+  .title-black{
     background-color: #232321;
     color: white;
     padding: 20px;
     margin-bottom: 10px;
     
-      h1{
-            color: white;
-            font-size: 27px;
-      }
-}
+    h1{
+      color: white;
+      font-size: 27px;
+    }
+  }
 
-.candidato {
-   padding: 20px;
-   padding-top: 10px;
-  h2 {
-    font-size: 30px;
-    font-weight: bold;
-    color: #171717;
-    display: inline-block;
-    padding-left: 5px;
+  .candidato {
+    padding: 20px;
+    padding-top: 10px;
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+      color: #171717;
+      display: inline-block;
+      padding-left: 5px;
+    }
+    a{
+      background: #FFD41F;
+      font-weight: bold;
+      padding: 10px;
+      font-size: 13px;
+      color: #171717;
+      @include border-radius(20px);
+    }
+    img {
+      @include border-radius(100%);
+      margin-left: 10%;
+      width: 180px;
+      height: 180px;
+    }
   }
-  a{
-    background: #FFD41F;
-    font-weight: bold;
-    padding: 10px;
-    font-size: 13px;
-    color: #171717;
-    @include border-radius(20px);
-  }
-  img {
-    @include border-radius(100%);
-    margin-left: 10%;
-		width: 180px;
-		height: 180px;
-  }
-}
-.candidato-title {
+  .candidato-title {
     border-bottom: solid 2px #CCC;
     margin-bottom: 15px;
-}
+  }
 
-.orbit-bullets-container {
+  .orbit-bullets-container {
     text-align: center;
     top: -3px;
     position: relative;
     background-color: #F7F7F7;
     border: solid 1px #E4E4E4;
-}
+  }
 
-.orbit-bullets {
+  .orbit-bullets {
     display: block;
     float: none;
     margin: -16px auto 5px auto;
     overflow: hidden;
     text-align: center;
-}
+  }
 
-.right-content{
+  .right-content{
     padding: 15px;
     display: inline-block;
     width: 60%;
     position: relative;
     vertical-align: top;
-  a{
-	  background: #FFD41F;
-		display: inline-block;
-    font-weight: bold;
-    padding: 10px;
-    color: #171717;
-	  @include border-radius(20px);
-		margin-top: 15px;
+    a{
+      background: #FFD41F;
+      display: inline-block;
+      font-weight: bold;
+      padding: 10px;
+      color: #171717;
+      @include border-radius(20px);
+      margin-top: 15px;
+    }
   }
-}
 
-.orbit-container {
-//    height: 590px;
-}
+  .orbit-container {
+    //    height: 590px;
+  }
 
-.orbit-container .orbit-slides-container > * .orbit-caption {
+  .orbit-container .orbit-slides-container > * .orbit-caption {
     position: relative;
-}
+  }
 
-.assistance{
-	position: relative;
-	top: 25px;
-	h6{
-		display: block;
-    font-weight: bold;
-		color: #000;
-	}
-	input{
-		display: block;
-		top: 0 !important;
-	}
-}
+  .assistance{
+    position: relative;
+    top: 25px;
+    h6{
+      display: block;
+      font-weight: bold;
+      color: #000;
+    }
+    input{
+      display: block;
+      top: 0 !important;
+    }
+  }
 
-.inliner{
-	label{
-		text-align: left;
-	}
-	input{
-		margin-right:5px;
-		max-width: 220px;
-	}
-}
+  .inliner{
+    label{
+      text-align: left;
+    }
+    input{
+      margin-right:5px;
+      max-width: 220px;
+    }
+  }
 
-fieldset{
-	padding: 5px 10px;
-	margin: 5px;
-	legend{
-		font-size: 11px;
-		font-weight: normal;
-	}
-}
+  fieldset{
+    padding: 5px 10px;
+    margin: 5px;
+    legend{
+      font-size: 11px;
+      font-weight: normal;
+    }
+  }
 
-.yearish{
-	border: 2px solid red;
-	@include border-radius(100%);
-	height: 200px;
-	width: 200px;
-	padding-top: 30px;
-	margin: 0 auto;
-	background: rgba(255,0,0,.1);
-	h1{
-		margin: 0;
-		font-weight: bold;
-	}
-}
+  .yearish{
+    border: 2px solid red;
+    @include border-radius(100%);
+    height: 200px;
+    width: 200px;
+    padding-top: 30px;
+    margin: 0 auto;
+    background: rgba(255,0,0,.1);
+    h1{
+      margin: 0;
+      font-weight: bold;
+    }
+  }
 
-.alerts{
-	position: absolute;
-	bottom: 0;
-	background: rgb(35,35,35);
-	color: #fff;
-	height: 40px;
-	width: 100%;
-	.symbols{
-		a{
-			color: #fff;
-		}
-		i{
-			margin:0 5px;
-		}
-		display: inline-block;
-		height: 40px;
-    line-height: 40px;
-    padding-right: 10px;
-		margin-right: 10px;
-		border-right: 1px solid white;
-	}
-	.number-alert{
-		float:right;
-		background: rgb(197,95,31);
-		height: 40px;
-		width: 40px;
-		text-align: center;
-		line-height: 40px;
-	}
-}
+  .alerts{
+    position: absolute;
+    bottom: 0;
+    background: rgb(35,35,35);
+    color: #fff;
+    height: 40px;
+    width: 100%;
+    .symbols{
+      a{
+        color: #fff;
+      }
+      i{
+        margin:0 5px;
+      }
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      padding-right: 10px;
+      margin-right: 10px;
+      border-right: 1px solid white;
+    }
+    .number-alert{
+      float:right;
+      background: rgb(197,95,31);
+      height: 40px;
+      width: 40px;
+      text-align: center;
+      line-height: 40px;
+    }
+  }
 
-.alerts-info{
-	display: none;
-	height: 55vh;
-	overflow: auto;
-	background: rgb(35,35,35);
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	-webkit-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
-	-moz-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
-	box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
-	li{
-		padding: 0;
-		border-bottom: 1px solid rgba(255,255,255,.4);
-		&:first-child{
-			a{
-				&:hover{
-					background: rgb(76,76,76);
-					-webkit-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
-					-moz-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
-					box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
-				}
-			}
-		}
-		a{
-			padding: 10px;
-			display: block;
-			width: 100%;
-			height: 100%;
-			&:hover{
-				background: rgb(76,76,76);
-			}
-		}
-		h4{
-			margin: 0;
-		}
-		h6{
-			margin: 0;
-		}
-		.cole{
-			color: rgb(197,95,31);
-		}
-	}
-}
+  .alerts-info{
+    display: none;
+    height: 55vh;
+    overflow: auto;
+    background: rgb(35,35,35);
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    -webkit-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
+    -moz-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
+    box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.62);
+    li{
+      padding: 0;
+      border-bottom: 1px solid rgba(255,255,255,.4);
+      &:first-child{
+        a{
+          &:hover{
+            background: rgb(76,76,76);
+            -webkit-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
+            -moz-box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
+            box-shadow: inset -1px 20px 20px 0px rgba(0,0,0,0.32);
+          }
+        }
+      }
+      a{
+        padding: 10px;
+        display: block;
+        width: 100%;
+        height: 100%;
+        &:hover{
+          background: rgb(76,76,76);
+        }
+      }
+      h4{
+        margin: 0;
+      }
+      h6{
+        margin: 0;
+      }
+      .cole{
+        color: rgb(197,95,31);
+      }
+    }
+  }
+
+  .no-admin{
+    .edit-establishment{
+      opacity:.2;
+      background:ligth-gray;
+    }
+    .for-admin{
+      opacity:.2;
+    }
+  }
+  
+  #estudiantes{
+    .modal-content{
+      padding: 15px;
+    }
+  }

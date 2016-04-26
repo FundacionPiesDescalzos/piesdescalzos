@@ -78,8 +78,8 @@
 			<li><span class="labeling"><%= fa_icon "user-times ls-icon" %> Retirado </span> <%= @student.drop? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "history ls-icon" %> Explicaciones adicionales </span> <%= @student.why %></li>
 			<li><span class="labeling"><%= fa_icon "graduation-cap ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.inhabilites? ? "Si" : "No" %></li>
-			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.inh_description %></li>
+			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.try(:inhabilites) ? "Si" : "No" %></li>
+			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.try(:inh_description) %></li>
 		</ul>
 	</div> <!-- /tab 1 -->
 	<div class="content" id="panel2">
@@ -248,7 +248,7 @@
 					<td><%= GeneralInfo.period[nutrition.period.to_i] %></td>
 					<td><%= nutrition.height %> Mts</td>
 					<td><%= nutrition.weight %> Kg</td>
-					<td><%= @imc = nutrition.imc %></td>
+					<td><%= @imc = nutrition.imc.round(2) %></td>
 					<td><%= fa_icon "cutlery ls-icon", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'}" %></td>
 				</tr>
 				<% end %>
@@ -319,7 +319,7 @@
 		</script>
 	</div>
 	<div class="content" id="panel6">
-		<div class="row collapse">
+		<!--<div class="row collapse">
 			<div class="small-8 columns">
 				<div class="row">
 					<div class="small-9 columns">
@@ -332,7 +332,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 		<ul class="accordion" data-accordion>
 			<% if @programs_m.present? %>
 			<li class="accordion-navigation">

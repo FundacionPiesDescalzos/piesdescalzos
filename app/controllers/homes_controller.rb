@@ -1,6 +1,7 @@
 class HomesController < ApplicationController
   before_action :set_home, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :admin_only, only: [:index, :show, :edit, :update, :destroy]
   # GET /homes
   # GET /homes.json
   def index
@@ -76,6 +77,12 @@ class HomesController < ApplicationController
       @home = Home.find(params[:id])
     end
 
+    def admin_only
+      unless current_user.admin?
+        redirect_to "/", :alert => "Accesso denegado."
+      end
+    end
+    
     # Never trust parameters from the scary internet, only allow the white list through.
     def home_params
       params.require(:home).permit(:name, :paragraph, :email, :texto, :pic, :slide,  pictures: [])

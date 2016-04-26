@@ -96,17 +96,17 @@ class Student < ActiveRecord::Base
 		 end
 		 @response
 	end
-	
-  # export CSV
-  def self.to_csv(options = {})
-    (CSV.generate(options) do |csv|
-      csv << column_names
-      all.each do |students|
-        csv << students.attributes.values_at(*column_names)
+  
+  def self.to_csv
+    attributes = ["Identificacion", "Nombre", "Tipo de identificacion", "Genero", "Direccion", "Ultimo curso", "desescolarizado", "Nacimiento", "Etnia", "Barrio", "Nacido en", "Desplazado", "Retiro", "Graduado", "Lugar de residencia", "Estrato"]
+    (CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |student|
+        # csv << attributes.map{ |attr| user.send(attr) }
+         csv << [student.identification, student.name, student.id_type, student.gender, student.address, student.last_course, student.outschool_years, student.born, student.etnic, student.villa, student.born_state, student.displaced, student.drop, student.graduated, student.residency_state, student.zone]
       end
     end).encode('WINDOWS-1252', :undef => :replace, :replace => '')
   end
-	
 	
   # import CSV
   def self.import(file, school)
@@ -140,13 +140,13 @@ class ImportUserCSV
 	column :address, as: ["Direccion", /Direcci(ó|o)n/i ]
 	column :last_course, as: ["Ultimo curso"]
 	column :outschool_years, as: ["desescolarizado"]
-	column :identification, as: ["Identification"]
+	column :identification, as: ["Identificacion"]
 	column :born, as: ["Nacimiento"]
 	column :etnic, as: ["Etnia"]
 	column :villa, as: ["Barrio"]
 	column :born_state, as: ["Nacido en", "Ciudad de nacimiento"]
 	column :displaced, as: ["Desplazado"]
-	column :disability, as: ["Incapacidad"]
+	column :graduated, as: ["Graduado"]
 	column :drop, as: ["Retiro", "Abandono"]
 	column :residency_state, as: ["Lugar de residencia"]
 	column :zone, as: ["Estrato"]

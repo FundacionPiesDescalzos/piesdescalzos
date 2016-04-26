@@ -2,12 +2,18 @@ Rails.application.routes.draw do
   resources :activities
   resources :programs
   resources :nutritions do 
-    collection { post :import }
+    get :export
+    collection do 
+      post :import 
+    end
   end
   resources :homes
   resources :attendances
-  resources :scores do 
-    collection { post :import }
+  resources :scores do
+    get :export
+    collection do
+      post :import 
+    end
   end
   resources :schools
   resources :establishments do 
@@ -15,6 +21,7 @@ Rails.application.routes.draw do
   end
   resources :health_cares
   resources :students do 
+    get :export
     collection { post :import }
   end
   resources :guardians

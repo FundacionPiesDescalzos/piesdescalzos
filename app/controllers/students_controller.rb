@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
-	before_action :authenticate_user!
+  before_action :authenticate_user!
+  before_action :admin_only, only: [:edit, :update, :new, :destroy]
 
   # GET /students
   # GET /students.json
@@ -22,6 +23,15 @@ class StudentsController < ApplicationController
 		@programs_edu =	Program.where(line: "epc").joins(:activities).where(activities: {id: @activities})
 		@programs_m =	Program.where(line: "n").joins(:activities).where(activities: {id: @activities})
 		@programs_h =	Program.where(line: "h").joins(:activities).where(activities: {id: @activities})
+  end
+  
+  def export
+    @school_id = params[:student_id]
+    @students = Student.where(school_id: @school_id)
+    respond_to do |format|
+        format.html
+        format.csv { send_data @students.to_csv }
+    end
   end
 
   # GET /students/new
@@ -90,6 +100,11 @@ class StudentsController < ApplicationController
       @student = Student.find(params[:id])
     end
     
+    def admin_only
+      unless current_user.admin?
+        redirect_to "/", :alert => "Accesso denegado."
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
       params.require(:student).permit(:name, :id_type, :gender, :address, :last_course, :outschool_years, :identification, :born, :etnic, :villa, :born_state, :displaced, :disability, :drop, :pic, :graduated, :why, :residency_state, :zone, :guardian_id, :school_id, :health_care_id, guardian_attributes: [:id_type, :identification, :name, :last_name, :second_name, :gender, :born, :address, :villa, :zone, :department, :municipality, :phone, :cel, :email, :relationship, :student_id])
