@@ -8,7 +8,7 @@ class ScoresController < ApplicationController
     @scores = Score.all
   end
   
-  def export
+  def export_scores
     @school_id = params[:score_id]
     @students = Student.where(school_id: @school_id)
     @ids = []

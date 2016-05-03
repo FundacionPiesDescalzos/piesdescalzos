@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :activities
   resources :programs
   resources :nutritions do 
-    get :export
+    get :export_nutritions
     collection do 
       post :import 
     end
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :homes
   resources :attendances
   resources :scores do
-    get :export
+    get :export_scores
     collection do
       post :import 
     end

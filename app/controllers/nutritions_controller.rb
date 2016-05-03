@@ -12,7 +12,7 @@ class NutritionsController < ApplicationController
   def show
   end
   
-  def export
+  def export_nutritions
     @school_id = params[:nutrition_id]
     @students = Student.where(school_id: @school_id)
     @ids = []

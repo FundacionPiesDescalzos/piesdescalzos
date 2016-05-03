@@ -75,7 +75,7 @@
   </div>
   <div class="content" id="panel1a">
 	<a href="#" class="button round success several for-admin" data-reveal-id="notas"><%= fa_icon "upload" %> Cargar notas</a>
-  <%= link_to score_export_path(@school.id,format: "csv"), class: "button tiny secondary round right" do %> 
+  <%= link_to score_export_scores_path(@school.id,format: "csv"), class: "button tiny secondary round right" do %> 
     <%= fa_icon "download" %> exportar csv 
   <% end %>
 	<% if @school.students.count > 0 %>
@@ -142,7 +142,7 @@
   </div>
   <div class="content" id="panel2a">
 	  <a href="#" class="button round success several for-admin" data-reveal-id="nutricion"><%= fa_icon "upload" %> Cargar nutrición</a>
-    <%= link_to nutrition_export_path(@school.id,format: "csv"), class: "button tiny secondary round right" do %> 
+    <%= link_to nutrition_export_nutritions_path(@school.id,format: "csv"), class: "button tiny secondary round right" do %> 
       <%= fa_icon "download" %> exportar csv
     <% end %>
 	  <% if @school.students.present? %>
