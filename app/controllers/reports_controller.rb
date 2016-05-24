@@ -76,6 +76,10 @@ class ReportsController < ApplicationController
 		"Obesidad" => {data: 0, girls: 0, boys: 0, good: 0, bad: 0}
  }
   
+ if !@students.present? 
+   @students = Student.all
+ end
+ 
  @actividad = {}
 	@students.each do |student|
 		
