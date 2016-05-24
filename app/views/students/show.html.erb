@@ -55,33 +55,57 @@
 <div class="tabs-content extended-tabs">
 	<div class="content active" id="panel1">
 		<ul class="no-bullet equal">
+      <% if @student.id_type.present? %>
 			<li><span class="labeling"><%= fa_icon "credit-card ls-icon" %> Tipo de identificación:</span> <%= GeneralInfo.kids_id.key(@student.id_type) %></li>
+      <% end %>
+      <% if @student.identification.present? %>
 			<li><span class="labeling"><%= fa_icon "hashtag ls-icon" %> Identificación </span> <%= @student.identification %></li>
+      <% end %>
 			<hr />
-			<li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %>  <i><%= @student.age %> Años <%= @student.age_month %> <%= @student.age_month == 1 ? "mes" : "meses" %></i></li>
+      <% if @student.born.present? %>
+  			<li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %>  <i><%= @student.age %> Años <%= @student.age_month %> <%= @student.age_month == 1 ? "mes" : "meses" %></i></li>
+      <% end %>
+      <% if @student.gender.present? %>
 			<li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
+      <% end %>
       <% if @student.outschool_years.present? %>
 			<li><span class="labeling"><%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
       <% end %>
 			<hr />
+      <% if @student.born_state.present? %>
 			<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Lugar de nacimiento</span> <%= @student.born_state %></li>
+      <% end %>
+      <% if @student.residency_state.present? %>
 			<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar de residencia </span> <%= @student.residency_state %></li>
+      <% end %>
+      <% if @student.villa.present? %>
 			<li><span class="labeling"><%= fa_icon "map-marker ls-icon" %> Barrio o vereda </span> <%= @student.villa %></li>
-			<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.zone %></li>
-			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
+      <% end %>
+      <% if @student.zone.present? %>
+  			<li><span class="labeling"><%= fa_icon "list-ol ls-icon" %> Estrato social </span> <%= @student.zone %></li>
+      <% end %>
+      <% if @student.address.present? %>
+  			<li><span class="labeling"><%= fa_icon "compass ls-icon" %> Dirección </span> <%= @student.address %></li>
+      <% end %>
 			<hr />
 			<% if @student.guardian.nil? %> 
 			<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> No tiene registrado </li>
 			<%else%> 
 			<li><span class="labeling"><%= fa_icon "shield ls-icon" %> Acudiente </span> <%= @student.guardian.name %></li>
 			<%end%>
-			<li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
+      <% if @student.etnic.present? %> 
+  			<li><span class="labeling"><%= fa_icon "group ls-icon" %> Etnia </span> <%= @student.etnic %></li>
+      <% end %>
+      <% if @student.displaced.present? %> 
 			<li><span class="labeling"><%= fa_icon "warning ls-icon" %> Desplazado </span> <%= @student.displaced? ? "Si" : "No" %></li>
+      <% end %>
 			<li><span class="labeling"><%= fa_icon "user-times ls-icon" %> Retirado </span> <%= @student.drop? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "history ls-icon" %> Explicaciones adicionales </span> <%= @student.why %></li>
 			<li><span class="labeling"><%= fa_icon "graduation-cap ls-icon" %> Graduado </span> <%= @student.graduated? ? "Si" : "No" %></li>
 			<li><span class="labeling"><%= fa_icon "wheelchair ls-icon" %> Discapacidad</span> <%= @student.health_care.try(:inhabilites) ? "Si" : "No" %></li>
+      <% if @student.health_care.try(:inh_description).present? %> 
 			<li><span class="labeling"><%= fa_icon "heartbeat ls-icon" %> Descripción de la discapacidad</span> <%= @student.health_care.try(:inh_description) %></li>
+      <% end %>
 		</ul>
 	</div> <!-- /tab 1 -->
 	<div class="content" id="panel2">
