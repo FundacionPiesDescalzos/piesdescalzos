@@ -60,7 +60,9 @@
 			<hr />
 			<li><span class="labeling"><%= fa_icon "child ls-icon" %> Fecha de nacimiento</span> <%= @student.born %>  <i><%= @student.age %> Años <%= @student.age_month %> <%= @student.age_month == 1 ? "mes" : "meses" %></i></li>
 			<li><span class="labeling"><%= fa_icon "venus-mars ls-icon" %> Genero </span> <%= @student.gender %></li>
+      <% if @student.outschool_years.present? %>
 			<li><span class="labeling"><%= fa_icon "thumbs-o-down ls-icon" %> Años desescolarizado</span> <%= @student.outschool_years > 0 ? @student.outschool_years : "Ninguno" %></li>
+      <% end %>
 			<hr />
 			<li><span class="labeling"><%= fa_icon "globe ls-icon" %> Lugar de nacimiento</span> <%= @student.born_state %></li>
 			<li><span class="labeling"><%= fa_icon "map-signs ls-icon" %> Lugar de residencia </span> <%= @student.residency_state %></li>
