@@ -1,12 +1,12 @@
 class Student < ActiveRecord::Base
-  has_one :guardian
-	has_one :health_care
+  has_one :guardian, dependent: :destroy
+	has_one :health_care, dependent: :destroy
 	accepts_nested_attributes_for :guardian
   belongs_to :school
-	has_many :scores
+	has_many :scores, dependent: :destroy
 	has_many :activities, through: :assistances
-	has_many :nutritions
-	has_many :assistances
+	has_many :nutritions, dependent: :destroy
+	has_many :assistances, dependent: :destroy
 	
 	mount_uploader :pic, PicUploader
 	
