@@ -65,7 +65,7 @@
 		 <%= link_to new_school_path, "data-reveal-id" => "school-new-#{establishment.code}-#{establishment.id}", class: 'button small success round nospace for-admin' do %>
 		 	<%= fa_icon "plus" %> Añadir Sede
 		 <% end %>
-     <%= link_to 'Borrar institución', establishment, class: 'button alert radius small right', method: :delete, data: { confirm: 'Are you sure?' } %>
+     <%= link_to 'Borrar institución', establishment, class: 'button alert radius small right', method: :delete, data: { confirm: 'Seguro? La institución sus sedes y estudiantes seran borrados' } %>
 		 <div class="reveal-modal nospace small radius" id="school-new-<%= establishment.code %>-<%= establishment.id %>" data-reveal>
 		    <div class="modal-header">
 		    	<h5 class="whitetxt nospace">Añadir sede a <%= establishment.name %></h5>

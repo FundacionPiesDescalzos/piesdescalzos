@@ -63,7 +63,7 @@ class EstablishmentsController < ApplicationController
   def destroy
     @establishment.destroy
     respond_to do |format|
-      format.html { redirect_to establishments_url, notice: 'Establishment was successfully destroyed.' }
+      format.html { redirect_to establishments_url, notice: 'La institución y todos los datos de sus sedes y estudiantes ha sido borrada' }
       format.json { head :no_content }
     end
   end
