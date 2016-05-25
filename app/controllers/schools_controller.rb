@@ -12,7 +12,7 @@ class SchoolsController < ApplicationController
   # GET /schools/1.json
   def show
 		@students = Student.where(school_id: @school.id)
-		@group = {"1"=>[],"2"=>[],"3"=>[],"4"=>[],"5"=>[],"6"=>[],"7"=>[],"8"=>[],"9"=>[],"10"=>[],"11"=>[],"12"=>[]}
+		@group = {"0"=>[],"1"=>[],"2"=>[],"3"=>[],"4"=>[],"5"=>[],"6"=>[],"7"=>[],"8"=>[],"9"=>[],"10"=>[],"11"=>[],"12"=>[]}
 		@st = []
 		@students.each do |student|
 			@group[student.last_course].push(student.average)
@@ -88,7 +88,7 @@ class SchoolsController < ApplicationController
   def destroy
     @school.destroy
     respond_to do |format|
-      format.html { redirect_to establishments_url, notice: 'La sede y todos sus estudiantes han sido borrados' }
+    format.html { redirect_to establishments_url, notice: 'La sede y todos sus estudiantes han sido borrados' }
       format.json { head :no_content }
     end
   end
