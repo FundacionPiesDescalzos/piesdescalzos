@@ -58,7 +58,7 @@
 					<td><p><%= school.contact_name %></p></td>
 					<td><%= mail_to school.email %></td>
 					<td><h5 class="subheader"><%= school.foundation_present? ? "Si" : "NO" %></h5></td>
-          <td><% link_to school, class: 'button alert round tiny ', method: :delete, data: { confirm: 'Seguro? la sede y los estudiantes seran borrados' } do %><span class="fa fa-trash"></span><% end %></td>
+          <td><%= link_to school, class: 'button alert round tiny ', method: :delete, data: { confirm: 'Seguro? la sede y los estudiantes seran borrados' } do %><span class="fa fa-trash"></span><% end %></td>
 			 	</tr>
 		   <% end %>
 			 </tbody>
