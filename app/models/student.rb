@@ -9,6 +9,9 @@ class Student < ActiveRecord::Base
 	has_many :assistances, dependent: :destroy
 	
 	mount_uploader :pic, PicUploader
+  
+  validates :name, :gender, :last_course, :identification, presence: true
+  validates :last_course, numericality: { only_integer: true, less_than: 12 }
 	
 	def self.genderize(g)
 	   joins(:nutritions, :school).where("students.gender = :gen AND schools.created_at <= :end_date", {gen: g, end_date: Time.now.midnight}) if g.present?
