@@ -16,7 +16,7 @@ class SchoolsController < ApplicationController
 		@st = []
 		@students.each do |student|
 			@group[student.last_course].push(student.average)
-			p student.average	
+			#p student.average	
 		end
 		@group.reject!{ |k,v| !v.any? }
 		@courses = [];
