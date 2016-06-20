@@ -20,23 +20,28 @@ class Score < ActiveRecord::Base
 		allowed_attributes = ["identification", "area", "score", "pass"]
 		  CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
 			student = Student.find_by_identification(row["identification"])
-      areas = ["matematicas", "ingles", "historia", "fisica"]
+      areas = ["matematicas", "ingles", "historia", "Educacion fisica"]
       posible = row.to_hash.select { |k,v| areas.include? k }
-      # p "posible"
-      # p posible
+      p "posible"
+      p posible
 			if student.present? && student.school_id = school
-			  scores = where("identification = ? AND period = ?", row["identification"], period)
-        if scores 
-          scores.each do |score|
-            p "score"
-            p score 
+        scores = where(period: period).joins(:student).merge(Student.where(:identification => row["identification"]))
+        if !scores.empty?
+          # go trough all of them and compare with posible areas update or create
+          scores.each do |score| 
+            p "score.area"
+            p score.area.gsub(/[^\x00-\x7F]/n,'').downcase.to_s
+            if areas.include? score.area.gsub(/[^\x00-\x7F]/n,'').downcase.to_s
+              p "new score"
+              p posible[score.area]
+              # score.score = posible[score.area]
+              # score.save!
+            end
           end
         else
           p "create them"
         end
 			  # score.attributes = row.to_hash.select { |k,v| allowed_attributes.include? k }
-        p "row"
-        p row
         # score.student_id = student.id
         # score.user_id = user
         # score.period = period

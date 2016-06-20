@@ -21,7 +21,7 @@
         <td><%= score.period %></td>
         <td><%= score.area %></td>
         <td><%= score.score %></td>
-        <td><%= score.student %></td>
+        <td><%= score.student.present? ? score.student.identification : 'no hay estudiante' %></td>
         <td><%= link_to 'Show', score %></td>
         <td><%= link_to 'Edit', edit_score_path(score) %></td>
         <td><%= link_to 'Destroy', score, method: :delete, data: { confirm: 'Are you sure?' } %></td>
