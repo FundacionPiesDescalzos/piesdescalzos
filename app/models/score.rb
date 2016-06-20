@@ -1,6 +1,7 @@
 class Score < ActiveRecord::Base
   belongs_to :student
 	belongs_to :user
+  validates :score, :user_id, :area, :year, :student_id, :period, presence: true
   
   
   # export CSV
@@ -20,7 +21,7 @@ class Score < ActiveRecord::Base
 		allowed_attributes = ["identification", "area", "score", "pass"]
 		  CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
 			student = Student.find_by_identification(row["identification"])
-      areas = ["matematicas", "ingles", "historia", "Educacion fisica"]
+      areas = ["Naturales", "Sociales", "Lenguaje", "Matematicas", "Disciplina"]
       posible = row.to_hash.select { |k,v| areas.include? k }
       p "posible"
       p posible
@@ -29,24 +30,33 @@ class Score < ActiveRecord::Base
         if !scores.empty?
           # go trough all of them and compare with posible areas update or create
           scores.each do |score| 
-            p "score.area"
-            p score.area.gsub(/[^\x00-\x7F]/n,'').downcase.to_s
-            if areas.include? score.area.gsub(/[^\x00-\x7F]/n,'').downcase.to_s
-              p "new score"
-              p posible[score.area]
-              # score.score = posible[score.area]
-              # score.save!
+            if areas.include? score.area
+              score.area = score.area
+              score.score = posible[score.area]
+              score.student_id = student.id
+              score.user_id = user
+              score.period = period
+              score.year = year
+              score.save!
             end
           end
         else
-          p "create them"
+          posible.each do |k,v|
+            if v.present?
+              new_score = new
+              new_score.area = k 
+              new_score.score = v
+              new_score.student_id = student.id
+              new_score.user_id = user
+              new_score.period = period
+              new_score.year = year
+              new_score.save!
+              # p "new_score"
+              # p new_score
+            end 
+          end
+          
         end
-			  # score.attributes = row.to_hash.select { |k,v| allowed_attributes.include? k }
-        # score.student_id = student.id
-        # score.user_id = user
-        # score.period = period
-        # score.year = year
-        # score.save!
 			end
 		end
     p "the end"
