@@ -20,45 +20,40 @@ class Score < ActiveRecord::Base
   def self.import(file, school, year, period, user)
 		allowed_attributes = ["identification", "area", "score", "pass"]
 		  CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
-			student = Student.find_by_identification(row["identification"])
-      areas = ["Naturales", "Sociales", "Lenguaje", "Matematicas", "Disciplina"]
-      posible = row.to_hash.select { |k,v| areas.include? k }
-      p "posible"
-      p posible
-			if student.present? && student.school_id = school
-        scores = where(period: period).joins(:student).merge(Student.where(:identification => row["identification"]))
-        if !scores.empty?
-          # go trough all of them and compare with posible areas update or create
-          scores.each do |score| 
-            if areas.include? score.area
-              score.area = score.area
-              score.score = posible[score.area]
-              score.student_id = student.id
-              score.user_id = user
-              score.period = period
-              score.year = year
-              score.save!
+  			student = Student.find_by_identification(row["identification"])
+        areas = ["Naturales", "Sociales", "Lenguaje", "Matematicas", "Disciplina"]
+        posible = row.to_hash.select { |k,v| areas.include? k }
+  			if student.present? && student.try(:school_id).to_i == school.to_i
+          scores = where(period: period).joins(:student).merge(Student.where(:identification => row["identification"]))
+          if !scores.empty?
+            # go trough all of them and compare with posible areas update or create
+            scores.each do |score| 
+              if areas.include? score.area
+                score.area = score.area
+                score.score = posible[score.area]
+                score.student_id = student.id
+                score.user_id = user
+                score.period = period
+                score.year = year
+                score.save!
+              end
+            end
+          else
+            posible.each do |k,v|
+              if v.present?
+                new_score = new
+                new_score.area = k 
+                new_score.score = v
+                new_score.student_id = student.id
+                new_score.user_id = user
+                new_score.period = period
+                new_score.year = year
+                new_score.save!
+              end 
             end
           end
-        else
-          posible.each do |k,v|
-            if v.present?
-              new_score = new
-              new_score.area = k 
-              new_score.score = v
-              new_score.student_id = student.id
-              new_score.user_id = user
-              new_score.period = period
-              new_score.year = year
-              new_score.save!
-              # p "new_score"
-              # p new_score
-            end 
-          end
-          
-        end
-			end
-		end
-    p "the end"
+  			end
+  		end
+      # "the end"
   end
 end
