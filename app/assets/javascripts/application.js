@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require ckeditor/override
 //= require ckeditor/init
 //= require jquery_ujs
 //= require foundation
