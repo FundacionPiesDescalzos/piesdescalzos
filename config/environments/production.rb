@@ -1,6 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  # to solve ckeditor problem
+  config.serve_static_assets = true
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+  config.assets.compile = false # we don't want compilation fallbacks
   # Code is not reloaded between requests.
   config.cache_classes = true
 

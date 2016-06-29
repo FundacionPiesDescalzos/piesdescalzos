@@ -1,6 +1,5 @@
 require File.expand_path('../boot', __FILE__)
 
-
 require 'csv'
 require 'rails/all'
 
@@ -10,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module RailsDeviseRoles
   class Application < Rails::Application
-    config.assets.precompile += Ckeditor.asset
+
     config.generators do |g|
       g.test_framework :rspec,
         fixtures: true,
