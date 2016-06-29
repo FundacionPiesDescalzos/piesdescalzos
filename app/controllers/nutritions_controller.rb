@@ -88,6 +88,6 @@ class NutritionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def nutrition_params
-      params.require(:nutrition).permit(:weight, :height, :identification, :period, :year, :user_id, :student_id)
+      params.require(:nutrition).permit(:desviacion, :weight, :height, :identification, :period, :year, :user_id, :student_id)
     end
 end
