@@ -21,7 +21,7 @@ class Nutrition < ActiveRecord::Base
 	
   def self.import(file, school, year, period, user)
 		allowed_attributes = ["weight", "height", "identification", "desviacion"]
-		   CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
+		  CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
 			student = Student.find_by_identification(row["identification"])
 			if student.present? && student.school_id = school
 				if row["height"].present?
