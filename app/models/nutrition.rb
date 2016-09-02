@@ -4,9 +4,10 @@ class Nutrition < ActiveRecord::Base
   # import CSV
 	
 	def imc
-		@imc = self.try(:weight) / (self.try(:height)*self.try(:height))
-    if !@imc
-      @imc = 0 
+    if self.try(:weight) && self.try(:height)
+  		@imc = self.try(:weight) / (self.try(:height)*self.try(:height))
+    else
+      @imc = 0
     end
 	end
   
