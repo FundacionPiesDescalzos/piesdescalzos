@@ -58,6 +58,8 @@
               <% unless @last.nil? || @last == 0 %>
                 <% @imc = student.nutritions[@last].try(:weight) / (student.nutritions[@last].try(:height)*student.nutritions[@last].try(:height)) %>
                 <td><%= fa_icon "cutlery", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'} index-icon"  %></td>
+              <% else %>  
+                <td></td>
               <% end %>
 		  <% else %>
 			  <td><%= fa_icon "cutlery", class: "index-icon" %></td>
