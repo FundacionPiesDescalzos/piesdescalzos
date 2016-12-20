@@ -21,7 +21,7 @@ class Nutrition < ActiveRecord::Base
         csv << [nutrition.student.identification, nutrition.weight, nutrition.height, nutrition.period, nutrition.year, nutrition.desviacion]
       end
     end).encode('WINDOWS-1252', :undef => :replace, :replace => '')
-  end
+  end 
 	
   def self.import(file, school, year, period, user)
 		allowed_attributes = ["weight", "height", "identification", "desviacion"]
