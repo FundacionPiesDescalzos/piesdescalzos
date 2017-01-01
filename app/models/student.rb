@@ -46,14 +46,19 @@ class Student < ActiveRecord::Base
 		self.average > 3.0 ? true : false
 	end
 	
-	def age
-		now = Time.now.utc.to_date
-		now.year - self.born.year - (self.born.to_date.change(:year => now.year) > now ? 1 : 0)
-	end
+  # def age
+  #   now = Time.now.utc.to_date
+  #   now.year - self.born.year - (self.born.to_date.change(:year => now.year) > now ? 1 : 0)
+  # end
+  
+  def age
+    now = Time.now.utc.to_date
+    now.year - self.born.year - ((now.month > self.born.month || (now.month == self.born.month && now.day >= self.born.day)) ? 0 : 1)
+  end
 	
 	def age_month
 		now = Time.now.utc.to_date
-		math = (self.born.to_date.change(:year => now.year) < now ? 0 : 12) - (now.month - self.born.month) * ((now.month - self.born.month) < 0 ? -1 : 1)
+		math = ((now.month > self.born.month || (now.month == self.born.month && now.day >= self.born.day)) ? 0 : 12) - (now.month - self.born.month) * ((now.month - self.born.month) < 0 ? -1 : 1)
 		if math == -1
 			math = 1
 		elsif math == 12
@@ -141,7 +146,7 @@ class ImportUserCSV
 	column :email, as: [/e.?mail/i, "Correo"], to: ->(email) { email.downcase }
 	column :name, as: ["Nombre"], to: ->(name) { name.downcase }
 	column :id_type, as: ["Tipo de identificacion"]
-	column :gender, as: ["Genero"]
+	column :gender, as: ["Genero"], to: ->(gender) { gender.downcase }
 	column :address, as: ["Direccion", /Direcci(ó|o)n/i ]
 	column :last_course, as: ["Ultimo curso"]
 	column :outschool_years, as: ["desescolarizado"]

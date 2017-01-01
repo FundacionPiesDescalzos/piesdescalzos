@@ -7,7 +7,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :address
       t.string :last_course
       t.integer :outschool_years
-      t.integer :identification
+      t.integer :identification, :limit => 8
       t.date :born
       t.string :etnic
       t.string :villa
