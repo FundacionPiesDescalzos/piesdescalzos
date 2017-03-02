@@ -16,6 +16,7 @@ class ActivitiesController < ApplicationController
   def new
     @activity = Activity.new
 		@activity.assistances.build
+    @schools = School.includes(:students).order(:name)
   end
 
   # GET /activities/1/edit

@@ -2,375 +2,379 @@
   <h4 class="whitetxt">Instituciones educativas</h4>
 </div>
 <div class="search-field">
-	  <div class="no-so-big">
-		  <br />
-	  	  <%= form_tag establishments_path, :method => 'get', class: "rounded" do %>
-	  	  <div class="row collapse">
-	  	      <div class="small-10 columns">
-	  	        <%= search_field_tag :search, params[:search], placeholder: "Ingrese parte del nombre de la institución" %>
-	  	      </div>
-	  	      <div class="small-2 columns">
-	  	        <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
-	  	            <h6><%= fa_icon "search" %> Buscar</h6>
-	  	        <% end %>
-	  	      </div>
-	  	  </div>
-	  	  <% end %>
-	  </div>
+  <div class="no-so-big">
+    <br/>
+    <%= form_tag establishments_path, :method => 'get', class: "rounded" do %>
+        <div class="row collapse">
+          <div class="small-10 columns">
+            <%= search_field_tag :search, params[:search], placeholder: "Ingrese parte del nombre de la institución" %>
+          </div>
+          <div class="small-2 columns">
+            <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+                <h6><%= fa_icon "search" %> Buscar</h6>
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
 </div>
-<br />
+<br/>
 <div class="est-data">
-&nbsp;<%= link_to new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success round nospace for-admin' do %>
-	<%= fa_icon "plus" %> Añadir institución
-<% end %>
-&nbsp;
-<!-- <%# link_to establishments_path(format: "csv") do %>
+  &nbsp;<%= link_to new_establishment_path, "data-reveal-id" => "establishment-new", class: 'button small success round nospace for-admin' do %>
+      <%= fa_icon "plus" %> Añadir institución
+  <% end %>
+  &nbsp;
+  <!-- <%# link_to establishments_path(format: "csv") do %>
 	<%# fa_icon "download" %> Descargar CSV
 <%# end %> -->
 </div>
 <ul class="accordion" data-accordion>
- <% @i = 0 %>
- <% @establishments.each do |establishment| %>
-   <li class="accordion-navigation">
-     <a href="#panel_<%= @i %>"><%= fa_icon "angle-up angle" %><%= establishment.name %></a>
-     <div id="panel_<%= @i %>" class="content <%= @i == 0 ? 'active':'subactive' %>">
-		 <% @i = @i + 1 %>
-	     <%= link_to "#", "data-reveal-id" => "establishment-#{establishment.id}", class: "edit-establishment" do %>
-	       <%= fa_icon "pencil" %>
-	     <% end %>
-		 <% if establishment.schools.present? %>
-		  <table width="100%">
-		    <thead>
-		      <tr>
-		        <th>Nombre</th>
-		        <th>Codigo de sede</th>
-		        <th>Nombre de contacto</th>
-		        <th>Correo electronico</th>
-		        <th>Atendida por la fundación</th>
-            <th></th>
-		      </tr>
-		    </thead>
-			<tbody>
-		   <% establishment.schools.each do |school| %>
-			 	<tr>
-			 		<td><%= link_to school.name, school %></td>
-					<td><num><%= school.code %></num></td>
-					<td><p><%= school.contact_name %></p></td>
-					<td><%= mail_to school.email %></td>
-					<td><h5 class="subheader"><%= school.foundation_present? ? "Si" : "NO" %></h5></td>
-          <td><%= link_to school, class: 'button alert round tiny ', method: :delete, data: { confirm: 'Seguro? la sede y los estudiantes seran borrados' } do %><span class="fa fa-trash"></span><% end %></td>
-			 	</tr>
-		   <% end %>
-			 </tbody>
-		   </table>
-		 <% end %>
-		 <%= link_to new_school_path, "data-reveal-id" => "school-new-#{establishment.code}-#{establishment.id}", class: 'button small success round nospace for-admin' do %>
-		 	<%= fa_icon "plus" %> Añadir Sede
-		 <% end %>
-     <%= link_to 'Borrar institución', establishment, class: 'button alert radius small right', method: :delete, data: { confirm: 'Seguro? La institución sus sedes y estudiantes seran borrados' } %>
-		 <div class="reveal-modal nospace small radius" id="school-new-<%= establishment.code %>-<%= establishment.id %>" data-reveal>
-		    <div class="modal-header">
-		    	<h5 class="whitetxt nospace">Añadir sede a <%= establishment.name %></h5>
-		    </div>
-			<div class="modal-content">
-				<%= simple_form_for(@school) do |f| %>
-				  <%= f.error_notification %>
-				  <div class="form-inputs">
-				    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :code, class: 'inline-label inline left' do %>
-				<%= fa_icon "cube ls-icon" %> Código
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :code %>
-		  </div>
-		</div>
-	    
-	     <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :name, class: 'inline-label inline left' do %>
-				<%= fa_icon "info ls-icon" %> Nombre
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :name %>
-		  </div>
-		</div>
-	    
-			<div class="row">
-			  <div class="small-5 columns">
-			    <%= f.label :pic, class: 'inline-label inline left' do %>
-					<%= fa_icon "image ls-icon" %> Imagen
-				<% end %>
-			  </div>
-			  <div class="small-7 columns">
-			    <%= f.input_field :pic %>
-			  </div>
-			</div>
-			
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :zone, required: true, class: 'inline-label inline left' do %>
-				<%= fa_icon "map-signs ls-icon" %> Municipio
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :zone, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
-		  </div>
-		</div>
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :neighborhood, class: 'inline-label inline left' do %>
-				<%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div class="inline-select"><%= f.input_field :neighborhood  %></div>
-		  </div>
-		</div>
-		
-		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :address, class: 'inline-label inline left' do %>
-				<%= fa_icon "compass ls-icon" %> Dirección
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :address  %></div>
-		  </div>
-		</div>
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :contact_name, class: 'inline-label inline left' do %>
-				<%= fa_icon "user ls-icon" %> Nombre del Contacto
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :contact_name  %></div>
-		  </div>
-		</div>
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :contact_position, class: 'inline-label inline left' do %>
-				<%= fa_icon "sitemap ls-icon" %> Cargo
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :contact_position  %></div>
-		  </div>
-		</div>
-		
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :phone, class: 'inline-label inline left' do %>
-				<%= fa_icon "phone ls-icon" %> Teléfono
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :phone  %></div>
-		  </div>
-		</div>
-		
-		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :email, class: 'inline-label inline left' do %>
-				<%= fa_icon "envelope-o ls-icon" %> Correo electronico
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :email  %></div>
-		  </div>
-		</div>
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :headquarter , class: 'inline-label inline left' do %>
-				<%= fa_icon "dot-circle-o ls-icon" %> Sede Principal
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.input_field :headquarter , as: :boolean  %></div>
-		  </div>
-		</div>
-		
-		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :foundation_present, class: 'inline-label inline left' do %>
-				<%= fa_icon "crosshairs ls-icon" %> Fundación presente
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.input_field :foundation_present, as: :boolean  %></div>
-		  </div>
-		</div>
-				    <%= f.input :establishment_id, :as => :hidden, input_html: {value: establishment.id} %>
-				  </div>
-				 
-			</div>
-			
-			<div class="form-actions">
-	   			 <%= f.button :submit, "Crear Sede", class: "expand nospace success" %>
-	  		</div>
-	  		<% end %>
-			
-		 </div>
-		 
-	     <div class="reveal-modal nospace small radius" id="establishment-<%= establishment.id %>" data-reveal>
-	     	<div class="modal-header">
-  				<h5 class="whitetxt nospace">Editar Institución</h5>
- 			 </div>	
- 			 
- 		<div class="modal-content">	
-	       <%= simple_form_for(establishment) do |f| %>
-	         <%= f.error_notification %>
+  <% @i = 0 %>
+  <% @establishments.each do |establishment| %>
+      <li class="accordion-navigation">
+        <a href="#panel_<%= @i %>"><%= fa_icon "angle-up angle" %><%= establishment.name %></a>
+        <div id="panel_<%= @i %>" class="content <%= @i == 0 ? 'active' : 'subactive' %>">
+          <% @i = @i + 1 %>
+          <%= link_to "#", "data-reveal-id" => "establishment-#{establishment.id}", class: "edit-establishment" do %>
+              <%= fa_icon "pencil" %>
+          <% end %>
+          <% if establishment.schools.present? %>
+              <table width="100%">
+                <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Codigo de sede</th>
+                  <th>Nombre de contacto</th>
+                  <th>Correo electronico</th>
+                  <th>Atendida por la fundación</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% establishment.schools.each do |school| %>
+                    <tr>
+                      <td><%= link_to school.name, school %></td>
+                      <td>
+                        <num><%= school.code %></num>
+                      </td>
+                      <td><p><%= school.contact_name %></p></td>
+                      <td><%= mail_to school.email %></td>
+                      <td><h5 class="subheader"><%= school.foundation_present? ? "Si" : "NO" %></h5></td>
+                      <td><%= link_to school, class: 'button alert round tiny ', method: :delete, data: {confirm: 'Seguro? la sede y los estudiantes seran borrados'} do %>
+                            <span class="fa fa-trash"></span>
+                        <% end %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+              </table>
+          <% end %>
+          <%= link_to new_school_path, "data-reveal-id" => "school-new-#{establishment.code}-#{establishment.id}", class: 'button small success round nospace for-admin' do %>
+              <%= fa_icon "plus" %> Añadir Sede
+          <% end %>
+          <%= link_to 'Borrar institución', establishment, class: 'button alert radius small right', method: :delete, data: {confirm: 'Seguro? La institución sus sedes y estudiantes seran borrados'} %>
+          <div class="reveal-modal nospace small radius" id="school-new-<%= establishment.code %>-<%= establishment.id %>" data-reveal>
+            <div class="modal-header">
+              <h5 class="whitetxt nospace">Añadir sede a <%= establishment.name %></h5>
+            </div>
+            <div class="modal-content">
+              <%= simple_form_for(@school) do |f| %>
+                  <%= f.error_notification %>
+                  <div class="form-inputs">
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :code, class: 'inline-label inline left' do %>
+                            <%= fa_icon "cube ls-icon" %> Código
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <%= f.input_field :code %>
+                      </div>
+                    </div>
 
-	         <div class="form-inputs">
-	           				    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :code, class: 'inline-label inline left' do %>
-				<%= fa_icon "cube ls-icon" %> Código
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :code %>
-		  </div>
-		</div>
-	    
-	     <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :name, class: 'inline-label inline left' do %>
-				<%= fa_icon "info ls-icon" %> Nombre
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :name %>
-		  </div>
-		</div>
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :department, required: true, class: 'inline-label inline left' do %>
-				<%= fa_icon "map-signs ls-icon" %> Municipio
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
-		  </div>
-		</div>
-	           
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :phone, class: 'inline-label inline left' do %>
-				<%= fa_icon "phone ls-icon" %> Teléfono
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :phone  %></div>
-		  </div>
-		</div>
-		
-		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :email, class: 'inline-label inline left' do %>
-				<%= fa_icon "envelope-o ls-icon" %> Correo electronico
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :email  %></div>
-		  </div>
-		</div>
-	    
-         </div>
-     </div>
-	     <div class="form-actions">
-	   			 <%= f.button :submit, "Actualizar datos", class: "expand nospace success" %>
-	  		</div>
-	  		<% end %>
-	     </div>
-     </div><!-- / panel_content -->
-   </li>
- <% end %>
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :name, class: 'inline-label inline left' do %>
+                            <%= fa_icon "info ls-icon" %> Nombre
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <%= f.input_field :name %>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :pic, class: 'inline-label inline left' do %>
+                            <%= fa_icon "image ls-icon" %> Imagen
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <%= f.input_field :pic %>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :zone, required: true, class: 'inline-label inline left' do %>
+                            <%= fa_icon "map-signs ls-icon" %> Municipio
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.select :zone, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una" %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :neighborhood, class: 'inline-label inline left' do %>
+                            <%= fa_icon "map-marker ls-icon" %> Barrio o Vereda
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div class="inline-select"><%= f.input_field :neighborhood %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :address, class: 'inline-label inline left' do %>
+                            <%= fa_icon "compass ls-icon" %> Dirección
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :address %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :contact_name, class: 'inline-label inline left' do %>
+                            <%= fa_icon "user ls-icon" %> Nombre del Contacto
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :contact_name %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :contact_position, class: 'inline-label inline left' do %>
+                            <%= fa_icon "sitemap ls-icon" %> Cargo
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :contact_position %></div>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :phone, class: 'inline-label inline left' do %>
+                            <%= fa_icon "phone ls-icon" %> Teléfono
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :phone %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :email, class: 'inline-label inline left' do %>
+                            <%= fa_icon "envelope-o ls-icon" %> Correo electronico
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :email %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :headquarter, class: 'inline-label inline left' do %>
+                            <%= fa_icon "dot-circle-o ls-icon" %> Sede Principal
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :headquarter, as: :boolean %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :foundation_present, class: 'inline-label inline left' do %>
+                            <%= fa_icon "crosshairs ls-icon" %> Fundación presente
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :foundation_present, as: :boolean %></div>
+                      </div>
+                    </div>
+                    <%= f.input :establishment_id, :as => :hidden, input_html: {value: establishment.id} %>
+                  </div>
+
+                  </div>
+
+                  <div class="form-actions">
+                    <%= f.button :submit, "Crear Sede", class: "expand nospace success" %>
+                  </div>
+              <% end %>
+
+              </div>
+
+          <div class="reveal-modal nospace small radius" id="establishment-<%= establishment.id %>" data-reveal>
+            <div class="modal-header">
+              <h5 class="whitetxt nospace">Editar Institución</h5>
+            </div>
+
+            <div class="modal-content">
+              <%= simple_form_for(establishment) do |f| %>
+                  <%= f.error_notification %>
+
+                  <div class="form-inputs">
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :code, class: 'inline-label inline left' do %>
+                            <%= fa_icon "cube ls-icon" %> Código
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <%= f.input_field :code %>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :name, class: 'inline-label inline left' do %>
+                            <%= fa_icon "info ls-icon" %> Nombre
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <%= f.input_field :name %>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :department, required: true, class: 'inline-label inline left' do %>
+                            <%= fa_icon "map-signs ls-icon" %> Municipio
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una" %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :phone, class: 'inline-label inline left' do %>
+                            <%= fa_icon "phone ls-icon" %> Teléfono
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :phone %></div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="small-5 columns">
+                        <%= f.label :email, class: 'inline-label inline left' do %>
+                            <%= fa_icon "envelope-o ls-icon" %> Correo electronico
+                        <% end %>
+                      </div>
+                      <div class="small-7 columns">
+                        <div><%= f.input_field :email %></div>
+                      </div>
+                    </div>
+
+                  </div>
+                  </div>
+                  <div class="form-actions">
+                    <%= f.button :submit, "Actualizar datos", class: "expand nospace success" %>
+                  </div>
+              <% end %>
+              </div>
+        </div><!-- / panel_content -->
+      </li>
+  <% end %>
 </ul>
 
 <br>
 
 <div class="reveal-modal nospace small radius" id="establishment-new" data-reveal>
-	
-	<div class="modal-header">
-  				<h5 class="whitetxt nospace">Crear Nueva Institución</h5>
- 			</div>	
- 			
- 	<div class="modal-content">	
-  <%= simple_form_for(@establishment) do |f| %>
-    <%= f.error_notification %>
 
-    <div class="form-inputs">
-         				    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :code, class: 'inline-label inline left' do %>
-				<%= fa_icon "cube ls-icon" %> Código
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :code %>
-		  </div>
-		</div>
-	    
-	     <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :name, class: 'inline-label inline left' do %>
-				<%= fa_icon "info ls-icon" %> Nombre
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <%= f.input_field :name %>
-		  </div>
-		</div>
-	    
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :department, required: true, class: 'inline-label inline left' do %>
-				<%= fa_icon "map-signs ls-icon" %> Municipio
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una"  %></div>
-		  </div>
-		</div>
-	           
-	    <div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :phone, class: 'inline-label inline left' do %>
-				<%= fa_icon "phone ls-icon" %> Teléfono
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :phone  %></div>
-		  </div>
-		</div>
-		
-		<div class="row">
-		  <div class="small-5 columns">
-		    <%= f.label :email, class: 'inline-label inline left' do %>
-				<%= fa_icon "envelope-o ls-icon" %> Correo electronico
-			<% end %>
-		  </div>
-		  <div class="small-7 columns">
-		    <div ><%= f.input_field :email  %></div>
-		  </div>
-    </div>
+  <div class="modal-header">
+    <h5 class="whitetxt nospace">Crear Nueva Institución</h5>
+  </div>
 
-	</div>
-	<div class="form-actions">
-	   			 <%= f.button :submit, "Crear Institución", class: "expand nospace success" %>
-	  		</div>
-	  		<% end %>
-</div>
+  <div class="modal-content">
+    <%= simple_form_for(@establishment) do |f| %>
+        <%= f.error_notification %>
+
+        <div class="form-inputs">
+          <div class="row">
+            <div class="small-5 columns">
+              <%= f.label :code, class: 'inline-label inline left' do %>
+                  <%= fa_icon "cube ls-icon" %> Código
+              <% end %>
+            </div>
+            <div class="small-7 columns">
+              <%= f.input_field :code %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-5 columns">
+              <%= f.label :name, class: 'inline-label inline left' do %>
+                  <%= fa_icon "info ls-icon" %> Nombre
+              <% end %>
+            </div>
+            <div class="small-7 columns">
+              <%= f.input_field :name %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-5 columns">
+              <%= f.label :department, required: true, class: 'inline-label inline left' do %>
+                  <%= fa_icon "map-signs ls-icon" %> Municipio
+              <% end %>
+            </div>
+            <div class="small-7 columns">
+              <div><%= f.select :department, GeneralInfo.cities, as: :grouped_select, group_method: :last, prompt: "Escoge una" %></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-5 columns">
+              <%= f.label :phone, class: 'inline-label inline left' do %>
+                  <%= fa_icon "phone ls-icon" %> Teléfono
+              <% end %>
+            </div>
+            <div class="small-7 columns">
+              <div><%= f.input_field :phone %></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="small-5 columns">
+              <%= f.label :email, class: 'inline-label inline left' do %>
+                  <%= fa_icon "envelope-o ls-icon" %> Correo electronico
+              <% end %>
+            </div>
+            <div class="small-7 columns">
+              <div><%= f.input_field :email %></div>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-actions">
+          <%= f.button :submit, "Crear Institución", class: "expand nospace success" %>
+        </div>
+    <% end %>
+  </div>
 
 <%# form_tag import_establishments_path, multipart: true do %>
   <%# file_field_tag :file %>

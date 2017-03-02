@@ -20,9 +20,9 @@ class StudentsController < ApplicationController
 		@health_care = @student.health_care || HealthCare.new
     @schools = School.all
 		@activities = Activity.joins(:students).where(students: {id: @student.id})
-		@programs_edu =	Program.where(line: "epc").joins(:activities).where(activities: {id: @activities})
-		@programs_m =	Program.where(line: "n").joins(:activities).where(activities: {id: @activities})
-		@programs_h =	Program.where(line: "h").joins(:activities).where(activities: {id: @activities})
+		@programs_edu =	Program.includes(:activities).where(line: "epc").joins(:activities).where(activities: {id: @activities})
+		@programs_m =	Program.includes(:activities).where(line: "n").joins(:activities).where(activities: {id: @activities})
+		@programs_h =	Program.includes(:activities).where(line: "h").joins(:activities).where(activities: {id: @activities})
   end
   
   def export
@@ -97,7 +97,7 @@ class StudentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
-      @student = Student.find(params[:id])
+      @student = Student.includes(:scores, :nutritions).find(params[:id])
     end
     
     def admin_only

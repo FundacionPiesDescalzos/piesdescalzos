@@ -4,7 +4,7 @@ class NutritionsController < ApplicationController
   # GET /nutritions
   # GET /nutritions.json
   def index
-    @nutritions = Nutrition.all
+    @nutritions = Nutrition.includes(:student).all
   end
 
   # GET /nutritions/1

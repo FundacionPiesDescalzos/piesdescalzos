@@ -6,7 +6,7 @@ class EstablishmentsController < ApplicationController
   # GET /establishments.json
   def index
     @establishment = Establishment.new
-    @establishments = Establishment.search(params[:search])
+    @establishments = Establishment.includes(:schools).search(params[:search])
 		@school = School.new
     respond_to do |format|
         format.html

@@ -2,100 +2,106 @@
   <h4 class="whitetxt">Consultar estudiante</h4>
 </div>
 <div class="search-field">
-      <%= form_tag visitors_path, :method => 'get', class: "rounded" do %>
+  <%= form_tag visitors_path, :method => 'get', class: "rounded" do %>
       <div class="row collapse">
-          <div class="small-10 columns">
-            <%= search_field_tag :search, params[:search], placeholder: "Buscar por identificación nombre o apellido" %>
-            <label for="instituciones" class="ib">Instituciones: </label>
-            <%= select_tag "instituciones", options_from_collection_for_select(@schools, "id", "name", params[:instituciones]), include_blank: "Todas" %>
-          </div>
-          <div class="small-2 columns">
-            <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
-                <h6><%= fa_icon "search" %> Buscar</h6>
-            <% end %>
-          </div>
+        <div class="small-10 columns">
+          <%= search_field_tag :search, params[:search], placeholder: "Buscar por identificación nombre o apellido" %>
+          <label for="instituciones" class="ib">Instituciones: </label>
+          <%= select_tag "instituciones", options_from_collection_for_select(@schools, "id", "name", params[:instituciones]), include_blank: "Todas" %>
+        </div>
+        <div class="small-2 columns">
+          <%= button_tag(type: "submit", :name => nil, class: "button success postfix") do %>
+              <h6><%= fa_icon "search" %> Buscar</h6>
+          <% end %>
+        </div>
       </div>
-      <% end %>
+  <% end %>
 </div>
 
 <h4 class="text-center redtxt"><%= @message %></h4>
 <% if @students.count > 0 %>
-<div class="results">
-  <table id="global">
-    <thead class="tb-header">
-      <tr>
-      	<th>Calificaciones</th>
-        <th>Nutrición</th>
-        <th></th>
-        <th>Nombre</th>
-        <th>Identificación</th>
-        <th>Edad</th>
-        <th>Curso</th>
-        <th>Editar</th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @students.each do |student| %>
-        <tr class="<%= 'retired' if student.drop %> <%= 'graduated' if student.graduated %>">
-		  <% if student.scores.present? %>
-		  <% @ultima = 0 %>
-		  <% @qty = 0 %>
-		  <% student.scores.each do |score| %>
-		    <% if score.year.to_i == Time.now.year || score.year.to_i == Time.now.year-1  %>
-			    <% @qty = @qty + 1 %>
-			    <% @ultima = @ultima + score.score.to_f %>
-			  <% end %>
- 		  <% end %>
-		  <% @ultima = @ultima/@qty unless @qty == 0 %>
-	         <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
-		  <% else %>
-		      <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon" %></td>
-		  <% end %>
-		  <% if student.nutritions.present? %>
-  		      <% @last = student.nutritions.length - 1  %>
-              <% unless @last.nil? || @last == 0 %>
-                <% @imc = student.nutritions[@last].try(:weight) / (student.nutritions[@last].try(:height)*student.nutritions[@last].try(:height)) %>
-                <td><%= fa_icon "cutlery", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'} index-icon"  %></td>
-              <% else %>  
-                <td></td>
-              <% end %>
-		  <% else %>
-			  <td><%= fa_icon "cutlery", class: "index-icon" %></td>
-		  <% end %>
-          <td>
-						<% if student.pic_url.present? %>
-							<%= image_tag student.pic_url(:thumb), class:"circulo" %>
-						<% else %>
-						  <%= image_tag "unnamed.jpg", class:"circulo" %>
-						<% end %>
-					</td>
-          <td>
-            <div class="text-left">
-            	<h5 class="italic nospace"><%= link_to student.name, student %></h5>
-            	<h6 class="nospace"><%= student.school.present? ? student.school.name : "Sin institución" %></h6>
-            	<p><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
-            </div>
-          </td>
-          <td><h6 class="nospace"><%= student.id_type.present? ? GeneralInfo.kids_id.key(student.id_type) : "Sin tipo" %></h6><p><%= student.identification %></p></td>
-          <td><h6 class="nospace">Edad</h6><p><%= student.born %></p></td>
-          <td><h6 class="nospace">Curso</h6><p><%= student.last_course %></p></td>
-          <td><%= link_to edit_student_path(student) , class: "for-admin" do %><%= fa_icon "pencil editar"%><% end %></td>
-          <td><%= link_to student, method: :delete, data: { confirm: 'Estas seguro que quieres borrar?' }, class: "for-admin" do %><%= fa_icon "trash borrar", class: 'redtxt' %><% end %></td>
+    <div class="results">
+      <table id="global">
+        <thead class="tb-header">
+        <tr>
+          <th>Calificaciones</th>
+          <th>Nutrición</th>
+          <th></th>
+          <th>Nombre</th>
+          <th>Identificación</th>
+          <th>Edad</th>
+          <th>Curso</th>
+          <th>Editar</th>
+          <th></th>
         </tr>
-		
-		
-      <% end %>
-    </tbody>
-  </table>
-</div>
+        </thead>
+
+        <tbody>
+        <% @students.each do |student| %>
+            <tr class="<%= 'retired' if student.drop %> <%= 'graduated' if student.graduated %>">
+              <% if student.scores.present? %>
+                  <% @ultima = 0 %>
+                  <% @qty = 0 %>
+                  <% student.scores.each do |score| %>
+                      <% if score.year.to_i == Time.now.year || score.year.to_i == Time.now.year-1 %>
+                          <% @qty = @qty + 1 %>
+                          <% @ultima = @ultima + score.score.to_f %>
+                      <% end %>
+                  <% end %>
+                  <% @ultima = @ultima/@qty unless @qty == 0 %>
+                  <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon #{(@ultima).round(2) < 3 && @qty > 0 ? 'redtxt' : 'graytxt'} #{(@ultima).round(2) > 4.8 ? 'greentxt' : 'graytxt'}" %></td>
+              <% else %>
+                  <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon" %></td>
+              <% end %>
+              <% if student.nutritions.present? %>
+                  <% @last = student.nutritions.length - 1 %>
+                  <% unless @last.nil? || @last == 0 %>
+                      <% @imc = student.nutritions[@last].try(:weight) / (student.nutritions[@last].try(:height)*student.nutritions[@last].try(:height)) %>
+                      <td><%= fa_icon "cutlery", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'} index-icon" %></td>
+                  <% else %>
+                      <td></td>
+                  <% end %>
+              <% else %>
+                  <td><%= fa_icon "cutlery", class: "index-icon" %></td>
+              <% end %>
+              <td>
+                <% if student.pic_url.present? %>
+                    <%= image_tag student.pic_url(:thumb), class: "circulo" %>
+                <% else %>
+                    <%= image_tag "unnamed.jpg", class: "circulo" %>
+                <% end %>
+              </td>
+              <td>
+                <div class="text-left">
+                  <h5 class="italic nospace"><%= link_to student.name, student %></h5>
+                  <h6 class="nospace"><%= student.school.present? ? student.school.name : "Sin institución" %></h6>
+                  <p><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
+                </div>
+              </td>
+              <td>
+                <h6 class="nospace"><%= student.id_type.present? ? GeneralInfo.kids_id.key(student.id_type) : "Sin tipo" %></h6>
+                <p><%= student.identification %></p></td>
+              <td><h6 class="nospace">Edad</h6>
+                <p><%= student.born %></p></td>
+              <td><h6 class="nospace">Curso</h6>
+                <p><%= student.last_course %></p></td>
+              <td><%= link_to edit_student_path(student), class: "for-admin" do %><%= fa_icon "pencil editar" %>
+                <% end %></td>
+              <td><%= link_to student, method: :delete, data: {confirm: 'Estas seguro que quieres borrar?'}, class: "for-admin" do %><%= fa_icon "trash borrar", class: 'redtxt' %>
+                <% end %></td>
+            </tr>
+
+
+        <% end %>
+        </tbody>
+      </table>
+    </div>
 <% else %>
-  <% if  params[:search].present?  %>
-  <div data-alert class="alert-box warning round">
-    <%= "No se encontraron resultados para #{params[:search]}" %>
-    <a href="#" class="close">&times;</a>
-  </div>
-  <% end %>
+    <% if params[:search].present? %>
+        <div data-alert class="alert-box warning round">
+          <%= "No se encontraron resultados para #{params[:search]}" %>
+          <a href="#" class="close">&times;</a>
+        </div>
+    <% end %>
 <% end %>
 

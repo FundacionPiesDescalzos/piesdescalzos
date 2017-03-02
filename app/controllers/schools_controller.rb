@@ -16,7 +16,7 @@ class SchoolsController < ApplicationController
 		@st = []
 		@students.each do |student|
 			@group[student.last_course].push(student.average)
-			#p student.average	
+			#p student.average
 		end
 		@group.reject!{ |k,v| !v.any? }
 		@courses = [];
@@ -27,19 +27,19 @@ class SchoolsController < ApplicationController
 			@grades.push(v[0].round(2));
 		end
 		@title = "Informe del " + (Time.now.year-1).to_s + " al " + (Time.now.year).to_s
-		
+
 		@ids=[]
 		@students.each do |st|
 			@ids.push(st.id)
 		end
-		
+
 		@activities = Activity.joins(:students).where(students: {id: @ids})
 		@programs_edu =	Program.where(line: "epc").joins(:activities).where(activities: {id: @activities})
 		@programs_m =	Program.where(line: "n").joins(:activities).where(activities: {id: @activities})
 		@programs_h =	Program.where(line: "h").joins(:activities).where(activities: {id: @activities})
-		
+
   end
-	
+
 	def added(arr)
 		arr.inject(0){|sum,x| sum + x }.to_f / arr.size
 	end
@@ -94,12 +94,12 @@ class SchoolsController < ApplicationController
   end
 
   private
-     
+
     # Use callbacks to share common setup or constraints between actions.
     def set_school
       @school = School.find(params[:id])
     end
-    
+
     def admin_only
       unless current_user.admin?
         redirect_to "/", :alert => "Accesso denegado."

@@ -2,7 +2,7 @@
 	<form action="/reports" method="get" class="inliner">
 		<label> <span>Instituciones</span>
 			<% seleccionado = params[:establishments][:establishment_id] if params[:establishments].present? && params[:establishments][:establishment_id].present? %>
-			<%= select("establishments", "establishment_id", Establishment.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'Todas', selected: seleccionado || ""}) %>
+			<%= select("establishments", "establishment_id", @establishments, {include_blank: 'Todas', selected: seleccionado || ""}) %>
 		</label>
 		<label> <span>Departamentos</span>
 			<% dep_seleccionado = params[:departments][:cities] if params[:departments].present? && params[:departments][:cities].present? %>

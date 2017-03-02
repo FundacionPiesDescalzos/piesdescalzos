@@ -6,10 +6,10 @@ class ProgramsController < ApplicationController
   # GET /programs
   # GET /programs.json
   def index
-    @programs = Program.all
-		@programs_edu = Program.where(line: "epc");
-		@programs_m = Program.where(line: "n");
-		@programs_h = Program.where(line: "h");
+    @programs = Program.includes(activities: [:students]).all
+		@programs_edu = Program.includes(activities: [:students]).where(line: "epc");
+		@programs_m = Program.includes(activities: [:students]).where(line: "n");
+		@programs_h = Program.includes(activities: [:students]).where(line: "h");
   end
 
   # GET /programs/1
@@ -69,7 +69,7 @@ class ProgramsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_program
-      @program = Program.find(params[:id])
+      @program = Program.includes(activities: [:students]).find(params[:id])
     end
     
     def admin_only

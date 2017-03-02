@@ -1,77 +1,85 @@
-<br /><br />
+<br/><br/>
 <div class="text-center">
-	<%= simple_form_for(@activity) do |f| %>
-	 <h5 class="text-center">Creación de actividades</h5>
-	<%= f.error_notification %>
-	<div class="form-inputs">
-		<%= f.association :program, label: "Escoge el programa asociado" %>
-		<div class="row">
-			<div class="large-8 columns large-centered">
-				<%= f.input :name, label: "Nombre de la actividad" %>
-				<div class="inline-select center">
-					<%= f.input :the_date, label: "Fecha de la actividad" %>
-				</div>
-				<br />
-				<%= f.input :boss, label: "Persona a cargo" %>
-				<%= f.input :description, label: "Descripción de la actividad" %>
-			</div>
-		</div>
-		<h5 class="text-center">Asigna sedes cursos y estudiantes a esta actividad.</h5>
-		<%# f.association :students, label: "Escoge estudiantes" %>
-		<br />
-		<% if @activity.students.count > 0 %>
-			<h6><%= @activity.students.count %> estudiantes seleccionados</h6>
-		<% end %>
-		<ul class="accordion" data-accordion>
-		<%= fa_icon "angle-right angle none" %><% School.order(:name).each do |school| %>
-			<li class="accordion-navigation">
-			 <a href="#student-<%= school.id %>"><%= school.name %></a>
-			 <div id="student-<%= school.id %>" class="students content">
-				<div class="grados">
-					<input type="search" name="student_search" class="student_search" placeholder="buscar estudiante" />
-					<a href="#" class="label round" data-course="0">Todos</a> <a href="#" class="label round" data-course="1">1er</a> <a href="#" class="label round" data-course="2">2do</a> <a href="#" class="label round" data-course="3">3er</a><a href="#" class="label round" data-course="4">4to</a><a href="#" class="label round" data-course="5">5to</a><a href="#" class="label round" data-course="6">6to</a><a href="#" class="label round" data-course="7">7mo</a><a href="#" class="label round" data-course="8">8vo</a><a href="#" class="label round" data-course="9">9no</a><a href="#" class="label round" data-course="10">10</a><a href="#" class="label round" data-course="11">11</a>
-				</div>
-			  <% school.students.order(:last_course).each do |student| %>
-				  <label class="text-left course-<%= student.last_course %>">
-					  <%= check_box_tag "activity[student_ids][]", student.id, @activity.students.include?(student) %>
-					  <div class="student-info ib">
-						<h6 class="student_name"><%= student.name %></h6>
-					  	<h6 class="subheader">
-					  		<i><%= student.school.name %></i>
-					  	</h6>
-					  	<h6 class="subheader"><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
-					  </div>
-					  <div class="student-info iden ib">
-					  	<h6 class="text-center">Tarjeta de identidad</h6>
-						<h6 class="subheader text-center"><%= student.identification %></h6>
-					  </div>
-					  <div class="student-info edad ib">
-					  	<h6 class="text-center">Edad</h6>
-						<h6 class="subheader text-center"><%= student.identification %></h6>
-					  </div>
-					  <div class="student-info edad ib">
-					  	<h6 class="text-center">Edad</h6>
-						<h6 class="subheader text-center"><%= student.age %></h6>
-					  </div>
-					  <div class="student-info grado ib">
-					  	<h6 class="text-center">grado</h6>
-						<h6 class="subheader text-center"><%= student.last_course %></h6>
-					  </div>
-					  <div class="right assistance">
-						  <h6 class="text-center">Asistio?</h6>
-							<% @court = Assistance.where(activity_id:@activity.id).where(student_id:student.id).first %>
-							<%= check_box_tag "activity[assistances_attributes][]", @court.try(:id), @court.try(:assistance_mark) %>
-					  </div>
-				   </label>
-			  <% end %>
-			  </div>
-			</li>
-		<% end %>
-		</ul>
-		<br /><br />
-	</div>
-	<div class="form-actions">
-		<%= f.button :submit, "Siguiente paso", class: "button success round"  %>
-	</div>
-	<% end %>
+  <%= simple_form_for(@activity) do |f| %>
+      <h5 class="text-center">Creación de actividades</h5>
+      <%= f.error_notification %>
+      <div class="form-inputs">
+        <%= f.association :program, label: "Escoge el programa asociado" %>
+        <div class="row">
+          <div class="large-8 columns large-centered">
+            <%= f.input :name, label: "Nombre de la actividad" %>
+            <div class="inline-select center">
+              <%= f.input :the_date, label: "Fecha de la actividad" %>
+            </div>
+            <br/>
+            <%= f.input :boss, label: "Persona a cargo" %>
+            <%= f.input :description, label: "Descripción de la actividad" %>
+          </div>
+        </div>
+        <h5 class="text-center">Asigna sedes cursos y estudiantes a esta actividad.</h5>
+        <%# f.association :students, label: "Escoge estudiantes" %>
+        <br/>
+        <% if @activity.students.count > 0 %>
+            <h6><%= @activity.students.count %> estudiantes seleccionados</h6>
+        <% end %>
+        <ul class="accordion" data-accordion>
+          <%= fa_icon "angle-right angle none" %>
+          <% @schools.each do |school| %>
+              <li class="accordion-navigation">
+                <a href="#student-<%= school.id %>"><%= school.name %></a>
+                <div id="student-<%= school.id %>" class="students content">
+                  <div class="grados">
+                    <input type="search" name="student_search" class="student_search" placeholder="buscar estudiante"/>
+                    <a href="#" class="label round" data-course="0">Todos</a>
+                    <a href="#" class="label round" data-course="1">1er</a>
+                    <a href="#" class="label round" data-course="2">2do</a>
+                    <a href="#" class="label round" data-course="3">3er</a><a href="#" class="label round" data-course="4">4to</a><a href="#" class="label round" data-course="5">5to</a><a href="#" class="label round" data-course="6">6to</a><a href="#" class="label round" data-course="7">7mo</a><a href="#" class="label round" data-course="8">8vo</a><a href="#" class="label round" data-course="9">9no</a><a href="#" class="label round" data-course="10">10</a><a href="#" class="label round" data-course="11">11</a>
+                  </div>
+                  <% school.students.order(:last_course).find_each do |student| %>
+                      <label class="text-left course-<%= student.last_course %>">
+                        <%= check_box_tag "activity[student_ids][]", student.id, @activity.students.include?(student) %>
+                        <div class="student-info ib">
+                          <h6 class="student_name"><%= student.name %></h6>
+                          <h6 class="subheader">
+                            <i><%= student.school.name %></i>
+                          </h6>
+                          <h6 class="subheader"><%= fa_icon "map-marker" %> <%= student.residency_state %></h6>
+                        </div>
+                        <div class="student-info iden ib">
+                          <h6 class="text-center">Tarjeta de identidad</h6>
+                          <h6 class="subheader text-center"><%= student.identification %></h6>
+                        </div>
+                        <div class="student-info edad ib">
+                          <h6 class="text-center">Edad</h6>
+                          <h6 class="subheader text-center"><%= student.identification %></h6>
+                        </div>
+                        <div class="student-info edad ib">
+                          <h6 class="text-center">Edad</h6>
+                          <h6 class="subheader text-center"><%= student.age %></h6>
+                        </div>
+                        <div class="student-info grado ib">
+                          <h6 class="text-center">grado</h6>
+                          <h6 class="subheader text-center"><%= student.last_course %></h6>
+                        </div>
+                        <div class="right assistance">
+                          <h6 class="text-center">Asistio?</h6>
+                          <% if @activity.id.present? %>
+                              <% @court = Assistance.where(activity_id: @activity.id).where(student_id: student.id).first %>
+                          <% else %>
+                              <% @court = nil %>
+                          <% end %>
+                          <%= check_box_tag "activity[assistances_attributes][]", @court.try(:id), @court.try(:assistance_mark) %>
+                        </div>
+                      </label>
+                  <% end %>
+                </div>
+              </li>
+          <% end %>
+        </ul>
+        <br/><br/>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, "Siguiente paso", class: "button success round" %>
+      </div>
+  <% end %>
 </div>
