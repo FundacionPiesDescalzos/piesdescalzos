@@ -77,8 +77,12 @@ class ScoresController < ApplicationController
   end
 	
   def import
-    Score.import(params[:file],params[:school_id],params[:date][:year], params[:period],params[:user_id])
-    redirect_to school_url(params[:school_id]), notice: "Notas importadas."
+    begin
+      Score.import(params[:file],params[:school_id],params[:date][:year], params[:period],params[:user_id])
+      redirect_to school_url(params[:school_id]), notice: "Notas importadas."
+    rescue => exception
+      redirect_to school_url(params[:school_id]), alert: "#{exception.class}: #{exception.message}"
+    end
   end
 
   private

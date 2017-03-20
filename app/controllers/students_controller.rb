@@ -85,12 +85,18 @@ class StudentsController < ApplicationController
   end
 	
   def import
-    @importar = Student.import(params[:file],params[:school_id])
-		if @importar.status == :done
-	    redirect_to school_url(params[:school_id]), notice: @importar.message
-		else
-			redirect_to school_url(params[:school_id]), alert: @importar.message
-		end
+  
+    begin 
+      @importar = Student.import(params[:file],params[:school_id])
+
+      if @importar.status == :done
+        redirect_to school_url(params[:school_id]), notice: @importar.message
+      else
+        redirect_to school_url(params[:school_id]), alert: @importar.message
+      end
+    rescue => exception
+      redirect_to school_url(params[:school_id]), alert: "#{exception.class}: #{exception.message}"
+    end
   end
 	
 

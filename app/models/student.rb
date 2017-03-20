@@ -123,9 +123,9 @@ class Student < ActiveRecord::Base
 		import = ImportUserCSV.new(file: file) do
 		  model school.students
 		end
-		p import.valid_header? # => false
+		import.valid_header? # => false
 		import.run!
-		p import.report.status # => :aborted
+		import.report.status # => :aborted
 		return import.report # => "The following columns are required: "email""
 		
 			#     CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|

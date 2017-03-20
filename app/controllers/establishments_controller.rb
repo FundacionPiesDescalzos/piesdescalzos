@@ -69,8 +69,12 @@ class EstablishmentsController < ApplicationController
   end
   
   def import
-    Establishment.import(params[:file])
-    redirect_to establishments_url, notice: "Establecimientos importados."
+    begin
+      Establishment.import(params[:file])
+      redirect_to establishments_url, notice: "Establecimientos importados."
+    rescue => exception
+      redirect_to establishments_url, alert: "#{exception.class}: #{exception.message}"
+    end
   end
 
   private
