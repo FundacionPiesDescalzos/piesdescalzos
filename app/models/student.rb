@@ -58,21 +58,19 @@ class Student < ActiveRecord::Base
 	
 	def age_month
 		now = Time.now.utc.to_date
-		math = ((now.month > self.born.month || (now.month == self.born.month && now.day >= self.born.day)) ? 0 : 12) - (now.month - self.born.month) * ((now.month - self.born.month) < 0 ? -1 : 1)
-		if math == -1
-			math = 1
-		elsif math == 12
-			math = 0
-		else
-			math = math
-		end
+
+    if now.month == self.born.month
+      if now.day >= self.born.day then 0 else 11 end 
+    elsif now.month > self.born.month
+      now.month - self.born.month
+    elsif now.month < self.born.month
+      12 - (self.born.month - now.month)
+    end
+    
 	end
 	
 	def age_medium
-		now = Time.now.utc.to_date
-		age = now.year - self.born.year - (self.born.to_date.change(:year => now.year) > now ? 1 : 0)
-		math = (self.born.to_date.change(:year => now.year) < now ? 0 : 12) - (now.month - self.born.month) * ((now.month - self.born.month) < 0 ? -1 : 1)
-		if math >= 6
+		if age_month >= 6
 			math = 5
 		else
 			math = 0
