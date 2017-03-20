@@ -1,0 +1,29 @@
+version: '2.1'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+    volumes_from:
+      - bundler
+  bundler:
+    image: busybox
+    volumes:
+      - /gems
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=fpd
+      - POSTGRES_PASSWORD=fpd
+      - POSTGRES_DB=fpd
+    volumes:
+      - /var/lib/postgresql/data

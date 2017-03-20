@@ -1,50 +1,25 @@
-Rails Devise Roles
-================
+## How to run with docker 🐳
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+Clone the project
 
-This application was generated with the [rails_apps_composer](https://github.com/RailsApps/rails_apps_composer) gem
-provided by the [RailsApps Project](http://railsapps.github.io/).
+    git clone git@github.com:fundacionpiesdescalzos/piesdescalzos
+    
+Build the docker containers
 
-Rails Composer is supported by developers who purchase our RailsApps tutorials.
+    cd piesdescalzos
+    docker-compose build
+    
+Install gems
 
-Problems? Issues?
------------
+    docker-compose run app bundle install
 
-Need help? Ask on Stack Overflow with the tag 'railsapps.'
+Setup database
 
-Your application contains diagnostics in the README file. Please provide a copy of the README file when reporting any issues.
+    docker-compose run app bundle exec rake db:setup
 
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues)
-and include the diagnostics.
+Run
 
-Ruby on Rails
--------------
-
-This application requires:
-
-- Ruby 2.1.3
-- Rails 4.2.1
-
-Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.html).
-
-Getting Started
----------------
-
-Documentation and Support
--------------------------
-
-Issues
--------------
-
-Similar Projects
-----------------
-
-Contributing
-------------
-
-Credits
--------
-
-License
--------
+    docker-compose up
+    
+Then go to 
+ * [http://localhost:3000/](http://localhost:3000/) (login: ```user@example.com```, password: ```changeme```)

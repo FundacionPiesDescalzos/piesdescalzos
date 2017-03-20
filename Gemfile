@@ -4,7 +4,7 @@ ruby '2.1.3'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'rails', '4.2.1'
 gem 'sass-rails', '~> 5.0'
-gem "compass-rails", github: "Compass/compass-rails", branch: "master"
+gem "compass-rails", '3.0.0' 
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'

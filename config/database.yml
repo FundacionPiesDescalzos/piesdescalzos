@@ -18,10 +18,13 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  host: db
+  username: fpd
+  password: fpd
 
 development:
   <<: *default
-  database: rails-devise-roles_development
+  database: fpd
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
