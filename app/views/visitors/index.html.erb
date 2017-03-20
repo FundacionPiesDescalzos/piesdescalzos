@@ -53,14 +53,25 @@
               <% else %>
                   <td><%= fa_icon "graduation-cap #{(@ultima)}", class: "index-icon" %></td>
               <% end %>
-              <% if student.nutritions.present? %>
-                  <% @last = student.nutritions.length - 1 %>
-                  <% unless @last.nil? || @last == 0 %>
-                      <% @imc = student.nutritions[@last].try(:weight) / (student.nutritions[@last].try(:height)*student.nutritions[@last].try(:height)) %>
-                      <td><%= fa_icon "cutlery", class: "#{@imc > 13.84 && @imc < 17.60 ? 'fa-green' : 'fa-red'} index-icon" %></td>
-                  <% else %>
-                      <td></td>
-                  <% end %>
+              <% if student.nutritions.last.present? %>
+                  <% nutrition = student.nutritions.last %>
+                  <% imc_2_txt = GeneralInfo.nutrition_points_five[student.age_medium][student.gender] %>
+                  <% color = case nutrition.imc 
+                      when 0..imc_2_txt["lower"]
+                        "264b96" #AZUL OSCURO
+                      when imc_2_txt["lower"]..imc_2_txt["minimum"]
+                        "7cb5ec" #AZUL CLARO
+                      when imc_2_txt["minimum"]..imc_2_txt["medium_min"]
+                        "27b376" #VERDE CLARO
+                      when imc_2_txt["medium_min"]..imc_2_txt["medium_max"]
+                        "006f3c" #VERDE OSCURO
+                      when imc_2_txt["medium_max"]..imc_2_txt["maximum"]
+                        "f9a73e" #AMARILLO
+                      else #> imc_2_txt["maximum"]
+                        "bf212f" #ROJO
+                      end
+                  %>
+                  <td><%= fa_icon "cutlery", class: "index-icon", style: "color: ##{color}" %></td>
               <% else %>
                   <td><%= fa_icon "cutlery", class: "index-icon" %></td>
               <% end %>
