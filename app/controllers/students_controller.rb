@@ -92,7 +92,7 @@ class StudentsController < ApplicationController
       if @importar.status == :done
         redirect_to school_url(params[:school_id]), notice: @importar.message
       else
-        redirect_to school_url(params[:school_id]), alert: @importar.message
+        redirect_to school_url(params[:school_id]), alert: "Error linea #{@importar.invalid_rows.first.line}: #{@importar.invalid_rows.first.model.errors.full_messages.join("|")}"
       end
     rescue => exception
       redirect_to school_url(params[:school_id]), alert: "#{exception.class}: #{exception.message}"

@@ -159,4 +159,5 @@ class ImportUserCSV
 	column :residency_state, as: ["Lugar de residencia"]
 	column :zone, as: ["Estrato"]
 	identifier :identification
+  when_invalid :abort
 end

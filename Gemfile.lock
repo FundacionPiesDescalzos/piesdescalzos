@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/fundacionpiesdescalzos/csv-importer.git
+  revision: b0352185c5ab76edc5f2ca2f0f34935a04f28b75
+  specs:
+    csv-importer (0.3.2)
+      virtus
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -101,8 +108,6 @@ GEM
       sass-rails (< 5.1)
       sprockets (< 4.0)
     concurrent-ruby (1.0.0)
-    csv-importer (0.3.0)
-      virtus
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
     descendants_tracker (0.0.4)
@@ -415,7 +420,7 @@ DEPENDENCIES
   ckeditor
   coffee-rails (~> 4.1.0)
   compass-rails (= 3.0.0)
-  csv-importer
+  csv-importer!
   database_cleaner
   devise
   dotenv-rails

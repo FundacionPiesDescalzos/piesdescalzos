@@ -49,5 +49,5 @@ end
 gem 'carrierwave'
 gem 'fog'
 gem 'mini_magick'
-gem 'csv-importer'
+gem 'csv-importer', github: 'fundacionpiesdescalzos/csv-importer'
 gem 'ckeditor'
