@@ -10,7 +10,7 @@ class Student < ActiveRecord::Base
 	
 	mount_uploader :pic, PicUploader
   
-  validates :name, :gender, :last_course, :identification, presence: true
+  validates :name, :gender, :last_course, :identification, :born, presence: true
   validates :last_course, numericality: { only_integer: true, less_than: 12 }
   validates :identification, numericality: { only_integer: true, less_than: 1500000000 }
   validates :id_type, inclusion: {in: %w(TI RC NUIP Otro)}
