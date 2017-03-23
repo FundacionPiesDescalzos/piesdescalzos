@@ -23,7 +23,14 @@ class Establishment < ActiveRecord::Base
   # import CSV
   def self.import(file)
     allowed_attributes = ["id","code", "name", "department", "state", "phone", "email"]
-    CSV.foreach(file.path, headers: true, :encoding => 'WINDOWS-1252') do |row|
+    data = CSV.read(file.path, headers: true, :encoding => 'WINDOWS-1252') 
+
+    (allowed_attributes - data.headers).each do |missing_attribute|
+    raise "Falta la columna #{missing_attribute}"
+    end
+
+
+    data.each do |row|
       establishment = find_by_code(row["code"]) || new
       establishment.attributes = row.to_hash.select { |k,v| allowed_attributes.include? k }
       establishment.save!
