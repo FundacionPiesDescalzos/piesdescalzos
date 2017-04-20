@@ -18,14 +18,7 @@ class Score < ActiveRecord::Base
   
   # import CSV
   def self.import(file, school, year, period, user)
-		allowed_attributes = ["identification", "area", "score", "pass"]
-
 		data = CSV.read(file.path, headers: true, :encoding => 'WINDOWS-1252') 
-
-		(allowed_attributes - data.headers).each do |missing_attribute|
-			raise "Falta la columna #{missing_attribute}"
-		end
-
 
 		data.each do |row|
   			student = Student.find_by_identification(row["identification"])
