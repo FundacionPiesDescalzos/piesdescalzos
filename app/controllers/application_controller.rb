@@ -7,15 +7,15 @@ class ApplicationController < ActionController::Base
 	
 	def alertas
 		@people = []
-		# @students = Student.all
-		# @students.includes(:nutritions).find_each do |student|
-		# 	if student.nutritions.present?
-		# 		@imc = student.nutritions.last.imc
-		# 		unless @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"]
-		# 			@people.push(student)
-		# 		end
-		# 	end
-		# end
+		@students = Student.all
+		@students.includes(:nutritions).find_each do |student|
+			if student.nutritions.present?
+				@imc = student.nutritions.last.imc
+				unless @imc > GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_min"] && @imc < GeneralInfo.nutrition_points_five[student.age_medium][student.gender]["medium_max"]
+					@people.push(student)
+				end
+			end
+		end
 		@people
 	end
 	
