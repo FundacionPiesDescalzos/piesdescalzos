@@ -35,148 +35,198 @@ class GeneralInfo
 	end
 	
 	def self.nutrition_points_five
-		@@nutrition_points_five = {
-			1.0 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			1.5 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			2.0 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			2.5 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			3.0 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			3.5 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			4.0 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			4.5 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			5.0 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
-			},
-			5.5 => {
-				"femenino" => {"lower" => 11.7, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 19.0},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.7, "maximum" => 18.4}	
-			},
-			6.0 => {
-				"femenino" => {"lower" => 11.7, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 17.0, "maximum" => 19.2},
-				"masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.8, "maximum" => 18.5}	
-			},
-			6.5 => {
-				"femenino" => {"lower" => 11.7, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 17.1, "maximum" => 19.5},
-				"masculino" => {"lower" => 12.2, "minimum" => 13.1, "medium_min" => 14.1, "medium_max" => 16.9, "maximum" => 18.7}	
-			},
-			7.0 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 17.3, "maximum" => 19.8},
-				"masculino" => {"lower" => 12.3, "minimum" => 13.1, "medium_min" => 14.2, "medium_max" => 17.0, "maximum" => 19.0}	
-			},
-			7.5 => {
-				"femenino" => {"lower" => 11.8, "minimum" => 12.8, "medium_min" => 14.0, "medium_max" => 17.5, "maximum" => 20.1},
-				"masculino" => {"lower" => 12.3, "minimum" => 13.2, "medium_min" => 14.3, "medium_max" => 17.2, "maximum" => 19.3}	
-			},
-			8.0 => {
-				"femenino" => {"lower" => 11.9, "minimum" => 12.9, "medium_min" => 14.1, "medium_max" => 17.7, "maximum" => 20.6},
-				"masculino" => {"lower" => 12.4, "minimum" => 13.3, "medium_min" => 14.4, "medium_max" => 17.4, "maximum" => 19.7}	
-			},
-			8.5 => {
-				"femenino" => {"lower" => 12.0, "minimum" => 13.0, "medium_min" => 14.3, "medium_max" => 18.0, "maximum" => 21.0},
-				"masculino" => {"lower" => 12.5, "minimum" => 13.4, "medium_min" => 14.5, "medium_max" => 17.7, "maximum" => 20.1}	
-			},
-			9.0 => {
-				"femenino" => {"lower" => 12.1, "minimum" => 13.1, "medium_min" => 14.4, "medium_max" => 18.3, "maximum" => 21.5},
-				"masculino" => {"lower" => 12.6, "minimum" => 13.5, "medium_min" => 14.6, "medium_max" => 17.9, "maximum" => 20.5}	
-			},
-			9.5 => {
-				"femenino" => {"lower" => 12.2, "minimum" => 13.3, "medium_min" => 14.6, "medium_max" => 18.7, "maximum" => 22.0},
-				"masculino" => {"lower" => 12.7, "minimum" => 13.6, "medium_min" => 14.8, "medium_max" => 18.2, "maximum" => 20.9}	
-			},
-			10.0 => {
-				"femenino" => {"lower" => 12.4, "minimum" => 13.5, "medium_min" => 14.8, "medium_max" => 19.0, "maximum" => 22.6},
-				"masculino" => {"lower" => 12.8, "minimum" => 13.7, "medium_min" => 14.9, "medium_max" => 18.5, "maximum" => 21.4}	
-			},
-			10.5 => {
-				"femenino" => {"lower" => 12.5, "minimum" => 13.7, "medium_min" => 15.1, "medium_max" => 19.4, "maximum" => 23.1},
-				"masculino" => {"lower" => 12.9, "minimum" => 13.9, "medium_min" => 15.1, "medium_max" => 18.8, "maximum" => 21.9}	
-			},
-			11.0 => {
-				"femenino" => {"lower" => 12.7, "minimum" => 13.9, "medium_min" => 15.3, "medium_max" => 19.9, "maximum" => 23.7},
-				"masculino" => {"lower" => 13.1, "minimum" => 14.1, "medium_min" => 15.3, "medium_max" => 19.2, "maximum" => 22.5}	
-			},
-			11.5 => {
-				"femenino" => {"lower" => 12.9, "minimum" => 14.1, "medium_min" => 15.6, "medium_max" => 20.3, "maximum" => 24.3},
-				"masculino" => {"lower" => 13.2, "minimum" => 14.2, "medium_min" => 15.5, "medium_max" => 19.5, "maximum" => 23.0}	
-			},
-			12.0 => {
-				"femenino" => {"lower" => 13.2, "minimum" => 14.4, "medium_min" => 16.0, "medium_max" => 20.8, "maximum" => 25.0},
-				"masculino" => {"lower" => 13.4, "minimum" => 14.5, "medium_min" => 15.8, "medium_max" => 19.9, "maximum" => 23.6}	
-			},
-			12.5 => {
-				"femenino" => {"lower" => 13.4, "minimum" => 14.7, "medium_min" => 16.3, "medium_max" => 21.3, "maximum" => 25.6},
-				"masculino" => {"lower" => 13.6, "minimum" => 14.7, "medium_min" => 16.1, "medium_max" => 20.4, "maximum" => 24.2}	
-			},
-			13.0 => {
-				"femenino" => {"lower" => 13.6, "minimum" => 14.9, "medium_min" => 16.6, "medium_max" => 21.8, "maximum" => 26.2},
-				"masculino" => {"lower" => 13.8, "minimum" => 14.9, "medium_min" => 16.4, "medium_max" => 20.8, "maximum" => 24.8}	
-			},
-			13.5 => {
-				"femenino" => {"lower" => 13.8, "minimum" => 15.2, "medium_min" => 16.9, "medium_max" => 22.3, "maximum" => 26.8},
-				"masculino" => {"lower" => 14.0, "minimum" => 15.2, "medium_min" => 16.7, "medium_max" => 21.3, "maximum" => 25.3}	
-			},
-			14.0 => {
-				"femenino" => {"lower" => 14.0, "minimum" => 15.4, "medium_min" => 17.2, "medium_max" => 22.7, "maximum" => 27.3},
-				"masculino" => {"lower" => 14.3, "minimum" => 15.5, "medium_min" => 17.0, "medium_max" => 21.8, "maximum" => 25.9}	
-			},
-			14.5 => {
-				"femenino" => {"lower" => 14.2, "minimum" => 15.7, "medium_min" => 17.5, "medium_max" => 23.1, "maximum" => 27.8},
-				"masculino" => {"lower" => 14.5, "minimum" => 15.7, "medium_min" => 17.3, "medium_max" => 22.2, "maximum" => 26.5}	
-			},
-			15.0 => {
-				"femenino" => {"lower" => 14.4, "minimum" => 15.9, "medium_min" => 17.8, "medium_max" => 23.5, "maximum" => 28.2},
-				"masculino" => {"lower" => 14.7, "minimum" => 16.0, "medium_min" => 17.6, "medium_max" => 22.7, "maximum" => 27.0}	
-			},
-			15.5 => {
-				"femenino" => {"lower" => 14.5, "minimum" => 16.0, "medium_min" => 18.0, "medium_max" => 23.8, "maximum" => 28.6},
-				"masculino" => {"lower" => 14.9, "minimum" => 16.3, "medium_min" => 18.0, "medium_max" => 23.1, "maximum" => 27.4}	
-			},
-			16.0 => {
-				"femenino" => {"lower" => 14.6, "minimum" => 16.2, "medium_min" => 18.2, "medium_max" => 24.1, "maximum" => 28.9},
-				"masculino" => {"lower" => 15.1, "minimum" => 16.5, "medium_min" => 18.2, "medium_max" => 23.5, "maximum" => 27.9}	
-			},
-			16.5 => {
-				"femenino" => {"lower" => 14.7, "minimum" => 16.3, "medium_min" => 18.3, "medium_max" => 24.3, "maximum" => 29.1},
-				"masculino" => {"lower" => 15.3, "minimum" => 16.7, "medium_min" => 18.5, "medium_max" => 23.9, "maximum" => 28.3}	
-			},
-			17.0 => {
-				"femenino" => {"lower" => 14.7, "minimum" => 16.4, "medium_min" => 18.4, "medium_max" => 24.5, "maximum" => 29.3},
-				"masculino" => {"lower" => 15.4, "minimum" => 16.9, "medium_min" => 18.8, "medium_max" => 24.3, "maximum" => 28.6}	
-			},
-			17.5 => {
-				"femenino" => {"lower" => 14.7, "minimum" => 16.4, "medium_min" => 18.5, "medium_max" => 24.6, "maximum" => 29.4},
-				"masculino" => {"lower" => 15.6, "minimum" => 17.1, "medium_min" => 19.0, "medium_max" => 24.6, "maximum" => 29.0}	
-			},
-			18.0 => {
+    
+    @@nutrition_points_five = Hash.new({
 				"femenino" => {"lower" => 14.7, "minimum" => 16.4, "medium_min" => 18.6, "medium_max" => 24.8, "maximum" => 29.5},
 				"masculino" => {"lower" => 15.7, "minimum" => 17.3, "medium_min" => 19.2, "medium_max" => 24.9, "maximum" => 29.2}	
-			}
-		}
+		})
+
+    @@nutrition_points_five[0.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[0.5] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+    
+    @@nutrition_points_five[1.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[1.5] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[2.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[2.5] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[3.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[3.5] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[4.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[4.5] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[5.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 18.9},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.6, "maximum" => 18.3}	
+    }
+
+    @@nutrition_points_five[5.5] = {
+      "femenino" => {"lower" => 11.7, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 16.9, "maximum" => 19.0},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.7, "maximum" => 18.4}	
+    }
+
+    @@nutrition_points_five[6.0] = {
+      "femenino" => {"lower" => 11.7, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 17.0, "maximum" => 19.2},
+      "masculino" => {"lower" => 12.1, "minimum" => 13.0, "medium_min" => 14.1, "medium_max" => 16.8, "maximum" => 18.5}	
+    }
+
+    @@nutrition_points_five[6.5] = {
+      "femenino" => {"lower" => 11.7, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 17.1, "maximum" => 19.5},
+      "masculino" => {"lower" => 12.2, "minimum" => 13.1, "medium_min" => 14.1, "medium_max" => 16.9, "maximum" => 18.7}	
+    }
+
+    @@nutrition_points_five[7.0] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.7, "medium_min" => 13.9, "medium_max" => 17.3, "maximum" => 19.8},
+      "masculino" => {"lower" => 12.3, "minimum" => 13.1, "medium_min" => 14.2, "medium_max" => 17.0, "maximum" => 19.0}	
+    }
+
+    @@nutrition_points_five[7.5] = {
+      "femenino" => {"lower" => 11.8, "minimum" => 12.8, "medium_min" => 14.0, "medium_max" => 17.5, "maximum" => 20.1},
+      "masculino" => {"lower" => 12.3, "minimum" => 13.2, "medium_min" => 14.3, "medium_max" => 17.2, "maximum" => 19.3}	
+    }
+
+    @@nutrition_points_five[8.0] = {
+      "femenino" => {"lower" => 11.9, "minimum" => 12.9, "medium_min" => 14.1, "medium_max" => 17.7, "maximum" => 20.6},
+      "masculino" => {"lower" => 12.4, "minimum" => 13.3, "medium_min" => 14.4, "medium_max" => 17.4, "maximum" => 19.7}	
+    }
+
+    @@nutrition_points_five[8.5] = {
+      "femenino" => {"lower" => 12.0, "minimum" => 13.0, "medium_min" => 14.3, "medium_max" => 18.0, "maximum" => 21.0},
+      "masculino" => {"lower" => 12.5, "minimum" => 13.4, "medium_min" => 14.5, "medium_max" => 17.7, "maximum" => 20.1}	
+    }
+
+    @@nutrition_points_five[9.0] = {
+      "femenino" => {"lower" => 12.1, "minimum" => 13.1, "medium_min" => 14.4, "medium_max" => 18.3, "maximum" => 21.5},
+      "masculino" => {"lower" => 12.6, "minimum" => 13.5, "medium_min" => 14.6, "medium_max" => 17.9, "maximum" => 20.5}	
+    }
+
+    @@nutrition_points_five[9.5] = {
+      "femenino" => {"lower" => 12.2, "minimum" => 13.3, "medium_min" => 14.6, "medium_max" => 18.7, "maximum" => 22.0},
+      "masculino" => {"lower" => 12.7, "minimum" => 13.6, "medium_min" => 14.8, "medium_max" => 18.2, "maximum" => 20.9}	
+    }
+
+    @@nutrition_points_five[10.0] = {
+      "femenino" => {"lower" => 12.4, "minimum" => 13.5, "medium_min" => 14.8, "medium_max" => 19.0, "maximum" => 22.6},
+      "masculino" => {"lower" => 12.8, "minimum" => 13.7, "medium_min" => 14.9, "medium_max" => 18.5, "maximum" => 21.4}	
+    }
+
+    @@nutrition_points_five[10.5] = {
+      "femenino" => {"lower" => 12.5, "minimum" => 13.7, "medium_min" => 15.1, "medium_max" => 19.4, "maximum" => 23.1},
+      "masculino" => {"lower" => 12.9, "minimum" => 13.9, "medium_min" => 15.1, "medium_max" => 18.8, "maximum" => 21.9}	
+    }
+
+    @@nutrition_points_five[11.0] = {
+      "femenino" => {"lower" => 12.7, "minimum" => 13.9, "medium_min" => 15.3, "medium_max" => 19.9, "maximum" => 23.7},
+      "masculino" => {"lower" => 13.1, "minimum" => 14.1, "medium_min" => 15.3, "medium_max" => 19.2, "maximum" => 22.5}	
+    }
+
+    @@nutrition_points_five[11.5] = {
+      "femenino" => {"lower" => 12.9, "minimum" => 14.1, "medium_min" => 15.6, "medium_max" => 20.3, "maximum" => 24.3},
+      "masculino" => {"lower" => 13.2, "minimum" => 14.2, "medium_min" => 15.5, "medium_max" => 19.5, "maximum" => 23.0}	
+    }
+
+    @@nutrition_points_five[12.0] = {
+      "femenino" => {"lower" => 13.2, "minimum" => 14.4, "medium_min" => 16.0, "medium_max" => 20.8, "maximum" => 25.0},
+      "masculino" => {"lower" => 13.4, "minimum" => 14.5, "medium_min" => 15.8, "medium_max" => 19.9, "maximum" => 23.6}	
+    }
+
+    @@nutrition_points_five[12.5] = {
+      "femenino" => {"lower" => 13.4, "minimum" => 14.7, "medium_min" => 16.3, "medium_max" => 21.3, "maximum" => 25.6},
+      "masculino" => {"lower" => 13.6, "minimum" => 14.7, "medium_min" => 16.1, "medium_max" => 20.4, "maximum" => 24.2}	
+    }
+
+    @@nutrition_points_five[13.0] = {
+      "femenino" => {"lower" => 13.6, "minimum" => 14.9, "medium_min" => 16.6, "medium_max" => 21.8, "maximum" => 26.2},
+      "masculino" => {"lower" => 13.8, "minimum" => 14.9, "medium_min" => 16.4, "medium_max" => 20.8, "maximum" => 24.8}	
+    }
+
+    @@nutrition_points_five[13.5] = {
+      "femenino" => {"lower" => 13.8, "minimum" => 15.2, "medium_min" => 16.9, "medium_max" => 22.3, "maximum" => 26.8},
+      "masculino" => {"lower" => 14.0, "minimum" => 15.2, "medium_min" => 16.7, "medium_max" => 21.3, "maximum" => 25.3}	
+    }
+
+    @@nutrition_points_five[14.0] = {
+      "femenino" => {"lower" => 14.0, "minimum" => 15.4, "medium_min" => 17.2, "medium_max" => 22.7, "maximum" => 27.3},
+      "masculino" => {"lower" => 14.3, "minimum" => 15.5, "medium_min" => 17.0, "medium_max" => 21.8, "maximum" => 25.9}	
+    }
+
+    @@nutrition_points_five[14.5] = {
+      "femenino" => {"lower" => 14.2, "minimum" => 15.7, "medium_min" => 17.5, "medium_max" => 23.1, "maximum" => 27.8},
+      "masculino" => {"lower" => 14.5, "minimum" => 15.7, "medium_min" => 17.3, "medium_max" => 22.2, "maximum" => 26.5}	
+    }
+
+    @@nutrition_points_five[15.0] = {
+      "femenino" => {"lower" => 14.4, "minimum" => 15.9, "medium_min" => 17.8, "medium_max" => 23.5, "maximum" => 28.2},
+      "masculino" => {"lower" => 14.7, "minimum" => 16.0, "medium_min" => 17.6, "medium_max" => 22.7, "maximum" => 27.0}	
+    }
+
+    @@nutrition_points_five[15.5] = {
+      "femenino" => {"lower" => 14.5, "minimum" => 16.0, "medium_min" => 18.0, "medium_max" => 23.8, "maximum" => 28.6},
+      "masculino" => {"lower" => 14.9, "minimum" => 16.3, "medium_min" => 18.0, "medium_max" => 23.1, "maximum" => 27.4}	
+    }
+
+    @@nutrition_points_five[16.0] = {
+      "femenino" => {"lower" => 14.6, "minimum" => 16.2, "medium_min" => 18.2, "medium_max" => 24.1, "maximum" => 28.9},
+      "masculino" => {"lower" => 15.1, "minimum" => 16.5, "medium_min" => 18.2, "medium_max" => 23.5, "maximum" => 27.9}	
+    }
+
+    @@nutrition_points_five[16.5] = {
+      "femenino" => {"lower" => 14.7, "minimum" => 16.3, "medium_min" => 18.3, "medium_max" => 24.3, "maximum" => 29.1},
+      "masculino" => {"lower" => 15.3, "minimum" => 16.7, "medium_min" => 18.5, "medium_max" => 23.9, "maximum" => 28.3}	
+    }
+
+    @@nutrition_points_five[17.0] = {
+      "femenino" => {"lower" => 14.7, "minimum" => 16.4, "medium_min" => 18.4, "medium_max" => 24.5, "maximum" => 29.3},
+      "masculino" => {"lower" => 15.4, "minimum" => 16.9, "medium_min" => 18.8, "medium_max" => 24.3, "maximum" => 28.6}	
+    }
+
+    @@nutrition_points_five[17.5] = {
+      "femenino" => {"lower" => 14.7, "minimum" => 16.4, "medium_min" => 18.5, "medium_max" => 24.6, "maximum" => 29.4},
+      "masculino" => {"lower" => 15.6, "minimum" => 17.1, "medium_min" => 19.0, "medium_max" => 24.6, "maximum" => 29.0}	
+    }
+
+    @@nutrition_points_five[18.0] = {
+      "femenino" => {"lower" => 14.7, "minimum" => 16.4, "medium_min" => 18.6, "medium_max" => 24.8, "maximum" => 29.5},
+      "masculino" => {"lower" => 15.7, "minimum" => 17.3, "medium_min" => 19.2, "medium_max" => 24.9, "maximum" => 29.2}	
+    }
+
+    @@nutrition_points_five
 	end
 	
 	def self.cities

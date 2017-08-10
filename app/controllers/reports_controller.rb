@@ -77,7 +77,7 @@ class ReportsController < ApplicationController
     end
 
     @actividad = {}
-    @students.select { |student| student.age_medium >= 1 && student.age_medium <= 18 }.each do |student|
+    @students.each do |student|
 
       #programs activities
       if student.activities.present?
